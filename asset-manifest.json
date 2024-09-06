@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ttovarischh/static/css/main.e6c13ad2.css",
+    "main.js": "/ttovarischh/static/js/main.ef9df0a8.js",
+    "static/js/453.acca0757.chunk.js": "/ttovarischh/static/js/453.acca0757.chunk.js",
+    "index.html": "/ttovarischh/index.html",
+    "main.e6c13ad2.css.map": "/ttovarischh/static/css/main.e6c13ad2.css.map",
+    "main.ef9df0a8.js.map": "/ttovarischh/static/js/main.ef9df0a8.js.map",
+    "453.acca0757.chunk.js.map": "/ttovarischh/static/js/453.acca0757.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.ef9df0a8.js"
+  ]
+}
