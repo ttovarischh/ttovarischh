@@ -1,30 +1,40 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import projects from '../projects'; // Adjust the path as necessary
+import React from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import projects from "../projects"; // Adjust the path as necessary
 
 interface Project {
-    id: number;
-    name: string;
-    description: string;
-    cover: string;
+  id: number;
+  name: string;
+  description: string;
+  cover: string;
 }
 
+const ProjectCover = styled.img`
+  width: 100%;
+  object-fit: cover;
+`;
+
 const ProjectPage: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
-    const projectId = Number(id);
-    const project = projects.find((proj: Project) => proj.id === projectId);
+  const { name } = useParams<{ name: string }>(); // Change id to name
+  const formattedName = name?.toLowerCase(); // Ensure case matches
 
-    if (!project) {
-        return <div>Project not found</div>;
-    }
+  const project = projects.find(
+    (proj: Project) =>
+      proj.name.toLowerCase().replace(/ /g, "-") === formattedName
+  );
 
-    return (
-        <div>
-            <h1>{project.name}</h1>
-            <img src={project.cover} alt={project.name} />
-            <p>{project.description}</p>
-        </div>
-    );
+  if (!project) {
+    return <div>Project not found</div>;
+  }
+
+  return (
+    <div>
+      {/* <h1>{project.name}</h1> */}
+      <ProjectCover src={project.cover} alt={project.name} />
+      {/* <p>{project.description}</p> */}
+    </div>
+  );
 };
 
 export default ProjectPage;

@@ -1,14 +1,80 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+* > a {
+  color: inherit !important;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: "PP Neue Montreal Book";
+  font-style: normal;
+  font-weight: normal;
+  src: local("PP Neue Montreal Book"),
+    url("../assets/fonts/ppneuemontreal-book.woff") format("woff");
+}
+
+@font-face {
+  font-family: "PP Neue Montreal Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("PP Neue Montreal Italic"),
+    url("../assets/fonts/ppneuemontreal-italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "PP Neue Montreal Thin";
+  font-style: normal;
+  font-weight: normal;
+  src: local("PP Neue Montreal Thin"),
+    url("../assets/fonts/ppneuemontreal-thin.woff") format("woff");
+}
+
+@font-face {
+  font-family: "PP Neue Montreal Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("PP Neue Montreal Medium"),
+    url("../assets/fonts/ppneuemontreal-medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "PP Neue Montreal SemiBold italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("PP Neue Montreal SemiBold italic"),
+    url("../assets/fonts/ppneuemontreal-semibolditalic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "PP Neue Montreal Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("PP Neue Montreal Bold"),
+    url("../assets/fonts/ppneuemontreal-bold.woff") format("woff");
+}
+
+.ppbook {
+  font-family: "PP Neue Montreal Book", Arial, Helvetica, sans-serif;
+}
+
+.ppmedium {
+  font-family: "PP Neue Montreal Medium", Arial, Helvetica, sans-serif;
 }
