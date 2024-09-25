@@ -53,6 +53,9 @@ export const PP_16 = (props: Omit<TextProps, "fontSize">) => (
 export const PP_20 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize={20} {...props} />
 );
+export const PP_24 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize={24} {...props} />
+);
 export const PP_48 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize={48} {...props} />
 );

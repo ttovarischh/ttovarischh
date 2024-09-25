@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox, DJR_128, PP_48, PP_20 } from "../Common";
-import A_InfoColumn from "../Atoms/A_InfoColumn";
+import A_InfoBlock from "../Atoms/A_InfoBlock";
 import A_Button from "../Atoms/A_Button";
 
 interface Link {
@@ -30,6 +30,7 @@ interface ProjectInfoProps {
 
 const MainInfoWrapper = styled(FlexBox)`
   padding: 166px 2.5vw 32px;
+  flex-direction: column;
 `;
 
 const ProjectInfoWrapper = styled.div`
@@ -71,9 +72,9 @@ const M_ProjectInfo = (props: ProjectInfoProps) => {
       <MainInfoWrapper>
         <DJR_128>{props.name}</DJR_128>
         <MainInfoContent>
-          <A_InfoColumn header="Role" text={props.type} />
-          <A_InfoColumn header="Timeline" text={props.timeline} />
-          <A_InfoColumn header="Deliverables" text={props.deliverables} />
+          <A_InfoBlock header="Role" text={props.type} />
+          <A_InfoBlock header="Timeline" text={props.timeline} />
+          <A_InfoBlock header="Deliverables" text={props.deliverables} />
         </MainInfoContent>
       </MainInfoWrapper>
     );
@@ -81,10 +82,10 @@ const M_ProjectInfo = (props: ProjectInfoProps) => {
     return (
       <ProjectInfoWrapper>
         <FlexBox $gap="20px">
-          <A_InfoColumn header="Role" text={props.role} />
-          <A_InfoColumn header="Organisation" text={props.organisation} />
-          <A_InfoColumn header="Status" text={props.status} />
-          {props.team && <A_InfoColumn header="Status" text={props.team} />}
+          <A_InfoBlock header="Role" text={props.role} />
+          <A_InfoBlock header="Organisation" text={props.organisation} />
+          <A_InfoBlock header="Status" text={props.status} />
+          {props.team && <A_InfoBlock header="Status" text={props.team} />}
         </FlexBox>
         <FlexBox $gap="60px">
           <FlexBox $gap="26px">

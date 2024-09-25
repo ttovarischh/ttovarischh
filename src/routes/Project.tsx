@@ -8,10 +8,20 @@ import Carousel2 from "../components/Atoms/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import EmblaCarousel from "../components/Atoms/EmblaCarousel";
 import "../styles/embla.css";
+import { FlexBox } from "../components/Common";
+import styled from "styled-components";
+import A_InfoBlock from "../components/Atoms/A_InfoBlock";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
 const SLIDE_COUNT = 5;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+
+const ProjectPageWrapper = styled(FlexBox)`
+  display: grid;
+  padding: 0px 2.5vw;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1.04vw;
+`;
 
 const ProjectPage: React.FC = () => {
   const { i18n } = useTranslation();
@@ -59,14 +69,14 @@ const ProjectPage: React.FC = () => {
         description={project.description[currentLanguage]}
         links={project.links}
       />
-      {/* <Carousel2 visibleItemsCount={3} withIndicator isInfinite>
-        {[0, 1, 2, 3, 4, 5].map((i, k) => (
-          <div style={{ fontSize: 32 }} key={k}>
-            {i}
-          </div>
-        ))}
-      </Carousel2> */}
-      <EmblaCarousel slides={images} options={OPTIONS} />
+      <ProjectPageWrapper>
+        <A_InfoBlock
+          body
+          header="Проблематика и контекст"
+          text="A robust global design system to support the new product vision rollout to multiple touch-points simultaneously."
+        />
+      </ProjectPageWrapper>
+      {/* <EmblaCarousel slides={images} options={OPTIONS} /> */}
     </div>
   );
 };

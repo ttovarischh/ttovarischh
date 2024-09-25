@@ -44,6 +44,25 @@ const projects = [
       },
       { name: "Landing", url: "https://wo.artdesignandprooomotion.ru/" },
     ],
+    texts: [
+      {
+        header: [{ en: "Full presentation", ru: "Полная презентация" }],
+        text: [{ en: "This is a text itself", ru: "А вот это текст" }],
+      },
+      {
+        header: [{ en: "Full presentation 2", ru: "Полная презентация 2" }],
+        text: [{ en: "This is a text itself 2", ru: "А вот это текст 2" }],
+      },
+    ],
+    layout: [
+      { component: "CoverImage" },
+      { component: "ProjectTitle" },
+      { component: "A_InfoBlock", textIndex: 0 },
+      { component: "Gallery" },
+      { component: "A_InfoBlock", textIndex: 1 },
+      { component: "StatsBlock" },
+      { component: "Testimonial" },
+    ],
   },
 ];
 
