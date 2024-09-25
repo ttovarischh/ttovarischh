@@ -1,12 +1,17 @@
 {
-    "projects": {
-      "1": {
-        "name": "Project 1",
-        "description": "Description for Project 1"
-      },
-      "2": {
-        "name": "Project 2",
-        "description": "Description for Project 2"
-      }
+  "projects": {
+    "1": {
+      "name": "Project 1",
+      "description": "Description for Project 1"
+    },
+    "2": {
+      "name": "Project 2",
+      "description": "Description for Project 2"
     }
+  },
+  "nav": {
+    "work": "work",
+    "contacts": "contacts",
+    "info": "info"
   }
+}

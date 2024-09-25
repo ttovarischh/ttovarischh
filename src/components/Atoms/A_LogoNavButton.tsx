@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { A_Text } from "../Common";
+import { DJR_20 } from "../Common";
 
 const LogoNavButton = styled(Link)`
   display: flex;
   background-color: ${({ theme }) => theme.text.white};
-  padding: 11px 10px;
+  padding: 16px 12px;
   border-radius: 4px;
   width: fit-content;
 `;
@@ -15,7 +15,7 @@ const AnimatedText = styled.span`
   display: inline-block;
 `;
 
-const Logo = () => {
+const A_LogoNavButton = () => {
   const [text, setText] = useState("P.S...");
   const [isHovered, setIsHovered] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
@@ -78,12 +78,12 @@ const Logo = () => {
       }}
     >
       <AnimatedText>
-        <A_Text medium color="black">
+        <DJR_20 medium color="black">
           {text}
-        </A_Text>
+        </DJR_20>
       </AnimatedText>
     </LogoNavButton>
   );
 };
 
-export default Logo;
+export default A_LogoNavButton;

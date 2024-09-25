@@ -1,5 +1,3 @@
 // common components
 export { FlexBox } from "./FlexBox";
-export {
-    A_Text
-} from "./StyledFont";
+export { PP_16, PP_20, PP_48, DJR_20, DJR_128 } from "./StyledFont";

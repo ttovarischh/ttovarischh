@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: #111111;
   min-height: 100vh;
   width: 100vw;
   position: relative;
@@ -13,9 +13,39 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+::selection {
+  color: black;
+  background: white;
+}
+
+::-moz-selection {
+  color: black;
+  background: white;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  /* background: #fbf8f3; */
+  background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+  /* background: #111111; */
+  background: #fbf8f3;
+
+  border-radius: 200px;
 }
 
 * > a {
@@ -71,10 +101,36 @@ code {
     url("../assets/fonts/ppneuemontreal-bold.woff") format("woff");
 }
 
+@font-face {
+  src: url("../assets/fonts/FormaDJRCyrillicText-Medium-Testing.woff2")
+      format("woff2"),
+    url("../assets/fonts/FormaDJRCyrillicText-Medium-Testing.woff")
+      format("woff");
+  font-family: "FormaDJRCyrillicText";
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  src: url("../assets/fonts/FormaDJRCyrillicText-Bold-Testing.woff2") format("woff2"),
+    url("../assets/fonts/FormaDJRCyrillicText-Bold-Testing.woff") format("woff");
+  font-family: "FormaDJRCyrillicTextBold";
+  font-style: normal;
+  font-weight: bold;
+}
+
 .ppbook {
   font-family: "PP Neue Montreal Book", Arial, Helvetica, sans-serif;
 }
 
 .ppmedium {
   font-family: "PP Neue Montreal Medium", Arial, Helvetica, sans-serif;
+}
+
+.djrmedium {
+  font-family: "FormaDJRCyrillicText", Arial, Helvetica, sans-serif;
+}
+
+.djrbold {
+  font-family: "FormaDJRCyrillicTextBold", Arial, Helvetica, sans-serif;
 }

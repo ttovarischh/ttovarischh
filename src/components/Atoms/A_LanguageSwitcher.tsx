@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FlexBox, A_Text } from "../Common";
-import styled, { ThemeContext } from "styled-components";
+import { FlexBox, PP_20 } from "../Common";
+import styled from "styled-components";
 
 const LanguageSwitcherWrapper = styled(FlexBox)`
   justify-self: right;
@@ -21,7 +21,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const ALanguageSwitcher = () => {
+const A_LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
   const handleLanguageChange = (lng: "ru" | "en") => {
@@ -34,23 +34,23 @@ const ALanguageSwitcher = () => {
         onClick={() => handleLanguageChange("ru")}
         aria-label="Switch to Russian"
       >
-        <A_Text uppercase medium underline={i18n.language === "ru"}>
+        <PP_20 uppercase medium underline={i18n.language === "ru"}>
           Ru
-        </A_Text>
+        </PP_20>
       </StyledButton>
-      <A_Text uppercase medium>
+      <PP_20 uppercase medium>
         /
-      </A_Text>
+      </PP_20>
       <StyledButton
         onClick={() => handleLanguageChange("en")}
         aria-label="Switch to English"
       >
-        <A_Text uppercase medium underline={i18n.language === "en"}>
+        <PP_20 uppercase medium underline={i18n.language === "en"}>
           Eng
-        </A_Text>
+        </PP_20>
       </StyledButton>
     </LanguageSwitcherWrapper>
   );
 };
 
-export default ALanguageSwitcher;
+export default A_LanguageSwitcher;
