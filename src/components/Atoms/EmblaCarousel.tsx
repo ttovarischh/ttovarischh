@@ -11,15 +11,26 @@ import {
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
+import { PP_20 } from "../Common";
+import { useTranslation } from "react-i18next";
 
 const TWEEN_FACTOR_BASE = 0.07;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
+interface Slide {
+  imgSrc: string;
+  description: {
+    en: string;
+    ru: string;
+  };
+}
+
 type PropType = {
-  slides: string[]; // Change to string array for image URLs
+  slides: Slide[];
   options?: EmblaOptionsType;
+  references?: string;
 };
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
@@ -27,6 +38,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<HTMLElement[]>([]);
+
+  const { i18n } = useTranslation(); // Get the i18n instance
+  const currentLanguage = i18n.language as "en" | "ru";
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -105,29 +119,33 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [emblaApi, tweenScale]);
 
   return (
-    <div className="embla">
+    <div className="embla" id={props.references}>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((imageSrc, index) => (
+          {slides.map((slide, index) => (
             <div className="embla__slide" key={index}>
-              <img 
-                className="embla__slide__image" 
-                src={imageSrc} 
-                alt={`Slide ${index + 1}`} 
-                style={{ width: "100%", height: "auto" }} // Adjust style as needed
+              <img
+                className="embla__slide__image"
+                src={slide.imgSrc}
+                alt={`Slide ${index + 1}`}
+                style={{ width: "100%", height: "auto" }}
+                loading="lazy"
               />
-              <p>Нихуя себе! Текст!</p>
+              {selectedIndex === index && (
+                <PP_20 color="#6B6863">
+                  {slide.description[currentLanguage]}
+                </PP_20>
+              )}
             </div>
           ))}
         </div>
       </div>
+      <div className="embla__buttons">
+        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+      </div>
 
       <div className="embla__controls">
-        <div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
         <div className="embla__dots">
           {scrollSnaps.map((_, index) => (
             <DotButton

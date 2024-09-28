@@ -9,6 +9,7 @@ const LogoNavButton = styled(Link)`
   padding: 16px 12px;
   border-radius: 4px;
   width: fit-content;
+  z-index: 10;
 `;
 
 const AnimatedText = styled.span`
@@ -17,7 +18,7 @@ const AnimatedText = styled.span`
 
 const A_LogoNavButton = () => {
   const [text, setText] = useState("P.S...");
-  const [isHovered, setIsHovered] = useState(false);
+  const [$isHovered, set$isHovered] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   const forwardSteps = [
@@ -47,7 +48,7 @@ const A_LogoNavButton = () => {
   useEffect(() => {
     let timeout;
 
-    if (isHovered) {
+    if ($isHovered) {
       timeout = setTimeout(() => {
         if (currentStep < forwardSteps.length) {
           setText(forwardSteps[currentStep]);
@@ -64,17 +65,17 @@ const A_LogoNavButton = () => {
     }
 
     return () => clearTimeout(timeout);
-  }, [isHovered, currentStep]);
+  }, [$isHovered, currentStep]);
 
   return (
     <LogoNavButton
       to="/"
       onMouseEnter={() => {
-        setIsHovered(true);
+        set$isHovered(true);
         setCurrentStep(0);
       }}
       onMouseLeave={() => {
-        setIsHovered(false);
+        set$isHovered(false);
       }}
     >
       <AnimatedText>

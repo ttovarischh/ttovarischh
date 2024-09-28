@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { PP_20 } from "../Common";
 import styled from "styled-components";
 
-const Emoji = styled.span<{ isVisible: boolean }>`
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+const Emoji = styled.span<{ $isVisible: boolean }>`
+  opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transition: opacity 0.3s ease-in-out; // Adjust duration as needed
 `;
 
 const A_TimeDisplay: React.FC = () => {
   const [currTime, setCurrTime] = useState<string>("");
   const [emoji, setEmoji] = useState<string>("");
-  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [$isHovered, set$isHovered] = useState<boolean>(false);
 
   const updateTime = () => {
     const options: Intl.DateTimeFormatOptions = {
@@ -35,11 +35,11 @@ const A_TimeDisplay: React.FC = () => {
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => set$isHovered(true)}
+      onMouseLeave={() => set$isHovered(false)}
     >
       <PP_20 medium>
-        <Emoji isVisible={isHovered}>{emoji} </Emoji>
+        <Emoji $isVisible={$isHovered}>{emoji} </Emoji>
         (GMT+3) {currTime}
       </PP_20>
     </div>

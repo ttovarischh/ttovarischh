@@ -35,8 +35,7 @@ const MainInfoWrapper = styled(FlexBox)`
 
 const ProjectInfoWrapper = styled.div`
   display: grid;
-  margin: 140px 2.5vw 88px;
-  height: 500px;
+  margin: 140px 2.5vw;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 1.04vw;
 

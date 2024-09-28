@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { PP_20 } from "../Common";
+import { PP_20, PP_24 } from "../Common";
 import A_Icon from "./A_Icon";
 
 interface ButtonProps {
@@ -27,7 +27,7 @@ const Button = styled.button<{ disabled?: boolean }>`
   }
 `;
 
-const ButtonWrapper = styled(Button)`
+const BigButtonWrapper = styled(Button)`
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -37,18 +37,36 @@ const ButtonWrapper = styled(Button)`
   flex: 1;
 `;
 
+const SmallButtonWrapper = styled(Button)`
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: #3f3f3f;
+`;
+
 const A_Button = (props: ButtonProps) => {
   if (props.fw) {
     return (
-      <ButtonWrapper
+      <BigButtonWrapper
         disabled={props.disabled}
         onClick={props.handleButtonClick}
       >
         <PP_20>{props.buttonText}</PP_20>
         <A_Icon iconName="buttonArrow" />
-      </ButtonWrapper>
+      </BigButtonWrapper>
     );
   }
+  return (
+    <SmallButtonWrapper
+      disabled={props.disabled}
+      onClick={props.handleButtonClick}
+    >
+      <PP_24>{props.buttonText}</PP_24>
+      <A_Icon iconName="buttonArrow" />
+    </SmallButtonWrapper>
+  );
 };
 
 export default A_Button;

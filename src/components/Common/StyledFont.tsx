@@ -11,7 +11,7 @@ interface TextProps {
   offsetLeft?: number;
   offsetRight?: number;
   lineHeight?: string;
-  fontSize?: number;
+  fontSize?: string;
   capitalize?: boolean;
   medium?: boolean;
   underline?: boolean;
@@ -24,7 +24,7 @@ const Text = (props: TextProps) => {
     <p
       className={props.className ?? (props.medium ? "ppmedium" : "ppbook")}
       style={{
-        fontSize: props.fontSize ?? 16,
+        fontSize: props.fontSize ?? "1rem",
         lineHeight: props.lineHeight ?? "normal",
         color: props.color ?? theme.white,
         margin: 0,
@@ -48,20 +48,23 @@ const Text = (props: TextProps) => {
 
 // Export specific components
 export const PP_16 = (props: Omit<TextProps, "fontSize">) => (
-  <Text fontSize={16} {...props} />
+  <Text fontSize="1rem" {...props} />
 );
 export const PP_20 = (props: Omit<TextProps, "fontSize">) => (
-  <Text fontSize={20} {...props} />
+  <Text fontSize="1.25rem" {...props} />
 );
 export const PP_24 = (props: Omit<TextProps, "fontSize">) => (
-  <Text fontSize={24} {...props} />
+  <Text fontSize="1.5rem" {...props} />
 );
 export const PP_48 = (props: Omit<TextProps, "fontSize">) => (
-  <Text fontSize={48} {...props} />
+  <Text fontSize="3rem" {...props} />
+);
+export const PP_80 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="5rem" {...props} />
 );
 export const DJR_20 = (props: Omit<TextProps, "fontSize">) => (
-  <Text className="djrbold" fontSize={20} {...props} />
+  <Text className="djrbold" fontSize="1.25rem" {...props} />
 );
 export const DJR_128 = (props: Omit<TextProps, "fontSize">) => (
-  <Text className="djrmedium" fontSize={128} {...props} />
+  <Text className="djrmedium" fontSize="8rem" {...props} />
 );

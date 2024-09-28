@@ -9,9 +9,13 @@ const NavButtonsWrapper = styled(FlexBox)`
   background: rgba(57, 57, 57, 0.2);
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
   border-radius: 100px;
-  backdrop-filter: blur(10px);
+  // backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
   width: fit-content;
   justify-self: center;
+
+  border: 1px solid hsla(0, 0%, 100%, 0.025);
 `;
 
 const NavButton = styled(FlexBox)`
