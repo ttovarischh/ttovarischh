@@ -101,10 +101,20 @@ export interface Project {
   images: Array<{
     src: string;
     description?: Array<{ en: string; ru: string }>;
+    shouldAutoplay?: boolean;
+    poster?: string;
   }>;
+  // texts: Array<{
+  //   header: Array<{ en: string; ru: string }>;
+  //   text: Array<{ en: string; ru: string }>;
+  // }>;
   texts: Array<{
     header: Array<{ en: string; ru: string }>;
-    text: Array<{ en: string; ru: string }>;
+    text: Array<{
+      en: string;
+      ru: string;
+    }>;
+    links?: Array<{ text: Array<{ en: string; ru: string }>; url: string }>;
   }>;
   layout: LayoutItem[];
   menuItems: MenuItem[];

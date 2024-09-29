@@ -12,6 +12,7 @@ interface LinkCardProps {
   disabled?: boolean;
   reference?: string;
   style?: any;
+  reverse?: boolean;
 }
 
 const LinkCardWrapper = styled.div`
@@ -47,18 +48,47 @@ const LinkCardImg = styled.img`
 const A_LinkCard = (props: LinkCardProps) => {
   return (
     <LinkCardWrapper id={props.reference || undefined} style={props.style}>
-      <LinkCardImg src={props.image_src} alt={`${props.header} thumbnail`} />
-      <LinkCardInfo>
-        <FlexBox $direction="column">
-          <PP_80 lineHeight="5rem">{props.header}</PP_80>
-          <PP_24>{props.text}</PP_24>
-        </FlexBox>
-        <A_Button
-          buttonText={props.link_text}
-          disabled={!props.url}
-          handleButtonClick={() => window.open(props.url, "_blank")}
-        />
-      </LinkCardInfo>
+      {props.reverse ? (
+        <>
+          <LinkCardInfo>
+            <FlexBox $direction="column" $gap="12px">
+              <PP_80 medium lineHeight="5rem">
+                {props.header}
+              </PP_80>
+              <PP_24>{props.text}</PP_24>
+            </FlexBox>
+            <A_Button
+              buttonText={props.link_text}
+              disabled={!props.url}
+              handleButtonClick={() => window.open(props.url, "_blank")}
+            />
+          </LinkCardInfo>
+          <LinkCardImg
+            src={props.image_src}
+            alt={`${props.header} thumbnail`}
+          />
+        </>
+      ) : (
+        <>
+          <LinkCardImg
+            src={props.image_src}
+            alt={`${props.header} thumbnail`}
+          />
+          <LinkCardInfo>
+            <FlexBox $direction="column" $gap="12px">
+              <PP_80 medium lineHeight="5rem">
+                {props.header}
+              </PP_80>
+              <PP_24>{props.text}</PP_24>
+            </FlexBox>
+            <A_Button
+              buttonText={props.link_text}
+              disabled={!props.url}
+              handleButtonClick={() => window.open(props.url, "_blank")}
+            />
+          </LinkCardInfo>
+        </>
+      )}
     </LinkCardWrapper>
   );
 };

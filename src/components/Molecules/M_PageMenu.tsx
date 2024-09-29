@@ -21,12 +21,14 @@ const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   gap: ${(props) => (props.$isHovered ? "4px" : "12px")};
   max-height: ${(props) => (props.$isHovered ? "42vh" : "none")};
   overflow-y: ${(props) => (props.$isHovered ? "scroll" : "auto")};
+  z-index: 2;
 `;
 
 const Line = styled.div<{ $isSubItem?: boolean; $isActive?: boolean }>`
   height: 2px;
   width: ${(props) => (props.$isSubItem ? "10px" : "20px")};
   border-radius: 1px;
+  transition: all 0.5ss ease;
   background: ${(props) =>
     props.$isActive ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.4)"};
 `;
@@ -48,7 +50,7 @@ const SubItem = styled.div`
   border-radius: 2px;
   box-sizing: border-box;
   margin-left: 2rem;
-
+  max-width: 200px;
   &:hover {
     background: rgba(255, 255, 255, 0.2);
   }
@@ -56,7 +58,6 @@ const SubItem = styled.div`
 
 interface PageMenuProps {
   menuItems: {
-    // header: { en: string; ru: string };
     header: {
       title: { en: string; ru: string };
       reference: string;
@@ -114,6 +115,11 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
     };
   }, [menuItems, currentLanguage]);
 
+  const totalSubItems = menuItems.reduce(
+    (count, item) => count + item.subItems.length,
+    0
+  );
+
   return (
     <MenuContainer
       onMouseEnter={() => {
@@ -127,7 +133,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
       {menuItems.map((item) => (
         <FlexBox
           $direction="column"
-          $gap={$isHovered ? "4px" : "12px"}
+          $gap={$isHovered ? "4px" : totalSubItems > 13 ? "8px" : "12px"}
           key={item.header[0].reference}
           $alignItems={$isHovered ? "flex-start" : "flex-end"}
         >

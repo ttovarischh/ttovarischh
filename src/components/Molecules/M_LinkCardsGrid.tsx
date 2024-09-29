@@ -41,6 +41,7 @@ const M_LinkCardsGrid: React.FC<LinkCardsGridProps> = ({
           style={{
             transform: index % 2 === 0 ? "rotate(-0.7deg)" : "rotate(0.8deg)",
           }}
+          reverse={index % 2 === 0}
         />
       ))}
     </LinkCardsContainer>

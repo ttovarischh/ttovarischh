@@ -9,6 +9,8 @@ interface CaseImageProps {
   id?: any;
   onClick?: any;
   ui?: boolean;
+  shouldAutoplay?: boolean;
+  poster?: string;
 }
 
 const CaseImage = styled.img<{ $imageDescription?: string }>`
@@ -37,6 +39,8 @@ const CaseVideo = styled.video`
   width: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 12px;
+  overflow: hidden;
 `;
 
 const UICaseVideo = styled(CaseVideo)`
@@ -56,7 +60,17 @@ const A_CaseImage = (props: CaseImageProps) => {
       <>
         {isVideo(props.src) ? (
           <CaseImageWrapper>
-            <CaseVideo autoPlay muted loop playsInline>
+            <CaseVideo
+              // autoPlay
+              // muted
+              // loop
+              playsInline
+              autoPlay={props.shouldAutoplay}
+              muted={props.shouldAutoplay}
+              loop={props.shouldAutoplay}
+              controls={props.shouldAutoplay}
+              poster={props.poster}
+            >
               <source src={props.src} type="video/mp4" />
               Your browser does not support the video tag.
             </CaseVideo>
@@ -86,7 +100,18 @@ const A_CaseImage = (props: CaseImageProps) => {
     return (
       <>
         {isVideo(props.src) ? (
-          <CaseVideo autoPlay muted loop playsInline>
+          <CaseVideo
+            // autoPlay
+            // muted
+            // loop
+            // playsInline
+            playsInline
+            autoPlay={props.shouldAutoplay}
+            muted={props.shouldAutoplay}
+            loop={props.shouldAutoplay}
+            controls={!props.shouldAutoplay}
+            poster={props.poster}
+          >
             <source src={props.src} type="video/mp4" />
             Your browser does not support the video tag.
           </CaseVideo>

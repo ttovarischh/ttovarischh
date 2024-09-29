@@ -3,11 +3,17 @@ import { FlexBox, PP_20, PP_24, PP_48, GridWrapper } from "../Common";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
+interface Link {
+  text: Array<{ en: string; ru: string }>;
+  url: string;
+}
+
 interface InfoBlockProps {
   header?: string;
   text?: string;
   $body?: boolean;
   references?: string;
+  links?: Array<Link>;
 }
 
 const InfoBlockWrapper = styled(FlexBox)<{ $body?: boolean }>`
@@ -26,6 +32,16 @@ const InfoBlockWrapperBig = styled(FlexBox)<{ $body?: boolean }>`
   @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
     max-width: 100%;
   }
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: #6b6863;
+    transition: all 0.5s ease;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
 const A_InfoBlock: React.FC<InfoBlockProps> = ({
@@ -33,9 +49,36 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
   text,
   $body,
   references,
+  links,
 }) => {
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language as "en" | "ru";
+
+  const constructTextWithLinks = (text: string, links?: Array<Link>) => {
+    let parts: Array<string | JSX.Element> = [text];
+
+    if (links) {
+      links.forEach((link) => {
+        const linkText = link.text[0][currentLanguage];
+        parts = parts.flatMap((part) =>
+          typeof part === "string"
+            ? part.split(linkText).flatMap((item, index) =>
+                index === 0
+                  ? item
+                  : [
+                      <a href={link.url} key={index} target="_blank">
+                        {linkText}
+                      </a>,
+                      item,
+                    ]
+              )
+            : part
+        );
+      });
+    }
+
+    return parts;
+  };
 
   if ($body) {
     return (
@@ -45,7 +88,8 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
             {header}
           </PP_24>
           <PP_48 medium lineHeight="113%">
-            {text}
+            {/* {text} */}
+            {constructTextWithLinks(text || "", links)}
           </PP_48>
         </InfoBlockWrapperBig>
       </GridWrapper>
@@ -56,7 +100,10 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
         <PP_20 medium color="#6B6863">
           {header}
         </PP_20>
-        <PP_20>{text}</PP_20>
+        <PP_20>
+          {/* {text} */}
+          {constructTextWithLinks(text || "", links)}
+        </PP_20>
       </InfoBlockWrapper>
     );
   }

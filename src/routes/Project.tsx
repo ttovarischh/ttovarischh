@@ -19,8 +19,8 @@ import EmblaCarousel from "../components/Atoms/EmblaCarousel";
 import "../styles/embla.css";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
-const SLIDE_COUNT = 5;
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+// const SLIDE_COUNT = 5;
+// const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 const ProjectPageWrapper = styled(FlexBox)`
   display: flex;
@@ -92,6 +92,7 @@ const ProjectPage: React.FC = () => {
                     key={index}
                     header={project.texts[idx].header[0][currentLanguage]}
                     text={project.texts[idx].text[0][currentLanguage]}
+                    links={project.texts[idx].links}
                     $body={item.$body}
                     references={item.references}
                   />
