@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox, PP_80, PP_14, PP_32, PP_20 } from "../Common";
-import A_LanguageSwitcher from "../Atoms/A_LanguageSwitcher";
-import A_LogoNavButton from "../Atoms/A_LogoNavButton";
-import A_TimeDisplay from "../Atoms/A_TimeDisplay";
-import A_NavButtons from "../Atoms/A_NavButtons";
 import { Link } from "react-router-dom";
 import A_Icon from "../Atoms/A_Icon";
+import { useTranslation } from "react-i18next";
 
 const FooterWrapper = styled(FlexBox)`
   position: relative;
@@ -96,6 +93,9 @@ const FooterUpperRowColumns = styled.div`
 `;
 
 const M_Footer = () => {
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language as "en" | "ru";
+
   return (
     <FooterWrapper>
       <FooterUpperRow>
@@ -179,9 +179,6 @@ const M_Footer = () => {
         <PP_14 medium color="#6B6863">
           © 2024 – Polina Sotnikova
         </PP_14>
-        {/* <PP_14 medium color="#6B6863">
-          Moscow, Russia
-        </PP_14> */}
         <FlexBox $gap="10px">
           <PP_14 medium color="#6B6863">
             Available for hire
@@ -190,7 +187,15 @@ const M_Footer = () => {
             •
           </PP_14>
           <PP_14 medium color="#6B6863">
-            Resumé
+            <a
+              href={
+                currentLanguage == "en"
+                  ? "https://www.are.na/polina-sotnikova-8r-1jefvew0/channels"
+                  : "https://drive.google.com/file/d/1n44MV-pDMMVsyf5hL8F1B11OuOOJzFxL/view?usp=sharing"
+              }
+            >
+              Resumé
+            </a>
           </PP_14>
         </FlexBox>
         <FlexBox $gap="10px">
