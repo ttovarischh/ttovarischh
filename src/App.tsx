@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Ch
 import HomePage from "./routes/Home";
 import Project from "./routes/Project";
 import M_Navbar from "./components/Molecules/M_Navbar";
+import M_Footer from "./components/Molecules/M_Footer";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage projects={projects} />} />
           <Route path="/:name" element={<Project />} />
         </Routes>
+        <M_Footer />
       </Router>
     </ThemeProvider>
   );

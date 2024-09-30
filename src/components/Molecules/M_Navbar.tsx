@@ -16,10 +16,8 @@ const NavbarWrapper = styled.div`
   padding-left: calc(2.5vw - 12px);
   padding-right: calc(2.5vw - 12px);
   padding-top: 24px;
-  // padding: 32px 2.5vw 0;
   box-sizing: border-box;
   z-index: 10;
-  // background: red;
 `;
 
 const NavbarGradient = styled.div`
@@ -28,29 +26,11 @@ const NavbarGradient = styled.div`
   right: 0;
   top: 0;
   height: calc(100% + 32px);
-  // background: red;
   background: linear-gradient(
     180deg,
     rgba(17, 17, 17, 0.9) 0%,
     rgba(17, 17, 17, 0) 100%
   );
-
-  // background: -moz-linear-gradient(
-  //   180deg,
-  //   rgba(17, 17, 17, 1) 0%,
-  //   rgba(17, 17, 17, 0) 100%%
-  // );
-  // background: -webkit-linear-gradient(
-  //   180deg,
-  //   rgba(17, 17, 17, 1) 0%,
-  //   rgba(17, 17, 17, 0) 100%%
-  // );
-  // background: linear-gradient(
-  //   180deg,
-  //   rgba(17, 17, 17, 1) 0%,
-  //   rgba(17, 17, 17, 0) 100%%
-  // );
-  // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#111111",endColorstr="#111111",GradientType=1);
 `;
 
 const M_Navbar = () => {

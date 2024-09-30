@@ -20,14 +20,17 @@ const M_InfoCardsGrid: React.FC<InfoCardsGridProps> = ({
   texts,
   references,
 }) => {
+  const isSingleReference = typeof references === "string";
   return (
-    <CardsContainer>
+    <CardsContainer id={isSingleReference ? references : undefined}>
       {texts.map(({ header, text }, index) => (
         <A_InfoCard
           key={`${header}-${text}`}
           header={header}
           text={text}
-          reference={references ? references[index] : undefined}
+          reference={
+            references && !isSingleReference ? references[index] : undefined
+          }
           style={{
             transform: index % 2 === 0 ? "rotate(-0.8deg)" : "rotate(0.8deg)",
           }}

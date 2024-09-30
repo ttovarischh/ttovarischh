@@ -1018,7 +1018,6 @@ export const woApp: Project = {
     {
       component: "M_CaseImagesGrid",
       imageIndices: [0, 1],
-      references: ["context", "problem"],
     },
     {
       component: "A_InfoBlock",
@@ -1029,13 +1028,12 @@ export const woApp: Project = {
     {
       component: "EmblaCarousel",
       sliderIndex: 1,
-      references: "segments",
     },
     { component: "A_InfoCard", textIndex: 2, references: ["research"] },
     {
       component: "M_CaseImagesGrid",
       imageIndices: [2, 3],
-      references: ["trendwatching", "benchmarking"],
+      references: "trendbench",
     },
     {
       component: "A_InfoBlock",
@@ -1046,9 +1044,11 @@ export const woApp: Project = {
     {
       component: "EmblaCarousel",
       sliderIndex: 2,
-      references: "book",
     },
-    { component: "M_CaseImagesGrid", imageIndices: [4, 5, 6, 7, 8, 9] },
+    {
+      component: "M_CaseImagesGrid",
+      imageIndices: [4, 5, 6, 7, 8, 9],
+    },
     {
       component: "A_InfoBlock",
       textIndex: 4,
@@ -1084,7 +1084,7 @@ export const woApp: Project = {
     {
       component: "A_InfoCard",
       textIndex: [6, 7],
-      references: ["aboutassets1", "aboutassets2"],
+      references: "aboutassets1",
     },
     {
       component: "EmblaCarousel",
@@ -1107,7 +1107,6 @@ export const woApp: Project = {
     {
       component: "EmblaCarousel",
       sliderIndex: 6,
-      references: "socialsss",
     },
     { component: "M_CaseImagesGrid", imageIndices: [18, 19, 20] },
     {
@@ -1119,7 +1118,7 @@ export const woApp: Project = {
     {
       component: "M_CaseImagesGrid",
       imageIndices: [21, 22],
-      references: ["MVP1", "MVP1results"],
+      references: "MVP1",
     },
     {
       component: "M_LinkCardsGrid",
@@ -1149,7 +1148,7 @@ export const woApp: Project = {
     {
       component: "A_InfoCard",
       textIndex: [10, 11],
-      references: ["mvp2", "mvp2promo"],
+      references: "mvp2",
     },
     {
       component: "EmblaCarousel",
@@ -1176,7 +1175,6 @@ export const woApp: Project = {
     {
       component: "M_CaseImagesGrid",
       imageIndices: [23, 24],
-      references: ["mvp3results", "mvp3features"],
     },
     {
       component: "A_InfoBlock",
@@ -1187,7 +1185,6 @@ export const woApp: Project = {
     {
       component: "M_CaseImagesGrid",
       imageIndices: [25, 26, 27],
-      references: ["MVP1", "MVP1results", "MVP1results"],
     },
     {
       component: "A_InfoBlock",
@@ -1242,17 +1239,10 @@ export const woApp: Project = {
       subItems: [
         {
           title: {
-            en: "Trendwatching",
-            ru: "Трендвотчинг",
+            en: "Trendwatching & Benchmarking",
+            ru: "Трендвотчинг и бенчмаркинг",
           },
-          reference: "trendwatching",
-        },
-        {
-          title: {
-            en: "Benchmarking",
-            ru: "Бенчмаркинг",
-          },
-          reference: "benchmarking",
+          reference: "trendbench",
         },
         {
           title: {
@@ -1363,13 +1353,6 @@ export const woApp: Project = {
             ru: "Трендвотчинг",
           },
           reference: "MVP1",
-        },
-        {
-          title: {
-            en: "MVP1 results",
-            ru: "Трендвотчинг",
-          },
-          reference: "MVP1results",
         },
         {
           title: {

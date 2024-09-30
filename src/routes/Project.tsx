@@ -53,8 +53,7 @@ const ProjectPage: React.FC = () => {
   }
 
   const currentLanguage = i18n.language as "en" | "ru";
-  const slides = project.slider[0].slides;
-  // console.log("Layout:", project.layout);
+  // const slides = project.slider[0].slides;
 
   return (
     <div>
@@ -102,10 +101,6 @@ const ProjectPage: React.FC = () => {
 
             case "EmblaCarousel":
               const sliderSlides = project.slider[item.sliderIndex].slides;
-              // console.log(
-              //   `Rendering slider index: ${item.sliderIndex}`,
-              //   sliderSlides
-              // );
               return (
                 <EmblaCarousel
                   key={index}

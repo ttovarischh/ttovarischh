@@ -1,7 +1,7 @@
-// components/PageMenu.tsx
-import React, { useState, useEffect } from "react";
+// components/M_PageMenu.tsx
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { PP_20, PP_24, FlexBox } from "../Common";
+import { PP_20, FlexBox } from "../Common";
 
 const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   display: flex;
@@ -22,6 +22,18 @@ const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   max-height: ${(props) => (props.$isHovered ? "42vh" : "none")};
   overflow-y: ${(props) => (props.$isHovered ? "scroll" : "auto")};
   z-index: 2;
+
+  &::-webkit-scrollbar {
+    width: 0.63vw;
+  }
+
+  &::-webkit-scrollbar-track {
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 200px;
+  }
 `;
 
 const Line = styled.div<{ $isSubItem?: boolean; $isActive?: boolean }>`
@@ -73,6 +85,7 @@ interface PageMenuProps {
 const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
   const [activeReference, setActiveReference] = useState<string | null>(null);
   const [$isHovered, set$isHovered] = useState(false);
+  const menuContainerRef = useRef<HTMLDivElement | null>(null);
 
   const handleScrollToReference = (reference: string) => {
     const element = document.getElementById(reference);
@@ -96,6 +109,34 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
   };
 
   useEffect(() => {
+    if ($isHovered && activeReference && menuContainerRef.current) {
+      console.log("Hovered");
+      const activeElement = menuContainerRef.current.querySelector(
+        `[data-reference="${activeReference}"]`
+      );
+      if (activeElement) {
+        const elementRect = activeElement.getBoundingClientRect();
+        const containerRect = menuContainerRef.current.getBoundingClientRect();
+        const containerHeight = containerRect.height;
+
+        const offset =
+          elementRect.top -
+          containerRect.top +
+          menuContainerRef.current.scrollTop;
+
+        const centeredOffset =
+          offset - containerHeight / 2 + elementRect.height / 2;
+
+        console.log("Centered Offset for Scroll:", centeredOffset);
+        menuContainerRef.current.scrollTo({
+          top: centeredOffset,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [$isHovered, activeReference]);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -104,7 +145,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.7 }
     );
 
     const sections = document.querySelectorAll("[id]");
@@ -129,6 +170,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
         set$isHovered(false);
       }}
       $isHovered={$isHovered}
+      ref={menuContainerRef}
     >
       {menuItems.map((item) => (
         <FlexBox
@@ -142,6 +184,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
               <Header
                 key={header.reference}
                 onClick={() => handleScrollToReference(header.reference)}
+                data-reference={header.reference}
               >
                 <PP_20
                   medium
@@ -165,6 +208,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
               <SubItem
                 key={subItem.reference}
                 onClick={() => handleScrollToReference(subItem.reference)}
+                data-reference={subItem.reference}
               >
                 <PP_20
                   color={

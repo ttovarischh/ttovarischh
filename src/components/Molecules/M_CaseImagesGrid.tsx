@@ -24,6 +24,12 @@ const ImagesFlexBox = styled.div`
   width: 100%;
 `;
 
+const FramedImagesFlexBox = styled(FlexBox)`
+  // flex-direction: column;
+  gap: 1.04vw;
+  transition: all 0.5s ease;
+`;
+
 const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
   imageIndices,
   images,
@@ -33,11 +39,16 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
   onImageClick,
 }) => {
   const numberOfImages = imageIndices.length;
+  const isSingleReference = typeof references === "string";
 
   switch (true) {
     case numberOfImages === 2:
       return (
-        <FlexBox $direction="column" $gap="1.04vw">
+        <FramedImagesFlexBox
+          // $direction="column"
+          // $gap="1.04vw"
+          id={isSingleReference ? references : undefined}
+        >
           <FlexBox $direction="row" $gap="1.04vw">
             {imageIndices.map((index, i) => {
               const image = images[index];
@@ -50,7 +61,8 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
               return (
                 <A_CaseImage
                   key={index}
-                  id={references[i]}
+                  // id={references[i]}
+                  id={!isSingleReference ? references?.[i] : undefined}
                   src={image.src}
                   projectName={projectName}
                   imageDescription={imageDescription}
@@ -61,7 +73,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
               );
             })}
           </FlexBox>
-        </FlexBox>
+        </FramedImagesFlexBox>
       );
 
     case numberOfImages === 3: {
@@ -140,6 +152,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
             onClick={() => onImageClick(images[imageIndices[0]].src)}
             poster={images[imageIndices[0]].poster}
             shouldAutoplay={images[imageIndices[0]].shouldAutoplay}
+            id={!isSingleReference ? references?.[imageIndices[0]] : undefined}
           />
           {Array.from({ length: 2 }).map((_, rowIndex) => (
             <ImagesFlexBox key={`pair-${rowIndex}`}>
@@ -154,6 +167,11 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
                       src={image.src}
                       projectName={projectName}
                       onClick={() => onImageClick(image.src)}
+                      id={
+                        !isSingleReference
+                          ? references?.[imageIndex]
+                          : undefined
+                      }
                     />
                   </div>
                 );
@@ -165,6 +183,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
             src={images[imageIndices[5]].src}
             projectName={projectName}
             onClick={() => onImageClick(images[imageIndices[5]].src)}
+            id={!isSingleReference ? references?.[imageIndices[5]] : undefined}
           />
         </FlexBox>
       );

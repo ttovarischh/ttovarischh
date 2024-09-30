@@ -7,15 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #111111;
   min-height: 100vh;
-  width: 100vw;
   position: relative;
   overflow: auto;
   overflow-x: hidden;
+  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow: auto;
 }
 
 /* @media screen and (min-width: 1025px) and (max-width: 1280px) {
@@ -49,6 +50,19 @@ code {
   color: black;
   background: white;
 }
+
+/* ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbf8f3;
+  border-radius: 200px;
+}
+
+::-webkit-scrollbar {
+  width: 0.63vw;
+} */
 
 /* ::-webkit-scrollbar {
   width: 0.63vw;

@@ -47,14 +47,17 @@ const Text = (props: TextProps) => {
 };
 
 // Export specific components
-export const PP_16 = (props: Omit<TextProps, "fontSize">) => (
-  <Text fontSize="1rem" {...props} />
+export const PP_14 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="0.875rem" {...props} />
 );
 export const PP_20 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="1.25rem" {...props} />
 );
 export const PP_24 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="1.5rem" {...props} />
+);
+export const PP_32 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="2rem" {...props} />
 );
 export const PP_48 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="3rem" {...props} />
