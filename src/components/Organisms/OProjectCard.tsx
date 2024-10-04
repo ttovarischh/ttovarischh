@@ -11,7 +11,7 @@ interface ProjectCardProps {
 }
 
 const CardWrapper = styled(FlexBox)`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.main_grey};
   width: 100%;
   padding: 20px;
   box-sizing: border-box;

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { FlexBox, PP_48, PP_24 } from "../Common";
 import A_CaseImage from "../Atoms/A_CaseImage";
 import A_Icon from "../Atoms/A_Icon";
@@ -26,6 +26,7 @@ const UIShowWrapper = styled(FlexBox)`
 
 const M_UIShow = (props: UIShowProps) => {
   const { uiShow, language, projectName, references } = props;
+  const theme = useTheme();
 
   return (
     <UIShowWrapper id={references}>
@@ -35,7 +36,7 @@ const M_UIShow = (props: UIShowProps) => {
           <PP_48 medium>
             {uiShow.headerA.map((header) => header[language])}
           </PP_48>
-          <PP_24 color="#595754">
+          <PP_24 color={theme.lightest_grey}>
             {uiShow.textA.map((text) => text[language])}
           </PP_24>
         </FlexBox>
@@ -55,7 +56,7 @@ const M_UIShow = (props: UIShowProps) => {
                       $alignItems="center"
                     >
                       <A_Icon iconName="arrowRight" />
-                      <PP_24 color="#595754">{textItem}</PP_24>
+                      <PP_24 color={theme.lightest_grey}>{textItem}</PP_24>
                     </FlexBox>
                   ))}
                 </FlexBox>

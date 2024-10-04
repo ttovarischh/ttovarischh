@@ -16,7 +16,7 @@ const InfoCardWrapper = styled(FlexBox)`
   width: 35.42vw;
   height: 35.42vw;
   border-radius: 12px;
-  background: #212121;
+  background-color: ${({ theme }) => theme.cards.bg};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
   white-space: pre-line;

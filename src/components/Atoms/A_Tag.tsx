@@ -10,7 +10,10 @@ interface TagProps {
 const TagWrapper = styled(FlexBox)<{ $header?: boolean }>`
   padding: 8px 12px;
   border-radius: 12px;
-  background: ${(props) => (props.$header ? "#111" : "#3F3F3F")};
+  background-color: ${(props) =>
+    props.$header
+      ? ({ theme }) => theme.tags.headertagbg
+      : ({ theme }) => theme.tags.bg};
   cursor: default;
 `;
 

@@ -37,6 +37,7 @@ const A_TimeDisplay: React.FC = () => {
     <div
       onMouseEnter={() => set$isHovered(true)}
       onMouseLeave={() => set$isHovered(false)}
+      style={{ cursor: "default" }}
     >
       <PP_20 medium>
         <Emoji $isVisible={$isHovered}>{emoji} </Emoji>

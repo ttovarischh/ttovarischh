@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { FlexBox, DJR_128, PP_48, PP_20 } from "../Common";
 import A_InfoBlock from "../Atoms/A_InfoBlock";
 import A_Button from "../Atoms/A_Button";
+import { useTranslation } from "react-i18next";
 
 interface Link {
-  name: string;
+  name: { en: string; ru: string };
   url: string;
 }
 
@@ -55,6 +56,7 @@ const MainInfoContent = styled.div`
   margin-top: 88px;
   grid-template-columns: 1fr 2fr 1fr 2fr;
   grid-column-gap: 1.04vw;
+  width: 100%;
 
   & > div:nth-child(2) {
     grid-column-start: 3;
@@ -66,14 +68,23 @@ const ButtonsWrapper = styled(FlexBox)`
 `;
 
 const M_ProjectInfo = (props: ProjectInfoProps) => {
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language as "en" | "ru";
   if (props.horisontal) {
     return (
       <MainInfoWrapper>
         <DJR_128>{props.name}</DJR_128>
         <MainInfoContent>
-          <A_InfoBlock header="Role" text={props.type} />
-          <A_InfoBlock header="Timeline" text={props.timeline} />
-          <A_InfoBlock header="Deliverables" text={props.deliverables} />
+          <A_InfoBlock header={t("projectPage.type")} text={props.type} />
+          <A_InfoBlock
+            header={t("projectPage.timeline")}
+            text={props.timeline}
+          />
+          <A_InfoBlock
+            header={t("projectPage.deliverables")}
+            text={props.deliverables}
+          />
         </MainInfoContent>
       </MainInfoWrapper>
     );
@@ -81,10 +92,15 @@ const M_ProjectInfo = (props: ProjectInfoProps) => {
     return (
       <ProjectInfoWrapper>
         <FlexBox $gap="20px">
-          <A_InfoBlock header="Role" text={props.role} />
-          <A_InfoBlock header="Organisation" text={props.organisation} />
-          <A_InfoBlock header="Status" text={props.status} />
-          {props.team && <A_InfoBlock header="Status" text={props.team} />}
+          <A_InfoBlock header={t("projectPage.role")} text={props.role} />
+          <A_InfoBlock
+            header={t("projectPage.organisation")}
+            text={props.organisation}
+          />
+          <A_InfoBlock header={t("projectPage.status")} text={props.status} />
+          {props.team && (
+            <A_InfoBlock header={t("projectPage.team")} text={props.team} />
+          )}
         </FlexBox>
         <FlexBox $gap="60px">
           <FlexBox $gap="26px">
@@ -97,7 +113,7 @@ const M_ProjectInfo = (props: ProjectInfoProps) => {
             {props.links?.map((link, index) => (
               <A_Button
                 key={index}
-                buttonText={link.name}
+                buttonText={link.name[currentLanguage]}
                 handleButtonClick={() => window.open(link.url, "_blank")}
                 fw
               />

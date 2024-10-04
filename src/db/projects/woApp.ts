@@ -15,12 +15,12 @@ export const woApp: Project = {
     ru: "Сен 2023 — Июль 2024",
   },
   deliverables: {
-    en: "Brand Strategy, Positioning, Tone of Voice, Branding, Identity Design",
-    ru: "Брендовая стратегия, Позиционирование, Тон общения, Брендинг, Дизайн идентичности",
+    en: "Branding, Identity, UI/UX, Analytics, Promotion, Development",
+    ru: "Брендинг, Айдентика, UI/UX, Аналитика, Продвижение, Разработка",
   },
   role: {
     en: "Product designer, Developer",
-    ru: "Продуктовый дизайнер, Разработчик",
+    ru: "Продуктовый дизайнер, разработчик",
   },
   organisation: "HSE ART AND DESIGN SCHOOL",
   status: {
@@ -29,40 +29,49 @@ export const woApp: Project = {
   },
   s_description: {
     en: "Wō is an AI-based music service for mood transformation.",
-    ru: "Wō — это музыкальный сервис на базе ИИ для изменения настроения.",
+    ru: "Wō — это музыкальный сервис для трансформации настроения.",
   },
   description: {
     en: "Wō is not just a streaming platform, but a safe space where each track is carefully selected to match your current state. Listening to music is often not just entertainment, but also a way to relax, feel sad, or, on the contrary, cheer up. Wō analyzes the user’s current mood and offers personalized playlists that promote emotional regulation.",
-    ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться. Wō анализирует текущее настроение юзера и предлагает персонализированные плейлисты, способствующие эмоциональной регуляции.",
+    ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться. Wō анализирует текущее настроение юзера и предлагает персонализированные плейлисты, способствующие эмоциональной регуляции.",
   },
   cover:
     "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727186991/PortfolioCover_tunkrm.mp4",
   svgHeaderPath: "/assets/images/wologo.svg",
   links: [
     {
-      name: "Full presentation",
+      name: {
+        en: "Full presentation",
+        ru: "Презентация",
+      },
       url: "https://portfolio.hse.ru/Project/213207",
     },
-    { name: "Landing", url: "https://wo.artdesignandprooomotion.ru/" },
+    {
+      name: {
+        en: "Landing",
+        ru: "Лендинг",
+      },
+      url: "https://wo.artdesignandprooomotion.ru/",
+    },
   ],
   smallCards: [
     {
       headerCardText: [
         {
-          en: "«Мне сложно описывать свои чувства»",
+          en: "«It's hard for me to describe my feelings»",
           ru: "«Мне сложно описывать свои чувства»",
         },
       ],
       headerCardIcon: "☂",
       mainCardText: [
         {
-          en: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
+          en: "People may have difficulty describing and understanding their emotional state. Mood is not just sadness, joy or calmness, it is more complex.",
           ru: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
         },
       ],
       tags: [
         {
-          en: ["Отсюда берем", "Тест Люшера"],
+          en: ["We take", "Lüscher color test"],
           ru: ["Отсюда берем", "Тест Люшера"],
         },
       ],
@@ -70,42 +79,52 @@ export const woApp: Project = {
     {
       headerCardText: [
         {
-          en: "«Когда грустно, выбираю пост-панк»", // Notice the semicolon added here
+          en: "«When I'm sad, I choose post-punk»",
           ru: "«Когда грустно, выбираю пост-панк»",
         },
       ],
-      headerCardIcon: "☂",
+      headerCardIcon: "☁",
       mainCardText: [
         {
-          en: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
-          ru: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
+          en: "Existing music services don't take into account individual characteristics of music perception: personal associations, negative or positive memories.",
+          ru: "Существующие муз. сервисы не способны учитывать индивидуальные особенности восприятия музыки: личные ассоциации, негативные или позитивные воспоминания.",
         },
       ],
       tags: [
         {
-          en: ["Отсюда берем", "Тест Люшера"],
-          ru: ["Отсюда берем", "Тест Люшера"],
+          en: [
+            "We take",
+            "Machine learning",
+            "Manual fine-tuning",
+            "Privacy settings",
+          ],
+          ru: [
+            "Отсюда берем",
+            "Машинное обучение",
+            "Мануальная донастройка",
+            "Настройки приватности",
+          ],
         },
       ],
     },
     {
       headerCardText: [
         {
-          en: "«Мне сложно описывать свои чувства»",
-          ru: "«Мне сложно описывать свои чувства»",
+          en: "«Music for me is a pure self-reflection»",
+          ru: "«Музыка для меня —саморефлексия»",
         },
       ],
-      headerCardIcon: "☂",
+      headerCardIcon: "♨",
       mainCardText: [
         {
-          en: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
-          ru: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
+          en: "People often use music as a means of self-regulation, and needing a service that is focused on supporting them in such cases, rather than purely on entertainment.",
+          ru: "Люди часто используют музыку как средство саморегуляции, и им нужен сервис, который специально ориентирован на поддержку в таких случаях, а не сугубо на развлечение.",
         },
       ],
       tags: [
         {
-          en: ["Отсюда берем", "Тест Люшера"],
-          ru: ["Отсюда берем", "Тест Люшера"],
+          en: ["We take", "State Insights"],
+          ru: ["Отсюда берем", "Инсайты состояния"],
         },
       ],
     },
@@ -215,6 +234,14 @@ export const woApp: Project = {
           description: {
             en: "Contents of the book",
             ru: "Содержание книги",
+          },
+        },
+        {
+          imgSrc:
+            "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727957108/sB_Add_fngl3x.jpg",
+          description: {
+            en: "Conclusion from the study",
+            ru: "Вывод из исследования",
           },
         },
         {
@@ -506,7 +533,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727567641/s9_1_tnrhbk.jpg",
           description: {
             en: "Market size",
-            ru: "Результаты по Телеграму",
+            ru: "Объемы рынка",
           },
         },
         {
@@ -514,7 +541,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727567636/s9_2_pwr5b2.jpg",
           description: {
             en: "Unit economy",
-            ru: "Результаты по Vk",
+            ru: "Юнит экономика",
           },
         },
         {
@@ -522,7 +549,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727567633/s9_3_axsruo.jpg",
           description: {
             en: "Unit economy conclusions",
-            ru: "Результаты по Дзену",
+            ru: "Выводы по юнит экономике",
           },
         },
         {
@@ -530,7 +557,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727567630/s9_4_nlslgo.jpg",
           description: {
             en: "Business model",
-            ru: "Результаты по всем каналам продвижения",
+            ru: "Бизнес-модель",
           },
         },
         {
@@ -538,7 +565,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727567638/s9_5_twu4hh.jpg",
           description: {
             en: "Sales Funnel",
-            ru: "Результаты по всем каналам продвижения",
+            ru: "Воронка продаж",
           },
         },
         {
@@ -546,7 +573,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727567749/s9_6_vjjq4b.jpg",
           description: {
             en: "PESTEL & SWOT",
-            ru: "Результаты по всем каналам продвижения",
+            ru: "PESTEL & SWOT",
           },
         },
       ],
@@ -555,10 +582,18 @@ export const woApp: Project = {
       slides: [
         {
           imgSrc:
+            "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727982434/wolast_ap7bv3.jpg",
+          description: {
+            en: "That's all folks)",
+            ru: "Вот и все, ребята)",
+          },
+        },
+        {
+          imgSrc:
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727568908/s10_1_rssgwk.jpg",
           description: {
             en: "Main numbers",
-            ru: "Результаты по Телеграму",
+            ru: "Основные цифры",
           },
         },
         {
@@ -566,7 +601,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727568904/s10_2_lp78t0.jpg",
           description: {
             en: "KAZAN FORUM lecture",
-            ru: "Результаты по Vk",
+            ru: "Лекция на KAZAN FORUM",
           },
         },
         {
@@ -574,7 +609,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727568912/s10_4_k7j1iu.jpg",
           description: {
             en: "Ads results",
-            ru: "Результаты по всем каналам продвижения",
+            ru: "Результаты по рекламе",
           },
         },
         {
@@ -582,7 +617,7 @@ export const woApp: Project = {
             "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727568924/s10_3_vtamwx.jpg",
           description: {
             en: "Proposal for financing",
-            ru: "Результаты по Дзену",
+            ru: "Деловое предложение",
           },
         },
       ],
@@ -595,25 +630,60 @@ export const woApp: Project = {
       headerA: [
         {
           en: "Auth and playlist creation",
-          ru: "Регистрация и создание плейлиста",
+          ru: "Регистрация + создание плейлиста",
         },
       ],
       textA: [
         {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
+          en: "Here are all the free, basic features of the app. The essentials for transforming your mood.",
+          ru: "Все бесплатные, базовые функции. Самое необходимое для трансформации вашего настроения.",
         },
       ],
       headerB: [
         {
-          en: "Recorded pages",
-          ru: "Охваченные страницы",
+          en: "Shown screens",
+          ru: "Охваченные экраны",
         },
       ],
       textB: [
         {
-          en: ["Screen 1", "Screen 2", "Screen 3", "Screen 4"],
-          ru: ["Экран 1", "Экран 2", "Экран 3", "Экран 4"],
+          en: ["Registration", "Main feed", "Creation", "Playlist", "Player"],
+          ru: ["Регистрация", "Фид", "Создание плейлиста", "Плейлист", "Плеер"],
+        },
+      ],
+    },
+    {
+      imgSrc:
+        "https://res.cloudinary.com/db64foay5/video/upload/q_auto/f_auto/v1727438683/mock_vypncx.webm",
+      headerA: [
+        {
+          en: "Subscription and old playlist view",
+          ru: "Покупка подписки + старый плейлист",
+        },
+      ],
+      textA: [
+        {
+          en: "We demonstrate paid features to the user and lead them to purchase a subscription.",
+          ru: "Демонстрируем пользователю платные фичи, ведем к покупке подписки.",
+        },
+      ],
+      headerB: [
+        {
+          en: "Shown screens",
+          ru: "Охваченные экраны",
+        },
+      ],
+      textB: [
+        {
+          en: [
+            "Feed",
+            "Friends' feed",
+            "Profile",
+            "History",
+            "Payment",
+            "Playlist",
+          ],
+          ru: ["Фид", "Фид друзей", "Профиль", "История", "Оплата", "Плейлист"],
         },
       ],
     },
@@ -623,53 +693,41 @@ export const woApp: Project = {
       headerA: [
         {
           en: "Auth and playlist creation",
-          ru: "Регистрация и создание плейлиста",
+          ru: "Все везде и сразу + инсайты",
         },
       ],
       textA: [
         {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
+          en: "Let's go through all the user paths again, but this time with a subscription and perks.",
+          ru: "Проходим все пользовательские пути еще раз, но уже с подпиской и плюшками.",
         },
       ],
       headerB: [
         {
-          en: "Recorded pages",
-          ru: "Охваченные страницы",
+          en: "Shown screens",
+          ru: "Охваченные экраны",
         },
       ],
       textB: [
         {
-          en: ["Screen 1", "Screen 2", "Screen 3", "Screen 4"],
-          ru: ["Экран 1", "Экран 2", "Экран 3", "Экран 4"],
-        },
-      ],
-    },
-    {
-      imgSrc:
-        "https://res.cloudinary.com/db64foay5/video/upload/q_auto/f_auto/v1727438683/mock_vypncx.webm",
-      headerA: [
-        {
-          en: "Auth and playlist creation",
-          ru: "Регистрация и создание плейлиста",
-        },
-      ],
-      textA: [
-        {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "Люди могут испытывать трудности с описанием и пониманием своего эмоционального состояния. Настроение — не просто грусть, радость или спокойствие, все сложнее.",
-        },
-      ],
-      headerB: [
-        {
-          en: "Recorded pages",
-          ru: "Охваченные страницы",
-        },
-      ],
-      textB: [
-        {
-          en: ["Screen 1", "Screen 2", "Screen 3", "Screen 4"],
-          ru: ["Экран 1", "Экран 2", "Экран 3", "Экран 4"],
+          en: [
+            "Feed",
+            "Creation",
+            "Playlist",
+            "Player",
+            "History",
+            "Insights",
+            "Profile",
+          ],
+          ru: [
+            "Фид",
+            "Создание",
+            "Плейлист",
+            "Плеер",
+            "История",
+            "Инсайты",
+            "Профиль",
+          ],
         },
       ],
     },
@@ -681,8 +739,8 @@ export const woApp: Project = {
       header: [{ en: "Userflow", ru: "Userflow" }],
       text: [
         {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "После всего анализа я составил схему действий пользователя для этого приложения. Найти ее можно по ссылке ниже.",
+          en: "After all the analysis we’ve made our userflow. Find it at the link below.",
+          ru: "Далее мы сделали userflow приложения. Найти его можно по ссылке ниже.",
         },
       ],
       link_text: [{ en: "See in Figma", ru: "Перейти в Figma" }],
@@ -694,8 +752,8 @@ export const woApp: Project = {
       header: [{ en: "Platform", ru: "Платформа" }],
       text: [
         {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "После всего анализа я составил схему действий пользователя для этого приложения. Найти ее можно по ссылке ниже.",
+          en: "The full version of the brand platform can also be found at the link.",
+          ru: "Полную версию платформы бренда можно также прочекать по ссылке.",
         },
       ],
       link_text: [{ en: "See in Figma", ru: "Перейти в Figma" }],
@@ -707,8 +765,8 @@ export const woApp: Project = {
       header: [{ en: "Styleguide", ru: "Стайлгайд" }],
       text: [
         {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "После всего анализа я составил схему действий пользователя для этого приложения. Найти ее можно по ссылке ниже.",
+          en: "It's our short styleguide, right next to the page with UI Kit.",
+          ru: "Это гайд для айдентики, а на странице рядом можно найти еще и UI Kit.",
         },
       ],
       link_text: [{ en: "See in Figma", ru: "Перейти в Figma" }],
@@ -717,11 +775,11 @@ export const woApp: Project = {
     {
       image_src:
         "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727566067/design_system_qgu7zc.jpg",
-      header: [{ en: "System", ru: "Стайлгайд" }],
+      header: [{ en: "Atomic", ru: "Атомик" }],
       text: [
         {
-          en: "After all the analysis I’ve made an userflow for this app. Find it by the link below.",
-          ru: "После всего анализа я составил схему действий пользователя для этого приложения. Найти ее можно по ссылке ниже.",
+          en: "You can take a look at our atomic component system at this link.",
+          ru: "По этой ссылке можно посмотреть на нашу систему компонентов.",
         },
       ],
       link_text: [{ en: "See in Figma", ru: "Перейти в Figma" }],
@@ -835,14 +893,18 @@ export const woApp: Project = {
       header: [{ en: "Context and problem", ru: "Проблематика и контекст" }],
       text: [
         {
-          en: "A robust global design system to support the new product vision rollout to multiple touch-points simultaneously.",
-          ru: "Надежная глобальная система проектирования для поддержки внедрения нового видения продукта в нескольких точках соприкосновения одновременно.",
+          en: "According to statistics[1][2], the main reasons for listening to music are mood enhancement, stress relief, and support for overall mental well-being. However, existing music services do not take this context into account.",
+          ru: "Согласно статистике[1][2], основными причинами прослушивания музыки являются улучшение настроения, борьба со стрессом, поддержка общего ментального состояния. Однако существующие музыкальные сервисы не учитывают этот контекст.",
         },
       ],
       links: [
         {
-          text: [{ en: "design system", ru: "система проектирования" }],
-          url: "https://ttovarischh.github.io/ttovarischh/",
+          text: [{ en: "1", ru: "1" }],
+          url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3741536/",
+        },
+        {
+          text: [{ en: "2", ru: "2" }],
+          url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3741536/table/TA3/?report=objectonly",
         },
       ],
     },
@@ -852,14 +914,8 @@ export const woApp: Project = {
       ],
       text: [
         {
-          en: "Researchers from Harvard Business Review found that even before Covid-19, zoomers avoided traditional social networks and preferred platforms for private communication, where they could create micro communities or, on the contrary, widely share some personal experiences.",
-          ru: "Исследователи из Harvard Business Review выяснили, что еще до Covid-19 зумеры избегали традиционных социальных сетей и отдавали предпочтение платформам для приватного общения, где можно создать микро сообщества или же, напротив, широко делиться каким-то личным опытом.",
-        },
-      ],
-      links: [
-        {
-          text: [{ en: "zoomers", ru: "зумеры" }],
-          url: "https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_Z",
+          en: "We conducted a study by surveying 81 people. The goal was to determine how users listen to music, what role it plays in their lives, and to understand the context in which they exist. As a result, three audience segments were identified.",
+          ru: "Мы провели опрос, целью которого было понять, как пользователь подходит к задаче прослушивания музыки и какое место она занимает в его жизни, а также понять, в каком контексте он существует. В результате были выделены 3 сегмента ЦА.",
         },
       ],
     },
@@ -869,8 +925,8 @@ export const woApp: Project = {
       ],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "In the course of the research, we discovered that there are no analogs to Wō. While there are similar products, none address our specific task. Our direct competitors include Endel, Mood Playlist, and My wave. Indirect competitors may include music therapy apps, meditation applications, and online psychotherapy services.",
+          ru: "В процессе исследования мы выяснили, что у Wō нет аналога. Есть похожие продукты, но нашу конкретную задачу не решает никто. Например, нашими прямыми конкурентами были Endel, Mood Playlist и «Моя волна». Косвенными конкурентами могут считаться сервисы с муз. терапией и психотерапией, приложения для медитации.",
         },
       ],
     },
@@ -898,8 +954,16 @@ export const woApp: Project = {
       header: [{ en: "Problem Interview", ru: "Проблемное интервью" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "To refine the product, we conducted problem-focused research by interviewing 20 people. During the interviews, 6/7 hypotheses were confirmed. Insights from the research later contributed to the brand development and the technical aspects of the product.",
+          ru: "Для более тщательной проработки продукта мы провели проблемные исследования, поговорив c 20 респондентами. В ходе интервью 6/7 гипотез подтвердились. Инсайты из исследования позже помогли в разработке бренда и технической части продукта.",
+        },
+      ],
+      links: [
+        {
+          text: [
+            { en: "problem-focused research", ru: "проблемные исследования" },
+          ],
+          url: "https://tinyurl.com/45wzju3u",
         },
       ],
     },
@@ -907,98 +971,134 @@ export const woApp: Project = {
       header: [{ en: "Branding & Identity", ru: "Брендинг и айдентика" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "To explain and convey the core value of our product to the audience, we created a brand — Wō (from Chinese «shelter»). Its mission is to make emotions clear for people. This is why we turn to the universal language — music.",
+          ru: "Чтобы объяснить и донести основную ценность нашего продукта до аудитории, мы создали бренд — Wō (с кит. «приют»). Его миссия — сделать эмоции понятными для человека. Именно поэтому мы обращаемся к универсальному языку — музыке.",
         },
       ],
     },
     {
-      header: [{ en: "Physical assets", ru: "Брендинг и айдентика" }],
+      header: [
+        { en: "About main metaphor \n⤨", ru: "Об основной метафоре \n⤨" },
+      ],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "Wō (aptly named mood switcher) helps you switch moods. Like a toggle or switch, it changes your mood from the current to the desired one with a snap of your fingers. Our symbol and logo, along with additional graphic elements, are abstract switches.",
+          ru: "Wō (не зря mood switcher) помогает переключиться. Как рубильник или свич, он по щелчку пальца меняет настроение с существующего на желаемое. Наш знак и логотип, дополнительные графические элементы — абстрактные переключатели.",
         },
       ],
     },
     {
-      header: [{ en: "Digital assets", ru: "Брендинг и айдентика" }],
+      header: [
+        { en: "About main metaphor \n৲", ru: "О добавочной метафоре \n৲" },
+      ],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "At the same time, it's important to understand that we don't treat or provide therapy, but act as a mediator between music, the user, and the desired mood. All the connections between the elements, all the smooth bridges — that's what it's all about.",
+          ru: "В то же время важно понимать, что мы не лечим и не занимаемся терапией, но становимся медиатором между музыкой, пользователем и желаемым настроением. Все связи между блоками, все обтекаемые мосты — про это.",
         },
       ],
     },
     {
-      header: [{ en: "About social networks", ru: "Каналы продвижения" }],
+      header: [{ en: "About digital assets", ru: "Про цифровые носители" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "Examples of our digital assets cover the entire user journey in the funnel: from discovering Wō through social media or banner ads to downloading the app in the store. By the way, over the past year, we made 100+ iterations of banners and identified the ones with the highest conversion rates.",
+          ru: "Примеры наших цифровых носителей охватывают весь путь пользователя в воронке: от знакомства с Wō через соцсети или рекламные баннеры до скачивания приложения в сторе. Кстати, за год мы сделали 100+ итераций баннеров и нашли те, что показали самую высокую конверсию.",
         },
       ],
     },
     {
-      header: [{ en: "About MVP1", ru: "Каналы продвижения" }],
+      header: [{ en: "About MVP1", ru: "Про MVP1" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "MVP1 was a landing page that collected nicks for access to the upcoming beta. The primary goal of the research was to determine how interested the TA was in the product. We gathered 27 responses w/ minimal advertising costs.",
+          ru: "Нашим первый MVP стал лендинг, собиравший тг-ники для доступа к будущей бете. Задачей исследования было, в первую очередь, определить, насколько высок интерес ЦА к продукту. Собрали 27 откликов при минимальных затратах на рекламу.",
         },
       ],
     },
     {
-      header: [{ en: "About MVP2", ru: "Каналы продвижения" }],
+      header: [{ en: "About MVP2", ru: "Про нашего\nтг-бота\nッ" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "To test the product mechanics, we created MVP2 — a bot with the Luscher test that curates music based on the user's goals and mood using ChatGPT API. Its secondary goal was to build an audience before the subscription launch.",
+          ru: "Для проверки механик продукта мы создали MVP2 — Telegram-бота с тестом Люшера, подбиравшего музыку под цель и настроение пользователя с помощью ChatGPT API. Его побочной целью был сбор аудитории перед запуском подписки.",
         },
       ],
     },
     {
-      header: [{ en: "About social media", ru: "Каналы продвижения" }],
+      header: [{ en: "About social media", ru: "Про каналы продвижения\n☄" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "Also we developed our communities. The content categories included announcements, posts about the history of emotions and their reflection in music, insights from casdev, and interactives. Plus, we created 20 mood playlists on Yandex Music under the Wō brand.",
+          ru: "Параллельно мы развивали наши сообщества. Рубрикатор включал анонсы, посты о истории эмоций и их отражении в музыке, инсайты из касдева и интерактивов. Также на Я.Музыке было создано 20 mood-плейлистов под брендом Wō.",
         },
       ],
     },
     {
-      header: [{ en: "Market analysis", ru: "Каналы продвижения" }],
+      header: [{ en: "Market analysis", ru: "Бизнес-аналитика" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "To understand how to sell it, we assessed the market potential and the product's ability to generate revenue. PESTEL and SWOT analyses provided insights into the project's strengths and weaknesses and how to mitigate threats by leveraging its strengths.",
+          ru: "Для того, чтобы понять как это продавать, мы просчитали потенциал рынка и способность продукта генерировать деньги. PESTEL и SWOT дали нам понимание, какие у проекта преимущества и недостатки, и как снизить угрозы за счет сильных сторон.",
+        },
+      ],
+      links: [
+        {
+          text: [{ en: "the market potential", ru: "потенциал рынка" }],
+          url: "https://www.figma.com/design/ZlOtk8Vhh97tBSRWBRtT1t/Shareable?node-id=179-2201&t=npGiMj53g40iHfme-1",
         },
       ],
     },
     {
-      header: [{ en: "Problem interview & MVP3", ru: "Каналы продвижения" }],
+      header: [
+        {
+          en: "Qualitative research & MVP3",
+          ru: "Качественное исследование & MVP3",
+        },
+      ],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "Solution Interviews confirmed that the basic mechanics are clear to people. The final version of the MVP was created to attract initial sales and validate the product's viability. Subscriptions were purchased directly within the bot, without transitioning to third-party applications.",
+          ru: "Решенческие интервью подтвердили: базовая механика понятна людям. Финальная версия MVP была сделана для привлечения первых продаж и проверки жизнеспособности продукта. Подписка покупалась прямо в боте, без перехода в сторонние приложения.",
         },
       ],
     },
     {
-      header: [{ en: "Landing2 продвижнеие мвп3", ru: "Каналы продвижения" }],
+      header: [
+        {
+          en: "Second landing & MVP3 promotion",
+          ru: "Второй лендинг & продвижение MVP3",
+        },
+      ],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "To promote MVP3, a second landing page was created. Its secondary goal was to increase the number of subscribers in the communities. The site attracted 617 unique users, and the conversion rate for the goals was 1.91%.",
+          ru: "Для продвижения MVP3 был создан второй лендинг. Его побочной целью было увеличить количество подписчиков в сообществах. 617 уникальных пользователей посетили сайт, конверсия по целям составила 1.91%.",
+        },
+      ],
+      links: [
+        {
+          text: [{ en: "second landing page", ru: "второй лендинг" }],
+          url: "https://wo.artdesignandprooomotion.ru/",
         },
       ],
     },
     {
-      header: [{ en: "Results overall", ru: "Каналы продвижения" }],
+      header: [{ en: "About numbers", ru: "Про цифры" }],
       text: [
         {
-          en: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
-          ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран индивидуально под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться.",
+          en: "Over the year, we spent 317k tokens, launched 14 ad. campaigns, and created 6.3k Figma frames. Wō was also presented at 1 international forum, receiving 1 business proposal. Reached ~91k users, and earned 2k from sales.",
+          ru: "За год потратили 317к токенов, запустлии 14 рекламных кампаний, создали 6.3к фреймов. А еще презентовали Wō на 1 международном форуме, получив 1 предложение по запуску проекта. Охватили ~91к пользователей и заработали 2к с продаж.",
+        },
+      ],
+      links: [
+        {
+          text: [{ en: "1 international forum", ru: "1 международном форуме" }],
+          url: "https://facecast.net/v/ntqgl4?t=18591s",
+        },
+        {
+          text: [{ en: "1 competition", ru: "1 конкурс" }],
+          url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3741536/table/TA3/?report=objectonly",
         },
       ],
     },
@@ -1220,7 +1320,7 @@ export const woApp: Project = {
         {
           title: {
             en: "Survey & TA",
-            ru: "Контекст и проблематика",
+            ru: "Опрос и ЦА",
           },
           reference: "researchta",
         },
@@ -1247,21 +1347,21 @@ export const woApp: Project = {
         {
           title: {
             en: "Visual Research",
-            ru: "Бенчмаркинг",
+            ru: "Визуальное исследование",
           },
           reference: "visualresearch",
         },
         {
           title: {
             en: "Problem Interview",
-            ru: "Бенчмаркинг",
+            ru: "Проблемное интервью",
           },
           reference: "probleminterview",
         },
         {
           title: {
             en: "Insights from TA",
-            ru: "Бенчмаркинг",
+            ru: "Инсайты из интервью",
           },
           reference: "interview",
         },
@@ -1272,7 +1372,7 @@ export const woApp: Project = {
         {
           title: {
             en: "—\u2002Branding & Identity",
-            ru: "—\u2002Продукт",
+            ru: "—\u2002Брендинг и айдентика",
           },
           reference: "brand",
         },
@@ -1281,56 +1381,56 @@ export const woApp: Project = {
         {
           title: {
             en: "Brand Components",
-            ru: "Userflow",
+            ru: "Составляющие бренда",
           },
           reference: "branding",
         },
         {
           title: {
             en: "Userflow",
-            ru: "Userflow",
+            ru: "Юзерфлоу",
           },
           reference: "userflow",
         },
         {
           title: {
             en: "Brand Platform",
-            ru: "Брендбук",
+            ru: "Платформа бренда",
           },
           reference: "brandplatform",
         },
         {
           title: {
             en: "Identity",
-            ru: "Еще тест",
+            ru: "Айдентика",
           },
           reference: "identity",
         },
         {
           title: {
-            en: "About assets",
-            ru: "Проблемное интервью",
+            en: "About identity components",
+            ru: "Про носители",
           },
           reference: "aboutassets1",
         },
         {
           title: {
             en: "Physical merch",
-            ru: "Проблемное интервью",
+            ru: "Физические носители",
           },
           reference: "pmerch",
         },
         {
           title: {
             en: "Styleguide",
-            ru: "Проблемное интервью",
+            ru: "Стайлгайд",
           },
           reference: "styleguide",
         },
         {
           title: {
             en: "Digital assets",
-            ru: "Проблемное интервью",
+            ru: "Диджитальные носители",
           },
           reference: "dassets",
         },
@@ -1350,91 +1450,91 @@ export const woApp: Project = {
         {
           title: {
             en: "About MVP1",
-            ru: "Трендвотчинг",
+            ru: "Про MVP1",
           },
           reference: "MVP1",
         },
         {
           title: {
             en: "Design System",
-            ru: "Бенчмаркинг",
+            ru: "Дизайн-система",
           },
           reference: "designsystem",
         },
         {
           title: {
             en: "User Scenarios",
-            ru: "Бенчмаркинг",
+            ru: "Сценарии",
           },
           reference: "scenarios",
         },
         {
           title: {
             en: "Scenario I",
-            ru: "Бенчмаркинг",
+            ru: "Сценарий I",
           },
           reference: "scenario1",
         },
         {
           title: {
             en: "Scenario II",
-            ru: "Бенчмаркинг",
+            ru: "Сценарий II",
           },
           reference: "scenario2",
         },
         {
           title: {
             en: "Scenario III",
-            ru: "Бенчмаркинг",
+            ru: "Сценарий III",
           },
           reference: "scenario3",
         },
         {
           title: {
             en: "MVP2 & Promotion",
-            ru: "Бенчмаркинг",
+            ru: "MVP2 & Продвижение",
           },
           reference: "mvp2",
         },
         {
           title: {
             en: "Media channels",
-            ru: "Бенчмаркинг",
+            ru: "Каналы продвижения",
           },
           reference: "mediachannels",
         },
         {
           title: {
             en: "Market Analysis",
-            ru: "Бенчмаркинг",
+            ru: "Анализ рынка",
           },
           reference: "marketanalysis",
         },
         {
           title: {
             en: "Market, Unit economy, Lean Canvas, PESTEL, SWOT, Funnels",
-            ru: "Бенчмаркинг",
+            ru: "Рынок, Юнит-экономика, Лин-канвас, PESTEL, SWOT, Воронки",
           },
           reference: "market",
         },
         {
           title: {
             en: "MVP3",
-            ru: "Бенчмаркинг",
+            ru: "MVP3",
           },
           reference: "mvp3",
         },
         {
           title: {
             en: "MVP3 promotion",
-            ru: "Бенчмаркинг",
+            ru: "Продвижение MVP3",
           },
           reference: "mvp3promo",
         },
         {
           title: {
             en: "Overall results",
-            ru: "Бенчмаркинг",
+            ru: "Результаты",
           },
           reference: "allres",
         },

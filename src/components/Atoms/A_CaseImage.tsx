@@ -1,6 +1,7 @@
-import React from "react";
-import { FlexBox, PP_20, PP_24, PP_48 } from "../Common";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { FlexBox, PP_20 } from "../Common";
+import styled, { useTheme } from "styled-components";
+import A_Skeleton from "./A_Skeleton";
 
 interface CaseImageProps {
   src: string;
@@ -19,9 +20,8 @@ const CaseImage = styled.img<{ $imageDescription?: string }>`
   border-radius: ${({ $imageDescription }) =>
     $imageDescription ? "5px" : "12px"};
   transition: all 0.5s ease;
-
-  flex: 1 1 0; // Allow images to grow equally within their container
-  max-width: 100%; // Prevent overflow
+  flex: 1 1 0;
+  max-width: 100%;
   cursor: zoom-in;
 `;
 
@@ -30,9 +30,11 @@ const CaseImageWrapper = styled(FlexBox)<{ $body?: boolean }>`
   padding: 20px;
   border-radius: 12px;
   gap: 16px;
-  background: #212121;
+  background-color: ${({ theme }) => theme.cards.bg};
   flex-direction: column;
   align-items: flex-start;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 `;
 
 const CaseVideo = styled.video`
@@ -55,21 +57,38 @@ const isVideo = (src: string) => {
 };
 
 const A_CaseImage = (props: CaseImageProps) => {
+  const theme = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleVideoLoad = () => {
+    setIsLoading(false);
+  };
+  
   if (props.imageDescription) {
     return (
       <>
         {isVideo(props.src) ? (
           <CaseImageWrapper>
+            {isLoading && (
+              <A_Skeleton
+                $width="100%"
+                $aspectRatio={16 / 9}
+                $borderRadius="5px"
+              />
+            )}
             <CaseVideo
-              // autoPlay
-              // muted
-              // loop
+              onLoadedData={handleVideoLoad}
               playsInline
               autoPlay={props.shouldAutoplay}
               muted={props.shouldAutoplay}
               loop={props.shouldAutoplay}
               controls={props.shouldAutoplay}
               poster={props.poster}
+              style={{ display: isLoading ? "none" : "block" }}
             >
               <source src={props.src} type="video/mp4" />
               Your browser does not support the video tag.
@@ -83,47 +102,86 @@ const A_CaseImage = (props: CaseImageProps) => {
               $imageDescription={props.imageDescription}
               id={props.id}
               loading="lazy"
+              onLoad={handleImageLoad}
+              style={{ display: isLoading ? "none" : "block" }}
             />
-            <PP_20 color="#6B6863">{props.imageDescription}</PP_20>
+            {isLoading && (
+              <A_Skeleton
+                $width="100%"
+                $aspectRatio={16 / 9}
+                $borderRadius="5px"
+              />
+            )}
+            <PP_20 color={theme.medium_grey}>{props.imageDescription}</PP_20>
           </CaseImageWrapper>
         )}
       </>
     );
   } else if (props.ui) {
     return (
-      <UICaseVideo autoPlay muted loop playsInline>
-        <source src={props.src} type="video/webm" />
-        Your browser does not support the video tag.
-      </UICaseVideo>
+      <>
+        {isLoading && (
+          <A_Skeleton $width="20vw" $aspectRatio={2.3} $borderRadius="12px" />
+        )}
+        <UICaseVideo
+          autoPlay
+          muted
+          loop
+          playsInline
+          onLoadedData={handleVideoLoad}
+          style={{ display: isLoading ? "none" : "block" }}
+        >
+          <source src={props.src} type="video/webm" />
+          Your browser does not support the video tag.
+        </UICaseVideo>
+      </>
     );
   } else {
     return (
       <>
         {isVideo(props.src) ? (
-          <CaseVideo
-            // autoPlay
-            // muted
-            // loop
-            // playsInline
-            playsInline
-            autoPlay={props.shouldAutoplay}
-            muted={props.shouldAutoplay}
-            loop={props.shouldAutoplay}
-            controls={!props.shouldAutoplay}
-            poster={props.poster}
-          >
-            <source src={props.src} type="video/mp4" />
-            Your browser does not support the video tag.
-          </CaseVideo>
+          <>
+            {isLoading && (
+              <A_Skeleton
+                $width="100%"
+                $aspectRatio={16 / 9}
+                $borderRadius="12px"
+              />
+            )}
+            <CaseVideo
+              onLoadedData={handleVideoLoad}
+              playsInline
+              autoPlay={props.shouldAutoplay}
+              muted={props.shouldAutoplay}
+              loop={props.shouldAutoplay}
+              controls={!props.shouldAutoplay}
+              poster={props.poster}
+              style={{ display: isLoading ? "none" : "block" }}
+            >
+              <source src={props.src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </CaseVideo>
+          </>
         ) : (
-          <CaseImage
-            src={props.src}
-            alt={`${props.projectName} case image`}
-            $imageDescription={props.imageDescription}
-            id={props.id}
-            onClick={props.onClick}
-            loading="lazy"
-          />
+          <>
+            <CaseImage
+              src={props.src}
+              alt={`${props.projectName} case image`}
+              $imageDescription={props.imageDescription}
+              id={props.id}
+              onClick={props.onClick}
+              loading="lazy"
+              onLoad={handleImageLoad}
+              style={{ display: isLoading ? "none" : "block" }}
+            />
+            {isLoading && (
+              <A_Skeleton
+                $width="100%"
+                $aspectRatio={16 / 9}
+                $borderRadius="12px"
+              />
+            )}
+          </>
         )}
       </>
     );

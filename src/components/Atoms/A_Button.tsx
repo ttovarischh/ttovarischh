@@ -8,6 +8,7 @@ interface ButtonProps {
   buttonText: string;
   handleButtonClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
+  backtotop?: boolean;
 }
 
 const Button = styled.button<{ disabled?: boolean }>`
@@ -33,7 +34,7 @@ const BigButtonWrapper = styled(Button)`
   width: 100%;
   padding: 17px 16px;
   border-radius: 12px;
-  background: #212121;
+  background-color: ${({ theme }) => theme.buttons.bigButton};
   flex: 1;
 `;
 
@@ -43,7 +44,20 @@ const SmallButtonWrapper = styled(Button)`
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  background: #3f3f3f;
+  background-color: ${({ theme }) => theme.buttons.smallButton};
+`;
+
+const BackToTopWrapper = styled(Button)`
+  padding: 10px 14px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 100px;
+  background: ${({ theme }) => theme.navigation.backtotop};
+
+  svg {
+    transform: rotate(-90deg);
+  }
 `;
 
 const A_Button = (props: ButtonProps) => {
@@ -56,6 +70,17 @@ const A_Button = (props: ButtonProps) => {
         <PP_20>{props.buttonText}</PP_20>
         <A_Icon iconName="buttonArrow" />
       </BigButtonWrapper>
+    );
+  }
+  if (props.backtotop) {
+    return (
+      <BackToTopWrapper
+        disabled={props.disabled}
+        onClick={props.handleButtonClick}
+      >
+        <PP_20 medium>{props.buttonText}</PP_20>
+        <A_Icon iconName="arrowRight" />
+      </BackToTopWrapper>
     );
   }
   return (

@@ -1,29 +1,7 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #111111;
-  min-height: 100vh;
-  position: relative;
-  overflow: auto;
-  overflow-x: hidden;
-  padding: 0;
-}
-
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
-  overflow: auto;
+  overflow: visible;
 }
-
-/* @media screen and (min-width: 1025px) and (max-width: 1280px) {
-  html {
-    font-size: 14px;
-  }
-} */
 
 @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
   html {
@@ -33,49 +11,13 @@ html {
 
 .faded {
   opacity: 0.5;
-  transition: opacity 0.5s ease; /* Smooth transition */
+  transition: opacity 0.5s ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-::selection {
-  color: black;
-  background: white;
-}
-
-::-moz-selection {
-  color: black;
-  background: white;
-}
-
-/* ::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #fbf8f3;
-  border-radius: 200px;
-}
-
-::-webkit-scrollbar {
-  width: 0.63vw;
-} */
-
-/* ::-webkit-scrollbar {
-  width: 0.63vw;
-}
-
-::-webkit-scrollbar-track {
-  background: #111111;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #fbf8f3;
-  border-radius: 200px;
-} */
 
 * > a {
   color: inherit !important;
@@ -90,45 +32,45 @@ code {
     url("../assets/fonts/ppneuemontreal-book.woff") format("woff");
 }
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal Italic";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Italic"),
     url("../assets/fonts/ppneuemontreal-italic.woff") format("woff");
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal Thin";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Thin"),
     url("../assets/fonts/ppneuemontreal-thin.woff") format("woff");
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal Medium";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Medium"),
     url("../assets/fonts/ppneuemontreal-medium.woff") format("woff");
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal SemiBold italic";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal SemiBold italic"),
     url("../assets/fonts/ppneuemontreal-semibolditalic.woff") format("woff");
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "PP Neue Montreal Bold";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Bold"),
     url("../assets/fonts/ppneuemontreal-bold.woff") format("woff");
-}
+} */
 
 @font-face {
   src: url("../assets/fonts/FormaDJRCyrillicText-Medium-Testing.woff2")

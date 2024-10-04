@@ -13,5 +13,31 @@
     "work": "work",
     "contacts": "contacts",
     "info": "info"
+  },
+  "projectPage": {
+    "type": "Type",
+    "timeline": "Timeline",
+    "deliverables": "Deliverables",
+    "role": "Role",
+    "organisation": "Organisation",
+    "status": "Status",
+    "team": "Team"
+  },
+  "footer": {
+    "mainContact1": "Fancy a chat?",
+    "mainContact2": "Let’s",
+    "mainContactLink": "get in touch",
+    "sitePlan": "Site plan",
+    "followMe": "Follow me",
+    "contactMe": "Contact me",
+    "home": "Home",
+    "work": "Work",
+    "about": "About",
+    "copyright": "© 2024 – Polina Sotnikova",
+    "availableHire": "Available for hire",
+    "resume": "Resumé",
+    "upd": "Updated 30.09",
+    "made": "Homemade w/ ⚛React(TS)",
+    "backToTop": "BACK TO TOP"
   }
 }

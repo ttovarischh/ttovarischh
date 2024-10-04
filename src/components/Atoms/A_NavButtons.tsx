@@ -6,16 +6,15 @@ import { useTranslation } from "react-i18next";
 
 const NavButtonsWrapper = styled(FlexBox)`
   position: relative;
-  background: rgba(57, 57, 57, 0.2);
+  background-color: ${({ theme }) => theme.navigation.navbuttonswrapper};
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
   border-radius: 100px;
-  // backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
   width: fit-content;
   justify-self: center;
-
   border: 1px solid hsla(0, 0%, 100%, 0.025);
+  cursor: pointer;
 `;
 
 const NavButton = styled(FlexBox)`
@@ -34,7 +33,7 @@ const HoverBackground = styled.div<{
   position: absolute;
   height: 100%;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.4);
+  background-color: ${({ theme }) => theme.navigation.hoverbg};
   top: 0;
   left: ${({ $left }) => $left}px;
   width: ${({ $width }) => $width}px;
@@ -67,6 +66,13 @@ const A_NavButtons: React.FC = () => {
     setIsSwitchingButtons(false);
   };
 
+  const handleScrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <NavButtonsWrapper onMouseLeave={handleMouseLeave}>
       {[t("nav:work"), t("nav:contacts"), t("nav:info")].map((text, index) => (
@@ -74,12 +80,24 @@ const A_NavButtons: React.FC = () => {
           key={text}
           ref={(el) => (buttonRefs.current[index] = el)}
           onMouseEnter={() => handleMouseEnter(index)}
+          onClick={
+            text === t("nav:contacts") ? handleScrollToBottom : undefined
+          }
         >
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <PP_20 medium uppercase color={theme?.text.white}>
+          {text === t("nav:contacts") ? (
+            <PP_20 medium uppercase color={theme?.white}>
               {text}
             </PP_20>
-          </Link>
+          ) : (
+            <Link
+              to={text === t("nav:work") ? "/work" : "/about"}
+              style={{ textDecoration: "none" }}
+            >
+              <PP_20 medium uppercase color={theme?.white}>
+                {text}
+              </PP_20>
+            </Link>
+          )}
         </NavButton>
       ))}
       <HoverBackground

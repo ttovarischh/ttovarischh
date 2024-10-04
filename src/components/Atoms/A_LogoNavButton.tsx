@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { DJR_20 } from "../Common";
 
 const LogoNavButton = styled(Link)`
   display: flex;
-  background-color: ${({ theme }) => theme.text.white};
+  background-color: ${({ theme }) => theme.white};
   padding: 16px 12px;
   border-radius: 4px;
   width: fit-content;
@@ -20,6 +20,7 @@ const A_LogoNavButton = () => {
   const [text, setText] = useState("P.S...");
   const [$isHovered, set$isHovered] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const theme = useTheme();
 
   const forwardSteps = [
     "P.S...",
@@ -79,7 +80,7 @@ const A_LogoNavButton = () => {
       }}
     >
       <AnimatedText>
-        <DJR_20 medium color="black">
+        <DJR_20 medium color={theme.black}>
           {text}
         </DJR_20>
       </AnimatedText>

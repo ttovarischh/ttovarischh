@@ -1,27 +1,30 @@
 // components/M_PageMenu.tsx
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { PP_20, FlexBox } from "../Common";
 
 const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   display: flex;
   flex-direction: column;
-  position: fixed;
-  // calc(2.5vw - 12px)
-  right: ${(props) => (props.$isHovered ? "1vw" : "0.6vw")};
-  top: 50%;
-  transform: translateY(-50%);
+  position: sticky;
+  width: fit-content;
+  margin-right: ${(props) => (props.$isHovered ? "1vw" : "0.6vw")};
+  margin-left: auto;
+  left: auto;
+  top: 28vh;
   padding: ${(props) => (props.$isHovered ? "20px" : "0px")};
   border-radius: ${(props) => (props.$isHovered ? "12px" : "0px")};
-  background: ${(props) =>
-    props.$isHovered ? "rgba(57, 57, 57, 0.4)" : "transparent"};
-  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
+  background-color: ${(props) =>
+    props.$isHovered ? ({ theme }) => theme.page_menu.bg : "transparent"};
+  box-shadow: ${(props) =>
+    props.$isHovered ? "0px 0px 40px 0px rgba(0, 0, 0, 0.1)" : "none"};
   backdrop-filter: ${(props) => (props.$isHovered ? "blur(10px)" : "none")};
   transition: all 0.6s ease;
   gap: ${(props) => (props.$isHovered ? "4px" : "12px")};
   max-height: ${(props) => (props.$isHovered ? "42vh" : "none")};
   overflow-y: ${(props) => (props.$isHovered ? "scroll" : "auto")};
   z-index: 2;
+  pointer-events: auto;
 
   &::-webkit-scrollbar {
     width: 0.63vw;
@@ -31,7 +34,7 @@ const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: transparent;
+    background-color: transparent;
     border-radius: 200px;
   }
 `;
@@ -40,9 +43,9 @@ const Line = styled.div<{ $isSubItem?: boolean; $isActive?: boolean }>`
   height: 2px;
   width: ${(props) => (props.$isSubItem ? "10px" : "20px")};
   border-radius: 1px;
-  transition: all 0.5ss ease;
-  background: ${(props) =>
-    props.$isActive ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.4)"};
+  transition: all 0.5s ease;
+  opacity: ${(props) => (props.$isActive ? 1 : 0.4)};
+  background-color: ${({ theme }) => theme.page_menu.line};
 `;
 
 const Header = styled(FlexBox)`
@@ -52,7 +55,7 @@ const Header = styled(FlexBox)`
   box-sizing: border-box;
   width: 100%;
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background-color: ${({ theme }) => theme.page_menu.text_bg};
   }
 `;
 
@@ -64,7 +67,7 @@ const SubItem = styled.div`
   margin-left: 2rem;
   max-width: 200px;
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background-color: ${({ theme }) => theme.page_menu.text_bg};
   }
 `;
 
@@ -86,6 +89,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
   const [activeReference, setActiveReference] = useState<string | null>(null);
   const [$isHovered, set$isHovered] = useState(false);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
+  const theme = useTheme();
 
   const handleScrollToReference = (reference: string) => {
     const element = document.getElementById(reference);
@@ -110,7 +114,6 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
 
   useEffect(() => {
     if ($isHovered && activeReference && menuContainerRef.current) {
-      console.log("Hovered");
       const activeElement = menuContainerRef.current.querySelector(
         `[data-reference="${activeReference}"]`
       );
@@ -127,7 +130,6 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
         const centeredOffset =
           offset - containerHeight / 2 + elementRect.height / 2;
 
-        console.log("Centered Offset for Scroll:", centeredOffset);
         menuContainerRef.current.scrollTo({
           top: centeredOffset,
           behavior: "smooth",
@@ -163,6 +165,7 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
 
   return (
     <MenuContainer
+      className="menu"
       onMouseEnter={() => {
         set$isHovered(true);
       }}
@@ -189,7 +192,9 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
                 <PP_20
                   medium
                   color={
-                    activeReference == header.reference ? "#FBF8F3" : "#82807D"
+                    activeReference == header.reference
+                      ? theme.page_menu.text_active
+                      : theme.page_menu.text
                   }
                 >
                   {header.title[currentLanguage]}
@@ -212,7 +217,9 @@ const PageMenu: React.FC<PageMenuProps> = ({ menuItems, currentLanguage }) => {
               >
                 <PP_20
                   color={
-                    activeReference == subItem.reference ? "#FBF8F3" : "#82807D"
+                    activeReference == subItem.reference
+                      ? theme.page_menu.text_active
+                      : theme.page_menu.text
                   }
                   medium={activeReference == subItem.reference}
                 >

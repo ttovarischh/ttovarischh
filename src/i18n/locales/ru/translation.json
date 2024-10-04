@@ -10,8 +10,34 @@
     }
   },
   "nav": {
-    "work": "портфолио",
+    "work": "проекты",
     "contacts": "контакты",
-    "info": "информация"
+    "info": "обо мне"
+  },
+  "projectPage": {
+    "type": "Тип",
+    "timeline": "Таймлайн",
+    "deliverables": "Результаты",
+    "role": "Роль",
+    "organisation": "Организация",
+    "status": "Статус",
+    "team": "Команда"
+  },
+  "footer": {
+    "mainContact1": "Поболтаем?",
+    "mainContact2": "Напишите мне",
+    "mainContactLink": "тут",
+    "sitePlan": "Меню сайта",
+    "followMe": "Соцсети",
+    "contactMe": "Контакты",
+    "home": "Главная",
+    "work": "Проекты",
+    "about": "Обо мне",
+    "copyright": "© 2024 – Полина Сотникова",
+    "availableHire": "Доступна для найма",
+    "resume": "Резюме",
+    "upd": "UPD 30.09",
+    "made": "Сделано с ♡ на ⚛React(TS)",
+    "backToTop": "НАВЕРХ"
   }
 }

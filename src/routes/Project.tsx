@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import projects from "../db/projects";
@@ -19,22 +19,56 @@ import EmblaCarousel from "../components/Atoms/EmblaCarousel";
 import "../styles/embla.css";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
-// const SLIDE_COUNT = 5;
-// const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 const ProjectPageWrapper = styled(FlexBox)`
   display: flex;
   flex-direction: column;
   padding: 0px 2.5vw;
   gap: 180px;
+  position: relative; /* Ensure this is necessary */
+  height: auto; /* Make sure it has a height based on content */
+  overflow: visible; /* Ensure overflow is set appropriately */
+`;
+
+const StickyMenuWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
 `;
 
 const ProjectPage: React.FC = () => {
   const { i18n } = useTranslation();
   const { name } = useParams<{ name: string }>();
   const formattedName = name?.toLowerCase();
-
+  const currentLanguage = i18n.language as "en" | "ru";
   const [fullscreenSrc, setFullscreenSrc] = useState<string | null>(null);
+  const projectPageRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (menuRef.current && projectPageRef.current) {
+        const projectPageHeight = projectPageRef.current.offsetHeight;
+        menuRef.current.style.height = `${projectPageHeight}px`;
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    if (projectPageRef.current) {
+      resizeObserver.observe(projectPageRef.current);
+    }
+
+    handleResize();
+
+    return () => {
+      if (projectPageRef.current) {
+        resizeObserver.unobserve(projectPageRef.current);
+      }
+    };
+  }, []);
 
   const handleImageClick = (src: string) => {
     setFullscreenSrc(src);
@@ -51,9 +85,6 @@ const ProjectPage: React.FC = () => {
   if (!project) {
     return <div>Project not found</div>;
   }
-
-  const currentLanguage = i18n.language as "en" | "ru";
-  // const slides = project.slider[0].slides;
 
   return (
     <div>
@@ -77,7 +108,17 @@ const ProjectPage: React.FC = () => {
         links={project.links}
       />
 
-      <ProjectPageWrapper>
+      <ProjectPageWrapper ref={projectPageRef}>
+        {/* <PageMenu
+          menuItems={project.menuItems}
+          currentLanguage={currentLanguage}
+        /> */}
+        <StickyMenuWrapper ref={menuRef}>
+          <PageMenu
+            menuItems={project.menuItems}
+            currentLanguage={currentLanguage}
+          />
+        </StickyMenuWrapper>
         {project.layout.map((item, index) => {
           const textIndex = item.textIndex;
           const smallCardIndex = item.smallCardIndex;
@@ -296,6 +337,11 @@ const ProjectPage: React.FC = () => {
           }
         })}
       </ProjectPageWrapper>
+      <FlexBox
+        className="similarProjects"
+        $offsetTop="160px"
+        style={{ width: "100%", height: "500px", background: "red" }}
+      />
       {fullscreenSrc && (
         <M_FullScreenImage
           src={fullscreenSrc}
@@ -303,10 +349,6 @@ const ProjectPage: React.FC = () => {
           onClose={closeFullscreen}
         />
       )}
-      <PageMenu
-        menuItems={project.menuItems}
-        currentLanguage={currentLanguage}
-      />
     </div>
   );
 };

@@ -25,9 +25,9 @@ const ImagesFlexBox = styled.div`
 `;
 
 const FramedImagesFlexBox = styled(FlexBox)`
-  // flex-direction: column;
   gap: 1.04vw;
   transition: all 0.5s ease;
+  width: 100%;
 `;
 
 const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
@@ -49,7 +49,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
           // $gap="1.04vw"
           id={isSingleReference ? references : undefined}
         >
-          <FlexBox $direction="row" $gap="1.04vw">
+          <FlexBox $direction="row" $gap="1.04vw" style={{ width: "100%" }}>
             {imageIndices.map((index, i) => {
               const image = images[index];
               if (!image) return null;
@@ -61,7 +61,6 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
               return (
                 <A_CaseImage
                   key={index}
-                  // id={references[i]}
                   id={!isSingleReference ? references?.[i] : undefined}
                   src={image.src}
                   projectName={projectName}
@@ -78,7 +77,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
 
     case numberOfImages === 3: {
       return (
-        <FlexBox $direction="column" $gap="1.04vw">
+        <FlexBox $direction="column" $gap="1.04vw" style={{ width: "100%" }}>
           <A_CaseImage
             key={imageIndices[0]}
             src={images[imageIndices[0]].src}
@@ -87,14 +86,14 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
             poster={images[imageIndices[0]].poster}
             shouldAutoplay={images[imageIndices[0]].shouldAutoplay}
           />
-          <ImagesFlexBox key="pair-row">
+          <ImagesFlexBox key="pair-row" className="hehe">
             {Array.from({ length: 2 }).map((_, imageIndex) => {
               const index = imageIndex + 1;
               const image = images[imageIndices[index]];
               if (!image) return null;
 
               return (
-                <div key={imageIndices[index]}>
+                <div key={imageIndices[index]} style={{ width: "100%" }}>
                   <A_CaseImage
                     src={image.src}
                     projectName={projectName}
@@ -112,7 +111,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
 
     case numberOfImages === 5: {
       return (
-        <FlexBox $direction="column" $gap="1.04vw">
+        <FlexBox $direction="column" $gap="1.04vw" style={{ width: "100%" }}>
           <A_CaseImage
             key={imageIndices[0]}
             src={images[imageIndices[0]].src}
@@ -128,7 +127,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
               if (!image) return null;
 
               return (
-                <div key={imageIndices[index]}>
+                <div key={imageIndices[index]} style={{ width: "100%" }}>
                   <A_CaseImage
                     src={image.src}
                     projectName={projectName}
@@ -144,7 +143,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
 
     case numberOfImages === 6: {
       return (
-        <FlexBox $direction="column" $gap="1.04vw">
+        <FlexBox $direction="column" $gap="1.04vw" style={{ width: "100%" }}>
           <A_CaseImage
             key={imageIndices[0]}
             src={images[imageIndices[0]].src}
@@ -162,7 +161,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
                 if (!image) return null;
 
                 return (
-                  <div key={imageIndices[index]}>
+                  <div key={imageIndices[index]} style={{ width: "100%" }}>
                     <A_CaseImage
                       src={image.src}
                       projectName={projectName}

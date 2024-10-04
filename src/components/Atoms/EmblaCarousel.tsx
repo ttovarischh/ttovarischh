@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   EmblaCarouselType,
   EmblaEventType,
@@ -13,6 +13,7 @@ import {
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import { PP_20 } from "../Common";
 import { useTranslation } from "react-i18next";
+import A_Skeleton from "./A_Skeleton";
 
 const TWEEN_FACTOR_BASE = 0.07;
 
@@ -39,7 +40,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<HTMLElement[]>([]);
 
-  const { i18n } = useTranslation(); // Get the i18n instance
+  const { i18n } = useTranslation();
   const currentLanguage = i18n.language as "en" | "ru";
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -118,8 +119,24 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       .on("slideFocus", tweenScale);
   }, [emblaApi, tweenScale]);
 
+  const [loading, setLoading] = useState<boolean[]>(
+    Array(slides.length).fill(true)
+  );
+
+  const handleImageLoad = (index: number) => {
+    setLoading((prevLoading) => {
+      const newLoading = [...prevLoading];
+      newLoading[index] = false;
+      return newLoading;
+    });
+  };
+
   return (
-    <div className="embla" id={props.references}>
+    <div
+      className="embla"
+      id={props.references}
+      style={loading.includes(true) ? { width: "100vw" } : undefined}
+    >
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide, index) => (
@@ -128,9 +145,22 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 className="embla__slide__image"
                 src={slide.imgSrc}
                 alt={`Slide ${index + 1}`}
-                style={{ width: "100%", height: "auto" }}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: loading[index] ? "none" : "block",
+                }}
+                onLoad={() => handleImageLoad(index)}
                 loading="lazy"
               />
+              {loading[index] && (
+                <A_Skeleton
+                  $width="100%"
+                  $aspectRatio={16 / 9}
+                  $borderRadius="0px"
+                  className="embla__slide__image"
+                />
+              )}
               {selectedIndex === index && (
                 <PP_20 color="#6B6863">
                   {slide.description[currentLanguage]}

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
+import React from "react";
+import { useTheme } from "styled-components";
 
 interface TextProps {
   children: React.ReactNode;
@@ -16,13 +16,15 @@ interface TextProps {
   medium?: boolean;
   underline?: boolean;
   className?: string;
+  id?: string;
 }
 
 const Text = (props: TextProps) => {
-  const theme = useContext(ThemeContext) || { text: { white: "#fff" } };
+  const theme = useTheme();
   return (
     <p
       className={props.className ?? (props.medium ? "ppmedium" : "ppbook")}
+      id={props.id}
       style={{
         fontSize: props.fontSize ?? "1rem",
         lineHeight: props.lineHeight ?? "normal",
@@ -46,7 +48,6 @@ const Text = (props: TextProps) => {
   );
 };
 
-// Export specific components
 export const PP_14 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="0.875rem" {...props} />
 );

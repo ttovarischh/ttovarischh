@@ -18,6 +18,7 @@ const CardsBlocksGrid = styled.div`
   display: flex;
   gap: 1.04vw;
   transition: all 0.5s ease;
+  width: 100%;
 `;
 
 const M_CardsBlocksGrid: React.FC<CardsBlocksGridProps> = ({
@@ -29,7 +30,12 @@ const M_CardsBlocksGrid: React.FC<CardsBlocksGridProps> = ({
     <CardsBlocksGrid id={references}>
       {smallCards.map(
         ({ headerCardText, headerCardIcon, mainCardText, tags }, index) => (
-          <FlexBox key={index} $direction="column" $gap="8px">
+          <FlexBox
+            key={index}
+            $direction="column"
+            $gap="8px"
+            style={{ width: "100%" }}
+          >
             <A_CardBlock
               headerCard
               cardHeader={

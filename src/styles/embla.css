@@ -1,6 +1,4 @@
 .embla {
-  /* width: calc(100vw + 4vw); */
-  /* width: 100vw; */
   margin: auto;
   --slide-height: 19rem;
   --slide-spacing: 0vw;
@@ -39,6 +37,10 @@
   user-select: none;
   line-height: 680px;
 }
+
+.embla__slide__image {
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
 .embla__controls {
   display: flex;
   justify-content: center;
@@ -51,10 +53,7 @@
   right: 0;
   bottom: 84px;
   display: flex;
-  /* background-color: red; */
-  /* opacity: 0.3; */
   justify-content: space-between;
-  /* grid-template-columns: repeat(2, 1fr); */
   gap: 0.6rem;
   align-items: center;
 }
@@ -68,10 +67,8 @@
   text-decoration: none;
   cursor: pointer;
   z-index: 1;
-  color: var(--text-body);
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   height: 100%;
   width: 18.9vw;
   border: none;
@@ -104,19 +101,4 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
-}
-.embla__dot {
-  background-color: #212121;
-  touch-action: manipulation;
-  cursor: pointer;
-  border: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transition: all 0.5s ease;
-}
-.embla__dot--selected {
-  background-color: #2d2d2d;
-  width: 16px;
-  height: 16px;
 }

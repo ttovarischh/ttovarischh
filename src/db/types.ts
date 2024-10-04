@@ -77,7 +77,10 @@ export interface Project {
   };
   cover: string;
   svgHeaderPath: string;
-  links: Array<{ name: string; url: string }>;
+  links: Array<{
+    name: { en: string; ru: string };
+    url: string;
+  }>;
   smallCards: Array<{
     headerCardText: Array<{ en: string; ru: string }>;
     headerCardIcon: string;

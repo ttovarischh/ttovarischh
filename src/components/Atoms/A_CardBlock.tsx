@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexBox, PP_24, PP_48 } from "../Common";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import A_Tag from "../Atoms/A_Tag";
 
 interface CardBlockProps {
@@ -16,7 +16,7 @@ const HeaderLine = styled.div`
   width: 0.52vw;
   height: 4rem;
   border-radius: 2px;
-  background: #595754;
+  background-color: ${({ theme }) => theme.cardBlocks.line};
   align-items: stretch;
   margin-right: 12px;
 `;
@@ -29,12 +29,16 @@ const CardBlock = styled(FlexBox)`
   height: auto;
   padding: 28px;
   border-radius: 12px;
-  background: #212121;
+  background-color: ${({ theme }) => theme.cards.bg};
 `;
 
 const HeaderCard = styled(CardBlock)`
   align-items: center;
   justify-content: space-between;
+
+  #headertext {
+    max-width: 80%;
+  }
 `;
 
 const DescriptionCard = styled(CardBlock)`
@@ -65,12 +69,15 @@ const A_CardBlock: React.FC<CardBlockProps> = ({
   tags,
   language = "en",
 }) => {
+  const theme = useTheme();
   if (headerCard) {
     return (
       <HeaderCard>
-        <HeaderLine />
-        <PP_24>{cardHeader}</PP_24>
-        <PP_48 color="#595754" lineHeight="3rem">
+        <FlexBox style={{ width: "100%" }}>
+          <HeaderLine />
+          <PP_24 id="headertext">{cardHeader}</PP_24>
+        </FlexBox>
+        <PP_48 color={theme.cardBlocks.icon} lineHeight="3rem">
           {cardHeaderIcon}
         </PP_48>
       </HeaderCard>

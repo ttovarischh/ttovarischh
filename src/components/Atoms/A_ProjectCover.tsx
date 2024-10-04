@@ -14,8 +14,7 @@ const StyledImage = styled.img`
 const StyledVideo = styled.video`
   width: 100%;
   object-fit: cover;
-  /* Optional: To hide the video controls completely */
-  display: block; 
+  display: block;
 `;
 
 const isVideo = (src: string) => {
