@@ -1,7 +1,12 @@
+// src/components/Atoms/A_CaseImage/tsx
 import React, { useState } from "react";
 import { FlexBox, PP_20 } from "../Common";
 import styled, { useTheme } from "styled-components";
 import A_Skeleton from "./A_Skeleton";
+import Image from "../Common/Image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import LazyLoad from "react-lazyload";
 
 interface CaseImageProps {
   src: string;
@@ -52,6 +57,16 @@ const UICaseVideo = styled(CaseVideo)`
   display: block;
 `;
 
+const CaseImg = styled(LazyLoadImage)<{ $imageDescription?: string }>`
+  height: auto;
+  object-fit: cover;
+  border-radius: ${({ $imageDescription }) =>
+    $imageDescription ? "5px" : "12px"};
+  flex: 1 1 0;
+  max-width: 100%;
+  cursor: zoom-in;
+`;
+
 const isVideo = (src: string) => {
   return src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg");
 };
@@ -67,7 +82,7 @@ const A_CaseImage = (props: CaseImageProps) => {
   const handleVideoLoad = () => {
     setIsLoading(false);
   };
-  
+
   if (props.imageDescription) {
     return (
       <>
@@ -96,22 +111,17 @@ const A_CaseImage = (props: CaseImageProps) => {
           </CaseImageWrapper>
         ) : (
           <CaseImageWrapper onClick={props.onClick}>
-            <CaseImage
-              src={props.src}
-              alt={`${props.projectName} case image`}
-              $imageDescription={props.imageDescription}
-              id={props.id}
-              loading="lazy"
-              onLoad={handleImageLoad}
-              style={{ display: isLoading ? "none" : "block" }}
-            />
-            {isLoading && (
-              <A_Skeleton
+            <LazyLoad offset={200} once style={{ width: "100%" }}>
+              <Image
+                src={props.src}
+                alt={`${props.projectName} case image`}
+                id={props.id}
                 $width="100%"
                 $aspectRatio={16 / 9}
                 $borderRadius="5px"
+                $imageDescription={props.imageDescription}
               />
-            )}
+            </LazyLoad>
             <PP_20 color={theme.medium_grey}>{props.imageDescription}</PP_20>
           </CaseImageWrapper>
         )}
@@ -163,25 +173,17 @@ const A_CaseImage = (props: CaseImageProps) => {
             </CaseVideo>
           </>
         ) : (
-          <>
-            <CaseImage
+          <LazyLoad offset={200} once style={{ width: "100%" }}>
+            <Image
               src={props.src}
               alt={`${props.projectName} case image`}
-              $imageDescription={props.imageDescription}
               id={props.id}
+              $width="100%"
+              $aspectRatio={16 / 9}
+              $borderRadius="12px"
               onClick={props.onClick}
-              loading="lazy"
-              onLoad={handleImageLoad}
-              style={{ display: isLoading ? "none" : "block" }}
             />
-            {isLoading && (
-              <A_Skeleton
-                $width="100%"
-                $aspectRatio={16 / 9}
-                $borderRadius="12px"
-              />
-            )}
-          </>
+          </LazyLoad>
         )}
       </>
     );

@@ -45,8 +45,6 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
     case numberOfImages === 2:
       return (
         <FramedImagesFlexBox
-          // $direction="column"
-          // $gap="1.04vw"
           id={isSingleReference ? references : undefined}
         >
           <FlexBox $direction="row" $gap="1.04vw" style={{ width: "100%" }}>
