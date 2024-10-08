@@ -1,10 +1,10 @@
 import { Project } from "../types";
 
-export const woApp: Project = {
-  id: 1,
+export const DSTSyhth: Project = {
+  id: 4,
   name: {
-    en: "Wō App",
-    ru: "Wō App",
+    en: "Digital Sound Trip Synth",
+    ru: "Digital Sound Trip Synth",
   },
   type: {
     en: "Personal",
@@ -40,7 +40,7 @@ export const woApp: Project = {
     ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться. Wō анализирует текущее настроение юзера и предлагает персонализированные плейлисты, способствующие эмоциональной регуляции.",
   },
   horisontal_cover:
-    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo_h_c.webp?alt=media&token=e98037f8-9e85-4d53-9991-4665c7843b5a",
+    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Fdstcover.webp?alt=media&token=0fb5ff41-dc87-4fbd-b999-b3fd95bcb3b1",
   cover:
     "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727186991/PortfolioCover_tunkrm.mp4",
   svgHeaderPath: "/assets/images/wologo.svg",

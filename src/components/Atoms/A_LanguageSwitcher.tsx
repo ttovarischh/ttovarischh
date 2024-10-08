@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FlexBox, PP_20 } from "../Common";
+import { FlexBox, PP_20 } from "../Quarks";
 import styled from "styled-components";
 
 const LanguageSwitcherWrapper = styled(FlexBox)`

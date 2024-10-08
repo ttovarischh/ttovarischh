@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { FlexBox, PP_48, PP_24 } from "../Common";
+import { FlexBox, PP_48, PP_24 } from "../Quarks";
 import A_CaseImage from "../Atoms/A_CaseImage";
 import A_Icon from "../Atoms/A_Icon";
 

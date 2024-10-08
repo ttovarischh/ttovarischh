@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexBox, PP_24, PP_48 } from "../Common";
+import { FlexBox, PP_24, PP_48 } from "../Quarks";
 import styled, { useTheme } from "styled-components";
 import A_Tag from "../Atoms/A_Tag";
 

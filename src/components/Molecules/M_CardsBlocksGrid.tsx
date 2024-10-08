@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexBox } from "../Common";
+import { FlexBox } from "../Quarks";
 import A_CardBlock from "../Atoms/A_CardBlock";
 import { styled } from "styled-components";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { PP_20, PP_24 } from "../Common";
+import styled, { useTheme } from "styled-components";
+import { PP_20, PP_24 } from "../Quarks";
 import A_Icon from "./A_Icon";
 
 interface ButtonProps {
@@ -39,11 +39,11 @@ const BigButtonWrapper = styled(Button)`
 `;
 
 const SmallButtonWrapper = styled(Button)`
-  padding: 8px 12px;
+  padding: 8px 20px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 12px;
+  border-radius: 100px;
   background-color: ${({ theme }) => theme.buttons.smallButton};
 `;
 
@@ -61,6 +61,7 @@ const BackToTopWrapper = styled(Button)`
 `;
 
 const A_Button = (props: ButtonProps) => {
+  const theme = useTheme();
   if (props.fw) {
     return (
       <BigButtonWrapper
@@ -89,7 +90,7 @@ const A_Button = (props: ButtonProps) => {
       onClick={props.handleButtonClick}
     >
       <PP_24>{props.buttonText}</PP_24>
-      <A_Icon iconName="buttonArrow" />
+      <A_Icon iconName="arrowRight" fill={theme.medium_grey} />
     </SmallButtonWrapper>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import A_LinkCard from "../Atoms/A_LinkCard";
 import styled from "styled-components";
-import { FlexBox } from "../Common";
+import { FlexBox } from "../Quarks";
 
 interface LinkCardsGridProps {
   linkCards: Array<{

@@ -11,9 +11,10 @@ import {
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
-import { PP_20 } from "../Common";
+import { PP_20 } from "../Quarks";
 import { useTranslation } from "react-i18next";
 import A_Skeleton from "./A_Skeleton";
+import Slide from "../Quarks/Slide";
 
 const TWEEN_FACTOR_BASE = 0.07;
 
@@ -32,16 +33,14 @@ type PropType = {
   slides: Slide[];
   options?: EmblaOptionsType;
   references?: string;
+  currentLanguage: "en" | "ru";
 };
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props;
+  const { slides, options, currentLanguage } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<HTMLElement[]>([]);
-
-  const { i18n } = useTranslation();
-  const currentLanguage = i18n.language as "en" | "ru";
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -141,7 +140,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slides.map((slide, index) => (
             <div className="embla__slide" key={index}>
-              <img
+              <Slide
+                src={slide.imgSrc}
+                alt={`Slide ${index + 1}`}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: loading[index] ? "none" : "block", // Control the display based on the loading state
+                }}
+                onLoad={() => handleImageLoad(index)} // Call the handler to update the loading state
+                isLoading={loading[index]} // Pass the specific loading state for this slide
+              />
+              {/* <img
                 className="embla__slide__image"
                 src={slide.imgSrc}
                 alt={`Slide ${index + 1}`}
@@ -160,7 +170,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   $borderRadius="0px"
                   className="embla__slide__image"
                 />
-              )}
+              )} */}
               {selectedIndex === index && (
                 <PP_20 color="#6B6863">
                   {slide.description[currentLanguage]}

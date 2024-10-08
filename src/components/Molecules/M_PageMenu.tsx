@@ -1,7 +1,7 @@
 // components/M_PageMenu.tsx
 import React, { useState, useEffect, useRef } from "react";
 import styled, { useTheme } from "styled-components";
-import { PP_20, FlexBox } from "../Common";
+import { PP_20, FlexBox } from "../Quarks";
 
 const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   display: flex;

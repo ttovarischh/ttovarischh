@@ -1,8 +1,11 @@
 import React, { useState, useRef, useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { FlexBox, PP_20 } from "../Common";
+import { FlexBox, PP_20 } from "../Quarks";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
+interface NavButtonsProps {
+  t: (key: string) => string;
+}
 
 const NavButtonsWrapper = styled(FlexBox)`
   position: relative;
@@ -45,12 +48,11 @@ const HoverBackground = styled.div<{
   z-index: 0;
 `;
 
-const A_NavButtons: React.FC = () => {
+const A_NavButtons = ({ t }: NavButtonsProps) => {
   const theme = useContext(ThemeContext);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isSwitchingButtons, setIsSwitchingButtons] = useState(false);
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const { t } = useTranslation();
 
   const handleMouseEnter = (index: number) => {
     if (hoveredIndex === null) {

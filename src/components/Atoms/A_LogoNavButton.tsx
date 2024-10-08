@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
-import { DJR_20 } from "../Common";
+import { DJR_20 } from "../Quarks";
 
 const LogoNavButton = styled(Link)`
   display: flex;

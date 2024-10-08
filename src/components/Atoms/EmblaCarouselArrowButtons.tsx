@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 import A_Icon from "./A_Icon";
-import { FlexBox } from "../Common";
+import { FlexBox } from "../Quarks";
 
 type UsePrevNextButtonsType = {
   prevBtnDisabled: boolean;

@@ -1,11 +1,9 @@
 // src/components/Atoms/A_CaseImage/tsx
-import React, { useState } from "react";
-import { FlexBox, PP_20 } from "../Common";
+import React from "react";
+import { FlexBox, PP_20 } from "../Quarks";
 import styled, { useTheme } from "styled-components";
-import A_Skeleton from "./A_Skeleton";
-import Image from "../Common/Image";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import Image from "../Quarks/Image";
+import Video from "../Quarks/Video";
 import LazyLoad from "react-lazyload";
 
 interface CaseImageProps {
@@ -19,17 +17,6 @@ interface CaseImageProps {
   poster?: string;
 }
 
-const CaseImage = styled.img<{ $imageDescription?: string }>`
-  height: auto;
-  object-fit: cover;
-  border-radius: ${({ $imageDescription }) =>
-    $imageDescription ? "5px" : "12px"};
-  transition: all 0.5s ease;
-  flex: 1 1 0;
-  max-width: 100%;
-  cursor: zoom-in;
-`;
-
 const CaseImageWrapper = styled(FlexBox)<{ $body?: boolean }>`
   flex: 1;
   padding: 20px;
@@ -42,72 +29,28 @@ const CaseImageWrapper = styled(FlexBox)<{ $body?: boolean }>`
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 `;
 
-const CaseVideo = styled.video`
-  width: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
-  overflow: hidden;
-`;
-
-const UICaseVideo = styled(CaseVideo)`
-  width: 20vw;
-  height: auto;
-  object-fit: cover;
-  display: block;
-`;
-
-const CaseImg = styled(LazyLoadImage)<{ $imageDescription?: string }>`
-  height: auto;
-  object-fit: cover;
-  border-radius: ${({ $imageDescription }) =>
-    $imageDescription ? "5px" : "12px"};
-  flex: 1 1 0;
-  max-width: 100%;
-  cursor: zoom-in;
-`;
-
 const isVideo = (src: string) => {
   return src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg");
 };
 
 const A_CaseImage = (props: CaseImageProps) => {
   const theme = useTheme();
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
-  const handleVideoLoad = () => {
-    setIsLoading(false);
-  };
 
   if (props.imageDescription) {
     return (
       <>
         {isVideo(props.src) ? (
           <CaseImageWrapper>
-            {isLoading && (
-              <A_Skeleton
+            <LazyLoad offset={200} once style={{ width: "100%" }}>
+              <Video
+                shouldAutoplay={props.shouldAutoplay}
+                poster={props.poster}
+                src={props.src}
                 $width="100%"
                 $aspectRatio={16 / 9}
                 $borderRadius="5px"
               />
-            )}
-            <CaseVideo
-              onLoadedData={handleVideoLoad}
-              playsInline
-              autoPlay={props.shouldAutoplay}
-              muted={props.shouldAutoplay}
-              loop={props.shouldAutoplay}
-              controls={props.shouldAutoplay}
-              poster={props.poster}
-              style={{ display: isLoading ? "none" : "block" }}
-            >
-              <source src={props.src} type="video/mp4" />
-              Your browser does not support the video tag.
-            </CaseVideo>
+            </LazyLoad>
           </CaseImageWrapper>
         ) : (
           <CaseImageWrapper onClick={props.onClick}>
@@ -129,49 +72,30 @@ const A_CaseImage = (props: CaseImageProps) => {
     );
   } else if (props.ui) {
     return (
-      <>
-        {isLoading && (
-          <A_Skeleton $width="20vw" $aspectRatio={2.3} $borderRadius="12px" />
-        )}
-        <UICaseVideo
-          autoPlay
-          muted
-          loop
-          playsInline
-          onLoadedData={handleVideoLoad}
-          style={{ display: isLoading ? "none" : "block" }}
-        >
-          <source src={props.src} type="video/webm" />
-          Your browser does not support the video tag.
-        </UICaseVideo>
-      </>
+      <LazyLoad offset={200} once style={{ width: "20vw" }}>
+        <Video
+          ui
+          src={props.src}
+          $width="20vw"
+          $aspectRatio={2.3}
+          $borderRadius="12px"
+        />
+      </LazyLoad>
     );
   } else {
     return (
       <>
         {isVideo(props.src) ? (
-          <>
-            {isLoading && (
-              <A_Skeleton
-                $width="100%"
-                $aspectRatio={16 / 9}
-                $borderRadius="12px"
-              />
-            )}
-            <CaseVideo
-              onLoadedData={handleVideoLoad}
-              playsInline
-              autoPlay={props.shouldAutoplay}
-              muted={props.shouldAutoplay}
-              loop={props.shouldAutoplay}
-              controls={!props.shouldAutoplay}
+          <LazyLoad offset={200} once style={{ width: "100%" }}>
+            <Video
+              shouldAutoplay={props.shouldAutoplay}
               poster={props.poster}
-              style={{ display: isLoading ? "none" : "block" }}
-            >
-              <source src={props.src} type="video/mp4" />
-              Your browser does not support the video tag.
-            </CaseVideo>
-          </>
+              src={props.src}
+              $width="100%"
+              $aspectRatio={16 / 9}
+              $borderRadius="12px"
+            />
+          </LazyLoad>
         ) : (
           <LazyLoad offset={200} once style={{ width: "100%" }}>
             <Image

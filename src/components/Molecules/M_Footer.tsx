@@ -1,10 +1,14 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { FlexBox, PP_80, PP_14, PP_32, PP_20 } from "../Common";
+import { FlexBox, PP_80, PP_14, PP_32, PP_20 } from "../Quarks";
 import { Link } from "react-router-dom";
 import A_Icon from "../Atoms/A_Icon";
-import { useTranslation } from "react-i18next";
 import A_Button from "../Atoms/A_Button";
+
+interface FooterProps {
+  currentLanguage: "en" | "ru";
+  t: (key: string) => string;
+}
 
 const FooterWrapper = styled(FlexBox)`
   position: relative;
@@ -101,11 +105,8 @@ const FooterUpperRowColumns = styled.div`
   box-sizing: border-box;
 `;
 
-const M_Footer = () => {
-  const { i18n } = useTranslation();
-  const currentLanguage = i18n.language as "en" | "ru";
+const M_Footer = ({ currentLanguage, t }: FooterProps) => {
   const theme = useTheme();
-  const { t } = useTranslation();
 
   const scrollToTop = () => {
     window.scrollTo({

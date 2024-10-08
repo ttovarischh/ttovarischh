@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexBox } from "../Common";
+import { FlexBox } from "../Quarks";
 import A_CaseImage from "../Atoms/A_CaseImage";
 import styled from "styled-components";
 

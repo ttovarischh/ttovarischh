@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { FlexBox, PP_24, PP_80 } from "../Common";
+import { FlexBox, PP_24, PP_80 } from "../Quarks";
 import A_Button from "./A_Button";
-import A_Skeleton from "./A_Skeleton";
+import Image from "../Quarks/Image";
+import LazyLoad from "react-lazyload";
 
 interface LinkCardProps {
   image_src: string;
@@ -38,20 +39,7 @@ const LinkCardInfo = styled(FlexBox)`
   }
 `;
 
-const LinkCardImg = styled.img`
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  max-width: 100%;
-`;
-
 const A_LinkCard = (props: LinkCardProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
   return (
     <LinkCardWrapper id={props.reference || undefined} style={props.style}>
       {props.reverse ? (
@@ -69,37 +57,29 @@ const A_LinkCard = (props: LinkCardProps) => {
               handleButtonClick={() => window.open(props.url, "_blank")}
             />
           </LinkCardInfo>
-          <LinkCardImg
-            src={props.image_src}
-            alt={`${props.header} thumbnail`}
-            loading="lazy"
-            onLoad={handleImageLoad}
-            style={{ display: isLoading ? "none" : "block" }}
-          />
-          {isLoading && (
-            <A_Skeleton
+          <LazyLoad offset={200} once style={{ width: "100%" }}>
+            <Image
+              $linkcard
+              src={props.image_src}
+              alt={`${props.header} thumbnail`}
               $width="100%"
               $aspectRatio={16 / 9}
-              $borderRadius="5px"
+              $borderRadius="12px"
             />
-          )}
+          </LazyLoad>
         </>
       ) : (
         <>
-          <LinkCardImg
-            src={props.image_src}
-            alt={`${props.header} thumbnail`}
-            loading="lazy"
-            onLoad={handleImageLoad}
-            style={{ display: isLoading ? "none" : "block" }}
-          />
-          {isLoading && (
-            <A_Skeleton
+          <LazyLoad offset={200} once style={{ width: "100%" }}>
+            <Image
+              $linkcard
+              src={props.image_src}
+              alt={`${props.header} thumbnail`}
               $width="100%"
               $aspectRatio={16 / 9}
-              $borderRadius="5px"
+              $borderRadius="12px"
             />
-          )}
+          </LazyLoad>
           <LinkCardInfo>
             <FlexBox $direction="column" $gap="12px">
               <PP_80 medium lineHeight="5rem">

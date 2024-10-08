@@ -12,17 +12,30 @@ interface ImageProps {
   $className?: string;
   $imageDescription?: string;
   onClick?: any;
+  $linkcard?: boolean;
+  $imageBorderRadius?: string;
+  $imageClassName?: string;
 }
 
-const CaseImg = styled.img<{ $imageDescription?: string }>`
+const CaseImg = styled.img<{
+  $imageDescription?: string;
+  $imageBorderRadius?: string;
+}>`
   height: auto;
   object-fit: cover;
-  border-radius: ${({ $imageDescription }) =>
-    $imageDescription ? "5px" : "12px"};
+  border-radius: ${({ $imageBorderRadius, $imageDescription }) =>
+    $imageBorderRadius ?? ($imageDescription ? "5px" : "12px")};
   transition: all 0.5s ease;
   flex: 1 1 0;
   max-width: 100%;
   cursor: zoom-in;
+`;
+
+const LinkCardImg = styled.img`
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  max-width: 100%;
 `;
 
 const Image = React.memo((props: ImageProps) => {
@@ -36,22 +49,20 @@ const Image = React.memo((props: ImageProps) => {
     id,
     onClick,
     $className,
+    $linkcard,
+    $imageBorderRadius,
+    $imageClassName,
   } = props;
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(`Initial loading state: ${isLoading}`);
-
   const handleImageLoad = () => {
-    console.log("Image loaded successfully.");
     setIsLoading(false);
 
     // setTimeout(() => {
     //   setIsLoading(false);
-    //   console.log("Skeleton should now be hidden.");
     // }, 20000);
   };
   const handleImageError = () => {
-    console.error("Image failed to load");
     setIsLoading(false);
   };
 
@@ -65,16 +76,28 @@ const Image = React.memo((props: ImageProps) => {
           className={$className}
         />
       )}
-      <CaseImg
-        src={src}
-        alt={alt}
-        id={id}
-        onLoad={handleImageLoad}
-        onError={handleImageError}
-        style={{ display: isLoading ? "none" : "block" }}
-        $imageDescription={$imageDescription}
-        onClick={onClick}
-      />
+      {$linkcard ? (
+        <LinkCardImg
+          src={src}
+          alt={alt}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          style={{ display: isLoading ? "none" : "block" }}
+        />
+      ) : (
+        <CaseImg
+          src={src}
+          alt={alt}
+          id={id}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          style={{ display: isLoading ? "none" : "block" }}
+          $imageDescription={$imageDescription}
+          onClick={onClick}
+          $imageBorderRadius={$imageBorderRadius}
+          className={$imageClassName}
+        />
+      )}
     </>
   );
 });

@@ -14,6 +14,7 @@ interface TextProps {
   fontSize?: string;
   capitalize?: boolean;
   medium?: boolean;
+  bold?: boolean;
   underline?: boolean;
   className?: string;
   id?: string;
@@ -23,7 +24,10 @@ const Text = (props: TextProps) => {
   const theme = useTheme();
   return (
     <p
-      className={props.className ?? (props.medium ? "ppmedium" : "ppbook")}
+      className={
+        props.className ??
+        (props.bold ? "ppbold" : props.medium ? "ppmedium" : "ppbook")
+      }
       id={props.id}
       style={{
         fontSize: props.fontSize ?? "1rem",
@@ -65,6 +69,9 @@ export const PP_48 = (props: Omit<TextProps, "fontSize">) => (
 );
 export const PP_80 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="5rem" {...props} />
+);
+export const PP_128 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="8rem" {...props} />
 );
 export const DJR_20 = (props: Omit<TextProps, "fontSize">) => (
   <Text className="djrbold" fontSize="1.25rem" {...props} />

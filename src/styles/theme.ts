@@ -43,6 +43,11 @@ export const darkTheme = {
     line: "#595754",
     icon: "#595754",
   },
+  mainComp: {
+    header: "#111111",
+    text: "#595754",
+    selection: "#FBF8F3",
+  },
 };
 
 export const lightTheme = {
@@ -90,5 +95,10 @@ export const lightTheme = {
   cardBlocks: {
     line: "#C2BFBA",
     icon: "#C2BFBA",
+  },
+  mainComp: {
+    header: "#111111",
+    text: "#595754",
+    selection: "#FBF8F3",
   },
 };

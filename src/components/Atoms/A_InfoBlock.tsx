@@ -1,7 +1,6 @@
 import React from "react";
-import { FlexBox, PP_20, PP_24, PP_48, GridWrapper } from "../Common";
+import { FlexBox, PP_20, PP_24, PP_48, GridWrapper } from "../Quarks";
 import styled, { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
 
 interface Link {
   text: Array<{ en: string; ru: string }>;
@@ -14,6 +13,7 @@ interface InfoBlockProps {
   $body?: boolean;
   references?: string;
   links?: Array<Link>;
+  currentLanguage: "en" | "ru";
 }
 
 const InfoBlockWrapper = styled(FlexBox)<{ $body?: boolean }>`
@@ -49,9 +49,8 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
   $body,
   references,
   links,
+  currentLanguage,
 }) => {
-  const { i18n } = useTranslation();
-  const currentLanguage = i18n.language as "en" | "ru";
   const theme = useTheme();
 
   const constructTextWithLinks = (text: string, links?: Array<Link>) => {
@@ -89,7 +88,7 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
             {header}
           </PP_24>
           <PP_48 medium lineHeight="113%">
-            {constructTextWithLinks(text || "", links)}
+            {constructTextWithLinks(text ?? "", links)}
           </PP_48>
         </InfoBlockWrapperBig>
       </GridWrapper>
@@ -100,7 +99,7 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
         <PP_20 medium color={theme.medium_grey}>
           {header}
         </PP_20>
-        <PP_20>{constructTextWithLinks(text || "", links)}</PP_20>
+        <PP_20>{constructTextWithLinks(text ?? "", links)}</PP_20>
       </InfoBlockWrapper>
     );
   }

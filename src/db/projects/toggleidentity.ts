@@ -1,9 +1,9 @@
 import { Project } from "../types";
 
-export const woApp: Project = {
-  id: 1,
+export const toggleID: Project = {
+  id: 3,
   name: {
-    en: "Wō App",
+    en: "Toggle Identity",
     ru: "Wō App",
   },
   type: {

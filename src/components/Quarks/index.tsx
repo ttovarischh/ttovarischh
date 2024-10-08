@@ -8,6 +8,7 @@ export {
   PP_32,
   PP_48,
   PP_80,
+  PP_128,
   DJR_20,
   DJR_128,
 } from "./StyledFont";

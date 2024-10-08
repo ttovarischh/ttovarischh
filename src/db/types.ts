@@ -39,8 +39,27 @@ export interface MenuItem {
   }[];
 }
 
+export interface Work {
+  top: Array<WorkItem>;
+  bottom: Array<WorkItem>;
+}
+
+interface WorkItem {
+  image_src: string;
+  image_description: Array<Description>;
+  link?: string;
+}
+
+interface Description {
+  en: string;
+  ru: string;
+}
+
 export interface Project {
   id: number;
+  horisontalOverlay?: boolean;
+  overlayColor?: string;
+  darkText?: boolean;
   name: {
     en: string;
     ru: string;
@@ -50,6 +69,10 @@ export interface Project {
     ru: string;
   };
   timeline: {
+    en: string;
+    ru: string;
+  };
+  short_deliverables: {
     en: string;
     ru: string;
   };
@@ -75,6 +98,7 @@ export interface Project {
     en: string;
     ru: string;
   };
+  horisontal_cover: string;
   cover: string;
   svgHeaderPath: string;
   links: Array<{

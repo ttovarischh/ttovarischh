@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FlexBox, DJR_128, PP_48, PP_20 } from "../Common";
+import { FlexBox, DJR_128, PP_48, PP_20 } from "../Quarks";
 import A_InfoBlock from "../Atoms/A_InfoBlock";
 import A_Button from "../Atoms/A_Button";
 import { useTranslation } from "react-i18next";
@@ -12,21 +12,19 @@ interface Link {
 
 interface ProjectInfoProps {
   horisontal?: boolean;
-
   name?: string;
-
   role?: string;
   organisation?: string;
   status?: string;
   team?: string;
-
   type?: string;
   timeline?: string;
   deliverables?: string;
   s_description?: string;
   description?: string;
-
   links?: Link[];
+  currentLanguage: "en" | "ru";
+  t: (key: string) => string;
 }
 
 const MainInfoWrapper = styled(FlexBox)`
@@ -67,23 +65,41 @@ const ButtonsWrapper = styled(FlexBox)`
   width: 100%;
 `;
 
-const M_ProjectInfo = (props: ProjectInfoProps) => {
-  const { t } = useTranslation();
-  const { i18n } = useTranslation();
-  const currentLanguage = i18n.language as "en" | "ru";
-  if (props.horisontal) {
+const M_ProjectInfo = ({
+  t,
+  horisontal,
+  name,
+  role,
+  organisation,
+  status,
+  team,
+  type,
+  timeline,
+  deliverables,
+  s_description,
+  description,
+  links,
+  currentLanguage,
+}: ProjectInfoProps) => {
+  if (horisontal) {
     return (
       <MainInfoWrapper>
-        <DJR_128>{props.name}</DJR_128>
+        <DJR_128>{name}</DJR_128>
         <MainInfoContent>
-          <A_InfoBlock header={t("projectPage.type")} text={props.type} />
+          <A_InfoBlock
+            header={t("projectPage.type")}
+            text={type}
+            currentLanguage={currentLanguage}
+          />
           <A_InfoBlock
             header={t("projectPage.timeline")}
-            text={props.timeline}
+            text={timeline}
+            currentLanguage={currentLanguage}
           />
           <A_InfoBlock
             header={t("projectPage.deliverables")}
-            text={props.deliverables}
+            text={deliverables}
+            currentLanguage={currentLanguage}
           />
         </MainInfoContent>
       </MainInfoWrapper>
@@ -92,25 +108,38 @@ const M_ProjectInfo = (props: ProjectInfoProps) => {
     return (
       <ProjectInfoWrapper>
         <FlexBox $gap="20px">
-          <A_InfoBlock header={t("projectPage.role")} text={props.role} />
+          <A_InfoBlock
+            header={t("projectPage.role")}
+            text={role}
+            currentLanguage={currentLanguage}
+          />
           <A_InfoBlock
             header={t("projectPage.organisation")}
-            text={props.organisation}
+            text={organisation}
+            currentLanguage={currentLanguage}
           />
-          <A_InfoBlock header={t("projectPage.status")} text={props.status} />
-          {props.team && (
-            <A_InfoBlock header={t("projectPage.team")} text={props.team} />
+          <A_InfoBlock
+            header={t("projectPage.status")}
+            text={status}
+            currentLanguage={currentLanguage}
+          />
+          {team && (
+            <A_InfoBlock
+              header={t("projectPage.team")}
+              text={team}
+              currentLanguage={currentLanguage}
+            />
           )}
         </FlexBox>
         <FlexBox $gap="60px">
           <FlexBox $gap="26px">
             <PP_48 lineHeight="100%" medium>
-              {props.s_description}
+              {s_description}
             </PP_48>
-            <PP_20>{props.description}</PP_20>
+            <PP_20>{description}</PP_20>
           </FlexBox>
           <ButtonsWrapper $gap="1.04vw">
-            {props.links?.map((link, index) => (
+            {links?.map((link, index) => (
               <A_Button
                 key={index}
                 buttonText={link.name[currentLanguage]}

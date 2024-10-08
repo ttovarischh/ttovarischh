@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import projects from "../db/projects";
 import A_InfoBlock from "../components/Atoms/A_InfoBlock";
 import M_CaseImagesGrid from "../components/Molecules/M_CaseImagesGrid";
-import { FlexBox } from "../components/Common";
+import { FlexBox } from "../components/Quarks";
 import styled from "styled-components";
 import M_ProjectInfo from "../components/Molecules/M_ProjectInfo";
 import A_ProjectCover from "../components/Atoms/A_ProjectCover";
@@ -20,14 +19,19 @@ import "../styles/embla.css";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
 
+interface ProjectPageProps {
+  currentLanguage: "en" | "ru";
+  t: (key: string) => string;
+}
+
 const ProjectPageWrapper = styled(FlexBox)`
   display: flex;
   flex-direction: column;
   padding: 0px 2.5vw;
   gap: 180px;
-  position: relative; /* Ensure this is necessary */
-  height: auto; /* Make sure it has a height based on content */
-  overflow: visible; /* Ensure overflow is set appropriately */
+  position: relative;
+  height: auto;
+  overflow: visible;
 `;
 
 const StickyMenuWrapper = styled.div`
@@ -39,11 +43,9 @@ const StickyMenuWrapper = styled.div`
   pointer-events: none;
 `;
 
-const ProjectPage: React.FC = () => {
-  const { i18n } = useTranslation();
+const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
   const { name } = useParams<{ name: string }>();
   const formattedName = name?.toLowerCase();
-  const currentLanguage = i18n.language as "en" | "ru";
   const [fullscreenSrc, setFullscreenSrc] = useState<string | null>(null);
   const projectPageRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -94,6 +96,8 @@ const ProjectPage: React.FC = () => {
         type={project.type[currentLanguage]}
         timeline={project.timeline[currentLanguage]}
         deliverables={project.deliverables[currentLanguage]}
+        currentLanguage={currentLanguage}
+        t={t}
       />
       <A_ProjectCover
         cover={project.cover}
@@ -106,13 +110,10 @@ const ProjectPage: React.FC = () => {
         s_description={project.s_description[currentLanguage]}
         description={project.description[currentLanguage]}
         links={project.links}
+        currentLanguage={currentLanguage}
+        t={t}
       />
-
       <ProjectPageWrapper ref={projectPageRef}>
-        {/* <PageMenu
-          menuItems={project.menuItems}
-          currentLanguage={currentLanguage}
-        /> */}
         <StickyMenuWrapper ref={menuRef}>
           <PageMenu
             menuItems={project.menuItems}
@@ -135,6 +136,7 @@ const ProjectPage: React.FC = () => {
                     links={project.texts[idx].links}
                     $body={item.$body}
                     references={item.references}
+                    currentLanguage={currentLanguage}
                   />
                 );
               }
@@ -148,6 +150,7 @@ const ProjectPage: React.FC = () => {
                   slides={sliderSlides}
                   options={OPTIONS}
                   references={item.references}
+                  currentLanguage={currentLanguage}
                 />
               );
 

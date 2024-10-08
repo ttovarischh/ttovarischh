@@ -1,7 +1,7 @@
 // M_Navbar
 import React from "react";
 import styled from "styled-components";
-import { FlexBox } from "../Common";
+import { FlexBox } from "../Quarks";
 import A_LanguageSwitcher from "../Atoms/A_LanguageSwitcher";
 import A_LogoNavButton from "../Atoms/A_LogoNavButton";
 import A_TimeDisplay from "../Atoms/A_TimeDisplay";
@@ -11,6 +11,7 @@ import A_ThemeSwitcher from "../Atoms/A_ThemeSwitcher";
 interface NavbarProps {
   theme: any;
   toggleTheme: () => void;
+  t: (key: string) => string;
 }
 
 const NavbarWrapper = styled.div`
@@ -36,12 +37,12 @@ const NavbarGradient = styled.div<{ theme: any }>`
   background: ${({ theme }) => theme.gradient};
 `;
 
-const M_Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
+const M_Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, t }) => {
   return (
     <NavbarWrapper>
       <NavbarGradient />
       <A_LogoNavButton />
-      <A_NavButtons />
+      <A_NavButtons t={t} />
       <FlexBox
         $gap="16px"
         $justifyContent="flex-end"

@@ -1,7 +1,7 @@
 import React from "react";
 import A_InfoCard from "../Atoms/A_InfoCard";
 import styled from "styled-components";
-import { FlexBox } from "../Common";
+import { FlexBox } from "../Quarks";
 
 interface InfoCardsGridProps {
   texts: Array<{ header: string; text: string }>;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FlexBox, PP_24 } from "../Common";
+import { FlexBox, PP_24 } from "../Quarks";
 
 interface TagProps {
   $header?: boolean;

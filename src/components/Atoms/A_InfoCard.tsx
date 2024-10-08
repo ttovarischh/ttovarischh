@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexBox, PP_80, PP_24 } from "../Common";
+import { FlexBox, PP_80, PP_24 } from "../Quarks";
 import styled from "styled-components";
 
 interface InfoCardProps {

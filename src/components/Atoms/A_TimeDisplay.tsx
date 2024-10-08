@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PP_20 } from "../Common";
+import { PP_20 } from "../Quarks";
 import styled from "styled-components";
 
 const Emoji = styled.span<{ $isVisible: boolean }>`

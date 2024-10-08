@@ -1,10 +1,10 @@
 // App.tsx
 import React, { useState, useEffect, useRef } from "react";
-import projects from "./db/projects";
+import { projects } from "./db/index";
 import "./i18n/i18n";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./styles/theme";
-import GlobalStyle from "./styles/GlobalStyles"; // Import GlobalStyle
+import GlobalStyle from "./styles/GlobalStyles";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,6 +17,7 @@ import WorkPage from "./routes/Work";
 import AboutPage from "./routes/About";
 import M_Navbar from "./components/Molecules/M_Navbar";
 import M_Footer from "./components/Molecules/M_Footer";
+import { useTranslation } from "react-i18next";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(() => {
@@ -36,19 +37,34 @@ const App: React.FC = () => {
     localStorage.setItem("theme", themeValue);
   }, [theme]);
 
+  const { i18n, t } = useTranslation();
+  const currentLanguage = i18n.language as "en" | "ru";
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle theme={theme} />
       <Router>
         <ScrollToTop />
-        <M_Navbar theme={themeValue} toggleTheme={toggleTheme} />
+        <M_Navbar theme={themeValue} toggleTheme={toggleTheme} t={t} />
         <Routes>
-          <Route path="/" element={<HomePage projects={projects} />} />
-          <Route path="/:name" element={<Project />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                projects={projects}
+                currentLanguage={currentLanguage}
+                t={t}
+              />
+            }
+          />
+          <Route
+            path="/:name"
+            element={<Project currentLanguage={currentLanguage} t={t} />}
+          />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
-        <M_Footer />
+        <M_Footer currentLanguage={currentLanguage} t={t} />
       </Router>
     </ThemeProvider>
   );

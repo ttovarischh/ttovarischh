@@ -64,13 +64,13 @@ code {
     url("../assets/fonts/ppneuemontreal-semibolditalic.woff") format("woff");
 } */
 
-/* @font-face {
+@font-face {
   font-family: "PP Neue Montreal Bold";
   font-style: normal;
   font-weight: normal;
   src: local("PP Neue Montreal Bold"),
     url("../assets/fonts/ppneuemontreal-bold.woff") format("woff");
-} */
+}
 
 @font-face {
   src: url("../assets/fonts/FormaDJRCyrillicText-Medium-Testing.woff2")
@@ -97,6 +97,10 @@ code {
 
 .ppmedium {
   font-family: "PP Neue Montreal Medium", Arial, Helvetica, sans-serif;
+}
+
+.ppbold {
+  font-family: "PP Neue Montreal Bold", Arial, Helvetica, sans-serif;
 }
 
 .djrmedium {
