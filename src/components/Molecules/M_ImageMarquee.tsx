@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { FlexBox, PP_20 } from "../Quarks";
 import Image from "../Quarks/Image";
@@ -69,45 +69,55 @@ const M_ImageMarquee: React.FC<ImageMarqueeProps> = ({
   currentLanguage,
 }) => {
   const theme = useTheme();
+  const marqueeRef = useRef<HTMLDivElement | null>(null);
+  const [marqueeHeight, setMarqueeHeight] = useState(0);
 
   const isVideo = (src: string): boolean => {
     return src.includes(".webm");
   };
 
+  useEffect(() => {
+    if (marqueeRef.current) {
+      setMarqueeHeight(marqueeRef.current.clientHeight);
+    }
+  }, [works]);
+
   return (
     <ImageMarqueeWrapper $direction={direction}>
-      <LazyLoad offset={200} height={564} once>
-        <Marquee speed={80} direction={direction}>
-          <ImageMarquee>
-            {works.map((work, index) => (
-              <WorkLink
-                key={`${work.link} ${index}`}
-                href={work.link}
-                target="_blank"
-              >
-                <PP_20 medium color={theme.medium_grey}>
-                  {work.image_description[0][currentLanguage]}
-                </PP_20>
-                {isVideo(work.image_src) ? (
+      <Marquee speed={80} direction={direction}>
+        <ImageMarquee ref={marqueeRef}>
+          {works.map((work, index) => (
+            <WorkLink
+              key={`${work.link} ${index}`}
+              href={work.link}
+              target="_blank"
+            >
+              <PP_20 medium color={theme.medium_grey}>
+                {work.image_description[0][currentLanguage]}
+              </PP_20>
+              {isVideo(work.image_src) ? (
+                <LazyLoad offset={200} once style={{ height: "29.38vw" }}>
                   <Video
                     shouldAutoplay
                     src={work.image_src}
                     $className="marqueeskeleton"
                     $borderRadius="0px"
                   />
-                ) : (
+                </LazyLoad>
+              ) : (
+                <LazyLoad offset={200} once style={{ height: "29.38vw" }}>
                   <Image
                     src={work.image_src}
                     alt={work.image_description[0]["en"]}
                     $className="marqueeskeleton"
                     $borderRadius="0px"
                   />
-                )}
-              </WorkLink>
-            ))}
-          </ImageMarquee>
-        </Marquee>
-      </LazyLoad>
+                </LazyLoad>
+              )}
+            </WorkLink>
+          ))}
+        </ImageMarquee>
+      </Marquee>
     </ImageMarqueeWrapper>
   );
 };

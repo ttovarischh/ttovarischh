@@ -1,11 +1,12 @@
 import { Project } from "../types";
 
 export const DSTSyhth: Project = {
-  id: 4,
+  id: 5,
   name: {
     en: "Digital Sound Trip Synth",
     ru: "Digital Sound Trip Synth",
   },
+  similarCases: [8, 7, 6],
   type: {
     en: "Personal",
     ru: "Личное",
@@ -14,14 +15,25 @@ export const DSTSyhth: Project = {
     en: "Sep 2023 — July 2024",
     ru: "Сен 2023 — Июль 2024",
   },
+  year: "2024",
   short_deliverables: {
-    en: "Brand & Product",
+    en: "UI/UX & Dev",
     ru: "Бренд и продукт",
   },
   deliverables: {
     en: "Branding, Identity, UI/UX, Analytics, Promotion, Development",
     ru: "Брендинг, Айдентика, UI/UX, Аналитика, Продвижение, Разработка",
   },
+  filterTags: [
+    {
+      name: { en: "UI/UX design", ru: "UI/UX" },
+      value: "uiux",
+    },
+    {
+      name: { en: "Development", ru: "Разработка" },
+      value: "dev",
+    },
+  ],
   role: {
     en: "Product designer, Developer",
     ru: "Продуктовый дизайнер, разработчик",

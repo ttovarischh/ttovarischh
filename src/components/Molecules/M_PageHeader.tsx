@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { FlexBox, DJR_128, PP_48, PP_20 } from "../Quarks";
 import A_InfoBlock from "../Atoms/A_InfoBlock";
 import A_Button from "../Atoms/A_Button";
-import { useTranslation } from "react-i18next";
+import A_Tag from "../Atoms/A_Tag";
 
 interface Link {
   name: { en: string; ru: string };
   url: string;
 }
 
-interface ProjectInfoProps {
+interface PageHeaderProps {
   horisontal?: boolean;
   name?: string;
   role?: string;
@@ -25,6 +25,11 @@ interface ProjectInfoProps {
   links?: Link[];
   currentLanguage: "en" | "ru";
   t: (key: string) => string;
+  works?: boolean;
+  projectsAmount?: string;
+  filterTags?: Array<{ name: string; filter: string | null }>;
+  onFilterSelect?: (filter: string | null) => void;
+  selectedFilter?: string | null;
 }
 
 const MainInfoWrapper = styled(FlexBox)`
@@ -65,7 +70,7 @@ const ButtonsWrapper = styled(FlexBox)`
   width: 100%;
 `;
 
-const M_ProjectInfo = ({
+const M_PageHeader = ({
   t,
   horisontal,
   name,
@@ -80,7 +85,12 @@ const M_ProjectInfo = ({
   description,
   links,
   currentLanguage,
-}: ProjectInfoProps) => {
+  works,
+  projectsAmount,
+  filterTags,
+  onFilterSelect,
+  selectedFilter,
+}: PageHeaderProps) => {
   if (horisontal) {
     return (
       <MainInfoWrapper>
@@ -101,6 +111,40 @@ const M_ProjectInfo = ({
             text={deliverables}
             currentLanguage={currentLanguage}
           />
+        </MainInfoContent>
+      </MainInfoWrapper>
+    );
+  } else if (works) {
+    return (
+      <MainInfoWrapper>
+        <DJR_128>{t("works.allCases")}</DJR_128>
+        <MainInfoContent>
+          <A_InfoBlock
+            header={t("works.amount")}
+            text={`${projectsAmount} ${t("works.cases")}`}
+            currentLanguage={currentLanguage}
+          />
+          <A_InfoBlock
+            header={t("works.filter")}
+            text={t("works.by")}
+            currentLanguage={currentLanguage}
+            noText
+          />
+          <FlexBox $gap="8px" style={{ alignSelf: "end" }}>
+            {filterTags!.map((filterTag, index) => (
+              <A_Tag
+                small
+                tagText={filterTag.name}
+                key={index}
+                onFilterSelect={() => {
+                  if (onFilterSelect) {
+                    onFilterSelect(filterTag.filter);
+                  }
+                }}
+                selected={selectedFilter === filterTag.filter}
+              />
+            ))}
+          </FlexBox>
         </MainInfoContent>
       </MainInfoWrapper>
     );
@@ -154,4 +198,4 @@ const M_ProjectInfo = ({
   }
 };
 
-export default M_ProjectInfo;
+export default M_PageHeader;

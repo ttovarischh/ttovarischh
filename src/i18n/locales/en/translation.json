@@ -21,7 +21,9 @@
     "role": "Role",
     "organisation": "Organisation",
     "status": "Status",
-    "team": "Team"
+    "team": "Team",
+    "similarCases": "Related projects",
+    "similarCasesText": "Sometimes I do things other than product design. And it’s fun too."
   },
   "footer": {
     "mainContact1": "Fancy a chat?",
@@ -54,5 +56,17 @@
     "moreWork": "More work",
     "sometimes": "Sometimes I do things other than product design. And it’s fun too.",
     "aboutMe": "About me"
+  },
+  "works": {
+    "allCases": "All cases",
+    "amount": "Amount of works:",
+    "cases": "cases",
+    "filter": "Filter projects",
+    "by": "by deliverables:",
+    "productDesign": "Product design",
+    "UIUX": "UI/UX",
+    "artDirection": "Art direction",
+    "development": "Development",
+    "all": "All"
   }
 }

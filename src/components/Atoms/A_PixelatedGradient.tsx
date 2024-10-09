@@ -91,13 +91,13 @@ const A_PixelatedGradient: React.FC = () => {
       };
 
       if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current); // Cancel previous animation before starting a new one
+        cancelAnimationFrame(animationRef.current);
       }
 
       drawPixelatedGradient();
     };
 
-    handleResize(); // Initialize the canvas on the first render
+    handleResize();
 
     const handleMouseMove = (event: MouseEvent) => {
       mousePosition.current = { x: event.clientX, y: event.clientY };

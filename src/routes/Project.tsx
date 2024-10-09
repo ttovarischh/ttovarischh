@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import projects from "../db/projects";
 import A_InfoBlock from "../components/Atoms/A_InfoBlock";
 import M_CaseImagesGrid from "../components/Molecules/M_CaseImagesGrid";
 import { FlexBox } from "../components/Quarks";
 import styled from "styled-components";
-import M_ProjectInfo from "../components/Molecules/M_ProjectInfo";
+import M_PageHeader from "../components/Molecules/M_PageHeader";
 import A_ProjectCover from "../components/Atoms/A_ProjectCover";
 import PageMenu from "../components/Molecules/M_PageMenu";
 import M_InfoCardsGrid from "../components/Molecules/M_InfoCardsGrid";
@@ -16,6 +16,9 @@ import M_UIShow from "../components/Molecules/M_UIShow";
 import { EmblaOptionsType } from "embla-carousel";
 import EmblaCarousel from "../components/Atoms/EmblaCarousel";
 import "../styles/embla.css";
+import T_ProjectsGrid from "../components/Templates/T_ProjectsGrid";
+import A_PageTextDivider from "../components/Atoms/A_PageTextDivider";
+import { Project } from "../db/types";
 
 const OPTIONS: EmblaOptionsType = { loop: true };
 
@@ -49,6 +52,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
   const [fullscreenSrc, setFullscreenSrc] = useState<string | null>(null);
   const projectPageRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -88,9 +92,18 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
     return <div>Project not found</div>;
   }
 
+  const similarProjects = project.similarCases
+    ?.map((id) => {
+      const foundProject = projects.find((proj) => proj.id === id);
+      return foundProject;
+    })
+    .filter((proj): proj is Project => {
+      return proj !== undefined;
+    });
+
   return (
     <div>
-      <M_ProjectInfo
+      <M_PageHeader
         horisontal
         name={project.name[currentLanguage]}
         type={project.type[currentLanguage]}
@@ -103,7 +116,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
         cover={project.cover}
         alt={`Cover image of ${project.name[currentLanguage]}`}
       />
-      <M_ProjectInfo
+      <M_PageHeader
         role={project.role[currentLanguage]}
         organisation={project.organisation}
         status={project.status[currentLanguage]}
@@ -341,10 +354,27 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
         })}
       </ProjectPageWrapper>
       <FlexBox
-        className="similarProjects"
+        $direction="column"
+        $alignItems="center"
         $offsetTop="160px"
-        style={{ width: "100%", height: "500px", background: "red" }}
-      />
+        $alignContent="center"
+        style={{ width: "100%" }}
+      >
+        <A_PageTextDivider
+          header={t("projectPage.similarCases")}
+          text={t("projectPage.similarCasesText")}
+          iconName="similar"
+          reverse
+          buttonText={t("home.seeAll")}
+          handleButtonClick={() => navigate("/work")}
+        />
+        <T_ProjectsGrid
+          projects={similarProjects}
+          featured
+          currentLanguage={currentLanguage}
+          similar
+        />
+      </FlexBox>
       {fullscreenSrc && (
         <M_FullScreenImage
           src={fullscreenSrc}

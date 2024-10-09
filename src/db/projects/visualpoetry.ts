@@ -1,12 +1,12 @@
 import { Project } from "../types";
 
-export const toggleWeb: Project = {
-  id: 3,
+export const visualpoetry: Project = {
+  id: 8,
   name: {
-    en: "Toggle Studio Web",
-    ru: "Toggle Studio Web",
+    en: "Visual Poetry Longread",
+    ru: "Визуальная поэзия | Лонгрид",
   },
-  similarCases: [6, 5, 4],
+  similarCases: [5, 6, 3],
   type: {
     en: "Personal",
     ru: "Личное",
@@ -18,7 +18,7 @@ export const toggleWeb: Project = {
   },
   short_deliverables: {
     en: "UI/UX & Dev",
-    ru: "UI/UX & Разработка",
+    ru: "Бренд и продукт",
   },
   deliverables: {
     en: "Branding, Identity, UI/UX, Analytics, Promotion, Development",
@@ -28,10 +28,6 @@ export const toggleWeb: Project = {
     {
       name: { en: "UI/UX design", ru: "UI/UX" },
       value: "uiux",
-    },
-    {
-      name: { en: "Art direction", ru: "Арт-дирекшн" },
-      value: "artdir",
     },
     {
       name: { en: "Development", ru: "Разработка" },
@@ -55,10 +51,8 @@ export const toggleWeb: Project = {
     en: "Wō is not just a streaming platform, but a safe space where each track is carefully selected to match your current state. Listening to music is often not just entertainment, but also a way to relax, feel sad, or, on the contrary, cheer up. Wō analyzes the user’s current mood and offers personalized playlists that promote emotional regulation.",
     ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться. Wō анализирует текущее настроение юзера и предлагает персонализированные плейлисты, способствующие эмоциональной регуляции.",
   },
-  vertical_cover:
-    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Ft_w_v_cover.webp?alt=media&token=e451c15e-7929-4416-ab0b-1b37f58567b2",
   horisontal_cover:
-    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Ftogglewebcover.webp?alt=media&token=17058638-3c77-4cbe-8a57-b54748fb99ac",
+    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo_h_c.webp?alt=media&token=e98037f8-9e85-4d53-9991-4665c7843b5a",
   cover:
     "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727186991/PortfolioCover_tunkrm.mp4",
   svgHeaderPath: "/assets/images/wologo.svg",

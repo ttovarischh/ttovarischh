@@ -48,6 +48,9 @@ export const darkTheme = {
     text: "#595754",
     selection: "#FBF8F3",
   },
+  boxShadows: {
+    projectCards: "rgba(0, 0, 0, 0.6)",
+  },
 };
 
 export const lightTheme = {
@@ -100,5 +103,8 @@ export const lightTheme = {
     header: "#111111",
     text: "#595754",
     selection: "#FBF8F3",
+  },
+  boxShadows: {
+    projectCards: "rgba(0, 0, 0, 0.3)",
   },
 };

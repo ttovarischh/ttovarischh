@@ -61,7 +61,16 @@ const App: React.FC = () => {
             path="/:name"
             element={<Project currentLanguage={currentLanguage} t={t} />}
           />
-          <Route path="/work" element={<WorkPage />} />
+          <Route
+            path="/work"
+            element={
+              <WorkPage
+                currentLanguage={currentLanguage}
+                t={t}
+                projects={projects}
+              />
+            }
+          />
           <Route path="/about" element={<AboutPage />} />
         </Routes>
         <M_Footer currentLanguage={currentLanguage} t={t} />

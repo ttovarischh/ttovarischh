@@ -116,7 +116,7 @@ const M_Footer = ({ currentLanguage, t }: FooterProps) => {
   };
 
   return (
-    <FlexBox $direction="column" $gap="1.85vh" $offsetTop="10vh">
+    <FlexBox $direction="column" $gap="1.85vh" $offsetTop="10vh" id="footer">
       <FlexBox $justifyContent="end" style={{ width: "calc(100% - 1.25vw" }}>
         <A_Button
           backtotop

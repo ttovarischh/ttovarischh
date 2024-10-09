@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FlexBox } from "../components/Quarks";
-import TProjectsGrid from "../components/Templates/TProjectsGrid";
+import T_ProjectsGrid from "../components/Templates/T_ProjectsGrid";
 import M_MainComp from "../components/Molecules/M_MainComp";
 import A_PageTextDivider from "../components/Atoms/A_PageTextDivider";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +71,7 @@ const HomePage: React.FC<HomePageProps> = ({
           buttonText={t("home.seeAll")}
           handleButtonClick={() => navigate("/work")}
         />
-        <TProjectsGrid
+        <T_ProjectsGrid
           projects={projects}
           featured
           currentLanguage={currentLanguage}

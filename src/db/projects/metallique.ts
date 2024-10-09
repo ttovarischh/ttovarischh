@@ -1,24 +1,24 @@
 import { Project } from "../types";
 
-export const toggleWeb: Project = {
-  id: 3,
+export const metallique: Project = {
+  id: 6,
   name: {
-    en: "Toggle Studio Web",
-    ru: "Toggle Studio Web",
+    en: "Metallique Web Synth",
+    ru: "Metallique Web Synth",
   },
-  similarCases: [6, 5, 4],
+  similarCases: [8, 7, 5],
   type: {
     en: "Personal",
     ru: "Личное",
   },
-  year: "2024",
   timeline: {
     en: "Sep 2023 — July 2024",
     ru: "Сен 2023 — Июль 2024",
   },
+  year: "2024",
   short_deliverables: {
     en: "UI/UX & Dev",
-    ru: "UI/UX & Разработка",
+    ru: "Бренд и продукт",
   },
   deliverables: {
     en: "Branding, Identity, UI/UX, Analytics, Promotion, Development",
@@ -28,10 +28,6 @@ export const toggleWeb: Project = {
     {
       name: { en: "UI/UX design", ru: "UI/UX" },
       value: "uiux",
-    },
-    {
-      name: { en: "Art direction", ru: "Арт-дирекшн" },
-      value: "artdir",
     },
     {
       name: { en: "Development", ru: "Разработка" },
@@ -55,10 +51,8 @@ export const toggleWeb: Project = {
     en: "Wō is not just a streaming platform, but a safe space where each track is carefully selected to match your current state. Listening to music is often not just entertainment, but also a way to relax, feel sad, or, on the contrary, cheer up. Wō analyzes the user’s current mood and offers personalized playlists that promote emotional regulation.",
     ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться. Wō анализирует текущее настроение юзера и предлагает персонализированные плейлисты, способствующие эмоциональной регуляции.",
   },
-  vertical_cover:
-    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Ft_w_v_cover.webp?alt=media&token=e451c15e-7929-4416-ab0b-1b37f58567b2",
   horisontal_cover:
-    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Ftogglewebcover.webp?alt=media&token=17058638-3c77-4cbe-8a57-b54748fb99ac",
+    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Fdstcover.webp?alt=media&token=0fb5ff41-dc87-4fbd-b999-b3fd95bcb3b1",
   cover:
     "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727186991/PortfolioCover_tunkrm.mp4",
   svgHeaderPath: "/assets/images/wologo.svg",

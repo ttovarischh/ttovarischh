@@ -1,11 +1,12 @@
 import { Project } from "../types";
 
 export const toggleID: Project = {
-  id: 3,
+  id: 4,
   name: {
     en: "Toggle Identity",
     ru: "Wō App",
   },
+  similarCases: [3, 2, 1],
   type: {
     en: "Personal",
     ru: "Личное",
@@ -14,6 +15,7 @@ export const toggleID: Project = {
     en: "Sep 2023 — July 2024",
     ru: "Сен 2023 — Июль 2024",
   },
+  year: "2024",
   short_deliverables: {
     en: "Brand & Product",
     ru: "Бренд и продукт",
@@ -22,6 +24,16 @@ export const toggleID: Project = {
     en: "Branding, Identity, UI/UX, Analytics, Promotion, Development",
     ru: "Брендинг, Айдентика, UI/UX, Аналитика, Продвижение, Разработка",
   },
+  filterTags: [
+    {
+      name: { en: "Product design", ru: "Продуктовый дизайн" },
+      value: "product",
+    },
+    {
+      name: { en: "Art direction", ru: "Арт-дирекшн" },
+      value: "artdir",
+    },
+  ],
   role: {
     en: "Product designer, Developer",
     ru: "Продуктовый дизайнер, разработчик",
@@ -39,6 +51,8 @@ export const toggleID: Project = {
     en: "Wō is not just a streaming platform, but a safe space where each track is carefully selected to match your current state. Listening to music is often not just entertainment, but also a way to relax, feel sad, or, on the contrary, cheer up. Wō analyzes the user’s current mood and offers personalized playlists that promote emotional regulation.",
     ru: "Wō не просто стриминговая платформа, а сейфспейс, где каждый трек заботливо подобран под твоё текущее состояние. Ведь прослушивание музыки — часто не только развлечение, но и способ расслабиться, погрустить или, наоборот, развеселиться. Wō анализирует текущее настроение юзера и предлагает персонализированные плейлисты, способствующие эмоциональной регуляции.",
   },
+  vertical_cover:
+    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2FtoggleVerticalCoverTest.webp?alt=media&token=1da35945-766b-4962-9048-4ad1cdac9fd4",
   horisontal_cover:
     "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo_h_c.webp?alt=media&token=e98037f8-9e85-4d53-9991-4665c7843b5a",
   cover:

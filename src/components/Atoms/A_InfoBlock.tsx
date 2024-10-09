@@ -14,6 +14,7 @@ interface InfoBlockProps {
   references?: string;
   links?: Array<Link>;
   currentLanguage: "en" | "ru";
+  noText?: boolean;
 }
 
 const InfoBlockWrapper = styled(FlexBox)<{ $body?: boolean }>`
@@ -50,6 +51,7 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
   references,
   links,
   currentLanguage,
+  noText,
 }) => {
   const theme = useTheme();
 
@@ -99,7 +101,13 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
         <PP_20 medium color={theme.medium_grey}>
           {header}
         </PP_20>
-        <PP_20>{constructTextWithLinks(text ?? "", links)}</PP_20>
+        {noText ? (
+          <PP_20 medium color={theme.medium_grey}>
+            {text}
+          </PP_20>
+        ) : (
+          <PP_20>{constructTextWithLinks(text ?? "", links)}</PP_20>
+        )}
       </InfoBlockWrapper>
     );
   }

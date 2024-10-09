@@ -1,7 +1,7 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { FlexBox, PP_20 } from "../Quarks";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface NavButtonsProps {
   t: (key: string) => string;
@@ -18,6 +18,17 @@ const NavButtonsWrapper = styled(FlexBox)`
   justify-self: center;
   border: 1px solid hsla(0, 0%, 100%, 0.025);
   cursor: pointer;
+`;
+
+const ButtonDot = styled.div`
+  position: absolute;
+  background-color: ${({ theme }) => theme.medium_grey};
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  left: calc(50% - 2px);
+  transition: all 0.4s ease;
+  bottom: 10px;
 `;
 
 const NavButton = styled(FlexBox)`
@@ -50,9 +61,41 @@ const HoverBackground = styled.div<{
 
 const A_NavButtons = ({ t }: NavButtonsProps) => {
   const theme = useContext(ThemeContext);
+  const location = useLocation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<string>("");
   const [isSwitchingButtons, setIsSwitchingButtons] = useState(false);
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const footerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const footer = document.querySelector("#footer") as HTMLElement | null;
+
+    if (footer) {
+      footerRef.current = footer;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          setIsFooterVisible(entry.isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(footer);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setActiveIndex("");
+    }
+  }, [location.pathname]);
 
   const handleMouseEnter = (index: number) => {
     if (hoveredIndex === null) {
@@ -69,35 +112,67 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
   };
 
   const handleScrollToBottom = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+      setActiveIndex("#footer");
+    }, 50);
   };
+
+  const buttons = [
+    { key: "work", path: "/work" },
+    { key: "contacts", path: "#footer" },
+    { key: "info", path: "/about" },
+  ];
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    if (currentPath === "/work") {
+      setActiveIndex("/work");
+    } else if (currentPath === "/about") {
+      setActiveIndex("/about");
+    } else if (currentPath === "/") {
+      setActiveIndex("");
+    }
+  }, [location.pathname]);
 
   return (
     <NavButtonsWrapper onMouseLeave={handleMouseLeave}>
-      {[t("nav:work"), t("nav:contacts"), t("nav:info")].map((text, index) => (
+      {buttons.map((button, index) => (
         <NavButton
-          key={text}
+          key={button.key}
           ref={(el) => (buttonRefs.current[index] = el)}
           onMouseEnter={() => handleMouseEnter(index)}
-          onClick={
-            text === t("nav:contacts") ? handleScrollToBottom : undefined
-          }
+          onClick={() => {
+            if (button.key === "contacts") {
+              handleScrollToBottom();
+            } else {
+              setActiveIndex(button.path);
+            }
+          }}
         >
-          {text === t("nav:contacts") ? (
-            <PP_20 medium uppercase color={theme?.white}>
-              {text}
-            </PP_20>
-          ) : (
-            <Link
-              to={text === t("nav:work") ? "/work" : "/about"}
-              style={{ textDecoration: "none" }}
-            >
+          {button.path.startsWith("#") ? (
+            <>
               <PP_20 medium uppercase color={theme?.white}>
-                {text}
+                {t(`nav:${button.key}`)}
               </PP_20>
+              <ButtonDot
+                style={{
+                  opacity:
+                    activeIndex === button.path && isFooterVisible ? 1 : 0,
+                }}
+              />
+            </>
+          ) : (
+            <Link to={button.path} style={{ textDecoration: "none" }}>
+              <PP_20 medium uppercase color={theme?.white}>
+                {t(`nav:${button.key}`)}
+              </PP_20>
+              <ButtonDot
+                style={{ opacity: activeIndex === button.path ? 1 : 0 }}
+              />
             </Link>
           )}
         </NavButton>
@@ -105,12 +180,12 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
       <HoverBackground
         $width={
           hoveredIndex !== null && buttonRefs.current[hoveredIndex]
-            ? buttonRefs.current[hoveredIndex]!.offsetWidth
+            ? buttonRefs.current[hoveredIndex].offsetWidth
             : 0
         }
         $left={
           hoveredIndex !== null && buttonRefs.current[hoveredIndex]
-            ? buttonRefs.current[hoveredIndex]!.offsetLeft
+            ? buttonRefs.current[hoveredIndex].offsetLeft
             : 0
         }
         $hasTransition={isSwitchingButtons}

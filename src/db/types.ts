@@ -57,9 +57,8 @@ interface Description {
 
 export interface Project {
   id: number;
-  horisontalOverlay?: boolean;
-  overlayColor?: string;
-  darkText?: boolean;
+  similarCases: number[];
+  locked?: boolean;
   name: {
     en: string;
     ru: string;
@@ -68,6 +67,7 @@ export interface Project {
     en: string;
     ru: string;
   };
+  year: string;
   timeline: {
     en: string;
     ru: string;
@@ -80,6 +80,13 @@ export interface Project {
     en: string;
     ru: string;
   };
+  filterTags: {
+    name: {
+      en: string;
+      ru: string;
+    };
+    value: string;
+  }[];
   role: {
     en: string;
     ru: string;
@@ -98,6 +105,7 @@ export interface Project {
     en: string;
     ru: string;
   };
+  vertical_cover?: string;
   horisontal_cover: string;
   cover: string;
   svgHeaderPath: string;
