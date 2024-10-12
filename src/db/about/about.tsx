@@ -18,9 +18,9 @@ const about: About = {
   aboutMeCards: [
     {
       imgSrc:
-        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/portraitfin.webp?alt=media&token=5fd1f896-deea-410c-933f-1df11e32668d",
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2Ffin.webp?alt=media&token=569a9b65-ab86-443e-9170-5a0fe9d85dbd",
       text: {
-        en: "Hi! It’s Polina. I am a small girly pop (no) with a huge desire to work (yes). But besides being a white-collar, I’m also just a person.",
+        en: "Hi! It’s Polina. I am a small girly pop with a huge desire to work. But besides being a white-collar, I’m also just a person.",
         ru: "Хей! Это Полина. Я люблю работать работу, но помимо того, что я человек работающий, я еще и просто человек. ",
       },
     },
@@ -556,7 +556,7 @@ const about: About = {
   skills: [
     {
       name: {
-        en: "#UI/UX Дизайн",
+        en: "#UI/UX design",
         ru: "#UI/UX Дизайн",
       },
       typeOf: {
@@ -573,7 +573,7 @@ const about: About = {
     },
     {
       name: {
-        en: "#Аналитика",
+        en: "#Analytics",
         ru: "#Аналитика",
       },
       typeOf: {
@@ -590,7 +590,7 @@ const about: About = {
     },
     {
       name: {
-        en: "#Разработка",
+        en: "#Development",
         ru: "#Разработка",
       },
       typeOf: {
@@ -615,7 +615,7 @@ const about: About = {
     },
     {
       name: {
-        en: "#Брендинг",
+        en: "#Branding",
         ru: "#Брендинг",
       },
       typeOf: {
@@ -637,7 +637,7 @@ const about: About = {
     },
     {
       name: {
-        en: "#Моушн-Дизайн",
+        en: "#Motion design",
         ru: "#Моушн-Дизайн",
       },
       typeOf: {
@@ -658,7 +658,7 @@ const about: About = {
     },
     {
       name: {
-        en: "#3D Моделирование",
+        en: "#3D modeling",
         ru: "#3D Моделирование",
       },
       typeOf: {
