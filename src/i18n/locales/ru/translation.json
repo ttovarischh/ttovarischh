@@ -68,5 +68,23 @@
     "artDirection": "Арт-дирекшн",
     "development": "Код",
     "all": "Все"
+  },
+  "about": {
+    "moving": "Двигаю пиксели\nв ",
+    "figma": " Фигме ",
+    "since": "с 2018 года",
+    "responsibilities": "Обязанности:",
+    "achievements": "Достижения:",
+    "workExperience": "Опыт работы",
+    "education": "Образование",
+    "skillsTech": "Навыки и технологии",
+    "achievementsHeader": "Достижения",
+    "selected": "Избранные кейсы",
+    "loveit": "Мои любимые продуктовые кейсы 2020-2024. Можете глянуть на них или...",
+    "seeAll": "Посмотреть все работы",
+    "specializations": "Специализация: ",
+    "looking": "В поиске работы",
+    "currently": "Сейчас:",
+    "based": "Местоположение:"
   }
 }

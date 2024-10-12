@@ -10,6 +10,7 @@ const LogoNavButton = styled(Link)`
   border-radius: 4px;
   width: fit-content;
   z-index: 10;
+  pointer-events: auto;
 `;
 
 const AnimatedText = styled.span`

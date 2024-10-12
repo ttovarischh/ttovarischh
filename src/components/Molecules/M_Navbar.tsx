@@ -26,6 +26,7 @@ const NavbarWrapper = styled.div`
   padding-top: 24px;
   box-sizing: border-box;
   z-index: 10;
+  pointer-events: none;
 `;
 
 const NavbarGradient = styled.div<{ theme: any }>`
@@ -35,6 +36,17 @@ const NavbarGradient = styled.div<{ theme: any }>`
   top: 0;
   height: calc(100% + 32px);
   background: ${({ theme }) => theme.gradient};
+  pointer-events: none;
+`;
+
+const RightControlsWrapper = styled(FlexBox)`
+  gap: 16px;
+  justify-content: flex-end;
+  align-items: baseline;
+  z-index: 10;
+  > * {
+    pointer-events: auto;
+  }
 `;
 
 const M_Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, t }) => {
@@ -43,16 +55,11 @@ const M_Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, t }) => {
       <NavbarGradient />
       <A_LogoNavButton />
       <A_NavButtons t={t} />
-      <FlexBox
-        $gap="16px"
-        $justifyContent="flex-end"
-        $alignItems="baseline"
-        style={{ zIndex: 10 }}
-      >
+      <RightControlsWrapper>
         <A_TimeDisplay />
         <A_ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
         <A_LanguageSwitcher />
-      </FlexBox>
+      </RightControlsWrapper>
     </NavbarWrapper>
   );
 };

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import M_PageHeader from "../components/Molecules/M_PageHeader";
 import T_ProjectsGrid from "../components/Templates/T_ProjectsGrid";
+import { Project } from "../db/types";
 
 interface WorkPageProps {
   currentLanguage: "en" | "ru";
   t: (key: string) => string;
-  projects: any;
+  projects: Array<Project>;
 }
 
 const WorkPage: React.FC<WorkPageProps> = ({
@@ -51,12 +52,15 @@ const WorkPage: React.FC<WorkPageProps> = ({
     <>
       <M_PageHeader
         works
+        bigText={t("works.allCases")}
         currentLanguage={currentLanguage}
-        t={t}
-        projectsAmount={projectsAmount}
         filterTags={filterTags}
         onFilterSelect={handleFilterSelect}
         selectedFilter={selectedFilter}
+        columnAHeader={t("works.amount")}
+        columnBHeader={t("works.filter")}
+        columnAText={`${projectsAmount} ${t("works.cases")}`}
+        columnBText={t("works.by")}
       />
       <T_ProjectsGrid
         projects={filteredProjects}

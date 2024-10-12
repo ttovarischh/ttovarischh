@@ -87,60 +87,6 @@ const Video = React.memo((props: VideoProps) => {
       )}
     </>
   );
-
-  // if (ui) {
-  //   return (
-  //     <>
-  //       {isLoading && (
-  //         <A_Skeleton
-  //           $width={$width}
-  //           $aspectRatio={$aspectRatio}
-  //           $borderRadius={$borderRadius}
-  //           className={$className}
-  //         />
-  //       )}
-  //       <UICaseVideo
-  //         autoPlay
-  //         muted
-  //         loop
-  //         playsInline
-  //         onLoadedData={handleVideoLoad}
-  //         onError={handleVideoError}
-  //         style={{ display: isLoading ? "none" : "block" }}
-  //       >
-  //         <source src={src} type="video/webm" />
-  //         Your browser does not support the video tag.
-  //       </UICaseVideo>
-  //     </>
-  //   );
-  // } else {
-  //   return (
-  //     <>
-  //       {isLoading && (
-  //         <A_Skeleton
-  //           $width={$width}
-  //           $aspectRatio={$aspectRatio}
-  //           $borderRadius={$borderRadius}
-  //           className={$className}
-  //         />
-  //       )}
-  //       <CaseVideo
-  //         onLoadedData={handleVideoLoad}
-  //         onError={handleVideoError}
-  //         playsInline
-  //         autoPlay={shouldAutoplay}
-  //         muted={shouldAutoplay}
-  //         loop={shouldAutoplay}
-  //         controls={!shouldAutoplay}
-  //         poster={poster}
-  //         style={{ display: isLoading ? "none" : "block" }}
-  //       >
-  //         <source src={src} type="video/mp4" />
-  //         Your browser does not support the video tag.
-  //       </CaseVideo>
-  //     </>
-  //   );
-  // }
 });
 
 export default Video;

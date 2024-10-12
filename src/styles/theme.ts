@@ -34,6 +34,7 @@ export const darkTheme = {
   },
   cards: {
     bg: "#212121",
+    lighter_bg: "#2D2D2D",
   },
   buttons: {
     bigButton: "#212121",
@@ -89,7 +90,8 @@ export const lightTheme = {
     button: "#FBF8F3",
   },
   cards: {
-    bg: "#E6E3DE",
+    bg: "#212121",
+    lighter_bg: "#2D2D2D",
   },
   buttons: {
     bigButton: "#E6E3DE",

@@ -7,9 +7,10 @@ import A_PageTextDivider from "../components/Atoms/A_PageTextDivider";
 import { useNavigate } from "react-router-dom";
 import { works } from "../db";
 import M_ImageMarquee from "../components/Molecules/M_ImageMarquee";
+import { Project } from "../db/types";
 
 interface HomePageProps {
-  projects: any;
+  projects: Array<Project>;
   currentLanguage: "en" | "ru";
   t: (key: string) => string;
 }

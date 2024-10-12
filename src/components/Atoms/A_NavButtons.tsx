@@ -18,6 +18,7 @@ const NavButtonsWrapper = styled(FlexBox)`
   justify-self: center;
   border: 1px solid hsla(0, 0%, 100%, 0.025);
   cursor: pointer;
+  pointer-events: auto;
 `;
 
 const ButtonDot = styled.div`
@@ -33,10 +34,23 @@ const ButtonDot = styled.div`
 
 const NavButton = styled(FlexBox)`
   height: 100%;
-  padding: 16px 20px;
   border-radius: 100px;
   position: relative;
   z-index: 1;
+  align-self: center;
+`;
+
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  padding: 16px 20px;
+`;
+
+const ContactButtonWrapper = styled(FlexBox)`
+  padding: 16px 20px;
+  position: relative;
+  height: 100%;
 `;
 
 const HoverBackground = styled.div<{
@@ -152,9 +166,10 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
               setActiveIndex(button.path);
             }
           }}
+          className="LinkKink"
         >
           {button.path.startsWith("#") ? (
-            <>
+            <ContactButtonWrapper>
               <PP_20 medium uppercase color={theme?.white}>
                 {t(`nav:${button.key}`)}
               </PP_20>
@@ -164,16 +179,16 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
                     activeIndex === button.path && isFooterVisible ? 1 : 0,
                 }}
               />
-            </>
+            </ContactButtonWrapper>
           ) : (
-            <Link to={button.path} style={{ textDecoration: "none" }}>
+            <ButtonLink to={button.path} className="Link">
               <PP_20 medium uppercase color={theme?.white}>
                 {t(`nav:${button.key}`)}
               </PP_20>
               <ButtonDot
                 style={{ opacity: activeIndex === button.path ? 1 : 0 }}
               />
-            </Link>
+            </ButtonLink>
           )}
         </NavButton>
       ))}

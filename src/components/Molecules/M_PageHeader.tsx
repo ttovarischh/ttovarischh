@@ -4,32 +4,49 @@ import { FlexBox, DJR_128, PP_48, PP_20 } from "../Quarks";
 import A_InfoBlock from "../Atoms/A_InfoBlock";
 import A_Button from "../Atoms/A_Button";
 import A_Tag from "../Atoms/A_Tag";
+import A_Icon from "../Atoms/A_Icon";
 
 interface Link {
   name: { en: string; ru: string };
-  url: string;
+  url: string | { en: string; ru: string };
 }
 
 interface PageHeaderProps {
-  horisontal?: boolean;
-  name?: string;
-  role?: string;
-  organisation?: string;
-  status?: string;
-  team?: string;
-  type?: string;
-  timeline?: string;
-  deliverables?: string;
+  wrapped?: boolean;
+  bigText?: string;
+  bigTextSpan?: string;
+  bigTextB?: string;
   s_description?: string;
   description?: string;
   links?: Link[];
   currentLanguage: "en" | "ru";
-  t: (key: string) => string;
   works?: boolean;
-  projectsAmount?: string;
+  multiLine?: boolean;
+  jobless?: string;
   filterTags?: Array<{ name: string; filter: string | null }>;
   onFilterSelect?: (filter: string | null) => void;
   selectedFilter?: string | null;
+  columnAHeader: string;
+  columnBHeader: string;
+  columnCHeader?: string;
+  teamColumnHeader?: string;
+  columnAText?: string;
+  columnBText?: string;
+  columnCText?: string;
+  iconName?: string;
+  team?: Array<{
+    imageSrc: string;
+    link: string;
+  }>;
+  contactMeLinks?: Array<{
+    name: string;
+    url: string;
+  }>;
+  followMeLinks?: Array<{
+    name: string;
+    url: string;
+  }>;
+  ps?: string;
 }
 
 const MainInfoWrapper = styled(FlexBox)`
@@ -37,9 +54,9 @@ const MainInfoWrapper = styled(FlexBox)`
   flex-direction: column;
 `;
 
-const ProjectInfoWrapper = styled.div`
+const ProjectInfoWrapper = styled.div<{ $wrapped?: boolean }>`
   display: grid;
-  margin: 140px 2.5vw;
+  margin: ${({ $wrapped }) => ($wrapped ? "0px" : "140px 2.5vw")};
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 1.04vw;
 
@@ -51,6 +68,10 @@ const ProjectInfoWrapper = styled.div`
   & > div:nth-child(2) {
     grid-column-start: 3;
     grid-column-end: 6;
+  }
+
+  span {
+    color: ${({ theme }) => theme.medium_grey} !important;
   }
 `;
 
@@ -70,108 +91,134 @@ const ButtonsWrapper = styled(FlexBox)`
   width: 100%;
 `;
 
+const BigTextWrapper = styled(FlexBox)<{ $multiLine?: boolean }>`
+  width: ${({ $multiLine }) => ($multiLine ? "65%" : "100%")};
+  p {
+    max-width: ${({ $multiLine }) => ($multiLine ? "100%" : "50%")};
+    line-height: ${({ $multiLine }) =>
+      $multiLine ? "8rem" : "normal"} !important;
+    margin-top: ${({ $multiLine }) => $multiLine && "1rem"} !important;
+  }
+  white-space: pre-line;
+`;
+
 const M_PageHeader = ({
-  t,
-  horisontal,
-  name,
-  role,
-  organisation,
-  status,
+  bigText,
+  bigTextB,
+  bigTextSpan,
+  iconName,
   team,
-  type,
-  timeline,
-  deliverables,
   s_description,
   description,
   links,
   currentLanguage,
   works,
-  projectsAmount,
   filterTags,
   onFilterSelect,
   selectedFilter,
+  columnAHeader,
+  columnBHeader,
+  columnCHeader,
+  teamColumnHeader,
+  columnAText,
+  columnBText,
+  columnCText,
+  multiLine,
+  jobless,
+  wrapped,
+  followMeLinks,
+  contactMeLinks,
+  ps,
 }: PageHeaderProps) => {
-  if (horisontal) {
+  if (bigText) {
     return (
       <MainInfoWrapper>
-        <DJR_128>{name}</DJR_128>
+        <BigTextWrapper $multiLine={multiLine}>
+          {multiLine ? (
+            <FlexBox>
+              <DJR_128>
+                {bigText}
+                <span>
+                  <A_Icon iconName={iconName} />
+                </span>
+                {bigTextSpan}
+                <span>
+                  <A_Icon iconName={iconName} />
+                </span>
+                {bigTextB}
+              </DJR_128>
+            </FlexBox>
+          ) : (
+            <DJR_128 id="bigText">{bigText}</DJR_128>
+          )}
+        </BigTextWrapper>
         <MainInfoContent>
           <A_InfoBlock
-            header={t("projectPage.type")}
-            text={type}
+            header={columnAHeader}
+            text={columnAText}
             currentLanguage={currentLanguage}
+            jobless={jobless}
           />
           <A_InfoBlock
-            header={t("projectPage.timeline")}
-            text={timeline}
+            header={columnBHeader}
+            text={columnBText}
             currentLanguage={currentLanguage}
           />
-          <A_InfoBlock
-            header={t("projectPage.deliverables")}
-            text={deliverables}
-            currentLanguage={currentLanguage}
-          />
-        </MainInfoContent>
-      </MainInfoWrapper>
-    );
-  } else if (works) {
-    return (
-      <MainInfoWrapper>
-        <DJR_128>{t("works.allCases")}</DJR_128>
-        <MainInfoContent>
-          <A_InfoBlock
-            header={t("works.amount")}
-            text={`${projectsAmount} ${t("works.cases")}`}
-            currentLanguage={currentLanguage}
-          />
-          <A_InfoBlock
-            header={t("works.filter")}
-            text={t("works.by")}
-            currentLanguage={currentLanguage}
-            noText
-          />
-          <FlexBox $gap="8px" style={{ alignSelf: "end" }}>
-            {filterTags!.map((filterTag, index) => (
-              <A_Tag
-                small
-                tagText={filterTag.name}
-                key={index}
-                onFilterSelect={() => {
-                  if (onFilterSelect) {
-                    onFilterSelect(filterTag.filter);
-                  }
-                }}
-                selected={selectedFilter === filterTag.filter}
-              />
-            ))}
-          </FlexBox>
+          {works ? (
+            <FlexBox $gap="8px" style={{ alignSelf: "end" }}>
+              {filterTags!.map((filterTag, index) => (
+                <A_Tag
+                  small
+                  tagText={filterTag.name}
+                  key={index}
+                  onFilterSelect={() => {
+                    if (onFilterSelect) {
+                      onFilterSelect(filterTag.filter);
+                    }
+                  }}
+                  selected={selectedFilter === filterTag.filter}
+                />
+              ))}
+            </FlexBox>
+          ) : (
+            <A_InfoBlock
+              header={columnCHeader}
+              text={columnCText}
+              currentLanguage={currentLanguage}
+            />
+          )}
         </MainInfoContent>
       </MainInfoWrapper>
     );
   } else {
     return (
-      <ProjectInfoWrapper>
+      <ProjectInfoWrapper $wrapped={wrapped}>
         <FlexBox $gap="20px">
           <A_InfoBlock
-            header={t("projectPage.role")}
-            text={role}
+            header={columnAHeader}
+            text={columnAText}
             currentLanguage={currentLanguage}
+            aboutMeLinks={contactMeLinks}
           />
           <A_InfoBlock
-            header={t("projectPage.organisation")}
-            text={organisation}
+            header={columnBHeader}
+            text={columnBText}
             currentLanguage={currentLanguage}
+            aboutMeLinks={followMeLinks}
           />
-          <A_InfoBlock
-            header={t("projectPage.status")}
-            text={status}
-            currentLanguage={currentLanguage}
-          />
+          {columnCHeader && (
+            <A_InfoBlock
+              header={columnCHeader}
+              text={columnCText}
+              currentLanguage={currentLanguage}
+            />
+          )}
           {team && (
             <A_InfoBlock
-              header={t("projectPage.team")}
-              text={team}
+              header={teamColumnHeader}
+              text={columnCText}
               currentLanguage={currentLanguage}
+              team={team}
             />
           )}
         </FlexBox>
@@ -180,17 +227,33 @@ const M_PageHeader = ({
             <PP_48 lineHeight="100%" medium>
               {s_description}
             </PP_48>
-            <PP_20>{description}</PP_20>
+            <PP_20>
+              {description}
+              {ps && (
+                <>
+                  <br></br>
+                  <br></br>
+                  <span>{ps}</span>
+                </>
+              )}
+            </PP_20>
           </FlexBox>
           <ButtonsWrapper $gap="1.04vw">
-            {links?.map((link, index) => (
-              <A_Button
-                key={index}
-                buttonText={link.name[currentLanguage]}
-                handleButtonClick={() => window.open(link.url, "_blank")}
-                fw
-              />
-            ))}
+            {links?.map((link, index) => {
+              const linkUrl =
+                typeof link.url === "string"
+                  ? link.url
+                  : link.url[currentLanguage];
+
+              return (
+                <A_Button
+                  key={index}
+                  buttonText={link.name[currentLanguage]}
+                  handleButtonClick={() => window.open(linkUrl, "_blank")}
+                  fw
+                />
+              );
+            })}
           </ButtonsWrapper>
         </FlexBox>
       </ProjectInfoWrapper>

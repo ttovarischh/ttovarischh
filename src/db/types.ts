@@ -55,6 +55,153 @@ interface Description {
   ru: string;
 }
 
+export interface About {
+  currently: {
+    en: string;
+    ru: string;
+  };
+  jobless?: boolean;
+  based: {
+    en: string;
+    ru: string;
+  };
+  who: {
+    en: string;
+    ru: string;
+  };
+  aboutMeCards: Array<AboutMeCard>;
+  aboutMeText: {
+    header: { en: string; ru: string };
+    text: {
+      en: string;
+      ru: string;
+    };
+    ps: { en: string; ru: string };
+  };
+  contactMeLinks: Array<{
+    name: string;
+    url: string;
+  }>;
+  followMeLinks: Array<{
+    name: string;
+    url: string;
+  }>;
+  bigLinks: Array<{
+    name: { en: string; ru: string };
+    url: { en: string; ru: string };
+  }>;
+  workExperience: Array<WorkExperienceItem>;
+  education: Array<EducationItem>;
+  skills: Array<SkillItem>;
+  achievements: Array<Achievement>;
+}
+
+export interface Achievement {
+  imgSrc: string;
+  text: {
+    en: string;
+    ru: string;
+  };
+  year: string;
+  link: string;
+}
+
+export interface AboutMeCard {
+  imgSrc: string;
+  text: {
+    en: string;
+    ru: string;
+  };
+  links?: Array<{
+    text: Array<{ en: string; ru: string }>;
+    url: string;
+  }>;
+}
+
+export interface EducationItem {
+  iconName: string;
+  organisation: {
+    name: {
+      en: string;
+      ru: string;
+    };
+    url: string;
+  };
+  typeYear: {
+    en: string;
+    ru: string;
+  };
+  specialization: Array<{
+    text: {
+      en: string;
+      ru: string;
+    };
+    url: string;
+  }>;
+  achievements: Array<{
+    text: {
+      en: string;
+      ru: string;
+    };
+  }>;
+  button: {
+    text: {
+      en: string;
+      ru: string;
+    };
+    url: string;
+  };
+}
+
+export interface WorkExperienceItem {
+  role: {
+    en: string;
+    ru: string;
+  };
+  organisation: {
+    text: {
+      en: string;
+      ru: string;
+    };
+    url: string;
+  };
+  year: {
+    en: string;
+    ru: string;
+  };
+  responsibilities: Array<{
+    text: {
+      en: string;
+      ru: string;
+    };
+  }>;
+  achievements: Array<{
+    text: {
+      en: string;
+      ru: string;
+    };
+  }>;
+}
+
+export interface SkillItem {
+  name: {
+    en: string;
+    ru: string;
+  };
+  typeOf: {
+    en: string;
+    ru: string;
+  };
+  image_src: string;
+  text: {
+    en: string;
+    ru: string;
+  };
+  techTags: string[];
+}
+
+export type AboutCard = AboutMeCard | Achievement;
+
 export interface Project {
   id: number;
   similarCases: number[];
@@ -96,6 +243,10 @@ export interface Project {
     en: string;
     ru: string;
   };
+  team?: {
+    imageSrc: string;
+    link: string;
+  }[];
   s_description: {
     en: string;
     ru: string;
@@ -139,10 +290,6 @@ export interface Project {
     shouldAutoplay?: boolean;
     poster?: string;
   }>;
-  // texts: Array<{
-  //   header: Array<{ en: string; ru: string }>;
-  //   text: Array<{ en: string; ru: string }>;
-  // }>;
   texts: Array<{
     header: Array<{ en: string; ru: string }>;
     text: Array<{

@@ -53,7 +53,7 @@ const T_ProjectsGrid = ({
     return (
       <FeaturedProjectsGrid $similar={similar}>
         {similar && (
-          <BgGradient src="https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/design%2Fsimilaroverlay2.webp?alt=media&token=ac347670-5702-4ac9-84cb-63778c940d49" />
+          <BgGradient src="https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/design%2Ffinoverlay.webp?alt=media&token=ebcba8a5-012f-477f-9bea-30175533e3b1" />
         )}
         {similar
           ? projects.map((project) => (

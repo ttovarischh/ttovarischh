@@ -68,5 +68,23 @@
     "artDirection": "Art direction",
     "development": "Development",
     "all": "All"
+  },
+  "about": {
+    "moving": "Moving pixels\nin ",
+    "figma": " Figma ",
+    "since": "since 2018",
+    "responsibilities": "Responsibilities:",
+    "achievements": "Achievements:",
+    "workExperience": "Work experience",
+    "education": "Education",
+    "skillsTech": "Skills & Tech",
+    "achievementsHeader": "Achievements",
+    "selected": "Selected work",
+    "loveit": "My favorite product cases of 2020-2024. Feel free to check them out or...",
+    "seeAll": "See all work",
+    "specializations": "Specialization: ",
+    "looking": "Looking for a job",
+    "currently": "Currently:",
+    "based": "Based in:"
   }
 }

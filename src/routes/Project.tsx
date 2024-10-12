@@ -104,27 +104,32 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
   return (
     <div>
       <M_PageHeader
-        horisontal
-        name={project.name[currentLanguage]}
-        type={project.type[currentLanguage]}
-        timeline={project.timeline[currentLanguage]}
-        deliverables={project.deliverables[currentLanguage]}
+        bigText={project.name[currentLanguage]}
         currentLanguage={currentLanguage}
-        t={t}
+        columnAHeader={t("projectPage.type")}
+        columnBHeader={t("projectPage.timeline")}
+        columnCHeader={t("projectPage.deliverables")}
+        columnAText={project.type[currentLanguage]}
+        columnBText={project.timeline[currentLanguage]}
+        columnCText={project.deliverables[currentLanguage]}
       />
       <A_ProjectCover
         cover={project.cover}
         alt={`Cover image of ${project.name[currentLanguage]}`}
       />
       <M_PageHeader
-        role={project.role[currentLanguage]}
-        organisation={project.organisation}
-        status={project.status[currentLanguage]}
         s_description={project.s_description[currentLanguage]}
         description={project.description[currentLanguage]}
         links={project.links}
         currentLanguage={currentLanguage}
-        t={t}
+        columnAHeader={t("projectPage.role")}
+        columnBHeader={t("projectPage.organisation")}
+        columnAText={project.role[currentLanguage]}
+        columnBText={project.organisation}
+        columnCHeader={t("projectPage.status")}
+        columnCText={project.status[currentLanguage]}
+        team={project.team}
+        teamColumnHeader={t("projectPage.team")}
       />
       <ProjectPageWrapper ref={projectPageRef}>
         <StickyMenuWrapper ref={menuRef}>

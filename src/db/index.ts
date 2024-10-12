@@ -2,5 +2,6 @@
 
 import projects from "./projects";
 import works from "./works/works";
+import about from "./about/about";
 
-export { projects, works };
+export { projects, works, about };

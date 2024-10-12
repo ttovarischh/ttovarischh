@@ -47,6 +47,18 @@ export const quimi: Project = {
     en: "Finished",
     ru: "Завершено",
   },
+  team: [
+    {
+      imageSrc:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/design%2Fmasha.webp?alt=media&token=74f1d18a-714a-4050-b787-479d941877ce",
+      link: "https://www.behance.net/kauzt",
+    },
+    {
+      imageSrc:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/design%2Fpolina.webp?alt=media&token=d1bec526-b4aa-47ac-ba48-85c4e20d6377",
+      link: "https://www.behance.net/sugumisu",
+    },
+  ],
   s_description: {
     en: "Wō is an AI-based music service for mood transformation.",
     ru: "Wō — это музыкальный сервис для трансформации настроения.",
