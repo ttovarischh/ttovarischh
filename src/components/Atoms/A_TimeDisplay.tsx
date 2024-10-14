@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { PP_20 } from "../Quarks";
 import styled from "styled-components";
 
+const TimeDisplayWrapper = styled.div`
+  cursor: default;
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    display: none;
+  }
+`;
+
 const Emoji = styled.span<{ $isVisible: boolean }>`
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   transition: opacity 0.3s ease-in-out; // Adjust duration as needed
@@ -34,16 +42,15 @@ const A_TimeDisplay: React.FC = () => {
   }, []);
 
   return (
-    <div
+    <TimeDisplayWrapper
       onMouseEnter={() => set$isHovered(true)}
       onMouseLeave={() => set$isHovered(false)}
-      style={{ cursor: "default" }}
     >
       <PP_20 medium>
         <Emoji $isVisible={$isHovered}>{emoji} </Emoji>
         (GMT+3) {currTime}
       </PP_20>
-    </div>
+    </TimeDisplayWrapper>
   );
 };
 

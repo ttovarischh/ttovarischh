@@ -43,8 +43,6 @@ const T_ProjectsGrid = ({
   fadeOutStates = [],
   similar,
 }: ProjectsGridProps) => {
-  console.log(projects);
-
   const selectedProjects = projects.filter((_, index) =>
     [0, 2, 3].includes(index)
   );

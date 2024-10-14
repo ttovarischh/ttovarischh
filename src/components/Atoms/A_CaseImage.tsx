@@ -41,7 +41,11 @@ const A_CaseImage = (props: CaseImageProps) => {
       <>
         {isVideo(props.src) ? (
           <CaseImageWrapper>
-            <LazyLoad offset={200} once style={{ width: "100%" }}>
+            <LazyLoad
+              offset={200}
+              once
+              style={{ width: "100%", aspectRatio: "16/9" }}
+            >
               <Video
                 shouldAutoplay={props.shouldAutoplay}
                 poster={props.poster}
@@ -54,7 +58,11 @@ const A_CaseImage = (props: CaseImageProps) => {
           </CaseImageWrapper>
         ) : (
           <CaseImageWrapper onClick={props.onClick}>
-            <LazyLoad offset={200} once style={{ width: "100%" }}>
+            <LazyLoad
+              offset={200}
+              once
+              style={{ width: "100%", aspectRatio: "16/9" }}
+            >
               <Image
                 src={props.src}
                 alt={`${props.projectName} case image`}
@@ -86,7 +94,11 @@ const A_CaseImage = (props: CaseImageProps) => {
     return (
       <>
         {isVideo(props.src) ? (
-          <LazyLoad offset={200} once style={{ width: "100%" }}>
+          <LazyLoad
+            offset={200}
+            once
+            style={{ width: "100%", aspectRatio: "16/9" }}
+          >
             <Video
               shouldAutoplay={props.shouldAutoplay}
               poster={props.poster}
@@ -97,7 +109,11 @@ const A_CaseImage = (props: CaseImageProps) => {
             />
           </LazyLoad>
         ) : (
-          <LazyLoad offset={200} once style={{ width: "100%" }}>
+          <LazyLoad
+            offset={200}
+            once
+            style={{ width: "100%", aspectRatio: "16/9" }}
+          >
             <Image
               src={props.src}
               alt={`${props.projectName} case image`}

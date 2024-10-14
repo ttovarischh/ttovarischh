@@ -251,6 +251,7 @@ const M_PageHeader = ({
                   buttonText={link.name[currentLanguage]}
                   handleButtonClick={() => window.open(linkUrl, "_blank")}
                   fw
+                  disabled={!linkUrl}
                 />
               );
             })}

@@ -63,7 +63,7 @@ const about: About = {
   ],
   aboutMeText: {
     header: {
-      en: "My experience allows me to lead projects from concept to successful market launch.",
+      en: "Experience allows me to lead projects from concept to successful market launch.",
       ru: "Опыт позволяет мне вести проекты от изначальной концепции до успешного выхода на рынок.",
     },
     text: {
@@ -431,7 +431,7 @@ const about: About = {
         {
           text: {
             en: "Design and promotion of digital product",
-            ru: "Дизайн и продвижение цифрового продукта",
+            ru: "Дизайн и продвижение",
           },
           url: "https://design.hse.ru/ba/design/design-marketing",
         },
@@ -440,7 +440,7 @@ const about: About = {
         {
           text: {
             en: "In 4 years, I completed 31 projects across various fields, from product and communication design to game development and jewelry making. I gained skills not only in design and coding but also in marketing, business analytics, branding, and other crucial areas.",
-            ru: "За 4 года сделала 31 проект, работая в самых различных направлениях: от продуктового и коммуникационного дизайна до гейм-дева и ювелирного мастерства. Получила навыки не только в дизайне и кодинге, но и в продвижении, бизнес-аналитике, брендинге и других важнейших областях.",
+            ru: "За 4 года сделала 31 проект, работая в самых различных направлениях: от продуктового и коммуникационного дизайна до гейм-дева и ювелирного мастерства.",
           },
         },
         {
@@ -468,8 +468,8 @@ const about: About = {
       iconName: "UAL",
       organisation: {
         name: {
-          en: "UAL:",
-          ru: "UAL:",
+          en: "University of the Arts London",
+          ru: "University of the Arts London",
         },
         url: "https://www.arts.ac.uk/",
       },
@@ -600,8 +600,8 @@ const about: About = {
       image_src:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2F3.webp?alt=media&token=bd341865-1161-461f-90fe-df6fb4aa93ce",
       text: {
-        en: "Knowledge and experience with HTML, CSS, JS, jQuery, React, React Native, TypeScript, RoR; basic Python skills and experience in creative coding (Tone.js, P5.js).",
-        ru: "Знание и работа с HTML, CSS, JavaScript, jQuery, React, React Native, TypeScript, Ruby on Rails; базовые навыки Python и опыт в креативном кодинге (Tone.js, P5.js).",
+        en: "I mostly work in front-end development, but I'm also familiar with back-end. Sometimes I do creative coding.",
+        ru: "По большей части я работаю в сфере фронтенд разработки, но знакома и бэкендом. Иногда занимаюсь креативным кодингом.",
       },
       techTags: [
         "VSCode",
@@ -684,7 +684,7 @@ const about: About = {
       imgSrc:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2F8.webp?alt=media&token=a9eef99f-b125-42ba-8c8b-f0390db67477",
       text: {
-        en: "Video for the interactive exhibition «Gogol in Moscow» at the Museum of Moscow",
+        en: "Video for the interactive exhibition at the Museum of Moscow",
         ru: "Видеоролик для интерактивной выставки «Гоголь в Москве» в Музее Москвы",
       },
       year: "2019",
@@ -694,7 +694,7 @@ const about: About = {
       imgSrc:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2F7.webp?alt=media&token=c4821001-3fa3-418b-b490-840695bb4e53",
       text: {
-        en: "Interactive landing page for the music video «Zodiac» by electronic artist Mujuice",
+        en: "Interactive landing page for the music video «Zodiac» Mujuice",
         ru: "Интерактивный лендинг для клипа «Zodiac» электронного исполнителя Mujuice",
       },
       year: "2021",

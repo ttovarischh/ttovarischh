@@ -206,6 +206,7 @@ export interface Project {
   id: number;
   similarCases: number[];
   locked?: boolean;
+  shortie?: boolean;
   name: {
     en: string;
     ru: string;

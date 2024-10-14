@@ -22,8 +22,6 @@ const ImageMarqueeWrapper = styled.div<{
   $direction: "left" | "right" | "up" | "down";
 }>`
   width: 100vw;
-  margin-bottom: ${({ $direction }) =>
-    $direction === "left" ? "48px" : "0px"};
   img {
     border-radius: 0;
     height: 29.38vw;
@@ -69,23 +67,14 @@ const M_ImageMarquee: React.FC<ImageMarqueeProps> = ({
   currentLanguage,
 }) => {
   const theme = useTheme();
-  const marqueeRef = useRef<HTMLDivElement | null>(null);
-  const [marqueeHeight, setMarqueeHeight] = useState(0);
-
   const isVideo = (src: string): boolean => {
     return src.includes(".webm");
   };
 
-  useEffect(() => {
-    if (marqueeRef.current) {
-      setMarqueeHeight(marqueeRef.current.clientHeight);
-    }
-  }, [works]);
-
   return (
     <ImageMarqueeWrapper $direction={direction}>
       <Marquee speed={80} direction={direction}>
-        <ImageMarquee ref={marqueeRef}>
+        <ImageMarquee>
           {works.map((work, index) => (
             <WorkLink
               key={`${work.link} ${index}`}
@@ -96,23 +85,23 @@ const M_ImageMarquee: React.FC<ImageMarqueeProps> = ({
                 {work.image_description[0][currentLanguage]}
               </PP_20>
               {isVideo(work.image_src) ? (
-                <LazyLoad offset={200} once style={{ height: "29.38vw" }}>
-                  <Video
-                    shouldAutoplay
-                    src={work.image_src}
-                    $className="marqueeskeleton"
-                    $borderRadius="0px"
-                  />
-                </LazyLoad>
+                // <LazyLoad offset={300} once style={{ height: "29.38vw" }}>
+                <Video
+                  shouldAutoplay
+                  src={work.image_src}
+                  $className="marqueeskeleton"
+                  $borderRadius="0px"
+                />
               ) : (
-                <LazyLoad offset={200} once style={{ height: "29.38vw" }}>
-                  <Image
-                    src={work.image_src}
-                    alt={work.image_description[0]["en"]}
-                    $className="marqueeskeleton"
-                    $borderRadius="0px"
-                  />
-                </LazyLoad>
+                // </LazyLoad>
+                // <LazyLoad offset={300} once style={{ height: "29.38vw" }}>
+                <Image
+                  src={work.image_src}
+                  alt={work.image_description[0]["en"]}
+                  $className="marqueeskeleton"
+                  $borderRadius="0px"
+                />
+                // </LazyLoad>
               )}
             </WorkLink>
           ))}

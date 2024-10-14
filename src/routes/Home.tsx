@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { works } from "../db";
 import M_ImageMarquee from "../components/Molecules/M_ImageMarquee";
 import { Project } from "../db/types";
+import LazyLoad from "react-lazyload";
 
 interface HomePageProps {
   projects: Array<Project>;
@@ -87,16 +88,33 @@ const HomePage: React.FC<HomePageProps> = ({
           buttonText={t("home.aboutMe")}
           handleButtonClick={() => navigate("/about")}
         />
-        <M_ImageMarquee
-          works={topMarqueeWorks}
-          direction="left"
-          currentLanguage={currentLanguage}
-        />
-        <M_ImageMarquee
-          works={bottomMarqueeWorks}
-          direction="right"
-          currentLanguage={currentLanguage}
-        />
+        <LazyLoad
+          offset={300}
+          once
+          style={{
+            height: "calc(24px + 1.25rem + 29.38vw)",
+            marginBottom: "48px",
+          }}
+        >
+          <M_ImageMarquee
+            works={topMarqueeWorks}
+            direction="left"
+            currentLanguage={currentLanguage}
+          />
+        </LazyLoad>
+        <LazyLoad
+          offset={300}
+          once
+          style={{
+            height: "calc(24px + 1.25rem + 29.38vw)",
+          }}
+        >
+          <M_ImageMarquee
+            works={bottomMarqueeWorks}
+            direction="right"
+            currentLanguage={currentLanguage}
+          />
+        </LazyLoad>
       </FlexBox>
     </PageWrapper>
   );

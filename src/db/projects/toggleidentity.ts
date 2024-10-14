@@ -61,17 +61,17 @@ export const toggleID: Project = {
   links: [
     {
       name: {
-        en: "Full presentation",
-        ru: "Презентация",
+        en: "Behance case",
+        ru: "Кейс на Behance",
       },
-      url: "https://portfolio.hse.ru/Project/213207",
+      url: "",
     },
     {
       name: {
-        en: "Landing",
-        ru: "Лендинг",
+        en: "Toggle Studio",
+        ru: "Toggle Studio",
       },
-      url: "https://wo.artdesignandprooomotion.ru/",
+      url: "https://www.toggle.studio/",
     },
   ],
   smallCards: [

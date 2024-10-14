@@ -131,233 +131,237 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
         team={project.team}
         teamColumnHeader={t("projectPage.team")}
       />
-      <ProjectPageWrapper ref={projectPageRef}>
-        <StickyMenuWrapper ref={menuRef}>
-          <PageMenu
-            menuItems={project.menuItems}
-            currentLanguage={currentLanguage}
-          />
-        </StickyMenuWrapper>
-        {project.layout.map((item, index) => {
-          const textIndex = item.textIndex;
-          const smallCardIndex = item.smallCardIndex;
-          switch (item.component) {
-            case "A_InfoBlock":
-              if (textIndex !== undefined) {
-                const idx = Array.isArray(textIndex) ? textIndex[0] : textIndex;
+      {!project.shortie && (
+        <ProjectPageWrapper ref={projectPageRef}>
+          <StickyMenuWrapper ref={menuRef}>
+            <PageMenu
+              menuItems={project.menuItems}
+              currentLanguage={currentLanguage}
+            />
+          </StickyMenuWrapper>
+          {project.layout.map((item, index) => {
+            const textIndex = item.textIndex;
+            const smallCardIndex = item.smallCardIndex;
+            switch (item.component) {
+              case "A_InfoBlock":
+                if (textIndex !== undefined) {
+                  const idx = Array.isArray(textIndex)
+                    ? textIndex[0]
+                    : textIndex;
 
+                  return (
+                    <A_InfoBlock
+                      key={index}
+                      header={project.texts[idx].header[0][currentLanguage]}
+                      text={project.texts[idx].text[0][currentLanguage]}
+                      links={project.texts[idx].links}
+                      $body={item.$body}
+                      references={item.references}
+                      currentLanguage={currentLanguage}
+                    />
+                  );
+                }
+                return null;
+
+              case "EmblaCarousel":
+                const sliderSlides = project.slider[item.sliderIndex].slides;
                 return (
-                  <A_InfoBlock
+                  <EmblaCarousel
                     key={index}
-                    header={project.texts[idx].header[0][currentLanguage]}
-                    text={project.texts[idx].text[0][currentLanguage]}
-                    links={project.texts[idx].links}
-                    $body={item.$body}
+                    slides={sliderSlides}
+                    options={OPTIONS}
                     references={item.references}
                     currentLanguage={currentLanguage}
                   />
                 );
-              }
-              return null;
 
-            case "EmblaCarousel":
-              const sliderSlides = project.slider[item.sliderIndex].slides;
-              return (
-                <EmblaCarousel
-                  key={index}
-                  slides={sliderSlides}
-                  options={OPTIONS}
-                  references={item.references}
-                  currentLanguage={currentLanguage}
-                />
-              );
-
-            case "M_CaseImagesGrid":
-              return (
-                <M_CaseImagesGrid
-                  key={index}
-                  imageIndices={item.imageIndices!}
-                  images={project.images}
-                  projectName={project.name[currentLanguage]}
-                  currentLanguage={currentLanguage}
-                  references={item.references}
-                  onImageClick={handleImageClick}
-                />
-              );
-
-            case "A_InfoCard":
-              const renderInfoCard = (
-                textIndex: number | number[],
-                references: any
-              ) => {
-                let textsArray: Array<{ header: string; text: string }> = [];
-
-                if (Array.isArray(textIndex)) {
-                  textsArray = textIndex
-                    .map((idx) => {
-                      const textItem = project.texts[idx];
-                      if (textItem) {
-                        return {
-                          header: textItem.header[0][currentLanguage],
-                          text: textItem.text[0][currentLanguage],
-                        };
-                      }
-                      return null;
-                    })
-                    .filter(
-                      (item): item is { header: string; text: string } =>
-                        item !== null
-                    );
-                } else {
-                  const textItem = project.texts[textIndex];
-                  if (textItem) {
-                    textsArray = [
-                      {
-                        header: textItem.header[0][currentLanguage],
-                        text: textItem.text[0][currentLanguage],
-                      },
-                    ];
-                  }
-                }
-
+              case "M_CaseImagesGrid":
                 return (
-                  <M_InfoCardsGrid
-                    key={`${textIndex}-${currentLanguage}`}
-                    texts={textsArray}
-                    references={references}
+                  <M_CaseImagesGrid
+                    key={index}
+                    imageIndices={item.imageIndices!}
+                    images={project.images}
+                    projectName={project.name[currentLanguage]}
+                    currentLanguage={currentLanguage}
+                    references={item.references}
+                    onImageClick={handleImageClick}
                   />
                 );
-              };
 
-              if (textIndex !== undefined) {
-                return renderInfoCard(textIndex, item.references);
-              }
-              return null;
-
-            case "M_LinkCardsGrid":
-              const { linkCardIndex } = item;
-              const renderLinkCard = (
-                linkCardIndex: number | number[],
-                references: any
-              ) => {
-                let linkCardsArray: Array<{
-                  image_src: string;
-                  header: string;
-                  text: string;
-                  link_text: string;
-                  url: string;
-                }> = [];
-
-                const getLocalizedValue = (
-                  array: Array<{ en: string; ru: string }>
+              case "A_InfoCard":
+                const renderInfoCard = (
+                  textIndex: number | number[],
+                  references: any
                 ) => {
+                  let textsArray: Array<{ header: string; text: string }> = [];
+
+                  if (Array.isArray(textIndex)) {
+                    textsArray = textIndex
+                      .map((idx) => {
+                        const textItem = project.texts[idx];
+                        if (textItem) {
+                          return {
+                            header: textItem.header[0][currentLanguage],
+                            text: textItem.text[0][currentLanguage],
+                          };
+                        }
+                        return null;
+                      })
+                      .filter(
+                        (item): item is { header: string; text: string } =>
+                          item !== null
+                      );
+                  } else {
+                    const textItem = project.texts[textIndex];
+                    if (textItem) {
+                      textsArray = [
+                        {
+                          header: textItem.header[0][currentLanguage],
+                          text: textItem.text[0][currentLanguage],
+                        },
+                      ];
+                    }
+                  }
+
                   return (
-                    array.find((item) => item[currentLanguage])?.[
-                      currentLanguage
-                    ] || ""
+                    <M_InfoCardsGrid
+                      key={`${textIndex}-${currentLanguage}`}
+                      texts={textsArray}
+                      references={references}
+                    />
                   );
                 };
 
-                if (Array.isArray(linkCardIndex)) {
-                  linkCardsArray = linkCardIndex
-                    .map((idx) => {
-                      const linkItem = project.link_cards[idx];
-                      if (linkItem) {
-                        return {
+                if (textIndex !== undefined) {
+                  return renderInfoCard(textIndex, item.references);
+                }
+                return null;
+
+              case "M_LinkCardsGrid":
+                const { linkCardIndex } = item;
+                const renderLinkCard = (
+                  linkCardIndex: number | number[],
+                  references: any
+                ) => {
+                  let linkCardsArray: Array<{
+                    image_src: string;
+                    header: string;
+                    text: string;
+                    link_text: string;
+                    url: string;
+                  }> = [];
+
+                  const getLocalizedValue = (
+                    array: Array<{ en: string; ru: string }>
+                  ) => {
+                    return (
+                      array.find((item) => item[currentLanguage])?.[
+                        currentLanguage
+                      ] || ""
+                    );
+                  };
+
+                  if (Array.isArray(linkCardIndex)) {
+                    linkCardsArray = linkCardIndex
+                      .map((idx) => {
+                        const linkItem = project.link_cards[idx];
+                        if (linkItem) {
+                          return {
+                            image_src: linkItem.image_src,
+                            header: getLocalizedValue(linkItem.header),
+                            text: getLocalizedValue(linkItem.text),
+                            link_text: getLocalizedValue(linkItem.link_text),
+                            url: linkItem.url,
+                          };
+                        }
+                        return null;
+                      })
+                      .filter(
+                        (
+                          item
+                        ): item is {
+                          image_src: string;
+                          header: string;
+                          text: string;
+                          link_text: string;
+                          url: string;
+                        } => item !== null
+                      );
+                  } else {
+                    const linkItem = project.link_cards[linkCardIndex];
+                    if (linkItem) {
+                      linkCardsArray = [
+                        {
                           image_src: linkItem.image_src,
                           header: getLocalizedValue(linkItem.header),
                           text: getLocalizedValue(linkItem.text),
                           link_text: getLocalizedValue(linkItem.link_text),
                           url: linkItem.url,
-                        };
-                      }
-                      return null;
-                    })
-                    .filter(
-                      (
-                        item
-                      ): item is {
-                        image_src: string;
-                        header: string;
-                        text: string;
-                        link_text: string;
-                        url: string;
-                      } => item !== null
-                    );
-                } else {
-                  const linkItem = project.link_cards[linkCardIndex];
-                  if (linkItem) {
-                    linkCardsArray = [
-                      {
-                        image_src: linkItem.image_src,
-                        header: getLocalizedValue(linkItem.header),
-                        text: getLocalizedValue(linkItem.text),
-                        link_text: getLocalizedValue(linkItem.link_text),
-                        url: linkItem.url,
-                      },
-                    ];
+                        },
+                      ];
+                    }
                   }
+
+                  return (
+                    <M_LinkCardsGrid
+                      key={`LinkCard ${linkCardIndex}-${currentLanguage}`}
+                      linkCards={linkCardsArray}
+                      references={references}
+                    />
+                  );
+                };
+
+                if (linkCardIndex !== undefined) {
+                  return renderLinkCard(linkCardIndex, item.references);
+                }
+                return null;
+
+              case "M_CardsBlocksGrid":
+                if (smallCardIndex !== undefined) {
+                  const indices = Array.isArray(smallCardIndex)
+                    ? smallCardIndex
+                    : [smallCardIndex];
+                  const selectedCards = indices.map(
+                    (idx) => project.smallCards[idx]
+                  );
+
+                  return (
+                    <M_CardsBlocksGrid
+                      key={index}
+                      smallCards={selectedCards}
+                      language={currentLanguage}
+                      references={item.references}
+                    />
+                  );
                 }
 
-                return (
-                  <M_LinkCardsGrid
-                    key={`LinkCard ${linkCardIndex}-${currentLanguage}`}
-                    linkCards={linkCardsArray}
-                    references={references}
-                  />
-                );
-              };
+              case "M_UIShow": {
+                const uiShowIndex = item.uiShowIndex;
 
-              if (linkCardIndex !== undefined) {
-                return renderLinkCard(linkCardIndex, item.references);
-              }
-              return null;
-
-            case "M_CardsBlocksGrid":
-              if (smallCardIndex !== undefined) {
-                const indices = Array.isArray(smallCardIndex)
-                  ? smallCardIndex
-                  : [smallCardIndex];
-                const selectedCards = indices.map(
-                  (idx) => project.smallCards[idx]
-                );
-
-                return (
-                  <M_CardsBlocksGrid
-                    key={index}
-                    smallCards={selectedCards}
-                    language={currentLanguage}
-                    references={item.references}
-                  />
-                );
+                if (uiShowIndex !== undefined) {
+                  return (
+                    <M_UIShow
+                      key={index}
+                      uiShow={project.uiShow[uiShowIndex]}
+                      language={currentLanguage}
+                      references={item.references}
+                      projectName={project.name[currentLanguage]}
+                    />
+                  );
+                } else {
+                  console.warn(
+                    `uiShowIndex is undefined for item at index ${index}`
+                  );
+                  return null;
+                }
               }
 
-            case "M_UIShow": {
-              const uiShowIndex = item.uiShowIndex;
-
-              if (uiShowIndex !== undefined) {
-                return (
-                  <M_UIShow
-                    key={index}
-                    uiShow={project.uiShow[uiShowIndex]}
-                    language={currentLanguage}
-                    references={item.references}
-                    projectName={project.name[currentLanguage]}
-                  />
-                );
-              } else {
-                console.warn(
-                  `uiShowIndex is undefined for item at index ${index}`
-                );
+              default:
                 return null;
-              }
             }
-
-            default:
-              return null;
-          }
-        })}
-      </ProjectPageWrapper>
+          })}
+        </ProjectPageWrapper>
+      )}
       <FlexBox
         $direction="column"
         $alignItems="center"

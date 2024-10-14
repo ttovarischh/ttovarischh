@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "styled-components";
+import styled from "styled-components";
 
 interface TextProps {
   children: React.ReactNode;
@@ -20,37 +20,105 @@ interface TextProps {
   id?: string;
 }
 
-const Text = (props: TextProps) => {
-  const theme = useTheme();
+const StyledText = styled.p<{
+  $fontSize?: string;
+  $lineHeight?: string;
+  $center?: boolean;
+  $offsetTop?: number;
+  $offsetBottom?: number;
+  $offsetLeft?: number;
+  $offsetRight?: number;
+  $underline?: boolean;
+  $uppercase?: boolean;
+  $capitalize?: boolean;
+  $color?: string;
+}>`
+  margin: 0;
+  font-size: ${({ $fontSize }) => $fontSize ?? "1rem"};
+  line-height: ${({ $lineHeight }) => $lineHeight ?? "normal"};
+  color: ${({ $color, theme }) => $color ?? theme.white};
+  text-align: ${({ $center }) => ($center ? "center" : "left")};
+  margin-top: ${({ $offsetTop }) => $offsetTop ?? 0}px;
+  margin-bottom: ${({ $offsetBottom }) => $offsetBottom ?? 0}px;
+  margin-left: ${({ $offsetLeft }) => $offsetLeft ?? 0}px;
+  margin-right: ${({ $offsetRight }) => $offsetRight ?? 0}px;
+  text-decoration: ${({ $underline }) => ($underline ? "underline" : "none")};
+  text-transform: ${({ $uppercase, $capitalize }) =>
+    $uppercase ? "uppercase" : $capitalize ? "capitalize" : "none"};
+`;
+
+const Text: React.FC<TextProps> = ({
+  children,
+  className,
+  id,
+  bold,
+  medium,
+  fontSize,
+  lineHeight,
+  center,
+  offsetTop,
+  offsetBottom,
+  offsetLeft,
+  offsetRight,
+  underline,
+  uppercase,
+  capitalize,
+  color,
+}) => {
   return (
-    <p
+    <StyledText
       className={
-        props.className ??
-        (props.bold ? "ppbold" : props.medium ? "ppmedium" : "ppbook")
+        className ?? (bold ? "ppbold" : medium ? "ppmedium" : "ppbook")
       }
-      id={props.id}
-      style={{
-        fontSize: props.fontSize ?? "1rem",
-        lineHeight: props.lineHeight ?? "normal",
-        color: props.color ?? theme.white,
-        margin: 0,
-        textAlign: props.center ? "center" : "left",
-        marginTop: props.offsetTop ?? 0,
-        marginBottom: props.offsetBottom ?? 0,
-        marginLeft: props.offsetLeft ?? 0,
-        marginRight: props.offsetRight ?? 0,
-        textDecoration: props.underline ? "underline" : "none",
-        textTransform: props.uppercase
-          ? "uppercase"
-          : props.capitalize
-          ? "capitalize"
-          : "none",
-      }}
+      $fontSize={fontSize}
+      $lineHeight={lineHeight}
+      $center={center}
+      $offsetTop={offsetTop}
+      $offsetBottom={offsetBottom}
+      $offsetLeft={offsetLeft}
+      $offsetRight={offsetRight}
+      $underline={underline}
+      $uppercase={uppercase}
+      $capitalize={capitalize}
+      $color={color}
+      id={id}
     >
-      {props.children}
-    </p>
+      {children}
+    </StyledText>
   );
 };
+
+// const Text = (props: TextProps) => {
+//   const theme = useTheme();
+//   return (
+//     <p
+//       className={
+//         props.className ??
+//         (props.bold ? "ppbold" : props.medium ? "ppmedium" : "ppbook")
+//       }
+//       id={props.id}
+//       style={{
+//         fontSize: props.fontSize ?? "1rem",
+//         lineHeight: props.lineHeight ?? "normal",
+//         color: props.color ?? theme.white,
+//         margin: 0,
+//         textAlign: props.center ? "center" : "left",
+//         marginTop: props.offsetTop ?? 0,
+//         marginBottom: props.offsetBottom ?? 0,
+//         marginLeft: props.offsetLeft ?? 0,
+//         marginRight: props.offsetRight ?? 0,
+//         textDecoration: props.underline ? "underline" : "none",
+//         textTransform: props.uppercase
+//           ? "uppercase"
+//           : props.capitalize
+//           ? "capitalize"
+//           : "none",
+//       }}
+//     >
+//       {props.children}
+//     </p>
+//   );
+// };
 
 export const PP_14 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="0.875rem" {...props} />

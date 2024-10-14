@@ -19,6 +19,7 @@ const NavButtonsWrapper = styled(FlexBox)`
   border: 1px solid hsla(0, 0%, 100%, 0.025);
   cursor: pointer;
   pointer-events: auto;
+  flex-wrap: nowrap;
 `;
 
 const ButtonDot = styled.div`
@@ -131,7 +132,6 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
         top: document.body.scrollHeight,
         behavior: "smooth",
       });
-      setActiveIndex("#footer");
     }, 50);
   };
 
@@ -175,8 +175,7 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
               </PP_20>
               <ButtonDot
                 style={{
-                  opacity:
-                    activeIndex === button.path && isFooterVisible ? 1 : 0,
+                  opacity: isFooterVisible ? 1 : 0,
                 }}
               />
             </ContactButtonWrapper>

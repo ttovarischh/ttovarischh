@@ -4,6 +4,7 @@ import { FlexBox, PP_80, PP_14, PP_32, PP_20 } from "../Quarks";
 import { Link } from "react-router-dom";
 import A_Icon from "../Atoms/A_Icon";
 import A_Button from "../Atoms/A_Button";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 interface FooterProps {
   currentLanguage: "en" | "ru";
@@ -18,6 +19,10 @@ const FooterWrapper = styled(FlexBox)`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.footer.bg};
   border-radius: 12px 12px 0px 0px;
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    padding: calc(3vw - 12px);
+  }
 
   ::selection {
     color: ${({ theme }) => theme.white};
@@ -107,6 +112,7 @@ const FooterUpperRowColumns = styled.div`
 
 const M_Footer = ({ currentLanguage, t }: FooterProps) => {
   const theme = useTheme();
+  const { isTabletSize } = useScreenSize();
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -134,8 +140,8 @@ const M_Footer = ({ currentLanguage, t }: FooterProps) => {
               lineHeight="88%"
               id="footerpp80"
             >
-              {t("footer.mainContact1")}
-              <br></br>
+              {!isTabletSize && t("footer.mainContact1")}
+              {!isTabletSize && <br></br>}
               {t("footer.mainContact2")}&nbsp;
               <a target="_blank" href="mailto: polinasot@gmail.com">
                 {t("footer.mainContactLink")}
@@ -255,12 +261,16 @@ const M_Footer = ({ currentLanguage, t }: FooterProps) => {
             </PP_14>
           </FlexBox>
           <FlexBox $gap="0.2vw" $alignItems="baseline">
-            <PP_14 medium color={theme.medium_grey}>
-              {t("footer.upd")}
-            </PP_14>
-            <PP_14 medium color={theme.medium_grey}>
-              •
-            </PP_14>
+            {!isTabletSize && (
+              <>
+                <PP_14 medium color={theme.medium_grey}>
+                  {t("footer.upd")}
+                </PP_14>
+                <PP_14 medium color={theme.medium_grey}>
+                  •
+                </PP_14>
+              </>
+            )}
             <PP_14 medium color={theme.medium_grey}>
               {t("footer.made")}
             </PP_14>

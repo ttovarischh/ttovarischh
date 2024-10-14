@@ -2,6 +2,7 @@ import { Project } from "../types";
 
 export const quimi: Project = {
   id: 7,
+  shortie: true,
   name: {
     en: "Quimi App",
     ru: "Quimi App",

@@ -1,9 +1,11 @@
 // M_Navbar
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { FlexBox, PP_32, PP_128 } from "../Quarks";
 import A_PixelatedGradient from "../Atoms/A_PixelatedGradient";
 import A_Icon from "../Atoms/A_Icon";
+import { media } from "../../styles/mediaQueries";
+import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 
 interface M_MainCompProps {
   scrollY: number;
@@ -30,7 +32,6 @@ const MainCompWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  // min-height: 840px;
 
   svg {
     position: absolute;
@@ -41,6 +42,33 @@ const MainCompWrapper = styled.div`
 
   svg:hover {
     animation: ${jiggle} 0.6s ease-in-out;
+  }
+
+  ${media.laptop} {
+    #difference,
+    #difference1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  ${media.tablets} {
+    #difference,
+    #difference1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media only screen and (min-aspect-ratio: 1440 / 700) and (max-device-width: 1600px) {
+    svg,
+    #difference1 {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-aspect-ratio: 1440 / 640) and (max-device-width: 1600px) {
+    #difference {
+      display: none;
+    }
   }
 `;
 
@@ -56,6 +84,28 @@ const BigText = styled(FlexBox)`
   > * {
     line-height: 84.1% !important;
     color: ${({ theme }) => theme.mainComp.header} !important;
+  }
+
+  ${media.tabletsL} {
+    height: 6rem;
+    p {
+      font-size: 6rem;
+    }
+  }
+
+  ${media.tabletsP} {
+    height: 5rem;
+    p {
+      font-size: 5rem;
+    }
+  }
+
+  ${media.ipadProP} {
+    opacity: 0.5;
+    height: 6.5rem;
+    p {
+      font-size: 6.5rem;
+    }
   }
 `;
 
@@ -82,57 +132,115 @@ const TextCompWrapper = styled(FlexBox)<{ $scrollY: number }>`
     background: transparent;
   }
 
-  #difference {
+  #difference,
+  #difference1 {
     color: ${({ theme }) => theme.mainComp.text} !important;
     max-width: 58%;
+  }
+
+  ${media.tabletsP} {
+    #difference,
+    #difference1 {
+      color: ${({ theme }) => theme.mainComp.text} !important;
+      max-width: 70%;
+    }
   }
 
   > * {
     cursor: default;
   }
+
+  @media only screen and (min-aspect-ratio: 1440 / 700) and (max-device-width: 1600px) {
+    padding-top: calc(1.4rem + 48px);
+  }
 `;
 
 const VideoBackground = styled.video`
-  width: 3.65vw;
-  height: 6.41vw;
+  width: 3.88rem;
+  height: 7.192rem;
   transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  ${media.tablets} {
+    width: 4.65vw;
+    height: 7.41vw;
   }
 `;
 
 const SquareVideoBackground = styled.video`
-  width: 4.79vw;
-  height: 4.79vw;
-  object-fit: cover;
-  margin-top: 0.5rem;
+  // width: 4.79vw;
+  // height: 4.79vw;
+  width: 5.2rem;
+  height: 5.2rem;
+  object-fit: contain;
+  margin-top: 0.7rem;
   transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
   }
+
+  ${media.tablets} {
+    width: 6vw;
+    height: 6vw;
+  }
 `;
 
-const Span = styled.span<{ $isHovered: boolean; $delay: string }>`
-  width: ${({ $isHovered }) => ($isHovered ? "2rem" : 0)};
+const Span = styled.span<{
+  $isHovered: boolean;
+  $isAnimating: boolean;
+  $delay: string;
+  $isTouchDevice: boolean;
+}>`
+  width: ${({ $isAnimating, $isHovered }) =>
+    $isAnimating || $isHovered ? "2rem" : 0};
   display: inline-block;
-  opacity: ${({ $isHovered }) => ($isHovered ? 1 : 0)};
+  opacity: ${({ $isAnimating, $isHovered }) =>
+    $isAnimating || $isHovered ? 1 : 0};
   position: relative;
-  transform: ${({ $isHovered }) =>
-    $isHovered ? "translateY(0)" : "translateY(10px)"};
+  transform: ${({ $isAnimating, $isHovered }) =>
+    $isAnimating || $isHovered ? "translateY(0)" : "translateY(10px)"};
   transition: opacity 0.4s ease, transform 0.4s ease, width 0.15s;
   transition-delay: ${({ $delay }) => $delay};
+
+  ${media.tablets} {
+    width: ${({ $isAnimating, $isHovered }) =>
+      $isAnimating || $isHovered ? "1.4rem" : 0};
+  }
 `;
 
 const M_MainComp: React.FC<M_MainCompProps> = ({ scrollY, t }) => {
   const [$isHovered, set$IsHovered] = useState(false);
+  const [$isAnimating, set$IsAnimating] = useState(false);
+  const isTouchDevice = useIsTouchDevice();
+
+  useEffect(() => {
+    const startAnimation = () => {
+      set$IsAnimating(true);
+      setTimeout(() => {
+        set$IsAnimating(false);
+      }, 6000);
+    };
+
+    if (isTouchDevice) {
+      startAnimation();
+
+      const intervalId = setInterval(() => {
+        startAnimation();
+      }, 12000);
+
+      return () => clearInterval(intervalId);
+    }
+  }, [isTouchDevice]);
 
   return (
     <MainCompWrapper>
       <A_PixelatedGradient />
       <TextCompWrapper $scrollY={scrollY}>
-        <PP_32 medium id="difference">
+        <PP_32 medium id="difference1">
           {t("home.hey")}
         </PP_32>
 
@@ -177,15 +285,29 @@ const M_MainComp: React.FC<M_MainCompProps> = ({ scrollY, t }) => {
             </PP_128>
           </BigText>
           <BigText
-            onMouseEnter={() => set$IsHovered(true)}
-            onMouseLeave={() => set$IsHovered(false)}
+            onMouseEnter={
+              !isTouchDevice ? () => set$IsHovered(true) : undefined
+            }
+            onMouseLeave={
+              !isTouchDevice ? () => set$IsHovered(false) : undefined
+            }
           >
             <PP_128 bold center>
               {t("home.human")}
-              <Span $isHovered={$isHovered} $delay={$isHovered ? "0s" : "0.3s"}>
+              <Span
+                $isHovered={isTouchDevice ? false : $isHovered}
+                $isAnimating={!isTouchDevice ? false : $isAnimating}
+                $delay={$isHovered || $isAnimating ? "0s" : "0.3s"}
+                $isTouchDevice={isTouchDevice}
+              >
                 .
               </Span>
-              <Span $isHovered={$isHovered} $delay={$isHovered ? "0.3s" : "0s"}>
+              <Span
+                $isHovered={isTouchDevice ? false : $isHovered}
+                $isAnimating={!isTouchDevice ? false : $isAnimating}
+                $delay={$isHovered || $isAnimating ? "0.3s" : "0s"}
+                $isTouchDevice={isTouchDevice}
+              >
                 .
               </Span>
             </PP_128>

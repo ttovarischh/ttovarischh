@@ -27,6 +27,12 @@ const NavbarWrapper = styled.div`
   box-sizing: border-box;
   z-index: 10;
   pointer-events: none;
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    padding-top: calc(3vw - 12px);
+    padding-left: calc(3vw - 12px);
+    padding-right: calc(3vw - 12px);
+  }
 `;
 
 const NavbarGradient = styled.div<{ theme: any }>`

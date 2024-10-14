@@ -18,6 +18,7 @@ import AboutPage from "./routes/About";
 import M_Navbar from "./components/Molecules/M_Navbar";
 import M_Footer from "./components/Molecules/M_Footer";
 import { useTranslation } from "react-i18next";
+import { ScreenSizeProvider } from "./styles/ScreenSizeContext";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(() => {
@@ -45,44 +46,46 @@ const App: React.FC = () => {
       <GlobalStyle theme={theme} />
       <Router>
         <ScrollToTop />
-        <M_Navbar theme={themeValue} toggleTheme={toggleTheme} t={t} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePage
-                projects={projects}
-                currentLanguage={currentLanguage}
-                t={t}
-              />
-            }
-          />
-          <Route
-            path="/:name"
-            element={<Project currentLanguage={currentLanguage} t={t} />}
-          />
-          <Route
-            path="/work"
-            element={
-              <WorkPage
-                currentLanguage={currentLanguage}
-                t={t}
-                projects={projects}
-              />
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <AboutPage
-                currentLanguage={currentLanguage}
-                t={t}
-                projects={projects}
-              />
-            }
-          />
-        </Routes>
-        <M_Footer currentLanguage={currentLanguage} t={t} />
+        <ScreenSizeProvider>
+          <M_Navbar theme={themeValue} toggleTheme={toggleTheme} t={t} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  projects={projects}
+                  currentLanguage={currentLanguage}
+                  t={t}
+                />
+              }
+            />
+            <Route
+              path="/:name"
+              element={<Project currentLanguage={currentLanguage} t={t} />}
+            />
+            <Route
+              path="/work"
+              element={
+                <WorkPage
+                  currentLanguage={currentLanguage}
+                  t={t}
+                  projects={projects}
+                />
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <AboutPage
+                  currentLanguage={currentLanguage}
+                  t={t}
+                  projects={projects}
+                />
+              }
+            />
+          </Routes>
+          <M_Footer currentLanguage={currentLanguage} t={t} />
+        </ScreenSizeProvider>
       </Router>
     </ThemeProvider>
   );

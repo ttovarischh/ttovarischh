@@ -1,7 +1,53 @@
 // GlobalStyles.ts
 import { createGlobalStyle } from "styled-components";
+import { media } from "./mediaQueries";
 
 const GlobalStyle = createGlobalStyle<{ theme: any }>`
+
+  ${media.iphoneSE} {
+    html {
+      font-size: 1px;
+    }
+  }
+
+  ${media.iphone678Plus} {
+    html {
+      font-size: 2px;
+    }
+  }
+
+  ${media.iphoneXPlus} {
+    html {
+      font-size: 4px;
+    }
+  }
+
+  ${media.pixel} {
+    html {
+      font-size: 6px;
+    }
+  }
+
+
+
+  ${media.laptop}, ${media.retinaLaptop} {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  ${media.ipadPro} {
+    html {
+      font-size: 16px;
+    }
+  }
+
+  ${media.ipadMini}, ${media.ipadAir}, {
+    html {
+      font-size: 14px;
+    }
+  }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
