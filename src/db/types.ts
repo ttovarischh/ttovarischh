@@ -48,6 +48,7 @@ interface WorkItem {
   image_src: string;
   image_description: Array<Description>;
   link?: string;
+  poster?: string;
 }
 
 interface Description {
@@ -116,6 +117,7 @@ export interface AboutMeCard {
     text: Array<{ en: string; ru: string }>;
     url: string;
   }>;
+  fallback?: string;
 }
 
 export interface EducationItem {
@@ -193,6 +195,7 @@ export interface SkillItem {
     ru: string;
   };
   image_src: string;
+  fallback?: string;
   text: {
     en: string;
     ru: string;
@@ -260,7 +263,7 @@ export interface Project {
   vertical_cover?: string;
   horisontal_cover: string;
   cover: string;
-  svgHeaderPath: string;
+  cover_mob: string;
   links: Array<{
     name: { en: string; ru: string };
     url: string;
@@ -277,6 +280,8 @@ export interface Project {
     textA: Array<{ en: string; ru: string }>;
     headerB: Array<{ en: string; ru: string }>;
     textB: Array<{ en: Array<string>; ru: Array<string> }>;
+    fallbackLink?: string;
+    poster?: string;
   }>;
   link_cards: Array<{
     image_src: string;

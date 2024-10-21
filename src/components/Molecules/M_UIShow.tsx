@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { FlexBox, PP_48, PP_24 } from "../Quarks";
+import { FlexBox, PP_48, PP_24, PP_32, PP_18 } from "../Quarks";
 import A_CaseImage from "../Atoms/A_CaseImage";
 import A_Icon from "../Atoms/A_Icon";
 
@@ -19,9 +19,14 @@ interface UIShowProps {
 
 const UIShowWrapper = styled(FlexBox)`
   width: 100%;
-  padding: 0px 2.5vw;
+  // padding: 0px 2.5vw;
   justify-content: center;
   gap: 2.66vw;
+
+  //new
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 `;
 
 const M_UIShow = (props: UIShowProps) => {
@@ -30,8 +35,22 @@ const M_UIShow = (props: UIShowProps) => {
 
   return (
     <UIShowWrapper id={references}>
+      <FlexBox
+        $direction="column"
+        $gap="12px"
+        $alignItems="center"
+        $offsetBottom="24px"
+      >
+        <PP_32 medium center>
+          {uiShow.headerA.map((header) => header[language])}
+        </PP_32>
+        <PP_18 color={theme.lightest_grey} center>
+          {uiShow.textA.map((text) => text[language])}
+        </PP_18>
+      </FlexBox>
+
       <A_CaseImage ui projectName={projectName} src={uiShow.imgSrc} />
-      <FlexBox $direction="column" $gap="48px" style={{ maxWidth: "28.59vw" }}>
+      {/* <FlexBox $direction="column" $gap="48px" style={{ maxWidth: "28.59vw" }}>
         <FlexBox $direction="column" $gap="16px">
           <PP_48 medium>
             {uiShow.headerA.map((header) => header[language])}
@@ -64,7 +83,7 @@ const M_UIShow = (props: UIShowProps) => {
             </FlexBox>
           </FlexBox>
         )}
-      </FlexBox>
+      </FlexBox> */}
     </UIShowWrapper>
   );
 };

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { useTheme, css } from "styled-components";
-import { FlexBox, PP_24, PP_14, PP_32, PP_20 } from "../Quarks";
+import { FlexBox, PP_24, PP_14, PP_32, PP_20, PP_16, PP_18 } from "../Quarks";
 import { Link } from "react-router-dom";
 import A_ProjectCover from "../Atoms/A_ProjectCover";
 import A_Tag from "../Atoms/A_Tag";
 import A_Tooltip from "../Atoms/A_Tooltip";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
+import { media } from "../../styles/mediaQueries";
 
 interface ProjectCardProps {
   name: { en: string; ru: string };
@@ -37,77 +39,140 @@ const CardWrapper = styled.div<{
   $highlight?: boolean;
   $locked?: boolean;
 }>`
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 10px;
+
   position: relative;
   display: ${({ $highlight }) => ($highlight ? "grid" : "flex")};
   flex-direction: ${({ $highlight }) => ($highlight ? "row" : "column")};
   grid-template-columns: 4fr 2fr;
   grid-column-gap: 1.04vw;
   background-color: ${({ theme }) => theme.cards.bg};
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 16px;
+
   overflow: ${({ $locked }) => ($locked ? "visible" : "hidden")};
   cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
   transition: all 0.3s ease-out;
   opacity: ${({ $fadeOut }) => ($fadeOut ? 0 : 1)};
   transform: translateY(${({ $fadeOut }) => ($fadeOut ? "10px" : "0px")});
 
-  &:hover {
-    box-shadow: ${({ $locked, theme }) =>
-      !$locked ? `0px 10px 30px ${theme.boxShadows.projectCards}` : "none"};
-
-    img {
-      transform: scale(${({ $locked }) => ($locked ? "none" : "1.01")});
-    }
-  }
-
-  > * {
-    cursor: ${({ $locked }) => $locked && "none"};
-  }
-
   img {
     width: 100%;
     transition: transform 0.5s ease;
-    cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
     aspect-ratio: 16/9;
     object-position: top;
+    border-radius: 5px;
   }
+
+  ${media.phoneLansdscape} {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  ${media.tablets} {
+    height: 100%;
+  }
+
+  ${media.tabletsL} {
+    height: 100%;
+  }
+
+  // desktop
+  // &:hover {
+  //   box-shadow: ${({ $locked, theme }) =>
+    !$locked ? `0px 10px 30px ${theme.boxShadows.projectCards}` : "none"};
+
+  //   img {
+  //     transform: scale(${({ $locked }) => ($locked ? "none" : "1.01")});
+  //   }
+  // }
+
+  // > * {
+  //   cursor: ${({ $locked }) => $locked && "none"};
+  // }
 `;
+
+// const CardWrapper = styled.div<{
+//   $fadeOut?: boolean;
+//   $highlight?: boolean;
+//   $locked?: boolean;
+// }>`
+//   position: relative;
+//   display: ${({ $highlight }) => ($highlight ? "grid" : "flex")};
+//   flex-direction: ${({ $highlight }) => ($highlight ? "row" : "column")};
+//   grid-template-columns: 4fr 2fr;
+//   grid-column-gap: 1.04vw;
+//   background-color: ${({ theme }) => theme.cards.bg};
+//   padding: 20px;
+//   box-sizing: border-box;
+//   border-radius: 16px;
+//   overflow: ${({ $locked }) => ($locked ? "visible" : "hidden")};
+//   cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
+//   transition: all 0.3s ease-out;
+//   opacity: ${({ $fadeOut }) => ($fadeOut ? 0 : 1)};
+//   transform: translateY(${({ $fadeOut }) => ($fadeOut ? "10px" : "0px")});
+
+//   &:hover {
+//     box-shadow: ${({ $locked, theme }) =>
+//       !$locked ? `0px 10px 30px ${theme.boxShadows.projectCards}` : "none"};
+
+//     img {
+//       transform: scale(${({ $locked }) => ($locked ? "none" : "1.01")});
+//     }
+//   }
+
+//   > * {
+//     cursor: ${({ $locked }) => $locked && "none"};
+//   }
+
+//   img {
+//     width: 100%;
+//     transition: transform 0.5s ease;
+//     cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
+//     aspect-ratio: 16/9;
+//     object-position: top;
+//   }
+// `;
 
 const MovingCardWrapper = styled(FlexBox)<{
   $isVisible: boolean;
   $vertical?: boolean;
 }>`
   background-color: ${({ theme }) => theme.main_grey};
-  width: ${({ $vertical }) => ($vertical ? "auto" : "63.02vw")};
+  // width: ${({ $vertical }) => ($vertical ? "auto" : "63.02vw")};
+  width: 100%;
   box-sizing: border-box;
-  border-radius: 16px;
+  // border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.5s ease, box-shadow 0.5s ease;
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.8s ease-out;
-  padding: ${({ $vertical }) => ($vertical ? "12px" : "20px")};
+  // padding: ${({ $vertical }) => ($vertical ? "12px" : "20px")};
+  padding: 8px;
   border: ${({ $vertical }) =>
     $vertical ? "1px solid hsla(0, 0%, 0%, 0.045)" : "none"};
   box-shadow: ${({ $vertical }) =>
     $vertical ? "0px 0px 15px rgba(0, 0, 0, 0.7)" : "none"};
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+  // &:hover {
+  //   transform: scale(1.02);
+  //   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
 
-    img {
-      transform: scale(1.01);
-    }
-  }
+  //   img {
+  //     transform: scale(1.01);
+  //   }
+  // }
 
   img {
-    width: ${({ $vertical }) => ($vertical ? "19.11vw" : "100%")};
+    // width: ${({ $vertical }) => ($vertical ? "19.11vw" : "100%")};
+    width: 100%;
     transition: transform 0.5s ease;
     cursor: pointer;
-    border-radius: ${({ $vertical }) => ($vertical ? "8px" : "10px")};
+    // border-radius: ${({ $vertical }) => ($vertical ? "8px" : "10px")};
+    border-radius: 5px;
   }
 
   ${({ $isVisible }) =>
@@ -116,6 +181,10 @@ const MovingCardWrapper = styled(FlexBox)<{
       opacity: 1;
       transform: translateY(0);
     `};
+
+  ${media.tabletsL} {
+    width: ${({ $vertical }) => ($vertical ? "unset" : "63.02vw")};
+  }
 `;
 
 const ProjectInfoWrapper = styled(FlexBox)<{
@@ -139,9 +208,27 @@ const ProjectInfoWrapper = styled(FlexBox)<{
   justify-content: space-between;
   align-items: flex-end;
   box-sizing: border-box;
-  margin-top: ${({ $vertical }) => ($vertical ? "12px" : "0px")};
-  padding: ${({ $works, $highlight, $vertical }) =>
+  // margin-top: ${({ $vertical }) => ($vertical ? "12px" : "0px")};
+  margin-top: 0px;
+  // padding: ${({ $works, $highlight, $vertical }) =>
     $works && $highlight ? "0px" : $vertical ? "0px 4px " : "20px 0px 0px"};
+  padding: 4px;
+  // padding-top: 8px;
+  padding-top: 12px;
+
+  ${media.phoneLansdscape} {
+    padding-top: ${({ $vertical }) => ($vertical ? "0px" : "12px")};
+  }
+
+  ${media.tablets} {
+    padding-top: ${({ $highlight }) => $highlight && "0px"};
+    height: 100%;
+  }
+
+  ${media.tabletsL} {
+    padding-top: ${({ $highlight }) => $highlight && "0px"};
+    height: 100%;
+  }
 
   p {
     max-width: ${({ $highlight }) => ($highlight ? "90%" : "auto")};
@@ -151,11 +238,13 @@ const ProjectInfoWrapper = styled(FlexBox)<{
 const TagsWrapper = styled(FlexBox)<{
   $highlight?: boolean;
 }>`
-  justify-content: space-between;
   width: 100%;
   flex-direction: ${({ $highlight }) =>
     $highlight ? "column-reverse" : "row"};
   gap: 8px;
+
+  // desktop
+  // justify-content: space-between;
 `;
 
 const TagsInnerWrapper = styled(FlexBox)<{
@@ -197,8 +286,9 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             set$IsVisible(true);
-          } else {
-            set$IsVisible(false);
+            if (cardRef.current) {
+              observer.unobserve(cardRef.current); // Stop observing once visible
+            }
           }
         });
       },
@@ -211,7 +301,7 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
 
     return () => {
       if (cardRef.current) {
-        observer.unobserve(cardRef.current);
+        observer.unobserve(cardRef.current); // Cleanup in case it wasn't done
       }
     };
   }, []);
@@ -239,6 +329,7 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
       tooltipRef.current.style.top = `${y}px`;
     }
   };
+  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
 
   if (works) {
     return (
@@ -266,26 +357,48 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
             $imageBorderRadius="10px"
           />
           <ProjectInfoWrapper $works={works} $gap="28px" $highlight={highlight}>
-            <FlexBox $direction="column" $gap={highlight ? "12px" : "4px"}>
-              <PP_32 medium lineHeight="32px">
+            <FlexBox
+              $direction="column"
+              $gap={highlight && !isTablet ? "12px" : "4px"}
+              style={{ margin: "2px" }}
+            >
+              {/* <PP_32 medium lineHeight="32px">
                 {name[currentLanguage]}
-              </PP_32>
-              <PP_20 medium color={theme.medium_grey}>
+              </PP_32> */}
+              <PP_24 medium lineHeight="24px">
+                {name[currentLanguage]}
+              </PP_24>
+              <PP_18 medium color={theme.medium_grey}>
+                {highlight && !isTablet
+                  ? description[currentLanguage]
+                  : s_description[currentLanguage]}
+              </PP_18>
+              {/* <PP_20 medium color={theme.medium_grey}>
                 {highlight
                   ? description[currentLanguage]
                   : s_description[currentLanguage]}
-              </PP_20>
+              </PP_20> */}
             </FlexBox>
             <TagsWrapper $highlight={highlight}>
-              <TagsInnerWrapper $highlight={highlight}>
-                {filterTags!.map((filterTag, index) => (
+              {isTablet || isTabletLandscape ? (
+                <TagsInnerWrapper $highlight={highlight}>
+                  {filterTags!.map((filterTag, index) => (
+                    <A_Tag
+                      small
+                      tagText={filterTag.name[currentLanguage]}
+                      key={index}
+                    />
+                  ))}
+                </TagsInnerWrapper>
+              ) : (
+                filterTags!.map((filterTag, index) => (
                   <A_Tag
                     small
                     tagText={filterTag.name[currentLanguage]}
                     key={index}
                   />
-                ))}
-              </TagsInnerWrapper>
+                ))
+              )}
               <A_Tag small tagText={year!} $header />
             </TagsWrapper>
           </ProjectInfoWrapper>
@@ -303,17 +416,26 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
         >
           <A_ProjectCover cover={src} horisontal projectName={name["en"]} />
           <ProjectInfoWrapper $vertical={vertical}>
-            <FlexBox $direction="column" $gap="4px">
-              <PP_24 medium lineHeight="1.5rem">
+            <FlexBox $direction="column" $gap="6px" style={{ padding: "2px" }}>
+              {/* <PP_24 medium lineHeight="1.5rem">
                 {name[currentLanguage]}
-              </PP_24>
-              <PP_14 medium color={theme.medium_grey}>
+              </PP_24> */}
+              <PP_20 medium lineHeight="100%">
+                {name[currentLanguage]}
+              </PP_20>
+              {/* <PP_14 medium color={theme.medium_grey}>
                 {deliverables[currentLanguage]}
-              </PP_14>
+              </PP_14> */}
+              <PP_16 medium color={theme.medium_grey}>
+                {deliverables[currentLanguage]}
+              </PP_16>
             </FlexBox>
-            <PP_14 medium color={theme.medium_grey}>
+            {/* <PP_14 medium color={theme.medium_grey}>
               {type[currentLanguage]}
-            </PP_14>
+            </PP_14> */}
+            <PP_16 medium color={theme.medium_grey}>
+              {type[currentLanguage]}
+            </PP_16>
           </ProjectInfoWrapper>
         </MovingCardWrapper>
       </Link>

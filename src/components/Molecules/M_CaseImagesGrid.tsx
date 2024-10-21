@@ -2,6 +2,7 @@ import React from "react";
 import { FlexBox } from "../Quarks";
 import A_CaseImage from "../Atoms/A_CaseImage";
 import styled from "styled-components";
+import { media } from "../../styles/mediaQueries";
 
 interface CaseImagesGridProps {
   imageIndices: number[];
@@ -17,16 +18,42 @@ interface CaseImagesGridProps {
   onImageClick: (src: string) => void;
 }
 
-const ImagesFlexBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1.04vw;
-  width: 100%;
-`;
-
 const FramedImagesFlexBox = styled(FlexBox)`
   gap: 1.04vw;
   transition: all 0.5s ease;
+  width: 100%;
+`;
+
+const FramedImagesContainer = styled(FlexBox)`
+  flex-direction: column;
+  width: 100%;
+  // gap: var(--desktop-gap);
+  gap: var(--mobile-gap-8);
+
+  ${media.phoneLansdscape} {
+    flex-direction: row;
+  }
+
+  ${media.tablets} {
+    flex-direction: row;
+  }
+
+  ${media.tabletsL} {
+    flex-direction: row;
+  }
+`;
+
+const ImagesGrid = styled(FlexBox)`
+  // gap: 1.04vw;
+  gap: var(--mobile-gap-8);
+  width: 100%;
+`;
+
+const ImagesFlexBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  // gap: 1.04vw;
+  gap: var(--mobile-gap-8);
   width: 100%;
 `;
 
@@ -44,10 +71,8 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
   switch (true) {
     case numberOfImages === 2:
       return (
-        <FramedImagesFlexBox
-          id={isSingleReference ? references : undefined}
-        >
-          <FlexBox $direction="row" $gap="1.04vw" style={{ width: "100%" }}>
+        <FramedImagesFlexBox id={isSingleReference ? references : undefined}>
+          <FramedImagesContainer>
             {imageIndices.map((index, i) => {
               const image = images[index];
               if (!image) return null;
@@ -69,13 +94,13 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
                 />
               );
             })}
-          </FlexBox>
+          </FramedImagesContainer>
         </FramedImagesFlexBox>
       );
 
     case numberOfImages === 3: {
       return (
-        <FlexBox $direction="column" $gap="1.04vw" style={{ width: "100%" }}>
+        <ImagesGrid $direction="column">
           <A_CaseImage
             key={imageIndices[0]}
             src={images[imageIndices[0]].src}
@@ -103,13 +128,13 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
               );
             })}
           </ImagesFlexBox>
-        </FlexBox>
+        </ImagesGrid>
       );
     }
 
     case numberOfImages === 5: {
       return (
-        <FlexBox $direction="column" $gap="1.04vw" style={{ width: "100%" }}>
+        <ImagesGrid $direction="column">
           <A_CaseImage
             key={imageIndices[0]}
             src={images[imageIndices[0]].src}
@@ -135,13 +160,13 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
               );
             })}
           </ImagesFlexBox>
-        </FlexBox>
+        </ImagesGrid>
       );
     }
 
     case numberOfImages === 6: {
       return (
-        <FlexBox $direction="column" $gap="1.04vw" style={{ width: "100%" }}>
+        <ImagesGrid $direction="column">
           <A_CaseImage
             key={imageIndices[0]}
             src={images[imageIndices[0]].src}
@@ -182,7 +207,7 @@ const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({
             onClick={() => onImageClick(images[imageIndices[5]].src)}
             id={!isSingleReference ? references?.[imageIndices[5]] : undefined}
           />
-        </FlexBox>
+        </ImagesGrid>
       );
     }
 

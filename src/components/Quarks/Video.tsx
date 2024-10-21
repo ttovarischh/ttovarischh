@@ -11,6 +11,7 @@ interface VideoProps {
   poster?: string;
   shouldAutoplay?: boolean;
   ui?: boolean;
+  fallback?: string;
 }
 
 const CaseVideo = styled.video`
@@ -18,12 +19,18 @@ const CaseVideo = styled.video`
   object-fit: cover;
   border-radius: 12px;
   overflow: hidden;
+
+  // new
+  border-radius: 5px;
 `;
 
 const UICaseVideo = styled(CaseVideo)`
   width: 20vw;
   height: auto;
   object-fit: cover;
+
+  // new
+  width: 60.93vw;
 `;
 
 const Video = React.memo((props: VideoProps) => {
@@ -36,6 +43,7 @@ const Video = React.memo((props: VideoProps) => {
     poster,
     shouldAutoplay,
     ui,
+    fallback,
   } = props;
   const [isLoading, setIsLoading] = useState(true);
 
@@ -48,7 +56,7 @@ const Video = React.memo((props: VideoProps) => {
 
   return (
     <>
-      {isLoading && (
+      {isLoading && shouldAutoplay && (
         <A_Skeleton
           $width={$width}
           $aspectRatio={$aspectRatio}
@@ -79,10 +87,12 @@ const Video = React.memo((props: VideoProps) => {
           loop={shouldAutoplay}
           controls={!shouldAutoplay}
           poster={poster}
-          style={{ display: isLoading ? "none" : "block" }}
+          style={{
+            display: !shouldAutoplay ? "block" : isLoading ? "none" : "block",
+          }}
         >
           <source src={src} type="video/mp4" />
-          Your browser does not support the video tag.
+          <source src={fallback} type="video/mp4" />
         </CaseVideo>
       )}
     </>

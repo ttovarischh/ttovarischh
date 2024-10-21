@@ -1,9 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-import { FlexBox, PP_24, PP_80 } from "../Quarks";
+import styled, { useTheme } from "styled-components";
+import { FlexBox, PP_16, PP_18, PP_20, PP_24, PP_32, PP_80 } from "../Quarks";
 import A_Button from "./A_Button";
 import Image from "../Quarks/Image";
 import LazyLoad from "react-lazyload";
+import { media } from "../../styles/mediaQueries";
 
 interface LinkCardProps {
   image_src: string;
@@ -18,18 +19,53 @@ interface LinkCardProps {
 }
 
 const LinkCardWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  transition: all 0.5s ease;
+  // transition: all 0.5s ease;
   overflow: hidden;
-  width: 63.02vw;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.cards.bg};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+  // new
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--mobile-padding-8);
+  border-radius: var(--mobile-img-card-radius);
+  gap: var(--mobile-gap-8);
+
+  img {
+    border-radius: var(--mobile-img-in-card-radius);
+  }
+
+  ${media.phoneLansdscape} {
+    width: 63.02vw;
+  }
+
+  ${media.tablets} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 63.02vw;
+
+    img {
+      height: auto;
+      min-height: 100%;
+    }
+  }
+
+  ${media.tabletsL} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 63.02vw;
+
+    img {
+      height: auto;
+      min-height: 100%;
+    }
+  }
 `;
 
-const LinkCardInfo = styled(FlexBox)`
+export const LinkCardInfo = styled(FlexBox)`
   padding: 20px 28px 28px;
   justify-content: space-between;
   flex-direction: column;
@@ -37,19 +73,45 @@ const LinkCardInfo = styled(FlexBox)`
   :nth-child(1) {
     max-width: 95%;
   }
+
+  // new
+  padding: 2px;
+  gap: 32px;
+  // .descr {
+  //   max-width: 70%;
+  // }
+  button {
+    width: 100%;
+  }
+
+  ${media.tablets} {
+    button {
+      width: auto;
+    }
+  }
 `;
 
 const A_LinkCard = (props: LinkCardProps) => {
+  const theme = useTheme();
   return (
     <LinkCardWrapper id={props.reference || undefined} style={props.style}>
       {props.reverse ? (
         <>
           <LinkCardInfo>
-            <FlexBox $direction="column" $gap="12px">
-              <PP_80 medium lineHeight="5rem">
+            <FlexBox
+              $direction="column"
+              // $gap="12px"
+              $gap="4px"
+            >
+              {/* <PP_80 medium lineHeight="5rem">
                 {props.header}
-              </PP_80>
-              <PP_24>{props.text}</PP_24>
+              </PP_80> */}
+              <PP_32 medium>{props.header}</PP_32>
+
+              {/* <PP_24>{props.text}</PP_24> */}
+              <PP_18 medium color={theme.medium_grey}>
+                {props.text}
+              </PP_18>
             </FlexBox>
             <A_Button
               buttonText={props.link_text}
@@ -64,7 +126,8 @@ const A_LinkCard = (props: LinkCardProps) => {
               alt={`${props.header} thumbnail`}
               $width="100%"
               $aspectRatio={16 / 9}
-              $borderRadius="12px"
+              // $borderRadius="12px"
+              $borderRadius="5px"
             />
           </LazyLoad>
         </>
@@ -77,15 +140,24 @@ const A_LinkCard = (props: LinkCardProps) => {
               alt={`${props.header} thumbnail`}
               $width="100%"
               $aspectRatio={16 / 9}
-              $borderRadius="12px"
+              // $borderRadius="12px"
+              $borderRadius="5px"
             />
           </LazyLoad>
           <LinkCardInfo>
-            <FlexBox $direction="column" $gap="12px">
-              <PP_80 medium lineHeight="5rem">
+            <FlexBox
+              $direction="column"
+              // $gap="12px"
+              $gap="4px"
+            >
+              {/* <PP_80 medium lineHeight="5rem">
                 {props.header}
-              </PP_80>
-              <PP_24>{props.text}</PP_24>
+              </PP_80> */}
+              <PP_32 medium>{props.header}</PP_32>
+              {/* <PP_24>{props.text}</PP_24> */}
+              <PP_18 medium color={theme.medium_grey}>
+                {props.text}
+              </PP_18>
             </FlexBox>
             <A_Button
               buttonText={props.link_text}

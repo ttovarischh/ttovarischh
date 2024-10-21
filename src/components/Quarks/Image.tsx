@@ -23,8 +23,9 @@ const CaseImg = styled.img<{
 }>`
   height: auto;
   object-fit: cover;
-  border-radius: ${({ $imageBorderRadius, $imageDescription }) =>
+  // border-radius: ${({ $imageBorderRadius, $imageDescription }) =>
     $imageBorderRadius ?? ($imageDescription ? "5px" : "12px")};
+  border-radius: var(--mobile-single-image-radius);
   transition: all 0.5s ease;
   flex: 1 1 0;
   max-width: 100%;
@@ -35,7 +36,11 @@ const LinkCardImg = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  // border-radius: var(--mobile-single-image-radius);
   max-width: 100%;
+
+  // new
+  height: auto;
 `;
 
 const Image = React.memo((props: ImageProps) => {

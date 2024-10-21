@@ -1,10 +1,17 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FlexBox, PP_20 } from "../Quarks";
+import { FlexBox, PP_20, PP_16 } from "../Quarks";
 import styled from "styled-components";
+import { media } from "../../styles/mediaQueries";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 const LanguageSwitcherWrapper = styled(FlexBox)`
   justify-self: right;
+  gap: 16px;
+
+  ${media.tablets} {
+    gap: 0px;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -28,13 +35,15 @@ const A_LanguageSwitcher = () => {
     i18n.changeLanguage(lng);
   };
 
+  const { isTablet, isTabletLandscape } = useScreenSize();
+
   return (
     <LanguageSwitcherWrapper>
       <StyledButton
         onClick={() => handleLanguageChange("ru")}
         aria-label="Switch to Russian"
       >
-        <PP_20 uppercase medium underline={i18n.language === "ru"}>
+        {/* <PP_20 uppercase medium underline={i18n.language === "ru"}>
           Ru
         </PP_20>
       </StyledButton>
@@ -47,7 +56,33 @@ const A_LanguageSwitcher = () => {
       >
         <PP_20 uppercase medium underline={i18n.language === "en"}>
           Eng
+        </PP_20> */}
+        {isTablet || isTabletLandscape ? (
+          <PP_20 uppercase medium underline={i18n.language === "ru"}>
+            Ru
+          </PP_20>
+        ) : (
+          <PP_16 underline={i18n.language === "ru"}>Ru</PP_16>
+        )}
+      </StyledButton>
+      {isTablet || isTabletLandscape ? (
+        <PP_20 uppercase medium>
+          /
         </PP_20>
+      ) : (
+        <PP_16 uppercase>/</PP_16>
+      )}
+      <StyledButton
+        onClick={() => handleLanguageChange("en")}
+        aria-label="Switch to English"
+      >
+        {isTablet || isTabletLandscape ? (
+          <PP_20 uppercase medium underline={i18n.language === "en"}>
+            Eng
+          </PP_20>
+        ) : (
+          <PP_16 underline={i18n.language === "en"}>Eng</PP_16>
+        )}
       </StyledButton>
     </LanguageSwitcherWrapper>
   );

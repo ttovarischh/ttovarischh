@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import M_PageHeader from "../components/Molecules/M_PageHeader";
 import T_ProjectsGrid from "../components/Templates/T_ProjectsGrid";
 import { Project } from "../db/types";
+import { useScreenSize } from "../styles/ScreenSizeContext";
 
 interface WorkPageProps {
   currentLanguage: "en" | "ru";
@@ -48,20 +49,41 @@ const WorkPage: React.FC<WorkPageProps> = ({
       )
     : projects;
 
+  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
+
   return (
     <>
-      <M_PageHeader
-        works
-        bigText={t("works.allCases")}
-        currentLanguage={currentLanguage}
-        filterTags={filterTags}
-        onFilterSelect={handleFilterSelect}
-        selectedFilter={selectedFilter}
-        columnAHeader={t("works.amount")}
-        columnBHeader={t("works.filter")}
-        columnAText={`${projectsAmount} ${t("works.cases")}`}
-        columnBText={t("works.by")}
-      />
+      {isTablet || isTabletLandscape ? (
+        <M_PageHeader
+          works
+          bigText={t("works.allCases")}
+          currentLanguage={currentLanguage}
+          filterTags={filterTags}
+          onFilterSelect={handleFilterSelect}
+          selectedFilter={selectedFilter}
+          columnAHeader={t("works.amount")}
+          columnBHeader={t("works.filter")}
+          columnAText={`${projectsAmount} ${t("works.cases")}`}
+          columnBText={t("works.by")}
+        />
+      ) : (
+        <M_PageHeader
+          works
+          bigText={t("works.allCases")}
+          currentLanguage={currentLanguage}
+          filterTags={filterTags}
+          onFilterSelect={handleFilterSelect}
+          selectedFilter={selectedFilter}
+          columnAHeader={isPhoneLandscape ? t("works.amount") : undefined}
+          columnBHeader={t("works.filter")}
+          columnAText={
+            isPhoneLandscape
+              ? `${projectsAmount} ${t("works.cases")}`
+              : undefined
+          }
+          // columnBText={t("works.by")}
+        />
+      )}
       <T_ProjectsGrid
         projects={filteredProjects}
         currentLanguage={currentLanguage}

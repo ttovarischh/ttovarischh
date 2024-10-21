@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import T_ProjectsGrid from "../components/Templates/T_ProjectsGrid";
 import { Project } from "../db/types";
 import M_PseudoAccordeon from "../components/Molecules/M_PseudoAccordeon";
+import M_MobPseudoAccordeon from "../components/Molecules/M_MobPseudoAccordeon";
+import { useScreenSize } from "../styles/ScreenSizeContext";
 
 interface AboutPageProps {
   currentLanguage: "en" | "ru";
@@ -19,9 +21,21 @@ interface AboutPageProps {
 const AboutPageContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px 2.5vw;
+  // padding: 0px 2.5vw;
+  // padding: 0px 16px;
+  box-sizing: border-box;
+  padding-left: calc(16px + env(safe-area-inset-left, 0px));
+  padding-right: calc(16px + env(safe-area-inset-right, 0px));
   position: relative;
-  gap: 120px;
+  // gap: 120px;
+  gap: 16px;
+`;
+
+const AboutPageInnerContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  // padding-top: 120px;
 `;
 
 const AboutPagePart = styled.div`
@@ -40,6 +54,8 @@ const AboutPage: React.FC<AboutPageProps> = ({
   const selectedProjects = projects.filter((_, index) =>
     [0, 2, 3].includes(index)
   );
+  const { isTablet, isTabletLandscape } = useScreenSize();
+
   return (
     <>
       <M_PageHeader
@@ -58,69 +74,81 @@ const AboutPage: React.FC<AboutPageProps> = ({
         columnCText={about.who[currentLanguage]}
       />
       <AboutPageContentWrapper>
-        <M_AboutCardsGrid
-          currentLanguage={currentLanguage}
-          cards={about.aboutMeCards}
-        />
-        <M_PageHeader
-          wrapped
-          currentLanguage={currentLanguage}
-          columnAHeader="Contact me:"
-          columnBHeader="Follow me:"
-          contactMeLinks={about.contactMeLinks}
-          followMeLinks={about.followMeLinks}
-          s_description={about.aboutMeText.header[currentLanguage]}
-          description={about.aboutMeText.text[currentLanguage]}
-          ps={about.aboutMeText.ps[currentLanguage]}
-          links={about.bigLinks}
-        />
-        <AboutPagePart>
-          <A_PageTextDivider header={t("about.workExperience")} />
-          <M_Accordeon
-            items={about.workExperience}
-            currentLanguage={currentLanguage}
-            t={t}
-          />
-        </AboutPagePart>
-        <AboutPagePart>
-          <A_PageTextDivider header={t("about.education")} />
-          <M_PseudoAccordeon
-            items={about.education}
-            currentLanguage={currentLanguage}
-            t={t}
-          />
-        </AboutPagePart>
-        <AboutPagePart>
-          <A_PageTextDivider header={t("about.skillsTech")} />
-          <M_Accordeon
-            items={about.skills}
-            currentLanguage={currentLanguage}
-            t={t}
-          />
-        </AboutPagePart>
-        <AboutPagePart>
-          <A_PageTextDivider header={t("about.achievementsHeader")} />
+        <AboutPageInnerContentWrapper>
           <M_AboutCardsGrid
             currentLanguage={currentLanguage}
-            cards={about.achievements}
+            cards={about.aboutMeCards}
           />
-        </AboutPagePart>
-        <AboutPagePart style={{ marginTop: "36px" }}>
-          <A_PageTextDivider
-            header={t("about.selected")}
-            text={t("about.loveit")}
-            iconName="similar"
-            reverse
-            buttonText={t("about.seeAll")}
-            handleButtonClick={() => navigate("/work")}
-          />
-          <T_ProjectsGrid
-            projects={selectedProjects}
-            featured
+          <M_PageHeader
+            wrapped
             currentLanguage={currentLanguage}
-            similar
+            columnAHeader="Contact me:"
+            columnBHeader="Follow me:"
+            contactMeLinks={about.contactMeLinks}
+            followMeLinks={about.followMeLinks}
+            s_description={about.aboutMeText.header[currentLanguage]}
+            description={about.aboutMeText.text[currentLanguage]}
+            ps={about.aboutMeText.ps[currentLanguage]}
+            links={about.bigLinks}
+            slash
           />
-        </AboutPagePart>
+          <AboutPagePart>
+            <A_PageTextDivider header={t("about.workExperience")} />
+            <M_Accordeon
+              items={about.workExperience}
+              currentLanguage={currentLanguage}
+              t={t}
+            />
+          </AboutPagePart>
+          <AboutPagePart>
+            <A_PageTextDivider header={t("about.education")} />
+            {isTabletLandscape ? (
+              <M_PseudoAccordeon
+                items={about.education}
+                currentLanguage={currentLanguage}
+                t={t}
+              />
+            ) : (
+              <M_MobPseudoAccordeon
+                items={about.education}
+                currentLanguage={currentLanguage}
+                t={t}
+              />
+            )}
+          </AboutPagePart>
+          <AboutPagePart>
+            <A_PageTextDivider header={t("about.skillsTech")} />
+            <M_Accordeon
+              items={about.skills}
+              currentLanguage={currentLanguage}
+              t={t}
+            />
+          </AboutPagePart>
+          <AboutPagePart>
+            <A_PageTextDivider header={t("about.achievementsHeader")} />
+            <M_AboutCardsGrid
+              currentLanguage={currentLanguage}
+              cards={about.achievements}
+            />
+          </AboutPagePart>
+          <AboutPagePart style={{ marginTop: "36px" }}>
+            <A_PageTextDivider
+              header={t("about.selected")}
+              text={t("about.loveit")}
+              iconName="similar"
+              reverse
+              buttonText={t("about.seeAll")}
+              handleButtonClick={() => navigate("/work")}
+            />
+            <T_ProjectsGrid
+              projects={selectedProjects}
+              featured
+              currentLanguage={currentLanguage}
+              similar
+              homepage={false}
+            />
+          </AboutPagePart>
+        </AboutPageInnerContentWrapper>
       </AboutPageContentWrapper>
     </>
   );

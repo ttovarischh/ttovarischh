@@ -15,10 +15,11 @@ import HomePage from "./routes/Home";
 import Project from "./routes/Project";
 import WorkPage from "./routes/Work";
 import AboutPage from "./routes/About";
-import M_Navbar from "./components/Molecules/M_Navbar";
 import M_Footer from "./components/Molecules/M_Footer";
 import { useTranslation } from "react-i18next";
 import { ScreenSizeProvider } from "./styles/ScreenSizeContext";
+import O_Navigation from "./components/Organisms/O_Navigation";
+import Test from "./routes/Test";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(() => {
@@ -47,7 +48,7 @@ const App: React.FC = () => {
       <Router>
         <ScrollToTop />
         <ScreenSizeProvider>
-          <M_Navbar theme={themeValue} toggleTheme={toggleTheme} t={t} />
+          <O_Navigation theme={themeValue} toggleTheme={toggleTheme} t={t} />
           <Routes>
             <Route
               path="/"
@@ -62,6 +63,10 @@ const App: React.FC = () => {
             <Route
               path="/:name"
               element={<Project currentLanguage={currentLanguage} t={t} />}
+            />
+            <Route
+              path="/test"
+              element={<Test currentLanguage={currentLanguage} t={t} />}
             />
             <Route
               path="/work"

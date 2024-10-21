@@ -4,33 +4,13 @@ import { media } from "./mediaQueries";
 
 const GlobalStyle = createGlobalStyle<{ theme: any }>`
 
-  ${media.iphoneSE} {
+  ${media.laptop} {
     html {
-      font-size: 1px;
+      font-size: 14px;
     }
   }
 
-  ${media.iphone678Plus} {
-    html {
-      font-size: 2px;
-    }
-  }
-
-  ${media.iphoneXPlus} {
-    html {
-      font-size: 4px;
-    }
-  }
-
-  ${media.pixel} {
-    html {
-      font-size: 6px;
-    }
-  }
-
-
-
-  ${media.laptop}, ${media.retinaLaptop} {
+  ${media.ipadMini}, ${media.ipadAir}, {
     html {
       font-size: 14px;
     }
@@ -39,12 +19,6 @@ const GlobalStyle = createGlobalStyle<{ theme: any }>`
   ${media.ipadPro} {
     html {
       font-size: 16px;
-    }
-  }
-
-  ${media.ipadMini}, ${media.ipadAir}, {
-    html {
-      font-size: 14px;
     }
   }
 
@@ -82,6 +56,9 @@ const GlobalStyle = createGlobalStyle<{ theme: any }>`
     height: 12px;
     border-radius: 50%;
     transition: all 0.5s ease;
+
+    // new
+    padding-inline-start: 0;
   }
   
   .embla__dot--selected {

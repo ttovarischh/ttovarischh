@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
-import { PP_24, FlexBox, PP_20, PP_16, PP_18 } from "../Quarks";
+import { FlexBox, PP_20, PP_16, PP_18 } from "../Quarks";
 import A_Icon from "../Atoms/A_Icon";
 import { EducationItem } from "../../db/types";
 import A_Button from "../Atoms/A_Button";
-import { useScreenSize } from "../../styles/ScreenSizeContext";
 import { media } from "../../styles/mediaQueries";
 
 interface PseudoAccordeonProps {
@@ -15,63 +14,33 @@ interface PseudoAccordeonProps {
 
 const AccordionContainer = styled.div<{ $openIndex: number | null }>`
   display: grid;
-  grid-template-columns: ${({ $openIndex }) =>
-    $openIndex === 0
-      ? "3fr 1fr 1fr"
-      : $openIndex === 1
-      ? "1fr 3fr 1fr"
-      : $openIndex === 2
-      ? "1fr 1fr 3fr"
-      : "1fr 1fr 1fr"};
-  grid-column-gap: 1.04vw;
+  grid-template-rows: repeat(3, 1fr);
   grid-row-gap: 8px;
   width: 100%;
-  transition: grid-template-columns 0.6s ease;
+  transition: all 0.6s ease;
 `;
 
 const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  overflow: hidden;
-
+  height: auto;
   background-color: ${({ theme }) => theme.cards.bg};
   transition: all 0.5s ease, opacity 0.3s ease;
-  cursor: pointer;
 
   a {
     text-decoration-color: ${({ theme }) => theme.medium_grey};
     transition: opacity 0.5s ease;
 
-    &:hover {
-      opacity: 0.5;
-    }
-
     &:click {
-      pointer-events: all; /* Ensure link is clickable */
+      pointer-events: all;
     }
-  }
-
-  svg {
-    max-width: 90%;
-  }
-
-  &:hover {
-    opacity: 0.7;
-
-    svg {
-      transform: rotate(360deg);
-    }
-  }
-
-  ${media.tabletsL} {
-    height: 45vw;
   }
 `;
 
 const AccordionHeader = styled.div<{ $isOpen: boolean }>`
   display: flex;
-  padding: 20px;
+  padding: 16px;
   border-radius: 12px;
   box-sizing: border-box;
   align-items: baseline;
@@ -86,10 +55,6 @@ const AccordionHeader = styled.div<{ $isOpen: boolean }>`
     transition: all 0.5s ease;
     transform: rotate(${({ $isOpen }) => ($isOpen ? "90deg" : "0deg")});
   }
-
-  ${media.tabletsL} {
-    padding: var(--mobile-padding-16);
-  }
 `;
 
 const AccordionContentWrapper = styled.div<{
@@ -99,11 +64,11 @@ const AccordionContentWrapper = styled.div<{
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 16px;
   box-sizing: border-box;
-  // justify-content: center;
   justify-content: ${({ $isNone }) => ($isNone ? "flex-start" : "center")};
   align-items: center;
+  position: relative;
 
   p {
     display: inline-flex;
@@ -117,32 +82,19 @@ const AccordionContentWrapper = styled.div<{
   }
 
   .logoSvg {
+    position: absolute;
+    width: 65%;
+    height: auto;
+    max-height: 50%;
     transition: opacity 0.3s ease;
-    margin-bottom: 8%;
     opacity: ${({ $invisible }) => ($invisible ? "0" : "1")};
     display: ${({ $isNone }) => ($isNone ? "none" : "block")};
-  }
-
-  img {
-    aspect-ratio: 16/10;
-    background-color: white;
-    border-radius: 10px;
-    cursor: inherit;
   }
 
   a {
     text-decoration: underline;
     text-decoration-color: ${({ theme }) => theme.medium_grey};
-    transition: all 0.5s ease;
     color: ${({ theme }) => theme.medium_grey} !important;
-
-    &:hover {
-      opacity: 0.5;
-    }
-  }
-
-  ${media.tabletsL} {
-    padding: var(--mobile-padding-16);
   }
 `;
 
@@ -151,16 +103,21 @@ const AccordionContentInnerWrapper = styled.div<{
   $isBlock: boolean;
 }>`
   display: flex;
-  width: 85%;
+  width: 100%;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
   transition: opacity 0.3s ease;
+  gap: 32px;
   opacity: ${({ $visible }) => ($visible ? "1" : "0")};
-  display: ${({ $isBlock }) => ($isBlock ? "flex" : "none")};
+  pointer-events: ${({ $visible }) => ($visible ? "auto" : "none")};
 
   button {
     align-self: start;
+  }
+
+  ${media.phoneLansdscape} {
+    padding-right: 30%;
   }
 `;
 
@@ -170,10 +127,12 @@ const InnerMapItem = styled.div`
   align-items: baseline;
   svg {
     flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
   }
 `;
 
-const M_PseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
+const M_MobPseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
   currentLanguage,
   items,
   t,
@@ -184,20 +143,35 @@ const M_PseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
   const [visible, setVisible] = useState<number | null>(null);
   const [isBlock, setIsBlock] = useState<number | null>(null);
   const theme = useTheme();
-  const { isTabletLandscape } = useScreenSize();
 
   const toggleAccordion = (index: number) => {
-    setInvisible(openIndex === index ? null : index);
-    setOpenIndex(openIndex === index ? null : index);
+    const isClosing = openIndex === index;
+    const isOpening = !isClosing;
 
-    setTimeout(() => {
-      setIsBlock(openIndex === index ? null : index);
-      setIsNone(openIndex === index ? null : index);
-    }, 300);
+    if (isOpening) {
+      setInvisible(index);
+      setOpenIndex(index);
 
-    setTimeout(() => {
-      setVisible(openIndex === index ? null : index);
-    }, 400);
+      setTimeout(() => {
+        setIsBlock(index);
+        setIsNone(null);
+      }, 300);
+
+      setTimeout(() => {
+        setVisible(index);
+      }, 400);
+    } else if (isClosing) {
+      setVisible(null);
+      setTimeout(() => {
+        setInvisible(null);
+        setIsNone(null);
+        setOpenIndex(null);
+      }, 300);
+
+      setTimeout(() => {
+        setIsBlock(null);
+      }, 400);
+    }
   };
 
   const handleClick = (url: string) => {
@@ -214,25 +188,10 @@ const M_PseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
         >
           <AccordionHeader $isOpen={openIndex === index}>
             <FlexBox $direction="column" $gap="2px">
-              {isTabletLandscape ? (
-                <>
-                  <PP_20 medium>
-                    {item.organisation.name[currentLanguage]}
-                  </PP_20>
-                  <PP_16 color={theme.medium_grey} medium>
-                    {item.typeYear[currentLanguage]}
-                  </PP_16>
-                </>
-              ) : (
-                <>
-                  <PP_24 medium>
-                    {item.organisation.name[currentLanguage]}
-                  </PP_24>
-                  <PP_24 color={theme.medium_grey} medium>
-                    {item.typeYear[currentLanguage]}
-                  </PP_24>
-                </>
-              )}
+              <PP_20 medium>{item.organisation.name[currentLanguage]}</PP_20>
+              <PP_16 color={theme.medium_grey} medium>
+                {item.typeYear[currentLanguage]}
+              </PP_16>
             </FlexBox>
             <A_Icon iconName="arrowDiagonal" />
           </AccordionHeader>
@@ -246,59 +205,40 @@ const M_PseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
               $isBlock={isBlock === index}
             >
               <FlexBox $direction="column" $gap="12px" className="nowrap">
-                {isTabletLandscape ? (
-                  <PP_18>
-                    {t("about.specializations")}
-                    {item.specialization.map((subItem, subIndex) => (
-                      <a
-                        href={subItem.url}
-                        target="_blank"
-                        onClick={(e) => e.stopPropagation()}
-                        key={subIndex}
-                      >
-                        {subItem.text[currentLanguage]}
-                        {subIndex + 1 !== item.specialization.length && ", "}
-                      </a>
-                    ))}
-                  </PP_18>
-                ) : (
-                  <PP_24>
-                    {t("about.specializations")}
-                    {item.specialization.map((subItem, subIndex) => (
-                      <a
-                        href={subItem.url}
-                        target="_blank"
-                        onClick={(e) => e.stopPropagation()}
-                        key={subIndex}
-                      >
-                        {subItem.text[currentLanguage]}
-                        {subIndex + 1 !== item.specialization.length && ", "}
-                      </a>
-                    ))}
-                  </PP_24>
-                )}
-
+                <PP_18>
+                  {t("about.specializations")}
+                  {item.specialization.map((subItem, subIndex) => (
+                    <a
+                      href={subItem.url}
+                      target="_blank"
+                      onClick={(e) => e.stopPropagation()}
+                      key={subIndex}
+                    >
+                      {subItem.text[currentLanguage]}
+                      {subIndex + 1 !== item.specialization.length && ", "}
+                    </a>
+                  ))}
+                </PP_18>
                 {item.achievements.map((achievement, subIndex) => (
                   <InnerMapItem key={subIndex}>
                     <A_Icon iconName="arrowRight" />
-                    {isTabletLandscape ? (
-                      <PP_18 color={theme.medium_grey}>
-                        {achievement.text[currentLanguage]}
-                      </PP_18>
-                    ) : (
-                      <PP_24 color={theme.medium_grey}>
-                        {achievement.text[currentLanguage]}
-                      </PP_24>
-                    )}
+                    <PP_18 color={theme.lightest_grey}>
+                      {achievement.text[currentLanguage]}
+                    </PP_18>
                   </InnerMapItem>
                 ))}
               </FlexBox>
               <A_Button
                 buttonText={item.button.text[currentLanguage]}
-                handleButtonClick={(e) => {
-                  e.stopPropagation();
-                  handleClick(item.button.url);
-                }}
+                handleButtonClick={
+                  openIndex === index
+                    ? (e) => {
+                        e.stopPropagation();
+                        handleClick(item.button.url);
+                      }
+                    : undefined
+                }
+                disabled={openIndex !== index}
               />
             </AccordionContentInnerWrapper>
           </AccordionContentWrapper>
@@ -308,4 +248,4 @@ const M_PseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
   );
 };
 
-export default M_PseudoAccordeon;
+export default M_MobPseudoAccordeon;

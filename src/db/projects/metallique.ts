@@ -55,7 +55,8 @@ export const metallique: Project = {
     "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Fdstcover.webp?alt=media&token=0fb5ff41-dc87-4fbd-b999-b3fd95bcb3b1",
   cover:
     "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727186991/PortfolioCover_tunkrm.mp4",
-  svgHeaderPath: "/assets/images/wologo.svg",
+  cover_mob:
+    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Fwoverticaltextfin.mp4?alt=media&token=d6307ae5-09e7-4e03-a7e8-6f4fafeecbb4",
   links: [
     {
       name: {

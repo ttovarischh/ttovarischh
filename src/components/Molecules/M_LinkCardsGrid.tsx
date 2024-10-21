@@ -2,6 +2,7 @@ import React from "react";
 import A_LinkCard from "../Atoms/A_LinkCard";
 import styled from "styled-components";
 import { FlexBox } from "../Quarks";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 interface LinkCardsGridProps {
   linkCards: Array<{
@@ -27,6 +28,7 @@ const M_LinkCardsGrid: React.FC<LinkCardsGridProps> = ({
   linkCards,
   references,
 }) => {
+  const { isTablet, isTabletLandscape } = useScreenSize();
   return (
     <LinkCardsContainer>
       {linkCards.map(({ image_src, header, text, link_text, url }, index) => (
@@ -41,7 +43,7 @@ const M_LinkCardsGrid: React.FC<LinkCardsGridProps> = ({
           style={{
             transform: index % 2 === 0 ? "rotate(-0.7deg)" : "rotate(0.8deg)",
           }}
-          reverse={index % 2 === 0}
+          reverse={(isTablet || isTabletLandscape) && index % 2 === 0}
         />
       ))}
     </LinkCardsContainer>

@@ -33,7 +33,7 @@ export const darkTheme = {
     button: "#FBF8F3",
   },
   cards: {
-    bg: "#212121",
+    bg: "#282828",
     lighter_bg: "#2D2D2D",
   },
   buttons: {

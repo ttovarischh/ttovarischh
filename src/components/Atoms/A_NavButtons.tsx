@@ -2,6 +2,8 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { FlexBox, PP_20 } from "../Quarks";
 import { Link, useLocation } from "react-router-dom";
+import { media } from "../../styles/mediaQueries";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 interface NavButtonsProps {
   t: (key: string) => string;
@@ -39,6 +41,14 @@ const NavButton = styled(FlexBox)`
   position: relative;
   z-index: 1;
   align-self: center;
+
+  ${media.tablets} {
+    white-space: nowrap;
+  }
+
+  ${media.tabletsL} {
+    white-space: nowrap;
+  }
 `;
 
 const ButtonLink = styled(Link)`
@@ -81,9 +91,9 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
   const [activeIndex, setActiveIndex] = useState<string>("");
   const [isSwitchingButtons, setIsSwitchingButtons] = useState(false);
   const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef<HTMLElement | null>(null);
+  const { isTablet, isLaptop, isPC } = useScreenSize();
 
   useEffect(() => {
     const footer = document.querySelector("#footer") as HTMLElement | null;
@@ -113,17 +123,21 @@ const A_NavButtons = ({ t }: NavButtonsProps) => {
   }, [location.pathname]);
 
   const handleMouseEnter = (index: number) => {
-    if (hoveredIndex === null) {
-      setIsSwitchingButtons(false);
-    } else {
-      setIsSwitchingButtons(true);
+    if (isLaptop || isPC) {
+      if (hoveredIndex === null) {
+        setIsSwitchingButtons(false);
+      } else {
+        setIsSwitchingButtons(true);
+      }
+      setHoveredIndex(index);
     }
-    setHoveredIndex(index);
   };
 
   const handleMouseLeave = () => {
-    setHoveredIndex(null);
-    setIsSwitchingButtons(false);
+    if (isLaptop || isPC) {
+      setHoveredIndex(null);
+      setIsSwitchingButtons(false);
+    }
   };
 
   const handleScrollToBottom = () => {

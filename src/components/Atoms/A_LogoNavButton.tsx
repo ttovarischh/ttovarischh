@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import { DJR_20 } from "../Quarks";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 const LogoNavButton = styled(Link)`
   display: flex;
@@ -22,6 +23,7 @@ const A_LogoNavButton = () => {
   const [$isHovered, set$isHovered] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const theme = useTheme();
+  const { isTablet, isLaptop, isPC } = useScreenSize();
 
   const forwardSteps = [
     "P.S...",
@@ -73,17 +75,19 @@ const A_LogoNavButton = () => {
     <LogoNavButton
       to="/"
       onMouseEnter={() => {
-        set$isHovered(true);
-        setCurrentStep(0);
+        if (isLaptop || isPC) {
+          set$isHovered(true);
+          setCurrentStep(0);
+        }
       }}
       onMouseLeave={() => {
-        set$isHovered(false);
+        if (isLaptop || isPC) {
+          set$isHovered(false);
+        }
       }}
     >
       <AnimatedText>
-        <DJR_20 medium color={theme.black}>
-          {text}
-        </DJR_20>
+        <DJR_20 color={theme.black}>{text}</DJR_20>
       </AnimatedText>
     </LogoNavButton>
   );

@@ -2,29 +2,96 @@ import React from "react";
 import styled from "styled-components";
 import A_AboutCard from "../Atoms/A_AboutCard";
 import { AboutMeCard, Achievement } from "../../db/types";
+import { media } from "../../styles/mediaQueries";
 
 interface AboutCardsGridProps {
   cards: (AboutMeCard | Achievement)[];
   currentLanguage: "en" | "ru";
 }
 
+// const AboutCardsGridWrapper = styled.div`
+//   display: grid;
+//   grid-template-columns: repeat(12, 1fr);
+//   grid-gap: 1.04vw;
+
+//   :nth-child(1),
+//   :nth-child(2),
+//   :nth-child(3) {
+//     grid-column: span 4;
+//   }
+//   :nth-child(4) {
+//     grid-column-start: 3;
+//     grid-column-end: 7;
+//   }
+//   :nth-child(5) {
+//     grid-column-start: 7;
+//     grid-column-end: 11;
+//   }
+// `;
+
 const AboutCardsGridWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 1.04vw;
+  grid-template-rows: repeat(3, auto);
+  grid-gap: var(--mobile-gap-12);
 
-  :nth-child(1),
-  :nth-child(2),
-  :nth-child(3) {
-    grid-column: span 4;
+  ${media.phoneLansdscape} {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: none;
+
+    :nth-child(1),
+    :nth-child(2),
+    :nth-child(3) {
+      grid-column: span 4;
+    }
+
+    :nth-child(4) {
+      grid-column-start: 3;
+      grid-column-end: 7;
+    }
+    :nth-child(5) {
+      grid-column-start: 7;
+      grid-column-end: 11;
+    }
   }
-  :nth-child(4) {
-    grid-column-start: 3;
-    grid-column-end: 7;
+
+  ${media.tablets} {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+
+    :nth-child(1),
+    :nth-child(2),
+    :nth-child(3) {
+      grid-column: span 4;
+    }
+
+    :nth-child(4) {
+      grid-column-start: 3;
+      grid-column-end: 7;
+    }
+    :nth-child(5) {
+      grid-column-start: 7;
+      grid-column-end: 11;
+    }
   }
-  :nth-child(5) {
-    grid-column-start: 7;
-    grid-column-end: 11;
+
+  ${media.tabletsL} {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+
+    :nth-child(1),
+    :nth-child(2),
+    :nth-child(3) {
+      grid-column: span 4;
+    }
+
+    :nth-child(4) {
+      grid-column-start: 3;
+      grid-column-end: 7;
+    }
+    :nth-child(5) {
+      grid-column-start: 7;
+      grid-column-end: 11;
+    }
   }
 `;
 

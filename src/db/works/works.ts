@@ -13,6 +13,8 @@ const works: Work = {
         },
       ],
       link: "https://vimeo.com/693300608",
+      poster:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/works%2Fposterco.webp?alt=media&token=925bb8e5-9e9b-4137-ac07-2cfdb6c4894f",
     },
     {
       image_src:
@@ -92,6 +94,8 @@ const works: Work = {
         },
       ],
       link: "https://vimeo.com/857521766",
+      poster:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/works%2Fposterjew.webp?alt=media&token=807b133e-f24d-4958-a863-cfb81a167826",
     },
     {
       image_src:
@@ -179,6 +183,8 @@ const works: Work = {
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/works%2Ffin_VP9_3.webm?alt=media&token=5fdff478-3d6d-46e0-b8f8-e129a30fe904",
       image_description: [{ en: "Gamedev / Promo", ru: "Геймдев / Промо" }],
       link: "https://vimeo.com/812373930",
+      poster:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/works%2Fpostergame.webp?alt=media&token=dfb2264b-8b17-4a81-a1c1-dbe625e05812",
     },
     {
       image_src:

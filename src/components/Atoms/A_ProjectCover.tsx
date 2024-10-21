@@ -21,13 +21,17 @@ const StyledVideo = styled.video`
   display: block;
 `;
 
-const isVideo = (src: string) => {
-  return src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".ogg");
+const isVideo = (src: string): boolean => {
+  return src.includes(".webm") || src.includes(".mp4");
 };
 
-const A_ProjectCover = (props: ProjectCoverProps) => {
-  const { cover, alt, horisontal, projectName, $imageBorderRadius } = props;
-
+const A_ProjectCover: React.FC<ProjectCoverProps> = ({
+  cover,
+  alt,
+  horisontal,
+  projectName,
+  $imageBorderRadius,
+}) => {
   if (horisontal) {
     return (
       <Image
@@ -43,7 +47,7 @@ const A_ProjectCover = (props: ProjectCoverProps) => {
     return (
       <>
         {isVideo(cover) ? (
-          <StyledVideo autoPlay muted loop playsInline>
+          <StyledVideo autoPlay muted loop playsInline key={cover}>
             <source src={cover} type="video/mp4" />
             Your browser does not support the video tag.
           </StyledVideo>

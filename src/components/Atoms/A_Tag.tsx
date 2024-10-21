@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { FlexBox, PP_24, PP_20 } from "../Quarks";
+import { FlexBox, PP_24, PP_20, PP_18 } from "../Quarks";
+import { media } from "../../styles/mediaQueries";
 
 interface TagProps {
   $header?: boolean;
@@ -15,8 +16,10 @@ const TagWrapper = styled(FlexBox)<{
   $clickable?: boolean;
   $selected?: boolean;
 }>`
-  padding: 8px 12px;
-  border-radius: 12px;
+  // padding: 8px 12px;
+  padding: 4px 12px;
+  // border-radius: 12px;
+  border-radius: 8px;
   background-color: ${(props) =>
     props.$header
       ? props.theme.tags.headertagbg
@@ -29,6 +32,14 @@ const TagWrapper = styled(FlexBox)<{
 
   &:hover {
     opacity: ${(props) => (props.$clickable ? 0.6 : 1)};
+  }
+
+  ${media.tablets} {
+    white-space: nowrap;
+  }
+
+  ${media.tabletsL} {
+    white-space: nowrap;
   }
 `;
 
@@ -46,7 +57,8 @@ const A_Tag: React.FC<TagProps> = ({
       $clickable={onFilterSelect !== undefined}
       onClick={onFilterSelect || undefined}
     >
-      {small ? <PP_20>{tagText}</PP_20> : <PP_24>{tagText}</PP_24>}
+      {/* {small ? <PP_20>{tagText}</PP_20> : <PP_24>{tagText}</PP_24>} */}
+      {small ? <PP_18>{tagText}</PP_18> : <PP_18>{tagText}</PP_18>}
     </TagWrapper>
   );
 };

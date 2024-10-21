@@ -14,6 +14,9 @@ const CardsContainer = styled(FlexBox)`
   gap: 1.04vw;
   width: 100%;
   justify-content: center;
+
+  // new
+  gap: var(--mobile-gap-12);
 `;
 
 const M_InfoCardsGrid: React.FC<InfoCardsGridProps> = ({

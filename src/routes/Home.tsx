@@ -9,6 +9,7 @@ import { works } from "../db";
 import M_ImageMarquee from "../components/Molecules/M_ImageMarquee";
 import { Project } from "../db/types";
 import LazyLoad from "react-lazyload";
+import { useScreenSize } from "../styles/ScreenSizeContext";
 
 interface HomePageProps {
   projects: Array<Project>;
@@ -23,6 +24,11 @@ const PageWrapper = styled(FlexBox)`
   gap: 100px;
 `;
 
+const PageMainContentWrapper = styled(FlexBox)`
+  align-items: center;
+  flex-direction: column;
+`;
+
 const HomePage: React.FC<HomePageProps> = ({
   projects,
   currentLanguage,
@@ -30,6 +36,7 @@ const HomePage: React.FC<HomePageProps> = ({
 }) => {
   const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
+  const { isPhoneLandscape, isTablet, isTabletLandscape } = useScreenSize();
 
   const MAX_SCROLL = 200;
   const SCROLL_DELAY = 400;
@@ -61,6 +68,17 @@ const HomePage: React.FC<HomePageProps> = ({
 
   const topMarqueeWorks = works.top;
   const bottomMarqueeWorks = works.bottom;
+  const [imageHeight, setImageHeight] = useState("75vw");
+
+  useEffect(() => {
+    if (isPhoneLandscape) {
+      setImageHeight("80vh");
+    } else if (isTablet || isTabletLandscape) {
+      setImageHeight("50vh");
+    } else {
+      setImageHeight("75vw");
+    }
+  }, [isPhoneLandscape, isTablet, isTabletLandscape]);
 
   return (
     <PageWrapper>
@@ -77,9 +95,11 @@ const HomePage: React.FC<HomePageProps> = ({
           projects={projects}
           featured
           currentLanguage={currentLanguage}
+          homepage
+          similar={false}
         />
       </FlexBox>
-      <FlexBox $direction="column" $alignItems="center">
+      <PageMainContentWrapper>
         <A_PageTextDivider
           header={t("home.moreWork")}
           text={t("home.sometimes")}
@@ -89,33 +109,41 @@ const HomePage: React.FC<HomePageProps> = ({
           handleButtonClick={() => navigate("/about")}
         />
         <LazyLoad
-          offset={300}
+          offset={500}
           once
           style={{
-            height: "calc(24px + 1.25rem + 29.38vw)",
-            marginBottom: "48px",
+            // height: "calc(24px + 1.25rem + 29.38vw)",
+            // height: isPhoneLandscape
+            //   ? "calc(24px + 1.25rem + 80vh)"
+            //   : "calc(24px + 1.25rem + 75vw)",
+            height: `calc(24px + 1.25rem + ${imageHeight})`,
+            // marginBottom: "48px",
+            marginBottom: "32px",
           }}
         >
           <M_ImageMarquee
             works={topMarqueeWorks}
             direction="left"
             currentLanguage={currentLanguage}
+            imageHeight={imageHeight}
           />
         </LazyLoad>
         <LazyLoad
-          offset={300}
+          offset={500}
           once
           style={{
-            height: "calc(24px + 1.25rem + 29.38vw)",
+            // height: "calc(24px + 1.25rem + 29.38vw)",
+            height: `calc(24px + 1.25rem + ${imageHeight})`,
           }}
         >
           <M_ImageMarquee
             works={bottomMarqueeWorks}
             direction="right"
             currentLanguage={currentLanguage}
+            imageHeight={imageHeight}
           />
         </LazyLoad>
-      </FlexBox>
+      </PageMainContentWrapper>
     </PageWrapper>
   );
 };

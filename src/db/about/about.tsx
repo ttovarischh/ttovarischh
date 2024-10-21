@@ -20,16 +20,18 @@ const about: About = {
       imgSrc:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2Ffin.webp?alt=media&token=569a9b65-ab86-443e-9170-5a0fe9d85dbd",
       text: {
-        en: "Hi! It’s Polina. I am a small girly pop with a huge desire to work. But besides being a white-collar, I’m also just a person.",
-        ru: "Хей! Это Полина. Я люблю работать работу, но помимо того, что я человек работающий, я еще и просто человек. ",
+        en: "It’s me, Polina (aka ttovarischh). I am a small girly pop w/ a huge desire to work. But besides being a white-collar, I’m also just a person.",
+        ru: "Это я, Полина (aka ttovarischh). Люблю работать работу, но еще иногда просто живу свою человеческую жизнь.",
       },
     },
     {
       imgSrc:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/design%2Flafemme%202_VP9_7.webm?alt=media&token=9d9491cd-e9f3-4ce5-a12f-d85a98c698b8",
+      fallback:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2Flafemme%202_VP9_7.mp4?alt=media&token=c6117406-614d-4569-8c02-6873a59b7961",
       text: {
         en: "I have an inexplicably strong attachment to pretentious European arthouse, novels of Tolstoy and Woolf, and music of any kind.",
-        ru: "Очень люблю претенциозный европейский артхаус, романы Толстого и Вулф и музыку любого рода.",
+        ru: "Обожаю претенциозный европейский артхаус, романы Толстого и Вулф и музыку любого рода.",
       },
       links: [
         {
@@ -56,15 +58,15 @@ const about: About = {
       imgSrc:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/design%2Ftea.webp?alt=media&token=dd17a9f4-305e-46ef-923b-0d0b976ec3e1",
       text: {
-        en: "I go to the gym 3 times a week, brew shu pu-erh 4 times a day, and love my mom and dad 365 days a year (366 in leap years).",
-        ru: "Хожу в фитнес 3 раза в неделю, завариваю шу пуэр 4 раза за день и люблю маму с папой 365 дней в году (иногда 366).",
+        en: "I go to gym 3 times a week, brew shu pu-erh 4 times a day, and love my mom and dad 365 days a year (366 in leap years).",
+        ru: "Качаюс 3 раза в неделю, завариваю пуэр 4 раза за день и люблю маму с папой 365 дней в году (иногда 366).",
       },
     },
   ],
   aboutMeText: {
     header: {
       en: "Experience allows me to lead projects from concept to successful market launch.",
-      ru: "Опыт позволяет мне вести проекты от изначальной концепции до успешного выхода на рынок.",
+      ru: "Опыт позволяет мне вести проекты от изначальной концепции до успешного выхода на рынок.",
     },
     text: {
       en: "My products address real user pains, while skills in a variety of design areas enable me to apply unconventional approaches. My strengths are analytical thinking, quick adaptation to new challenges, and creativity. I can help you to create products that will really stand out.",
@@ -114,7 +116,7 @@ const about: About = {
     {
       name: {
         en: "Conact me",
-        ru: "Свяжитесь со мной",
+        ru: "Связь со мной",
       },
       url: {
         en: "mailto: polinasot@gmail.com",
@@ -646,6 +648,8 @@ const about: About = {
       },
       image_src:
         "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/works%2Ffin_VP9_3.webm?alt=media&token=5fdff478-3d6d-46e0-b8f8-e129a30fe904",
+      fallback:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/about%2Fpromotoconvert.mp4?alt=media&token=dcad0d3b-58f3-44d5-be4b-ca44ffb0c065",
       text: {
         en: "Creation of animations and video editing of of almost any complexity, working with expressions to automate processes, generating video and audio content, and its subsequent editing.",
         ru: "Создание анимаций и видеомонтаж, работа с выражениями для автоматизации процессов, генерация видео — и аудиоконтента и последующая его обработка.",

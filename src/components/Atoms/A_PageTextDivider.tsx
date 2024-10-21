@@ -1,8 +1,10 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { FlexBox, PP_24, PP_80 } from "../Quarks";
+import { FlexBox, PP_24, PP_80, PP_40, PP_16, PP_18 } from "../Quarks";
 import A_Icon from "./A_Icon";
 import A_Button from "./A_Button";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
+import { media } from "../../styles/mediaQueries";
 
 interface PageTextDividerProps {
   header: string;
@@ -13,11 +15,42 @@ interface PageTextDividerProps {
   buttonText?: string;
 }
 
-const PageTextDividerWrapper = styled(FlexBox)`
+const PageTextDividerWrapper = styled(FlexBox)<{ $text?: string }>`
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  margin-bottom: 48px;
+  margin-bottom: ${({ $text }) => ($text ? "48px" : "24px")};
+  .shortie {
+    max-width: 70%;
+  }
+  button {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+  }
+`;
+
+const PageTextDividerInnerWrapper = styled(FlexBox)`
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  gap: 4px;
+
+  svg {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  ${media.tabletsL} {
+    svg {
+      height: unset;
+      width: unset;
+    }
+  }
+`;
+
+const HeaderWrapper = styled(FlexBox)`
+  align-items: baseline;
+  gap: 8px;
+  // gap: 16px;
 `;
 
 const A_PageTextDivider: React.FC<PageTextDividerProps> = ({
@@ -29,22 +62,34 @@ const A_PageTextDivider: React.FC<PageTextDividerProps> = ({
   buttonText,
 }) => {
   const theme = useTheme();
+  const { isTablet, isTabletLandscape } = useScreenSize();
   return (
-    <PageTextDividerWrapper>
-      <FlexBox $direction="column" $alignItems="center">
-        <FlexBox $alignItems="baseline" $gap="16px">
+    <PageTextDividerWrapper $text={text}>
+      <PageTextDividerInnerWrapper>
+        <HeaderWrapper>
           {reverse && iconName && <A_Icon iconName={iconName} />}
-          <PP_80 medium color={theme.white}>
-            {header}
-          </PP_80>
+          {isTabletLandscape ? (
+            <PP_80 medium color={theme.white}>
+              {header}
+            </PP_80>
+          ) : (
+            <PP_40 medium color={theme.white}>
+              {header}
+            </PP_40>
+          )}
           {!reverse && iconName && <A_Icon iconName={iconName} />}
-        </FlexBox>
-        {text && (
-          <PP_24 medium color={theme.medium_grey}>
-            {text}
-          </PP_24>
-        )}
-      </FlexBox>
+        </HeaderWrapper>
+        {text &&
+          (isTabletLandscape ? (
+            <PP_24 medium color={theme.medium_grey}>
+              {text}
+            </PP_24>
+          ) : (
+            <PP_18 medium color={theme.medium_grey} center className="shortie">
+              {text}
+            </PP_18>
+          ))}
+      </PageTextDividerInnerWrapper>
       {buttonText && (
         <A_Button
           buttonText={buttonText}

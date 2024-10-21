@@ -19,8 +19,10 @@ import "../styles/embla.css";
 import T_ProjectsGrid from "../components/Templates/T_ProjectsGrid";
 import A_PageTextDivider from "../components/Atoms/A_PageTextDivider";
 import { Project } from "../db/types";
+import M_UILinkCardsGrid from "../components/Molecules/M_UILinkCardsGrid";
+import { useScreenSize } from "../styles/ScreenSizeContext";
 
-const OPTIONS: EmblaOptionsType = { loop: true };
+const OPTIONS: EmblaOptionsType = { loop: true, watchDrag: true };
 
 interface ProjectPageProps {
   currentLanguage: "en" | "ru";
@@ -30,11 +32,22 @@ interface ProjectPageProps {
 const ProjectPageWrapper = styled(FlexBox)`
   display: flex;
   flex-direction: column;
-  padding: 0px 2.5vw;
-  gap: 180px;
+  // padding: 0px 2.5vw;
+
+  // gap: 180px;
+
+  padding-left: calc(16px + env(safe-area-inset-left, 0px));
+  padding-right: calc(16px + env(safe-area-inset-right, 0px));
+
+  // padding-left: var(--mobile-m-padding-left);
+  // padding-right: var(--mobile-m-padding-right);
+
+  // gap: 80px;
+  gap: var(--mobile-page-gap-s);
   position: relative;
   height: auto;
   overflow: visible;
+  padding-top: var(--mobile-page-gap-s);
 `;
 
 const StickyMenuWrapper = styled.div`
@@ -53,6 +66,8 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
   const projectPageRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
+  console.log(isPhoneLandscape);
 
   useEffect(() => {
     const handleResize = () => {
@@ -106,39 +121,73 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
       <M_PageHeader
         bigText={project.name[currentLanguage]}
         currentLanguage={currentLanguage}
-        columnAHeader={t("projectPage.type")}
-        columnBHeader={t("projectPage.timeline")}
+        columnAHeader={
+          isTablet || isTabletLandscape
+            ? t("projectPage.type")
+            : t("projectPage.timeline")
+        }
+        columnBHeader={
+          isTablet || isTabletLandscape ? t("projectPage.timeline") : undefined
+        }
         columnCHeader={t("projectPage.deliverables")}
-        columnAText={project.type[currentLanguage]}
-        columnBText={project.timeline[currentLanguage]}
+        columnAText={
+          isTablet || isTabletLandscape
+            ? project.type[currentLanguage]
+            : project.timeline[currentLanguage]
+        }
+        columnBText={
+          isTablet || isTabletLandscape
+            ? project.timeline[currentLanguage]
+            : undefined
+        }
         columnCText={project.deliverables[currentLanguage]}
       />
       <A_ProjectCover
-        cover={project.cover}
+        cover={
+          isPhoneLandscape || isTablet || isTabletLandscape
+            ? project.cover
+            : project.cover_mob
+        }
         alt={`Cover image of ${project.name[currentLanguage]}`}
       />
-      <M_PageHeader
-        s_description={project.s_description[currentLanguage]}
-        description={project.description[currentLanguage]}
-        links={project.links}
-        currentLanguage={currentLanguage}
-        columnAHeader={t("projectPage.role")}
-        columnBHeader={t("projectPage.organisation")}
-        columnAText={project.role[currentLanguage]}
-        columnBText={project.organisation}
-        columnCHeader={t("projectPage.status")}
-        columnCText={project.status[currentLanguage]}
-        team={project.team}
-        teamColumnHeader={t("projectPage.team")}
-      />
+      {/* {isPhoneLandscape && (
+        <M_PageHeader
+          s_description={project.s_description[currentLanguage]}
+          description={project.description[currentLanguage]}
+          links={project.links}
+          currentLanguage={currentLanguage}
+          columnAHeader={t("projectPage.role")}
+          columnBHeader={t("projectPage.organisation")}
+          columnAText={project.role[currentLanguage]}
+          columnBText={project.organisation}
+          columnCHeader={t("projectPage.status")}
+          columnCText={project.status[currentLanguage]}
+          team={project.team}
+          teamColumnHeader={t("projectPage.team")}
+        />
+      )} */}
       {!project.shortie && (
         <ProjectPageWrapper ref={projectPageRef}>
-          <StickyMenuWrapper ref={menuRef}>
+          <M_PageHeader
+            s_description={project.s_description[currentLanguage]}
+            description={project.description[currentLanguage]}
+            links={project.links}
+            currentLanguage={currentLanguage}
+            columnAHeader={t("projectPage.role")}
+            columnBHeader={t("projectPage.organisation")}
+            columnAText={project.role[currentLanguage]}
+            columnBText={project.organisation}
+            columnCHeader={t("projectPage.status")}
+            columnCText={project.status[currentLanguage]}
+            team={project.team}
+            teamColumnHeader={t("projectPage.team")}
+          />
+          {/* <StickyMenuWrapper ref={menuRef}>
             <PageMenu
               menuItems={project.menuItems}
               currentLanguage={currentLanguage}
             />
-          </StickyMenuWrapper>
+          </StickyMenuWrapper> */}
           {project.layout.map((item, index) => {
             const textIndex = item.textIndex;
             const smallCardIndex = item.smallCardIndex;
@@ -163,7 +212,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                 }
                 return null;
 
-              case "EmblaCarousel":
+              case "EmblaCarousel": {
                 const sliderSlides = project.slider[item.sliderIndex].slides;
                 return (
                   <EmblaCarousel
@@ -174,6 +223,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                     currentLanguage={currentLanguage}
                   />
                 );
+              }
 
               case "M_CaseImagesGrid":
                 return (
@@ -188,7 +238,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                   />
                 );
 
-              case "A_InfoCard":
+              case "A_InfoCard": {
                 const renderInfoCard = (
                   textIndex: number | number[],
                   references: any
@@ -236,8 +286,9 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                   return renderInfoCard(textIndex, item.references);
                 }
                 return null;
+              }
 
-              case "M_LinkCardsGrid":
+              case "M_LinkCardsGrid": {
                 const { linkCardIndex } = item;
                 const renderLinkCard = (
                   linkCardIndex: number | number[],
@@ -315,6 +366,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                   return renderLinkCard(linkCardIndex, item.references);
                 }
                 return null;
+              }
 
               case "M_CardsBlocksGrid":
                 if (smallCardIndex !== undefined) {
@@ -334,18 +386,28 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                     />
                   );
                 }
+                return null;
 
               case "M_UIShow": {
                 const uiShowIndex = item.uiShowIndex;
 
                 if (uiShowIndex !== undefined) {
+                  // return (
+                  //   <M_UIShow
+                  //     key={index}
+                  //     uiShow={project.uiShow[uiShowIndex]}
+                  //     language={currentLanguage}
+                  //     references={item.references}
+                  //     projectName={project.name[currentLanguage]}
+                  //   />
+                  // );
                   return (
-                    <M_UIShow
-                      key={index}
+                    <M_UILinkCardsGrid
+                      key={`UISHOW ${uiShowIndex}-${currentLanguage}`}
                       uiShow={project.uiShow[uiShowIndex]}
-                      language={currentLanguage}
                       references={item.references}
-                      projectName={project.name[currentLanguage]}
+                      language={currentLanguage}
+                      toTop={uiShowIndex !== 0}
                     />
                   );
                 } else {

@@ -13,8 +13,8 @@ export const woApp: Project = {
   },
   year: "2024",
   timeline: {
-    en: "Sep 2023 — July 2024",
-    ru: "Сен 2023 — Июль 2024",
+    en: "Sep'23 — July'24",
+    ru: "Сен'23 — Июль'24",
   },
   short_deliverables: {
     en: "Brand & Product",
@@ -61,11 +61,12 @@ export const woApp: Project = {
     "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo_h_c.webp?alt=media&token=e98037f8-9e85-4d53-9991-4665c7843b5a",
   cover:
     "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727186991/PortfolioCover_tunkrm.mp4",
-  svgHeaderPath: "/assets/images/wologo.svg",
+  cover_mob:
+    "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/casesCovers%2Fwoverticaltextfin.mp4?alt=media&token=d6307ae5-09e7-4e03-a7e8-6f4fafeecbb4",
   links: [
     {
       name: {
-        en: "Full presentation",
+        en: "Full deck",
         ru: "Презентация",
       },
       url: "https://portfolio.hse.ru/Project/213207",
@@ -675,13 +676,16 @@ export const woApp: Project = {
           ru: ["Регистрация", "Фид", "Создание плейлиста", "Плейлист", "Плеер"],
         },
       ],
+      fallbackLink: "https://vimeo.com/948853740?share=copy",
+      poster:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo%2Fthumb1.webp?alt=media&token=ec5d2759-0db3-4ca2-92bb-c2b0c7917acf",
     },
     {
       imgSrc:
         "https://res.cloudinary.com/db64foay5/video/upload/q_auto/f_auto/v1727438683/mock_vypncx.webm",
       headerA: [
         {
-          en: "Subscription and old playlist view",
+          en: "Subscription and old playlist view",
           ru: "Покупка подписки + старый плейлист",
         },
       ],
@@ -710,13 +714,16 @@ export const woApp: Project = {
           ru: ["Фид", "Фид друзей", "Профиль", "История", "Оплата", "Плейлист"],
         },
       ],
+      fallbackLink: "https://vimeo.com/948867317?share=copy",
+      poster:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo%2Fthumb2.webp?alt=media&token=39441c2a-cc06-4848-8d5d-1df4387ea6bf",
     },
     {
       imgSrc:
         "https://res.cloudinary.com/db64foay5/video/upload/q_auto/f_auto/v1727438683/mock_vypncx.webm",
       headerA: [
         {
-          en: "Auth and playlist creation",
+          en: "Everything all at once",
           ru: "Все везде и сразу + инсайты",
         },
       ],
@@ -754,6 +761,9 @@ export const woApp: Project = {
           ],
         },
       ],
+      fallbackLink: "https://vimeo.com/948868986?share=copy",
+      poster:
+        "https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/wo%2Fthumb3.webp?alt=media&token=e2c04f28-286c-45dc-b3cc-c25a18321e8c",
     },
   ],
   link_cards: [
@@ -856,7 +866,7 @@ export const woApp: Project = {
       src: "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727558403/s5_9_ucfkvk.jpg",
     },
     {
-      src: "https://res.cloudinary.com/db64foay5/video/upload/f_auto/v1727560560/wo%CC%84___posters_promo_1080p_1_gmq9qd.mp4",
+      src: "https://res.cloudinary.com/db64foay5/video/upload/q_auto/v1727560560/wo%CC%84___posters_promo_1080p_1_gmq9qd.mp4",
       poster:
         "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727562906/thumb_hioidb.jpg",
     },
@@ -885,20 +895,20 @@ export const woApp: Project = {
     },
     {
       src: "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727565595/ig3_1_zbwekt.jpg",
-      description: [{ en: "About MVP1", ru: "Трендвотчинг-исследование" }],
+      description: [{ en: "About MVP1", ru: "Про MVP1" }],
     },
     {
       src: "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727565651/ig3_2_pwcjmo.jpg",
-      description: [{ en: "MVP1 Results", ru: "Бенчмаркинг-исследование" }],
+      description: [{ en: "MVP1 Results", ru: "Результаты MVP1" }],
     },
 
     {
       src: "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727568116/mvp3_1_xe4b7c.jpg",
-      description: [{ en: "MVP3 results", ru: "Трендвотчинг-исследование" }],
+      description: [{ en: "MVP3 results", ru: "Результаты MVP3" }],
     },
     {
       src: "https://res.cloudinary.com/db64foay5/image/upload/q_auto/f_auto/v1727568159/mvp3_2_q1anmr.jpg",
-      description: [{ en: "MVP3 features", ru: "Бенчмаркинг-исследование" }],
+      description: [{ en: "MVP3 features", ru: "Фишки MVP3" }],
     },
 
     {

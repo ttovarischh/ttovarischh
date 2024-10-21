@@ -67,9 +67,9 @@ const Text: React.FC<TextProps> = ({
 }) => {
   return (
     <StyledText
-      className={
-        className ?? (bold ? "ppbold" : medium ? "ppmedium" : "ppbook")
-      }
+      className={`${className ?? ""} ${
+        bold ? "ppbold" : medium ? "ppmedium" : "ppbook"
+      }`}
       $fontSize={fontSize}
       $lineHeight={lineHeight}
       $center={center}
@@ -88,40 +88,17 @@ const Text: React.FC<TextProps> = ({
   );
 };
 
-// const Text = (props: TextProps) => {
-//   const theme = useTheme();
-//   return (
-//     <p
-//       className={
-//         props.className ??
-//         (props.bold ? "ppbold" : props.medium ? "ppmedium" : "ppbook")
-//       }
-//       id={props.id}
-//       style={{
-//         fontSize: props.fontSize ?? "1rem",
-//         lineHeight: props.lineHeight ?? "normal",
-//         color: props.color ?? theme.white,
-//         margin: 0,
-//         textAlign: props.center ? "center" : "left",
-//         marginTop: props.offsetTop ?? 0,
-//         marginBottom: props.offsetBottom ?? 0,
-//         marginLeft: props.offsetLeft ?? 0,
-//         marginRight: props.offsetRight ?? 0,
-//         textDecoration: props.underline ? "underline" : "none",
-//         textTransform: props.uppercase
-//           ? "uppercase"
-//           : props.capitalize
-//           ? "capitalize"
-//           : "none",
-//       }}
-//     >
-//       {props.children}
-//     </p>
-//   );
-// };
-
+export const PP_11 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="0.688rem" {...props} />
+);
 export const PP_14 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="0.875rem" {...props} />
+);
+export const PP_16 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="1rem" {...props} />
+);
+export const PP_18 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="1.125rem" {...props} />
 );
 export const PP_20 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="1.25rem" {...props} />
@@ -132,8 +109,14 @@ export const PP_24 = (props: Omit<TextProps, "fontSize">) => (
 export const PP_32 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="2rem" {...props} />
 );
+export const PP_40 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="2.5rem" {...props} />
+);
 export const PP_48 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="3rem" {...props} />
+);
+export const PP_52 = (props: Omit<TextProps, "fontSize">) => (
+  <Text fontSize="3.25rem" {...props} />
 );
 export const PP_80 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="5rem" {...props} />
@@ -141,8 +124,14 @@ export const PP_80 = (props: Omit<TextProps, "fontSize">) => (
 export const PP_128 = (props: Omit<TextProps, "fontSize">) => (
   <Text fontSize="8rem" {...props} />
 );
+export const DJR_16 = (props: Omit<TextProps, "fontSize">) => (
+  <Text className="djrbold" fontSize="1rem" {...props} />
+);
 export const DJR_20 = (props: Omit<TextProps, "fontSize">) => (
   <Text className="djrbold" fontSize="1.25rem" {...props} />
+);
+export const DJR_64 = (props: Omit<TextProps, "fontSize">) => (
+  <Text className="djrmedium" fontSize="4rem" {...props} />
 );
 export const DJR_128 = (props: Omit<TextProps, "fontSize">) => (
   <Text className="djrmedium" fontSize="8rem" {...props} />

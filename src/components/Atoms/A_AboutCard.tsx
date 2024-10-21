@@ -1,10 +1,11 @@
 import React from "react";
-import { FlexBox, PP_24 } from "../Quarks";
+import { FlexBox, PP_18, PP_24 } from "../Quarks";
 import styled, { useTheme } from "styled-components";
 import useConstructTextWithLinks from "../../hooks/useConstructTextWithLinks";
 import Image from "../Quarks/Image";
 import { AboutMeCard, Achievement } from "../../db/types";
 import Video from "../Quarks/Video";
+import { media } from "../../styles/mediaQueries";
 
 interface AboutCardProps {
   card: AboutMeCard | Achievement;
@@ -13,47 +14,121 @@ interface AboutCardProps {
 }
 
 const AboutCardWrapper = styled(FlexBox)<{ $rotation?: string }>`
-  padding: 12px;
+  padding: 8px;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 12px;
-  border-radius: 16px;
+  gap: 10px;
+  border-radius: 10px;
   background-color: ${({ theme }) => theme.cards.bg};
   transform: ${({ $rotation }) => $rotation};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-
   a {
     text-decoration: underline;
     text-decoration-color: ${({ theme }) => theme.medium_grey};
-    transition: all 0.5s ease;
-
-    &:hover {
-      opacity: 0.5;
-    }
   }
 
   img,
   video {
-    width: 24.01vw;
-    height: 24.01vw;
+    width: 20rem;
+    height: 20rem;
     flex: none;
-    cursor: default;
   }
 
   p {
-    margin: 0px 4px !important;
-    max-width: 85%;
+    margin: 4px;
+  }
+
+  ${media.tablets} {
+    img,
+    video {
+      width: 24.01vw;
+      height: 24.01vw;
+      flex: none;
+      cursor: default;
+    }
   }
 `;
 
+// const AboutCardWrapper = styled(FlexBox)<{ $rotation?: string }>`
+//   padding: 12px;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   gap: 12px;
+//   border-radius: 16px;
+//   background-color: ${({ theme }) => theme.cards.bg};
+//   transform: ${({ $rotation }) => $rotation};
+//   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+//     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+//   a {
+//     text-decoration: underline;
+//     text-decoration-color: ${({ theme }) => theme.medium_grey};
+//     transition: all 0.5s ease;
+
+//     &:hover {
+//       opacity: 0.5;
+//     }
+//   }
+
+//   img,
+//   video {
+//     width: 24.01vw;
+//     height: 24.01vw;
+//     flex: none;
+//     cursor: default;
+//   }
+
+//   p {
+//     margin: 0px 4px !important;
+//     max-width: 85%;
+//   }
+// `;
+
+// const AchievementCardWrapper = styled.a`
+//   display: flex;
+//   padding: 12px;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   gap: 12px;
+//   border-radius: 16px;
+//   background-color: ${({ theme }) => theme.cards.bg};
+//   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+//     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+//   transition: all 0.8s ease-out;
+//   cursor: pointer;
+
+//   span {
+//     color: ${({ theme }) => theme.medium_grey} !important;
+//   }
+
+//   p {
+//     margin: 0px 4px !important;
+//     max-width: 85%;
+//   }
+
+//   img {
+//     width: 100%;
+//     height: 100%;
+//     cursor: inherit;
+//   }
+
+//   &:hover {
+//     transform: scale(1.02);
+//     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+
+//     img {
+//       transform: scale(1.01);
+//     }
+//   }
+// `;
+
 const AchievementCardWrapper = styled.a`
   display: flex;
-  padding: 12px;
+  padding: 8px;
   flex-direction: column;
   justify-content: space-between;
-  gap: 12px;
-  border-radius: 16px;
+  gap: 10px;
+  border-radius: 10px;
   background-color: ${({ theme }) => theme.cards.bg};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
@@ -70,18 +145,14 @@ const AchievementCardWrapper = styled.a`
   }
 
   img {
+    border-radius: 5px;
     width: 100%;
     height: 100%;
     cursor: inherit;
   }
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
-
-    img {
-      transform: scale(1.01);
-    }
+  ${media.tabletsL} {
+    justify-content: start;
   }
 `;
 
@@ -128,9 +199,12 @@ const A_AboutCard: React.FC<AboutCardProps> = ({
         <AboutCardImageWrapper $achievement={true}>
           <Image src={card.imgSrc} alt="AboutCard Image" />
         </AboutCardImageWrapper>
-        <PP_24 color={theme.white}>
+        {/* <PP_24 color={theme.white}>
           {card.text[currentLanguage]} / <span>{card.year}</span>
-        </PP_24>
+        </PP_24> */}
+        <PP_18 color={theme.white}>
+          {card.text[currentLanguage]} / <span>{card.year}</span>
+        </PP_18>
       </AchievementCardWrapper>
     );
   } else {
@@ -138,12 +212,17 @@ const A_AboutCard: React.FC<AboutCardProps> = ({
       <AboutCardWrapper $rotation={rotation}>
         <AboutCardImageWrapper $achievement={false}>
           {isVideo(card.imgSrc) ? (
-            <Video src={card.imgSrc} shouldAutoplay={true} />
+            <Video
+              src={card.imgSrc}
+              shouldAutoplay={true}
+              fallback={card.fallback}
+            />
           ) : (
             <Image src={card.imgSrc} alt="AboutCard Image" />
           )}
         </AboutCardImageWrapper>
-        <PP_24 color={theme.medium_grey}>{constructedText}</PP_24>
+        {/* <PP_24 color={theme.medium_grey}>{constructedText}</PP_24> */}
+        <PP_18 color={theme.medium_grey}>{constructedText}</PP_18>
       </AboutCardWrapper>
     );
   }

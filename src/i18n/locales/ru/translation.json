@@ -12,7 +12,14 @@
   "nav": {
     "work": "проекты",
     "contacts": "контакты",
-    "info": "обо мне"
+    "info": "обо мне",
+    "menu": "Меню",
+    "home": "Главная",
+    "close": "Назад",
+    "siteLang": "Язык сайта",
+    "currently": "Сейчас",
+    "working": "На связи'",
+    "sleeping": "Сплю"
   },
   "projectPage": {
     "type": "Тип",
@@ -29,7 +36,7 @@
     "mainContact1": "Поболтаем?",
     "mainContact2": "Напишите мне",
     "mainContactLink": "тут",
-    "sitePlan": "Меню сайта",
+    "sitePlan": "Меню",
     "followMe": "Соцсети",
     "contactMe": "Контакты",
     "home": "Главная",
@@ -40,22 +47,31 @@
     "resume": "Резюме",
     "upd": "UPD 30.09",
     "made": "Сделано с ♡ на ⚛React(TS)",
-    "backToTop": "НАВЕРХ"
+    "backToTop": "НАВЕРХ",
+    "sayHi": "Перейти в почту",
+    "byTheWay": "Кстати",
+    "place": "Москва, Россия",
+    "based": "Москва, Россия"
   },
   "home": {
     "hey": "Привет!",
     "im": "Я",
     "polina": "Полина.",
-    "product": "Product designer",
+    "product": "Product",
+    "designer": "designer",
+    "productDesigner": "Product designer",
     "dev": "developer",
+    "coder": "coder,",
     "human": "и просто человек.",
+    "mobHuman": "человек.",
     "ihave": "4 года в продуктовом дизайне. Обладаю широким спектром компетенций. Хочу творить и быть полезной. Давайте работать вместе.",
     "selected": "Избранные кейсы",
     "loveit": "Мои любимые продуктовые кейсы 2020-2024. Можете глянуть на них или...",
     "seeAll": "Посмотреть все работы",
     "moreWork": "Больше работ",
     "sometimes": "Иногда я занимаюсь чем-то помимо продуктового дизайна.",
-    "aboutMe": "Обо мне"
+    "aboutMe": "Обо мне",
+    "contactMe": "Свяжитесь со мной"
   },
   "works": {
     "allCases": "Все кейсы",

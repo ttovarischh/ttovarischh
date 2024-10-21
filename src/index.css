@@ -1,6 +1,70 @@
+:root {
+  /* desktop */
+  --desktop-gap: 1.04vw;
+  --desktop-padding-20: 20px;
+  --desktop-img-card-radius: 12px;
+  --desktop-img-in-card-radius: 5px;
+  /* mobile */
+  --mobile-gap-8: 8px;
+  --mobile-gap-12: 12px;
+  --mobile-gap-16: 16px;
+  --mobile-gap-24: 24px;
+  --mobile-gap-32: 32px;
+
+  --mobile-page-gap-s: 80px;
+
+  --mobile-padding-8: 8px;
+  --mobile-padding-16: 16px;
+
+  --mobile-img-card-radius: 10px;
+  --mobile-img-in-card-radius: 5px;
+  --mobile-smallcard-radius: 12px;
+  --mobile-card-radius: 16px;
+
+  --mobile-m-padding-left: calc(16px + env(safe-area-inset-left, 0px));
+  --mobile-m-padding-right: calc(16px + env(safe-area-inset-right, 0px));
+
+  --mobile-single-image-radius: 5px;
+
+  /* tablets */
+  --tablets-outer-padding: 16px;
+
+  /* normal */
+  --simgle-img-border-radius: 5px;
+  --incard-img-border-radius: 5px;
+}
+
+/* tablets */
+@media only screen and (min-width: 768px) and (max-width: 1366px) and (min-height: 800px) and (-webkit-min-device-pixel-ratio: 1) and (orientation: portrait) {
+  :root {
+    --simgle-img-border-radius: 5px;
+    --incard-img-border-radius: 5px;
+  }
+}
+
 html {
   font-size: 16px;
   overflow: visible;
+}
+
+@keyframes tv {
+  from {
+    background-position-y: 0;
+  }
+
+  to {
+    background-position-y: 100%;
+  }
+}
+
+@keyframes th {
+  from {
+    background-position-x: 0;
+  }
+
+  to {
+    background-position-x: 100%;
+  }
 }
 
 /* @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {

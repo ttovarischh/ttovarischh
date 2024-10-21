@@ -12,7 +12,14 @@
   "nav": {
     "work": "work",
     "contacts": "contacts",
-    "info": "info"
+    "info": "info",
+    "menu": "Menu",
+    "home": "Home",
+    "close": "Close",
+    "siteLang": "Site language",
+    "currently": "Currently",
+    "working": "Working",
+    "sleeping": "Off-duty"
   },
   "projectPage": {
     "type": "Type",
@@ -40,22 +47,31 @@
     "resume": "Resumé",
     "upd": "UPD 30.09",
     "made": "Homemade w/ ⚛React(TS)",
-    "backToTop": "BACK TO TOP"
+    "backToTop": "Back to top",
+    "sayHi": "Say «hi» here",
+    "byTheWay": "By the way",
+    "place": "Moscow, Russia",
+    "based": "Based in Moscow"
   },
   "home": {
     "hey": "Hey there!",
     "im": "I’m",
     "polina": "Polina.",
-    "product": "Product designer",
+    "product": "Product",
+    "designer": "designer",
+    "productDesigner": "Product designer",
     "dev": "developer,",
+    "coder": "coder,",
     "human": "human being.",
+    "mobHuman": "human being.",
     "ihave": "I have 4 years of experience working with digital products, skills in a wide range of design fields, and a strong desire to create and be useful.",
     "selected": "Selected work",
     "loveit": "My favorite product cases of 2020-2024. Feel free to check them out or...",
     "seeAll": "See all work",
     "moreWork": "More work",
     "sometimes": "Sometimes I do things other than product design. And it’s fun too.",
-    "aboutMe": "About me"
+    "aboutMe": "About me",
+    "contactMe": "Contact me"
   },
   "works": {
     "allCases": "All cases",

@@ -11,12 +11,13 @@ import {
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
-import { PP_20 } from "../Quarks";
+import { PP_18, PP_20 } from "../Quarks";
 import { useTranslation } from "react-i18next";
 import A_Skeleton from "./A_Skeleton";
 import Slide from "../Quarks/Slide";
 
-const TWEEN_FACTOR_BASE = 0.07;
+// const TWEEN_FACTOR_BASE = 0.07;
+const TWEEN_FACTOR_BASE = 0.04;
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
@@ -172,18 +173,21 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 />
               )} */}
               {selectedIndex === index && (
-                <PP_20 color="#6B6863">
+                // <PP_20 color="#6B6863">
+                //   {slide.description[currentLanguage]}
+                // </PP_20>
+                <PP_18 color="#6B6863">
                   {slide.description[currentLanguage]}
-                </PP_20>
+                </PP_18>
               )}
             </div>
           ))}
         </div>
       </div>
-      <div className="embla__buttons">
+      {/* <div className="embla__buttons">
         <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
         <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-      </div>
+      </div> */}
 
       <div className="embla__controls">
         <div className="embla__dots">
