@@ -167,6 +167,8 @@ export const media = {
     and (max-width: 1366px) 
     and (min-height: 800px)
     and (-webkit-min-device-pixel-ratio: 1)
+    and (pointer: coarse)
+    and (hover: none)
     and (orientation: portrait)`,
 
   tabletsL: `@media only screen 
@@ -174,6 +176,8 @@ export const media = {
     and (max-width: 1366px)
     and (min-height: 600px) 
     and (-webkit-min-device-pixel-ratio: 1)
+    and (pointer: coarse)
+    and (hover: none)
     and (orientation: landscape)`,
 
   tabletsP: `@media only screen 
@@ -186,8 +190,8 @@ export const media = {
   /* ----------- Laptops ----------- */
   laptop: `@media screen 
   and (min-width: ${sizes.minLaptopW}) 
-  and (max-width: ${sizes.maxLaptopW}) 
-  // and (min-height: 832px)
+  and (pointer: fine)
+  and (hover: hover)
   and (-webkit-min-device-pixel-ratio: 1)`,
 
   retinaLaptop: `@media screen 

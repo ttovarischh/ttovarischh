@@ -14,12 +14,7 @@ const ThemeSwitcherButton = styled.button<{
 }>`
   width: 44px;
   height: 44px;
-
-  // width: 1.5rem;
-  // height: 1.5rem;
-  // border: none;
   border: 1px solid hsla(0, 0%, 100%, 0.025);
-  // background-color: ${({ theme }) => theme.navigation.themeswitcher};
   background-color: ${({ theme, $mobColor }) =>
     $mobColor ? theme.black : theme.navigation.themeswitcher};
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
@@ -34,10 +29,6 @@ const ThemeSwitcherButton = styled.button<{
   transition: all 0.4s ease;
   align-self: center;
 
-  &:hover {
-    transform: ${({ $mobColor }) => ($mobColor ? "0deg" : "45deg")};
-  }
-
   ${({ $rotating }) =>
     $rotating &&
     css`
@@ -47,6 +38,16 @@ const ThemeSwitcherButton = styled.button<{
   ${media.tablets} {
     width: 2rem;
     height: 2rem;
+  }
+
+  ${media.laptop} {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+
+    &:hover {
+      transform: rotate(45deg);
+    }
   }
 `;
 

@@ -310,7 +310,7 @@ const M_Footer = ({ currentLanguage, t }: FooterProps) => {
     });
   };
 
-  if (isTablet || isTabletLandscape) {
+  if (isTablet || isTabletLandscape || isLaptop) {
     return (
       <FullFooterWrapper id="footer">
         <FlexBox $justifyContent="end" style={{ width: "calc(100% - 1.25vw" }}>

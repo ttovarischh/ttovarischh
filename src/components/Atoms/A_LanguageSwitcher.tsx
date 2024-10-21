@@ -35,7 +35,7 @@ const A_LanguageSwitcher = () => {
     i18n.changeLanguage(lng);
   };
 
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
 
   return (
     <LanguageSwitcherWrapper>
@@ -57,7 +57,7 @@ const A_LanguageSwitcher = () => {
         <PP_20 uppercase medium underline={i18n.language === "en"}>
           Eng
         </PP_20> */}
-        {isTablet || isTabletLandscape ? (
+        {isTablet || isTabletLandscape || isLaptop ? (
           <PP_20 uppercase medium underline={i18n.language === "ru"}>
             Ru
           </PP_20>
@@ -65,7 +65,7 @@ const A_LanguageSwitcher = () => {
           <PP_16 underline={i18n.language === "ru"}>Ru</PP_16>
         )}
       </StyledButton>
-      {isTablet || isTabletLandscape ? (
+      {isTablet || isTabletLandscape || isLaptop ? (
         <PP_20 uppercase medium>
           /
         </PP_20>
@@ -76,7 +76,7 @@ const A_LanguageSwitcher = () => {
         onClick={() => handleLanguageChange("en")}
         aria-label="Switch to English"
       >
-        {isTablet || isTabletLandscape ? (
+        {isTablet || isTabletLandscape || isLaptop ? (
           <PP_20 uppercase medium underline={i18n.language === "en"}>
             Eng
           </PP_20>

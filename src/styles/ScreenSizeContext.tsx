@@ -25,17 +25,17 @@ export const ScreenSizeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const isTablet = useMediaQuery({
     query:
-      "(min-width: 768px) and (max-width: 1366px) and (min-height: 800px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1)",
+      "(min-width: 768px) and (max-width: 1366px) and (min-height: 800px) and (pointer: coarse) and (hover: none) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1)",
   });
 
   const isTabletLandscape = useMediaQuery({
     query:
-      "(min-width: 768px) and (max-width: 1366px) and (min-height: 600px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1)",
+      "(min-width: 768px) and (max-width: 1366px) and (min-height: 600px) and (pointer: coarse) and (hover: none)  and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1)",
   });
 
   const isLaptop = useMediaQuery({
     query:
-      "(min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1)",
+      "(min-device-width: 1200px) and (pointer: fine) and (hover: hover) and (-webkit-min-device-pixel-ratio: 1)",
   });
 
   const isPC = useMediaQuery({

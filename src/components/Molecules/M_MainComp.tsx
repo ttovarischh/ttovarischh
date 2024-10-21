@@ -8,6 +8,7 @@ import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 import A_Button from "../Atoms/A_Button";
 import { useScreenSize } from "../../styles/ScreenSizeContext";
 import A_AnimatedDots from "../Atoms/A_AnimatedDots";
+import A_Icon from "../Atoms/A_Icon";
 
 interface M_MainCompProps {
   scrollY: number;
@@ -51,13 +52,6 @@ const MainCompWrapper = styled.div`
   //   animation: ${jiggle} 0.6s ease-in-out;
   // }
 
-  ${media.laptop} {
-    #difference,
-    #difference1 {
-      font-size: 1.5rem;
-    }
-  }
-
   ${media.tablets} {
     #difference,
     #difference1 {
@@ -66,6 +60,13 @@ const MainCompWrapper = styled.div`
   }
 
   ${media.tabletsL} {
+    #difference,
+    #difference1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  ${media.laptop} {
     #difference,
     #difference1 {
       font-size: 1.5rem;
@@ -278,7 +279,7 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
   const [$isAnimating, set$IsAnimating] = useState(false);
   const isTouchDevice = useIsTouchDevice();
   const { isPhoneLandscape } = useScreenSize();
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
 
   useEffect(() => {
     const startAnimation = () => {
@@ -299,150 +300,214 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
     }
   }, [isTouchDevice]);
 
-  return (
-    <MainCompWrapper>
-      <A_PixelatedGradient />
-      <TextCompWrapper $scrollY={scrollY}>
-        {/* <PP_32 medium id="difference1">
+  console.log(isLaptop);
+
+  if (isLaptop) {
+    return (
+      <MainCompWrapper>
+        <A_PixelatedGradient />
+        <TextCompWrapper $scrollY={scrollY}>
+          <PP_32 medium id="difference1">
             {t("home.hey")}
-          </PP_32> */}
-        <MainTextWrapper>
-          {!isPhoneLandscape && (
-            <PP_16 medium id="difference1">
-              {t("home.hey")}
-            </PP_16>
-          )}
-
-          <BigTextWrapper>
-            <BigText $alignItems="center">
-              {/* <PP_128 bold center>
-              {t("home.im")}&nbsp;
-            </PP_128> */}
-              <PP_52 bold center>
-                {t("home.im")}&nbsp;
-              </PP_52>
-              <Portrait />
-              {/* <PP_128 bold center>
-              &nbsp;{t("home.polina")}
-            </PP_128> */}
-              <PP_52 bold center>
-                &nbsp;{t("home.polina")}
-              </PP_52>
-            </BigText>
-            {isTabletLandscape ? (
-              <BigText $alignItems="center" $gap="0.5rem">
-                <PP_52 bold center>
-                  {t("home.productDesigner")}
-                </PP_52>
-                <SquareA />
+          </PP_32>
+          <MainTextWrapper>
+            <BigTextWrapper>
+              <BigText $alignItems="center">
+                <PP_128 bold center>
+                  {t("home.im")}&nbsp;
+                </PP_128>
+                <Portrait />
+                <PP_128 bold center>
+                  &nbsp;{t("home.polina")}
+                </PP_128>
               </BigText>
-            ) : (
-              <>
+              <BigText $alignItems="center" $gap="0.5rem">
+                <PP_128 bold center>
+                  {t("home.productDesigner")}
+                </PP_128>
+                <SquareA />
+                <PP_128 bold center>
+                  ,
+                </PP_128>
+              </BigText>
+              <BigText $alignItems="center" $gap="0.5rem">
+                <SquareB />
+                <PP_128 bold center lineHeight="84.1%">
+                  {t("home.dev")}
+                </PP_128>
+              </BigText>
+              <BigText
+                onMouseEnter={
+                  !isTouchDevice ? () => set$IsHovered(true) : undefined
+                }
+                onMouseLeave={
+                  !isTouchDevice ? () => set$IsHovered(false) : undefined
+                }
+              >
+                <PP_128 bold center>
+                  {t("home.human")}
+                  <A_AnimatedDots
+                    isHovered={$isHovered}
+                    isAnimating={$isAnimating}
+                    isTouchDevice={isTouchDevice}
+                  />
+                </PP_128>
+              </BigText>
+            </BigTextWrapper>
+          </MainTextWrapper>
+          <PP_32 medium id="difference" center>
+            {t("home.ihave")}
+          </PP_32>
+        </TextCompWrapper>
+        <A_Icon iconName="scrollbottom" />
+      </MainCompWrapper>
+    );
+  } else {
+    return (
+      <MainCompWrapper>
+        <A_PixelatedGradient />
+        <TextCompWrapper $scrollY={scrollY}>
+          {/* <PP_32 medium id="difference1">
+              {t("home.hey")}
+            </PP_32> */}
+          <MainTextWrapper>
+            {!isPhoneLandscape && (
+              <PP_16 medium id="difference1">
+                {t("home.hey")}
+              </PP_16>
+            )}
+
+            <BigTextWrapper>
+              <BigText $alignItems="center">
+                {/* <PP_128 bold center>
+                {t("home.im")}&nbsp;
+              </PP_128> */}
+                <PP_52 bold center>
+                  {t("home.im")}&nbsp;
+                </PP_52>
+                <Portrait />
+                {/* <PP_128 bold center>
+                &nbsp;{t("home.polina")}
+              </PP_128> */}
+                <PP_52 bold center>
+                  &nbsp;{t("home.polina")}
+                </PP_52>
+              </BigText>
+              {isTabletLandscape ? (
                 <BigText $alignItems="center" $gap="0.5rem">
                   <PP_52 bold center>
-                    {t("home.product")}
-                  </PP_52>
-
-                  {/* <PP_128 bold center>
-              {t("home.product")}
-            </PP_128> */}
-
-                  {/* <PP_128 bold center>
-              ,
-            </PP_128> */}
-                </BigText>
-                <BigText $alignItems="center" $gap="0.5rem">
-                  <PP_52 bold center>
-                    {t("home.designer")}
+                    {t("home.productDesigner")}
                   </PP_52>
                   <SquareA />
-                  <PP_52 bold center>
-                    ,
-                  </PP_52>
                 </BigText>
-              </>
-            )}
-            <BigText $alignItems="center" $gap="0.5rem">
-              <SquareB />
-              {/* <PP_128 bold center lineHeight="84.1%">
-              {t("home.dev")}
-            </PP_128> */}
-              <PP_52 bold center lineHeight="84.1%">
-                {isTabletLandscape ? t("home.dev") : t("home.coder")}
-              </PP_52>
-            </BigText>
-            <BigText
-              onMouseEnter={
-                !isTouchDevice ? () => set$IsHovered(true) : undefined
-              }
-              onMouseLeave={
-                !isTouchDevice ? () => set$IsHovered(false) : undefined
-              }
-            >
-              {/* <PP_128 bold center>
-              {t("home.human")}
-              <Span
-                $isHovered={isTouchDevice ? false : $isHovered}
-                $isAnimating={!isTouchDevice ? false : $isAnimating}
-                $delay={$isHovered || $isAnimating ? "0s" : "0.3s"}
-                $isTouchDevice={isTouchDevice}
+              ) : (
+                <>
+                  <BigText $alignItems="center" $gap="0.5rem">
+                    <PP_52 bold center>
+                      {t("home.product")}
+                    </PP_52>
+
+                    {/* <PP_128 bold center>
+                {t("home.product")}
+              </PP_128> */}
+
+                    {/* <PP_128 bold center>
+                ,
+              </PP_128> */}
+                  </BigText>
+                  <BigText $alignItems="center" $gap="0.5rem">
+                    <PP_52 bold center>
+                      {t("home.designer")}
+                    </PP_52>
+                    <SquareA />
+                    <PP_52 bold center>
+                      ,
+                    </PP_52>
+                  </BigText>
+                </>
+              )}
+              <BigText $alignItems="center" $gap="0.5rem">
+                <SquareB />
+                {/* <PP_128 bold center lineHeight="84.1%">
+                {t("home.dev")}
+              </PP_128> */}
+                <PP_52 bold center lineHeight="84.1%">
+                  {isTabletLandscape ? t("home.dev") : t("home.coder")}
+                </PP_52>
+              </BigText>
+              <BigText
+                onMouseEnter={
+                  !isTouchDevice ? () => set$IsHovered(true) : undefined
+                }
+                onMouseLeave={
+                  !isTouchDevice ? () => set$IsHovered(false) : undefined
+                }
               >
-                .
-              </Span>
-              <Span
-                $isHovered={isTouchDevice ? false : $isHovered}
-                $isAnimating={!isTouchDevice ? false : $isAnimating}
-                $delay={$isHovered || $isAnimating ? "0.3s" : "0s"}
-                $isTouchDevice={isTouchDevice}
-              >
-                .
-              </Span>
-            </PP_128> */}
-              <PP_52 bold center>
-                {t("home.mobHuman")}
-                <A_AnimatedDots
-                  isHovered={$isHovered}
-                  isAnimating={$isAnimating}
-                  isTouchDevice={isTouchDevice}
-                />
-              </PP_52>
-            </BigText>
-          </BigTextWrapper>
-        </MainTextWrapper>
-        {isTabletLandscape && (
-          <PP_16 medium id="difference" center>
-            {t("home.ihave")}
-          </PP_16>
-        )}
-        {/* <PP_32 medium id="difference" center>
-          {t("home.ihave")}
-        </PP_32> */}
-        {!isPhoneLandscape && !isTabletLandscape && (
-          <FlexBox
-            $gap="20px"
-            $direction="column"
-            $alignItems="center"
-            $alignContent="center"
-          >
-            <A_Button
-              buttonText={t("home.contactMe")}
-              main
-              handleButtonClick={() =>
-                window.open(
-                  "mailto:polinasot@gmail.com?subject=Hi there!&body=What do you want?",
-                  "_blank"
-                )
-              }
-            />
+                {/* <PP_128 bold center>
+                {t("home.human")}
+                <Span
+                  $isHovered={isTouchDevice ? false : $isHovered}
+                  $isAnimating={!isTouchDevice ? false : $isAnimating}
+                  $delay={$isHovered || $isAnimating ? "0s" : "0.3s"}
+                  $isTouchDevice={isTouchDevice}
+                >
+                  .
+                </Span>
+                <Span
+                  $isHovered={isTouchDevice ? false : $isHovered}
+                  $isAnimating={!isTouchDevice ? false : $isAnimating}
+                  $delay={$isHovered || $isAnimating ? "0.3s" : "0s"}
+                  $isTouchDevice={isTouchDevice}
+                >
+                  .
+                </Span>
+              </PP_128> */}
+                <PP_52 bold center>
+                  {t("home.mobHuman")}
+                  <A_AnimatedDots
+                    isHovered={$isHovered}
+                    isAnimating={$isAnimating}
+                    isTouchDevice={isTouchDevice}
+                  />
+                </PP_52>
+              </BigText>
+            </BigTextWrapper>
+          </MainTextWrapper>
+          {isTabletLandscape && (
             <PP_16 medium id="difference" center>
               {t("home.ihave")}
             </PP_16>
-          </FlexBox>
-        )}
-      </TextCompWrapper>
-      {/* <A_Icon iconName="scrollbottom" /> */}
-    </MainCompWrapper>
-  );
+          )}
+          {/* <PP_32 medium id="difference" center>
+            {t("home.ihave")}
+          </PP_32> */}
+          {!isPhoneLandscape && !isTabletLandscape && (
+            <FlexBox
+              $gap="20px"
+              $direction="column"
+              $alignItems="center"
+              $alignContent="center"
+            >
+              <A_Button
+                buttonText={t("home.contactMe")}
+                main
+                handleButtonClick={() =>
+                  window.open(
+                    "mailto:polinasot@gmail.com?subject=Hi there!&body=What do you want?",
+                    "_blank"
+                  )
+                }
+              />
+              <PP_16 medium id="difference" center>
+                {t("home.ihave")}
+              </PP_16>
+            </FlexBox>
+          )}
+        </TextCompWrapper>
+        {/* <A_Icon iconName="scrollbottom" /> */}
+      </MainCompWrapper>
+    );
+  }
 });
 
 export default M_MainComp;
