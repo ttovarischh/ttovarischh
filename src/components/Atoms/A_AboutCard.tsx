@@ -6,6 +6,7 @@ import Image from "../Quarks/Image";
 import { AboutMeCard, Achievement } from "../../db/types";
 import Video from "../Quarks/Video";
 import { media } from "../../styles/mediaQueries";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 interface AboutCardProps {
   card: AboutMeCard | Achievement;
@@ -14,10 +15,10 @@ interface AboutCardProps {
 }
 
 const AboutCardWrapper = styled(FlexBox)<{ $rotation?: string }>`
-  padding: 8px;
+  padding: var(--small-card-padding);
   flex-direction: column;
   gap: 10px;
-  border-radius: 10px;
+  border-radius: var(--card-border-radius);
   background-color: ${({ theme }) => theme.cards.bg};
   transform: ${({ $rotation }) => $rotation};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
@@ -47,105 +48,52 @@ const AboutCardWrapper = styled(FlexBox)<{ $rotation?: string }>`
       cursor: default;
     }
   }
+
+  ${media.laptop} {
+    gap: 12px;
+    a {
+      transition: all 0.5s ease;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    img,
+    video {
+      width: 24.01vw;
+      height: 24.01vw;
+      flex: none;
+      cursor: default;
+    }
+
+    p {
+      max-width: 85%;
+    }
+  }
 `;
-
-// const AboutCardWrapper = styled(FlexBox)<{ $rotation?: string }>`
-//   padding: 12px;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   gap: 12px;
-//   border-radius: 16px;
-//   background-color: ${({ theme }) => theme.cards.bg};
-//   transform: ${({ $rotation }) => $rotation};
-//   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
-//     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-
-//   a {
-//     text-decoration: underline;
-//     text-decoration-color: ${({ theme }) => theme.medium_grey};
-//     transition: all 0.5s ease;
-
-//     &:hover {
-//       opacity: 0.5;
-//     }
-//   }
-
-//   img,
-//   video {
-//     width: 24.01vw;
-//     height: 24.01vw;
-//     flex: none;
-//     cursor: default;
-//   }
-
-//   p {
-//     margin: 0px 4px !important;
-//     max-width: 85%;
-//   }
-// `;
-
-// const AchievementCardWrapper = styled.a`
-//   display: flex;
-//   padding: 12px;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   gap: 12px;
-//   border-radius: 16px;
-//   background-color: ${({ theme }) => theme.cards.bg};
-//   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
-//     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-//   transition: all 0.8s ease-out;
-//   cursor: pointer;
-
-//   span {
-//     color: ${({ theme }) => theme.medium_grey} !important;
-//   }
-
-//   p {
-//     margin: 0px 4px !important;
-//     max-width: 85%;
-//   }
-
-//   img {
-//     width: 100%;
-//     height: 100%;
-//     cursor: inherit;
-//   }
-
-//   &:hover {
-//     transform: scale(1.02);
-//     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
-
-//     img {
-//       transform: scale(1.01);
-//     }
-//   }
-// `;
 
 const AchievementCardWrapper = styled.a`
   display: flex;
-  padding: 8px;
+  padding: var(--small-card-padding);
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
-  border-radius: 10px;
+  border-radius: var(--card-border-radius);
   background-color: ${({ theme }) => theme.cards.bg};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-  transition: all 0.8s ease-out;
-  cursor: pointer;
 
   span {
     color: ${({ theme }) => theme.medium_grey} !important;
   }
 
   p {
-    margin: 0px 4px !important;
+    margin: 0px 4px;
     max-width: 85%;
   }
 
   img {
-    border-radius: 5px;
+    border-radius: var(--incard-img-border-radius);
     width: 100%;
     height: 100%;
     cursor: inherit;
@@ -153,6 +101,21 @@ const AchievementCardWrapper = styled.a`
 
   ${media.tabletsL} {
     justify-content: start;
+  }
+
+  ${media.laptop} {
+    gap: 12px;
+    transition: all 0.8s ease-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+
+      img {
+        transform: scale(1.01);
+      }
+    }
   }
 `;
 
@@ -164,7 +127,7 @@ const AboutCardImageWrapper = styled.div<{ $achievement: boolean }>`
   width: 100%;
   aspect-ratio: ${({ $achievement }) => ($achievement ? "1/0.8" : "1/1")};
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--incard-img-border-radius);
   background-color: ${({ $achievement, theme }) =>
     $achievement ? theme.black : "#000000"};
   overflow: hidden;
@@ -193,18 +156,23 @@ const A_AboutCard: React.FC<AboutCardProps> = ({
     return src.includes(".webm");
   };
 
+  const { isLaptop } = useScreenSize();
+
   if (isAchievement(card)) {
     return (
       <AchievementCardWrapper href={card.link} target="_blank">
         <AboutCardImageWrapper $achievement={true}>
           <Image src={card.imgSrc} alt="AboutCard Image" />
         </AboutCardImageWrapper>
-        {/* <PP_24 color={theme.white}>
-          {card.text[currentLanguage]} / <span>{card.year}</span>
-        </PP_24> */}
-        <PP_18 color={theme.white}>
-          {card.text[currentLanguage]} / <span>{card.year}</span>
-        </PP_18>
+        {isLaptop ? (
+          <PP_24 color={theme.white}>
+            {card.text[currentLanguage]} / <span>{card.year}</span>
+          </PP_24>
+        ) : (
+          <PP_18 color={theme.white}>
+            {card.text[currentLanguage]} / <span>{card.year}</span>
+          </PP_18>
+        )}
       </AchievementCardWrapper>
     );
   } else {
@@ -221,8 +189,11 @@ const A_AboutCard: React.FC<AboutCardProps> = ({
             <Image src={card.imgSrc} alt="AboutCard Image" />
           )}
         </AboutCardImageWrapper>
-        {/* <PP_24 color={theme.medium_grey}>{constructedText}</PP_24> */}
-        <PP_18 color={theme.medium_grey}>{constructedText}</PP_18>
+        {isLaptop ? (
+          <PP_24 color={theme.medium_grey}>{constructedText}</PP_24>
+        ) : (
+          <PP_18 color={theme.medium_grey}>{constructedText}</PP_18>
+        )}
       </AboutCardWrapper>
     );
   }

@@ -15,9 +15,7 @@ import { PP_18, PP_20 } from "../Quarks";
 import { useTranslation } from "react-i18next";
 import A_Skeleton from "./A_Skeleton";
 import Slide from "../Quarks/Slide";
-
-// const TWEEN_FACTOR_BASE = 0.07;
-const TWEEN_FACTOR_BASE = 0.04;
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
@@ -42,6 +40,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<HTMLElement[]>([]);
+  const { isLaptop } = useScreenSize();
+
+  const TWEEN_FACTOR_BASE = isLaptop ? 0.07 : 0.04;
+
+  // const TWEEN_FACTOR_BASE = 0.07;
+  // const TWEEN_FACTOR_BASE = 0.04;
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
@@ -147,48 +151,31 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 style={{
                   width: "100%",
                   height: "auto",
-                  display: loading[index] ? "none" : "block", // Control the display based on the loading state
-                }}
-                onLoad={() => handleImageLoad(index)} // Call the handler to update the loading state
-                isLoading={loading[index]} // Pass the specific loading state for this slide
-              />
-              {/* <img
-                className="embla__slide__image"
-                src={slide.imgSrc}
-                alt={`Slide ${index + 1}`}
-                style={{
-                  width: "100%",
-                  height: "auto",
                   display: loading[index] ? "none" : "block",
                 }}
                 onLoad={() => handleImageLoad(index)}
-                loading="lazy"
+                isLoading={loading[index]}
               />
-              {loading[index] && (
-                <A_Skeleton
-                  $width="100%"
-                  $aspectRatio={16 / 9}
-                  $borderRadius="0px"
-                  className="embla__slide__image"
-                />
-              )} */}
-              {selectedIndex === index && (
-                // <PP_20 color="#6B6863">
-                //   {slide.description[currentLanguage]}
-                // </PP_20>
-                <PP_18 color="#6B6863">
-                  {slide.description[currentLanguage]}
-                </PP_18>
-              )}
+              {selectedIndex === index &&
+                (isLaptop ? (
+                  <PP_20 color="#6B6863">
+                    {slide.description[currentLanguage]}
+                  </PP_20>
+                ) : (
+                  <PP_18 color="#6B6863">
+                    {slide.description[currentLanguage]}
+                  </PP_18>
+                ))}
             </div>
           ))}
         </div>
       </div>
-      {/* <div className="embla__buttons">
-        <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-        <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-      </div> */}
-
+      {isLaptop && (
+        <div className="embla__buttons">
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        </div>
+      )}
       <div className="embla__controls">
         <div className="embla__dots">
           {scrollSnaps.map((_, index) => (

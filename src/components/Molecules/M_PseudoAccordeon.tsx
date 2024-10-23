@@ -32,12 +32,14 @@ const AccordionContainer = styled.div<{ $openIndex: number | null }>`
 const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: var(--bigger-card-radius);
 
+  overflow: hidden;
   background-color: ${({ theme }) => theme.cards.bg};
   transition: all 0.5s ease, opacity 0.3s ease;
   cursor: pointer;
+  height: auto;
+  min-height: 29.17vw;
 
   a {
     text-decoration-color: ${({ theme }) => theme.medium_grey};
@@ -65,14 +67,15 @@ const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
   }
 
   ${media.tabletsL} {
-    height: 45vw;
+    min-height: 45vw;
   }
 `;
 
 const AccordionHeader = styled.div<{ $isOpen: boolean }>`
   display: flex;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: var(--bigger-card-radius);
+
   box-sizing: border-box;
   align-items: baseline;
   background-color: ${({ $isOpen, theme }) =>
@@ -101,7 +104,6 @@ const AccordionContentWrapper = styled.div<{
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  // justify-content: center;
   justify-content: ${({ $isNone }) => ($isNone ? "flex-start" : "center")};
   align-items: center;
 
@@ -126,7 +128,8 @@ const AccordionContentWrapper = styled.div<{
   img {
     aspect-ratio: 16/10;
     background-color: white;
-    border-radius: 10px;
+    border-radius: var(--incard-img-medium-border-radius);
+
     cursor: inherit;
   }
 
@@ -158,6 +161,7 @@ const AccordionContentInnerWrapper = styled.div<{
   transition: opacity 0.3s ease;
   opacity: ${({ $visible }) => ($visible ? "1" : "0")};
   display: ${({ $isBlock }) => ($isBlock ? "flex" : "none")};
+  gap: 40px;
 
   button {
     align-self: start;
@@ -277,7 +281,6 @@ const M_PseudoAccordeon: React.FC<PseudoAccordeonProps> = ({
                     ))}
                   </PP_24>
                 )}
-
                 {item.achievements.map((achievement, subIndex) => (
                   <InnerMapItem key={subIndex}>
                     <A_Icon iconName="arrowRight" />

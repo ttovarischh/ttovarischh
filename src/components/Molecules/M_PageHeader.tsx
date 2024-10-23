@@ -62,12 +62,15 @@ interface PageHeaderProps {
 }
 
 const MainInfoWrapper = styled(FlexBox)`
-  // padding: 166px 2.5vw 32px;
   padding-top: 166px;
   padding-bottom: 24px;
   padding-left: calc(16px + env(safe-area-inset-left, 0px));
   padding-right: calc(16px + env(safe-area-inset-right, 0px));
   flex-direction: column;
+
+  ${media.laptop} {
+    padding: 166px 2.5vw 32px;
+  }
 `;
 
 const ProjectInfoWrapper = styled.div<{ $wrapped?: boolean }>`
@@ -97,6 +100,27 @@ const ProjectInfoWrapper = styled.div<{ $wrapped?: boolean }>`
     & > div:nth-child(2) {
       grid-column-start: 3;
       grid-column-end: 6;
+    }
+  }
+
+  ${media.laptop} {
+    display: grid;
+    margin: ${({ $wrapped }) => ($wrapped ? "0px" : "140px 2.5vw")};
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 1.04vw;
+
+    & > div:nth-child(1) {
+      grid-column-start: 2;
+      max-width: 165px;
+    }
+
+    & > div:nth-child(2) {
+      grid-column-start: 3;
+      grid-column-end: 6;
+    }
+
+    span {
+      color: ${({ theme }) => theme.medium_grey} !important;
     }
   }
 
@@ -192,6 +216,14 @@ const LinksAndInfoWrapper = styled(FlexBox)<{ $wrapped?: boolean }>`
       flex-direction: column;
     }
   }
+
+  ${media.laptop} {
+    gap: 20px;
+
+    div {
+      flex-direction: column;
+    }
+  }
 `;
 
 const MainInfoContent = styled.div<{ $works?: boolean }>`
@@ -216,9 +248,14 @@ const MainInfoContent = styled.div<{ $works?: boolean }>`
     }
   }
 
-  // desktop
-  // margin-top: 88px;
-  // grid-column-gap: 1.04vw;
+  ${media.laptop} {
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    margin-top: 88px;
+    grid-column-gap: 1.04vw;
+    & > div:nth-child(2) {
+      grid-column-start: 3;
+    }
+  }
 `;
 
 const ButtonsWrapper = styled(FlexBox)`
@@ -234,7 +271,6 @@ const BigTextWrapper = styled(FlexBox)<{ $multiLine?: boolean }>`
 
   ${media.tablets} {
     white-space: ${({ $multiLine }) => ($multiLine ? "pre-line" : "nowrap")};
-    // width: ${({ $multiLine }) => ($multiLine ? "65%" : "100%")};
     p {
       max-width: ${({ $multiLine }) => ($multiLine ? "100%" : "50%")};
       line-height: ${({ $multiLine }) => ($multiLine ? "8rem" : "normal")};
@@ -248,7 +284,20 @@ const BigTextWrapper = styled(FlexBox)<{ $multiLine?: boolean }>`
 
   ${media.tabletsL} {
     white-space: ${({ $multiLine }) => ($multiLine ? "pre-line" : "nowrap")};
-    // width: ${({ $multiLine }) => ($multiLine ? "65%" : "100%")};
+    p {
+      max-width: ${({ $multiLine }) => ($multiLine ? "100%" : "50%")};
+      line-height: ${({ $multiLine }) => ($multiLine ? "8rem" : "normal")};
+      margin-top: ${({ $multiLine }) => $multiLine && "1rem"};
+    }
+    svg {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+
+  ${media.laptop} {
+    white-space: ${({ $multiLine }) => ($multiLine ? "pre-line" : "nowrap")};
+    width: ${({ $multiLine }) => ($multiLine ? "65%" : "100%")};
     p {
       max-width: ${({ $multiLine }) => ($multiLine ? "100%" : "50%")};
       line-height: ${({ $multiLine }) => ($multiLine ? "8rem" : "normal")};
@@ -291,13 +340,14 @@ const M_PageHeader = ({
   slash,
 }: PageHeaderProps) => {
   const theme = useTheme();
-  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
+  const { isTablet, isPhoneLandscape, isTabletLandscape, isLaptop } =
+    useScreenSize();
   if (bigText) {
     return (
       <MainInfoWrapper>
         <BigTextWrapper $multiLine={multiLine}>
           {multiLine ? (
-            isTablet || isTabletLandscape ? (
+            isTablet || isTabletLandscape || isLaptop ? (
               <FlexBox>
                 <DJR_128>
                   {bigText}
@@ -308,6 +358,7 @@ const M_PageHeader = ({
                   <span>
                     <A_Icon iconName={iconName} />
                   </span>
+                  <br></br>
                   {bigTextB}
                 </DJR_128>
               </FlexBox>
@@ -326,7 +377,7 @@ const M_PageHeader = ({
                 </DJR_64>
               </FlexBox>
             )
-          ) : isTablet || isTabletLandscape ? (
+          ) : isTablet || isTabletLandscape || isLaptop ? (
             <DJR_128 id="bigText">{bigText}</DJR_128>
           ) : (
             <DJR_64 id="bigText">{bigText}</DJR_64>
@@ -339,7 +390,7 @@ const M_PageHeader = ({
             currentLanguage={currentLanguage}
             jobless={jobless}
           />
-          {(isTablet || isTabletLandscape) && (
+          {(isTablet || isTabletLandscape || isLaptop) && (
             <A_InfoBlock
               header={columnBHeader}
               text={columnBText}
@@ -348,7 +399,7 @@ const M_PageHeader = ({
           )}
           {works ? (
             <FlexBox $direction="column" $gap="12px">
-              {!isTablet && !isTabletLandscape && (
+              {!isTablet && !isTabletLandscape && !isLaptop && (
                 <PP_18 medium color={theme.medium_grey}>
                   {columnBHeader}
                 </PP_18>
@@ -415,45 +466,56 @@ const M_PageHeader = ({
             text={columnAText}
             currentLanguage={currentLanguage}
             aboutMeLinks={contactMeLinks}
-            slash={!isPhoneLandscape && !isTabletLandscape && slash}
+            slash={
+              !isPhoneLandscape && !isTabletLandscape && !isLaptop && slash
+            }
           />
           <A_InfoBlock
             header={columnBHeader}
             text={columnBText}
             currentLanguage={currentLanguage}
             aboutMeLinks={followMeLinks}
-            slash={!isPhoneLandscape && !isTabletLandscape && slash}
+            slash={
+              !isPhoneLandscape && !isTabletLandscape && !isLaptop && slash
+            }
           />
         </LinksAndInfoWrapper>
-        {!isTablet && !isTabletLandscape && <Divider />}
+        {!isTablet && !isTabletLandscape && !isLaptop && <Divider />}
         <FlexBox $gap="60px">
-          <FlexBox $gap="26px">
-            {/* <PP_48 lineHeight="100%" medium>
-              {s_description}
-            </PP_48>
-            <PP_20>
-              {description}
-              {ps && (
-                <>
-                  <br></br>
-                  <br></br>
-                  <span>{ps}</span>
-                </>
-              )}
-            </PP_20> */}
-            <PP_32 lineHeight="100%" medium>
-              {s_description}
-            </PP_32>
-            <PP_18>
-              {description}
-              {ps && (
-                <>
-                  <br></br>
-                  <br></br>
-                  <span style={{ color: theme.medium_grey }}>{ps}</span>
-                </>
-              )}
-            </PP_18>
+          <FlexBox $gap={isLaptop ? "20px" : "26px"}>
+            {isLaptop ? (
+              <>
+                <PP_48 lineHeight="100%" medium>
+                  {s_description}
+                </PP_48>
+                <PP_20>
+                  {description}
+                  {ps && (
+                    <>
+                      <br></br>
+                      <br></br>
+                      <span>{ps}</span>
+                    </>
+                  )}
+                </PP_20>
+              </>
+            ) : (
+              <>
+                <PP_32 lineHeight="100%" medium>
+                  {s_description}
+                </PP_32>
+                <PP_18>
+                  {description}
+                  {ps && (
+                    <>
+                      <br></br>
+                      <br></br>
+                      <span style={{ color: theme.medium_grey }}>{ps}</span>
+                    </>
+                  )}
+                </PP_18>
+              </>
+            )}
           </FlexBox>
           <ButtonsWrapper $gap="8px">
             {links?.map((link, index) => {

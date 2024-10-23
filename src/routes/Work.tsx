@@ -49,11 +49,12 @@ const WorkPage: React.FC<WorkPageProps> = ({
       )
     : projects;
 
-  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
+  const { isTablet, isPhoneLandscape, isTabletLandscape, isLaptop } =
+    useScreenSize();
 
   return (
     <>
-      {isTablet || isTabletLandscape ? (
+      {isTablet || isTabletLandscape || isLaptop ? (
         <M_PageHeader
           works
           bigText={t("works.allCases")}
@@ -81,7 +82,6 @@ const WorkPage: React.FC<WorkPageProps> = ({
               ? `${projectsAmount} ${t("works.cases")}`
               : undefined
           }
-          // columnBText={t("works.by")}
         />
       )}
       <T_ProjectsGrid

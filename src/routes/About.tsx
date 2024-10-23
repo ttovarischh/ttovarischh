@@ -11,6 +11,7 @@ import { Project } from "../db/types";
 import M_PseudoAccordeon from "../components/Molecules/M_PseudoAccordeon";
 import M_MobPseudoAccordeon from "../components/Molecules/M_MobPseudoAccordeon";
 import { useScreenSize } from "../styles/ScreenSizeContext";
+import { media } from "../styles/mediaQueries";
 
 interface AboutPageProps {
   currentLanguage: "en" | "ru";
@@ -21,21 +22,27 @@ interface AboutPageProps {
 const AboutPageContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  // padding: 0px 2.5vw;
-  // padding: 0px 16px;
   box-sizing: border-box;
   padding-left: calc(16px + env(safe-area-inset-left, 0px));
   padding-right: calc(16px + env(safe-area-inset-right, 0px));
   position: relative;
-  // gap: 120px;
   gap: 16px;
+
+  ${media.laptop} {
+    padding: 0px 2.5vw;
+    padding: 0px 16px;
+    gap: 120px;
+  }
 `;
 
 const AboutPageInnerContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 80px;
-  // padding-top: 120px;
+
+  // ${media.laptop} {
+  //   padding-top: 120px;
+  // }
 `;
 
 const AboutPagePart = styled.div`
@@ -49,12 +56,11 @@ const AboutPage: React.FC<AboutPageProps> = ({
   t,
   projects,
 }) => {
-  console.log(about);
   const navigate = useNavigate();
   const selectedProjects = projects.filter((_, index) =>
     [0, 2, 3].includes(index)
   );
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
 
   return (
     <>
@@ -102,7 +108,7 @@ const AboutPage: React.FC<AboutPageProps> = ({
           </AboutPagePart>
           <AboutPagePart>
             <A_PageTextDivider header={t("about.education")} />
-            {isTabletLandscape ? (
+            {isTabletLandscape || isLaptop ? (
               <M_PseudoAccordeon
                 items={about.education}
                 currentLanguage={currentLanguage}

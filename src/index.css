@@ -16,35 +16,76 @@
   --mobile-padding-8: 8px;
   --mobile-padding-16: 16px;
 
-  --mobile-img-card-radius: 10px;
-  --mobile-img-in-card-radius: 5px;
-  --mobile-smallcard-radius: 12px;
-  --mobile-card-radius: 16px;
-
   --mobile-m-padding-left: calc(16px + env(safe-area-inset-left, 0px));
   --mobile-m-padding-right: calc(16px + env(safe-area-inset-right, 0px));
-
-  --mobile-single-image-radius: 5px;
 
   /* tablets */
   --tablets-outer-padding: 16px;
 
   /* normal */
+  /* border-radius */
   --simgle-img-border-radius: 5px;
   --incard-img-border-radius: 5px;
+  --incard-vertical-img-border-radius: 5px;
+
+  --incard-img-medium-border-radius: 10px;
+
+  --incard-img-bigger-border-radius: 12px;
+
+  --tag-border-radius: 8px;
+
+  --card-border-radius: 10px;
+  --bigger-card-radius: 12px;
+  --tag-border-radius: 8px;
+
+  --big-button-border-radius: 12px;
+  --button-border-radius: 100px;
+
+  --header-line-border-radius: 2px;
+
+  --logo-nav-button-border-radius: 4px;
+  --footer-border-radius: 12px 12px 0px 0px;
+
+  /* paddings */
+  --small-card-padding: 8px;
+  --medium-card-padding: 16px;
+
+  /* gaps */
+  --gap-12-104: 12px;
+  --gap-12-24: 12px;
 }
 
-/* tablets */
-@media only screen and (min-width: 768px) and (max-width: 1366px) and (min-height: 800px) and (-webkit-min-device-pixel-ratio: 1) and (orientation: portrait) {
+/* laptops */
+@media only screen and (min-device-width: 1200px) and (pointer: fine) and (hover: hover) and (-webkit-min-device-pixel-ratio: 1) {
   :root {
-    --simgle-img-border-radius: 5px;
-    --incard-img-border-radius: 5px;
+    --incard-img-border-radius: 10px;
+    --simgle-img-border-radius: 12px;
+
+    --card-border-radius: 16px;
+
+    --small-card-padding: 12px;
+
+    --medium-card-padding: 28px;
+
+    --tag-border-radius: 12px;
+
+    --incard-vertical-img-border-radius: 8px;
+
+    /* gaps */
+    --gap-12: 12px;
+
+    --gap-12-104: 1.04vw;
+    --gap-12-24: 24px;
   }
 }
 
 html {
   font-size: 16px;
   overflow: visible;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 @keyframes tv {

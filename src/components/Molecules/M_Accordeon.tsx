@@ -7,20 +7,13 @@ import Image from "../Quarks/Image";
 import Video from "../Quarks/Video";
 import A_Tag from "../Atoms/A_Tag";
 import { media } from "../../styles/mediaQueries";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 interface AccordeonProps {
   items: (WorkExperienceItem | SkillItem)[];
   currentLanguage: "en" | "ru";
   t: (key: string) => string;
 }
-
-// const AccordionContainer = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(6, 1fr);
-//   grid-column-gap: 1.04vw;
-//   grid-row-gap: 8px;
-//   width: 100%;
-// `;
 
 export const AccordionContainer = styled.div`
   display: flex;
@@ -35,13 +28,20 @@ export const AccordionContainer = styled.div`
     // grid-row-gap: var(--mobile-gap-8);
     grid-template-rows: 1fr;
   }
+
+  ${media.laptop} {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-row-gap: var(--mobile-gap-8);
+    grid-template-rows: 1fr;
+  }
 `;
 
 export const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
   grid-column-start: 2;
   grid-column-end: 6;
-  border-radius: 12px;
-  // background-color: ${({ theme }) => theme.cards.bg};
+  border-radius: var(--bigger-card-radius);
+
   transition: all 0.2s ease;
   background-color: ${({ $isOpen, theme }) =>
     $isOpen ? theme.cards.bg : "transparent"};
@@ -63,7 +63,8 @@ export const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
 export const AccordionHeader = styled.div<{ $isOpen: boolean }>`
   display: flex;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: var(--bigger-card-radius);
+
   box-sizing: border-box;
   background-color: ${({ $isOpen, theme }) =>
     $isOpen ? theme.cards.lighter_bg : theme.cards.bg};
@@ -78,34 +79,24 @@ export const AccordionHeader = styled.div<{ $isOpen: boolean }>`
     transition: all 0.5s ease;
     transform: rotate(${({ $isOpen }) => ($isOpen ? "45deg" : "0deg")});
   }
+
+  ${media.laptop} {
+    svg {
+      height: 3rem;
+      width: 3rem;
+      transition: all 0.5s ease;
+      transform: rotate(${({ $isOpen }) => ($isOpen ? "45deg" : "0deg")});
+    }
+
+    &:hover {
+      opacity: 0.7;
+
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
 `;
-
-// const AccordionHeader = styled.div<{ $isOpen: boolean }>`
-//   display: flex;
-//   padding: 20px;
-//   border-radius: 12px;
-//   box-sizing: border-box;
-//   background-color: ${({ $isOpen, theme }) =>
-//     $isOpen ? theme.cards.lighter_bg : theme.cards.bg};
-//   color: ${({ theme }) => theme.white};
-//   cursor: pointer;
-//   align-items: center;
-//   justify-content: space-between;
-//   transition: all 0.5s ease;
-
-//   svg {
-//     transition: all 0.5s ease;
-//     transform: rotate(${({ $isOpen }) => ($isOpen ? "45deg" : "0deg")});
-//   }
-
-//   &:hover {
-//     opacity: 0.7;
-
-//     svg {
-//       transform: rotate(180deg);
-//     }
-//   }
-// `;
 
 export const AccordionContent = styled.div<{ $isOpen: boolean }>`
   display: grid;
@@ -117,22 +108,6 @@ export const AccordionContent = styled.div<{ $isOpen: boolean }>`
   }
 `;
 
-// const AccordionContentWrapper = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(2, 1fr);
-//   grid-gap: 1.04vw;
-//   width: 100%;
-//   padding: 20px;
-//   box-sizing: border-box;
-
-//   img,
-//   video {
-//     aspect-ratio: 16/10;
-//     border-radius: 10px;
-//     cursor: inherit;
-//   }
-// `;
-
 export const AccordionContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -142,9 +117,10 @@ export const AccordionContentWrapper = styled.div`
   box-sizing: border-box;
 
   img,
-  video {
+  video,
+  .sk {
     aspect-ratio: 16/10;
-    border-radius: 10px;
+    border-radius: var(--incard-img-medium-border-radius);
     cursor: inherit;
   }
 
@@ -164,7 +140,12 @@ export const AccordionContentWrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 
-  //repeating
+  ${media.laptop} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.04vw;
+    padding: 20px;
+  }
 `;
 
 export const AccordionContentInnerWrapper = styled.div<{ $isSkill: boolean }>`
@@ -213,6 +194,8 @@ const M_Accordeon: React.FC<AccordeonProps> = ({
     return src.includes(".webm");
   };
 
+  const { isLaptop } = useScreenSize();
+
   return (
     <AccordionContainer>
       {items.map((item, index) => (
@@ -221,44 +204,47 @@ const M_Accordeon: React.FC<AccordeonProps> = ({
             onClick={() => toggleAccordion(index)}
             $isOpen={openIndex === index}
           >
-            <FlexBox
-              $direction="column"
-              // $gap="8px"
-              $gap="4px"
-            >
-              {/* <PP_32 medium lineHeight="2rem">
-                {isSkill(item)
-                  ? item.name[currentLanguage]
-                  : item.role[currentLanguage]}
-              </PP_32> */}
-              <PP_20 medium lineHeight="100%">
-                {isSkill(item)
-                  ? item.name[currentLanguage]
-                  : item.role[currentLanguage]}
-              </PP_20>
-
+            <FlexBox $direction="column" $gap={isLaptop ? "6px" : "4px"}>
+              {isLaptop ? (
+                <PP_32 medium lineHeight="2rem">
+                  {isSkill(item)
+                    ? item.name[currentLanguage]
+                    : item.role[currentLanguage]}
+                </PP_32>
+              ) : (
+                <PP_20 medium lineHeight="100%">
+                  {isSkill(item)
+                    ? item.name[currentLanguage]
+                    : item.role[currentLanguage]}
+                </PP_20>
+              )}
               {isSkill(item) ? (
-                // <PP_24 color={theme.medium_grey} medium>
-                //   {item.typeOf[currentLanguage]}
-                // </PP_24>
-                <PP_16 color={theme.medium_grey} medium>
-                  {item.typeOf[currentLanguage]}
-                </PP_16>
+                isLaptop ? (
+                  <PP_24 color={theme.medium_grey} medium>
+                    {item.typeOf[currentLanguage]}
+                  </PP_24>
+                ) : (
+                  <PP_16 color={theme.medium_grey} medium>
+                    {item.typeOf[currentLanguage]}
+                  </PP_16>
+                )
               ) : (
                 <a
                   href={item.organisation.url}
                   target="_blank"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* <PP_24 color={theme.medium_grey} medium>
-                    {item.organisation.text[currentLanguage]} / 
-                    {item.year[currentLanguage]}
-                  </PP_24> */}
-
-                  <PP_16 color={theme.medium_grey} medium>
-                    {item.organisation.text[currentLanguage]} / 
-                    {item.year[currentLanguage]}
-                  </PP_16>
+                  {isLaptop ? (
+                    <PP_24 color={theme.medium_grey} medium>
+                      {item.organisation.text[currentLanguage]} / 
+                      {item.year[currentLanguage]}
+                    </PP_24>
+                  ) : (
+                    <PP_16 color={theme.medium_grey} medium>
+                      {item.organisation.text[currentLanguage]} / 
+                      {item.year[currentLanguage]}
+                    </PP_16>
+                  )}
                 </a>
               )}
             </FlexBox>
@@ -279,12 +265,15 @@ const M_Accordeon: React.FC<AccordeonProps> = ({
                       <Image src={item.image_src} alt="Skill Image" />
                     )}
                     <AccordionContentInnerWrapper $isSkill={true}>
-                      {/* <PP_24 color={theme.medium_grey} medium>
-                        {item.text[currentLanguage]}
-                      </PP_24> */}
-                      <PP_18 color={theme.medium_grey} medium>
-                        {item.text[currentLanguage]}
-                      </PP_18>
+                      {isLaptop ? (
+                        <PP_24 color={theme.medium_grey} medium>
+                          {item.text[currentLanguage]}
+                        </PP_24>
+                      ) : (
+                        <PP_18 color={theme.medium_grey} medium>
+                          {item.text[currentLanguage]}
+                        </PP_18>
+                      )}
                       <InnerMapItem
                         $isSkill={true}
                         style={{ marginTop: "32px" }}
@@ -298,37 +287,52 @@ const M_Accordeon: React.FC<AccordeonProps> = ({
                 ) : (
                   <>
                     <AccordionContentInnerWrapper $isSkill={false}>
-                      {/* <PP_24 color={theme.white} medium>
-                        {t("about.responsibilities")}
-                      </PP_24> */}
-                      <PP_18 color={theme.white} medium>
-                        {t("about.responsibilities")}
-                      </PP_18>
+                      {isLaptop ? (
+                        <PP_24 color={theme.white} medium>
+                          {t("about.responsibilities")}
+                        </PP_24>
+                      ) : (
+                        <PP_18 color={theme.white} medium>
+                          {t("about.responsibilities")}
+                        </PP_18>
+                      )}
                       {item.responsibilities.map((responsibility, subIndex) => (
                         <InnerMapItem key={subIndex} $isSkill={false}>
                           <A_Icon iconName="arrowRight" />
-                          {/* <PP_24 color={theme.lightest_grey}>
-                            {responsibility.text[currentLanguage]}
-                          </PP_24> */}
-                          <PP_18 color={theme.lightest_grey}>
-                            {responsibility.text[currentLanguage]}
-                          </PP_18>
+                          {isLaptop ? (
+                            <PP_24 color={theme.lightest_grey}>
+                              {responsibility.text[currentLanguage]}
+                            </PP_24>
+                          ) : (
+                            <PP_18 color={theme.lightest_grey}>
+                              {responsibility.text[currentLanguage]}
+                            </PP_18>
+                          )}
                         </InnerMapItem>
                       ))}
                     </AccordionContentInnerWrapper>
                     <AccordionContentInnerWrapper key={index} $isSkill={false}>
-                      {/* <PP_24 color={theme.white} medium>
-                        {t("about.achievements")}
-                      </PP_24> */}
-                      <PP_18 color={theme.white} medium>
-                        {t("about.achievements")}
-                      </PP_18>
+                      {isLaptop ? (
+                        <PP_24 color={theme.white} medium>
+                          {t("about.achievements")}
+                        </PP_24>
+                      ) : (
+                        <PP_18 color={theme.white} medium>
+                          {t("about.achievements")}
+                        </PP_18>
+                      )}
                       {item.achievements.map((achievement, subIndex) => (
                         <InnerMapItem key={subIndex} $isSkill={false}>
                           <A_Icon iconName="arrowRight" />
-                          <PP_18 color={theme.lightest_grey}>
-                            {achievement.text[currentLanguage]}
-                          </PP_18>
+                          {isLaptop ? (
+                            <PP_24 color={theme.lightest_grey}>
+                              {achievement.text[currentLanguage]}
+                            </PP_24>
+                          ) : (
+                            <PP_18 color={theme.lightest_grey}>
+                              {achievement.text[currentLanguage]}
+                            </PP_18>
+                          )}
                         </InnerMapItem>
                       ))}
                     </AccordionContentInnerWrapper>

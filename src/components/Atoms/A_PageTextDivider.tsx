@@ -45,12 +45,22 @@ const PageTextDividerInnerWrapper = styled(FlexBox)`
       width: unset;
     }
   }
+
+  ${media.laptop} {
+    svg {
+      height: unset;
+      width: unset;
+    }
+  }
 `;
 
 const HeaderWrapper = styled(FlexBox)`
   align-items: baseline;
   gap: 8px;
-  // gap: 16px;
+
+  ${media.laptop} {
+    gap: 16px;
+  }
 `;
 
 const A_PageTextDivider: React.FC<PageTextDividerProps> = ({
@@ -62,13 +72,13 @@ const A_PageTextDivider: React.FC<PageTextDividerProps> = ({
   buttonText,
 }) => {
   const theme = useTheme();
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
   return (
     <PageTextDividerWrapper $text={text}>
       <PageTextDividerInnerWrapper>
         <HeaderWrapper>
           {reverse && iconName && <A_Icon iconName={iconName} />}
-          {isTabletLandscape ? (
+          {isTabletLandscape || isLaptop ? (
             <PP_80 medium color={theme.white}>
               {header}
             </PP_80>
@@ -80,7 +90,7 @@ const A_PageTextDivider: React.FC<PageTextDividerProps> = ({
           {!reverse && iconName && <A_Icon iconName={iconName} />}
         </HeaderWrapper>
         {text &&
-          (isTabletLandscape ? (
+          (isTabletLandscape || isLaptop ? (
             <PP_24 medium color={theme.medium_grey}>
               {text}
             </PP_24>

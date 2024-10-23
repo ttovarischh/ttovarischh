@@ -19,7 +19,8 @@ const LogoNavButton = styled(Link)`
   background-color: ${({ theme }) => theme.white};
   height: 44px;
   padding: 0px 12px;
-  border-radius: 4px;
+  border-radius: var(--logo-nav-button-border-radius);
+
   z-index: 5;
 
   p {
@@ -54,7 +55,8 @@ const MenuButtonWrapper = styled.button<{
   background-color: ${({ theme, $isOpened }) =>
     $isOpened ? theme.black : theme.navigation.themeswitcher};
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
+
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
   padding: 0 22px;
@@ -111,7 +113,8 @@ const RouteButtons = styled(Link)<{
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
+
   background: ${({ theme }) => theme.white};
   p {
     color: ${({ theme }) => theme.black};
@@ -135,7 +138,8 @@ const RouteRealButton = styled.div<{
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
+
   background: ${({ theme }) => theme.white};
   p {
     color: ${({ theme }) => theme.black};

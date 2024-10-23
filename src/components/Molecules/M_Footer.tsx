@@ -53,7 +53,7 @@ const FooterWrapper = styled(FlexBox)`
     max(16px, env(safe-area-inset-right, 16px));
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.footer.bg};
-  border-radius: 12px 12px 0px 0px;
+  border-radius: var(--footer-border-radius);
 
   ::selection {
     color: ${({ theme }) => theme.white};
@@ -88,7 +88,6 @@ const FooterUpperRow = styled.div`
   grid-column-gap: 1.04vw;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 20px 20px 0px 0px;
 
   ${media.tablets} {
     display: flex;
@@ -300,8 +299,6 @@ const M_Footer = ({ currentLanguage, t }: FooterProps) => {
   const theme = useTheme();
   const { isTablet, isPhoneLandscape, isLaptop, isTabletLandscape } =
     useScreenSize();
-
-  console.log(isLaptop);
 
   const scrollToTop = () => {
     window.scrollTo({

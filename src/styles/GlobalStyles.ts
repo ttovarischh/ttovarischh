@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle<{ theme: any }>`
     border: 0;
     width: 12px;
     height: 12px;
-    border-radius: 50%;
+    border-radius: var(--button-border-radius);
     transition: all 0.5s ease;
 
     // new

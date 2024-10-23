@@ -12,6 +12,10 @@ const LanguageSwitcherWrapper = styled(FlexBox)`
   ${media.tablets} {
     gap: 0px;
   }
+
+  ${media.laptop} {
+    gap: 0px;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -43,20 +47,6 @@ const A_LanguageSwitcher = () => {
         onClick={() => handleLanguageChange("ru")}
         aria-label="Switch to Russian"
       >
-        {/* <PP_20 uppercase medium underline={i18n.language === "ru"}>
-          Ru
-        </PP_20>
-      </StyledButton>
-      <PP_20 uppercase medium>
-        /
-      </PP_20>
-      <StyledButton
-        onClick={() => handleLanguageChange("en")}
-        aria-label="Switch to English"
-      >
-        <PP_20 uppercase medium underline={i18n.language === "en"}>
-          Eng
-        </PP_20> */}
         {isTablet || isTabletLandscape || isLaptop ? (
           <PP_20 uppercase medium underline={i18n.language === "ru"}>
             Ru

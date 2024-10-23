@@ -21,6 +21,7 @@ import A_PageTextDivider from "../components/Atoms/A_PageTextDivider";
 import { Project } from "../db/types";
 import M_UILinkCardsGrid from "../components/Molecules/M_UILinkCardsGrid";
 import { useScreenSize } from "../styles/ScreenSizeContext";
+import { media } from "../styles/mediaQueries";
 
 const OPTIONS: EmblaOptionsType = { loop: true, watchDrag: true };
 
@@ -32,22 +33,18 @@ interface ProjectPageProps {
 const ProjectPageWrapper = styled(FlexBox)`
   display: flex;
   flex-direction: column;
-  // padding: 0px 2.5vw;
-
-  // gap: 180px;
-
   padding-left: calc(16px + env(safe-area-inset-left, 0px));
   padding-right: calc(16px + env(safe-area-inset-right, 0px));
-
-  // padding-left: var(--mobile-m-padding-left);
-  // padding-right: var(--mobile-m-padding-right);
-
-  // gap: 80px;
   gap: var(--mobile-page-gap-s);
   position: relative;
   height: auto;
   overflow: visible;
   padding-top: var(--mobile-page-gap-s);
+
+  ${media.laptop} {
+    padding: 0px 2.5vw;
+    gap: 180px;
+  }
 `;
 
 const StickyMenuWrapper = styled.div`
@@ -66,8 +63,8 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
   const projectPageRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
-  console.log(isPhoneLandscape);
+  const { isTablet, isPhoneLandscape, isTabletLandscape, isLaptop } =
+    useScreenSize();
 
   useEffect(() => {
     const handleResize = () => {
@@ -103,6 +100,12 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
     (proj) => proj.name.en.toLowerCase().replace(/ /g, "-") === formattedName
   );
 
+  useEffect(() => {
+    if (!project) {
+      navigate("/404");
+    }
+  }, [project, navigate]);
+
   if (!project) {
     return <div>Project not found</div>;
   }
@@ -127,16 +130,18 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
             : t("projectPage.timeline")
         }
         columnBHeader={
-          isTablet || isTabletLandscape ? t("projectPage.timeline") : undefined
+          isTablet || isTabletLandscape || isLaptop
+            ? t("projectPage.timeline")
+            : undefined
         }
         columnCHeader={t("projectPage.deliverables")}
         columnAText={
-          isTablet || isTabletLandscape
+          isTablet || isTabletLandscape || isLaptop
             ? project.type[currentLanguage]
             : project.timeline[currentLanguage]
         }
         columnBText={
-          isTablet || isTabletLandscape
+          isTablet || isTabletLandscape || isLaptop
             ? project.timeline[currentLanguage]
             : undefined
         }
@@ -144,7 +149,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
       />
       <A_ProjectCover
         cover={
-          isPhoneLandscape || isTablet || isTabletLandscape
+          isPhoneLandscape || isTablet || isTabletLandscape || isLaptop
             ? project.cover
             : project.cover_mob
         }
@@ -182,12 +187,14 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
             team={project.team}
             teamColumnHeader={t("projectPage.team")}
           />
-          {/* <StickyMenuWrapper ref={menuRef}>
-            <PageMenu
-              menuItems={project.menuItems}
-              currentLanguage={currentLanguage}
-            />
-          </StickyMenuWrapper> */}
+          {isLaptop && (
+            <StickyMenuWrapper ref={menuRef}>
+              <PageMenu
+                menuItems={project.menuItems}
+                currentLanguage={currentLanguage}
+              />
+            </StickyMenuWrapper>
+          )}
           {project.layout.map((item, index) => {
             const textIndex = item.textIndex;
             const smallCardIndex = item.smallCardIndex;
@@ -392,6 +399,27 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                 const uiShowIndex = item.uiShowIndex;
 
                 if (uiShowIndex !== undefined) {
+                  if (isLaptop) {
+                    return (
+                      <M_UIShow
+                        key={index}
+                        uiShow={project.uiShow[uiShowIndex]}
+                        language={currentLanguage}
+                        references={item.references}
+                        projectName={project.name[currentLanguage]}
+                      />
+                    );
+                  } else {
+                    return (
+                      <M_UILinkCardsGrid
+                        key={`UISHOW ${uiShowIndex}-${currentLanguage}`}
+                        uiShow={project.uiShow[uiShowIndex]}
+                        references={item.references}
+                        language={currentLanguage}
+                        toTop={uiShowIndex !== 0}
+                      />
+                    );
+                  }
                   // return (
                   //   <M_UIShow
                   //     key={index}
@@ -401,15 +429,15 @@ const ProjectPage: React.FC<ProjectPageProps> = ({ currentLanguage, t }) => {
                   //     projectName={project.name[currentLanguage]}
                   //   />
                   // );
-                  return (
-                    <M_UILinkCardsGrid
-                      key={`UISHOW ${uiShowIndex}-${currentLanguage}`}
-                      uiShow={project.uiShow[uiShowIndex]}
-                      references={item.references}
-                      language={currentLanguage}
-                      toTop={uiShowIndex !== 0}
-                    />
-                  );
+                  // return (
+                  //   <M_UILinkCardsGrid
+                  //     key={`UISHOW ${uiShowIndex}-${currentLanguage}`}
+                  //     uiShow={project.uiShow[uiShowIndex]}
+                  //     references={item.references}
+                  //     language={currentLanguage}
+                  //     toTop={uiShowIndex !== 0}
+                  //   />
+                  // );
                 } else {
                   console.warn(
                     `uiShowIndex is undefined for item at index ${index}`

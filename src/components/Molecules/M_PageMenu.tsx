@@ -13,7 +13,10 @@ const MenuContainer = styled.div<{ $isHovered?: boolean }>`
   left: auto;
   top: 28vh;
   padding: ${(props) => (props.$isHovered ? "20px" : "0px")};
-  border-radius: ${(props) => (props.$isHovered ? "12px" : "0px")};
+
+  border-radius: ${(props) =>
+    props.$isHovered ? `var(--bigger-card-radius)` : 0};
+
   background-color: ${(props) =>
     props.$isHovered ? ({ theme }) => theme.page_menu.bg : "transparent"};
   box-shadow: ${(props) =>
@@ -35,14 +38,16 @@ const MenuContainer = styled.div<{ $isHovered?: boolean }>`
 
   &::-webkit-scrollbar-thumb {
     background-color: transparent;
-    border-radius: 200px;
+
+    border-radius: var(--button-border-radius);
   }
 `;
 
 const Line = styled.div<{ $isSubItem?: boolean; $isActive?: boolean }>`
   height: 2px;
   width: ${(props) => (props.$isSubItem ? "10px" : "20px")};
-  border-radius: 1px;
+  border-radius: var(--header-line-border-radius);
+
   transition: all 0.5s ease;
   opacity: ${(props) => (props.$isActive ? 1 : 0.4)};
   background-color: ${({ theme }) => theme.page_menu.line};
@@ -50,7 +55,8 @@ const Line = styled.div<{ $isSubItem?: boolean; $isActive?: boolean }>`
 
 const Header = styled(FlexBox)`
   padding: 2px 8px;
-  border-radius: 2px;
+  border-radius: var(--header-line-border-radius);
+
   cursor: pointer;
   box-sizing: border-box;
   width: 100%;
@@ -62,7 +68,8 @@ const Header = styled(FlexBox)`
 const SubItem = styled.div`
   cursor: pointer;
   padding: 2px 8px;
-  border-radius: 2px;
+  border-radius: var(--header-line-border-radius);
+
   box-sizing: border-box;
   margin-left: 2rem;
   max-width: 200px;

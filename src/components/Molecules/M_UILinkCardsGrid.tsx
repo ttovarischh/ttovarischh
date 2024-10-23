@@ -29,7 +29,8 @@ const LinkCardWrapper = styled.div<{ $toTop: boolean }>`
   display: flex;
   flex-direction: column;
   padding: var(--mobile-padding-8);
-  border-radius: var(--mobile-img-card-radius);
+  border-radius: var(--card-border-radius);
+
   gap: var(--mobile-gap-8);
   width: 100%;
   box-sizing: border-box;
@@ -94,7 +95,6 @@ const M_UILinkCardsGrid: React.FC<LinkCardsGridProps> = ({
           alt={`${uiShow.headerA} thumbnail`}
           $width="100%"
           $aspectRatio={16 / 9}
-          $borderRadius="5px"
         />
       </LazyLoad>
       <LinkCardInfo>

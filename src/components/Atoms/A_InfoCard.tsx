@@ -12,22 +12,17 @@ interface InfoCardProps {
 }
 
 const InfoCardWrapper = styled(FlexBox)`
-  // padding: 28px;
   flex-direction: column;
   justify-content: space-between;
-  // width: 35.42vw;
-  // height: 35.42vw;
-  border-radius: 12px;
+  border-radius: var(--bigger-card-radius);
   background-color: ${({ theme }) => theme.cards.bg};
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
   white-space: pre-line;
-
-  // new
   width: 100%;
   box-sizing: border-box;
   aspect-ratio: 1/1;
-  padding: var(--mobile-card-radius);
+  padding: 16px;
 
   ${media.phoneLansdscape} {
     width: 404px;
@@ -46,6 +41,12 @@ const InfoCardWrapper = styled(FlexBox)`
     width: 45vw;
     height: 45vw;
   }
+
+  ${media.laptop} {
+    padding: 28px;
+    width: 35.42vw;
+    height: 35.42vw;
+  }
 `;
 
 const A_InfoCard: React.FC<InfoCardProps> = ({
@@ -54,15 +55,18 @@ const A_InfoCard: React.FC<InfoCardProps> = ({
   reference,
   style,
 }) => {
-  const { isTabletLandscape } = useScreenSize();
+  const { isTabletLandscape, isLaptop } = useScreenSize();
   return (
-    <InfoCardWrapper id={reference || undefined} style={style}>
-      {isTabletLandscape ? (
+    <InfoCardWrapper id={reference ?? undefined} style={style}>
+      {isLaptop ? (
         <>
-          {/* <PP_80 medium lineHeight="95%">
+          <PP_80 medium lineHeight="95%">
             {header}
           </PP_80>
-          <PP_24>{text}</PP_24> */}
+          <PP_24>{text}</PP_24>
+        </>
+      ) : isTabletLandscape ? (
+        <>
           <PP_48 medium lineHeight="95%">
             {header}
           </PP_48>

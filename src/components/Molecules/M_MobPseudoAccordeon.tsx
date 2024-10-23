@@ -23,7 +23,8 @@ const AccordionContainer = styled.div<{ $openIndex: number | null }>`
 const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
+  border-radius: var(--bigger-card-radius);
+
   height: auto;
   background-color: ${({ theme }) => theme.cards.bg};
   transition: all 0.5s ease, opacity 0.3s ease;
@@ -41,7 +42,8 @@ const AccordionWrapper = styled.div<{ $isOpen: boolean }>`
 const AccordionHeader = styled.div<{ $isOpen: boolean }>`
   display: flex;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: var(--bigger-card-radius);
+
   box-sizing: border-box;
   align-items: baseline;
   background-color: ${({ $isOpen, theme }) =>

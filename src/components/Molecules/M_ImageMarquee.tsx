@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styled, { useTheme } from "styled-components";
 import { FlexBox, PP_16, PP_20 } from "../Quarks";
 import Image from "../Quarks/Image";
 import Marquee from "react-fast-marquee";
 import Video from "../Quarks/Video";
-import LazyLoad from "react-lazyload";
 import { useScreenSize } from "../../styles/ScreenSizeContext";
-import { media } from "../../styles/mediaQueries";
 
 interface Work {
   image_src: string;
@@ -29,21 +27,14 @@ const ImageMarqueeWrapper = styled.div<{
   width: 100vw;
 
   img {
-    border-radius: 0;
-    // height: 29.38vw;
     height: ${(props) => props.$imageHeight};
     width: auto;
-    cursor: pointer;
   }
   video {
-    border-radius: 0;
-    // height: 29.38vw;
     height: ${(props) => props.$imageHeight};
     width: auto;
-    cursor: pointer;
   }
   .marqueeskeleton {
-    // height: 29.38vw;
     height: ${(props) => props.$imageHeight};
     width: auto;
     aspect-ratio: 16/9;
@@ -52,9 +43,9 @@ const ImageMarqueeWrapper = styled.div<{
 
 const ImageMarquee = styled(FlexBox)`
   flex-wrap: nowrap;
-  // gap: 1.04vw;
-  gap: var(--mobile-gap-12);
-  :nth-child(1) {
+  gap: var(--gap-12-104);
+
+  a:first-of-type {
     margin-left: 1.04vw;
   }
 `;
@@ -62,8 +53,7 @@ const ImageMarquee = styled(FlexBox)`
 const WorkLink = styled.a`
   display: flex;
   flex-direction: column;
-  // gap: 24px;
-  gap: var(--mobile-gap-12);
+  gap: var(--gap-12);
   transition: opacity 0.3s ease;
   cursor: pointer;
 
@@ -82,7 +72,7 @@ const M_ImageMarquee: React.FC<ImageMarqueeProps> = ({
   const isVideo = (src: string): boolean => {
     return src.includes(".webm");
   };
-  const { isPhoneLandscape } = useScreenSize();
+  const { isLaptop } = useScreenSize();
 
   return (
     <ImageMarqueeWrapper $direction={direction} $imageHeight={imageHeight}>
@@ -94,18 +84,20 @@ const M_ImageMarquee: React.FC<ImageMarqueeProps> = ({
               href={work.link}
               target="_blank"
             >
-              {/* <PP_20 medium color={theme.medium_grey}>
-                {work.image_description[0][currentLanguage]}
-              </PP_20> */}
-              <PP_16 medium color={theme.medium_grey}>
-                {work.image_description[0][currentLanguage]}
-              </PP_16>
+              {isLaptop ? (
+                <PP_20 medium color={theme.medium_grey}>
+                  {work.image_description[0][currentLanguage]}
+                </PP_20>
+              ) : (
+                <PP_16 medium color={theme.medium_grey}>
+                  {work.image_description[0][currentLanguage]}
+                </PP_16>
+              )}
               {isVideo(work.image_src) ? (
                 <Video
                   shouldAutoplay
                   src={work.image_src}
                   $className="marqueeskeleton"
-                  $borderRadius="0px"
                   poster={work.poster}
                 />
               ) : (
@@ -113,7 +105,6 @@ const M_ImageMarquee: React.FC<ImageMarqueeProps> = ({
                   src={work.image_src}
                   alt={work.image_description[0]["en"]}
                   $className="marqueeskeleton"
-                  $borderRadius="0px"
                 />
               )}
             </WorkLink>

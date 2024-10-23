@@ -22,12 +22,15 @@ const FramedImagesFlexBox = styled(FlexBox)`
   gap: 1.04vw;
   transition: all 0.5s ease;
   width: 100%;
+
+  img {
+    cursor: zoom-in;
+  }
 `;
 
 const FramedImagesContainer = styled(FlexBox)`
   flex-direction: column;
   width: 100%;
-  // gap: var(--desktop-gap);
   gap: var(--mobile-gap-8);
 
   ${media.phoneLansdscape} {
@@ -41,20 +44,41 @@ const FramedImagesContainer = styled(FlexBox)`
   ${media.tabletsL} {
     flex-direction: row;
   }
+
+  ${media.laptop} {
+    flex-direction: row;
+    gap: 1.04vw;
+  }
 `;
 
 const ImagesGrid = styled(FlexBox)`
-  // gap: 1.04vw;
   gap: var(--mobile-gap-8);
   width: 100%;
+
+  ${media.laptop} {
+    gap: 1.04vw;
+  }
+
+  img {
+    cursor: zoom-in;
+    border-radius: var(--simgle-img-border-radius);
+  }
+
+  video,
+  .sk {
+    border-radius: var(--simgle-img-border-radius);
+  }
 `;
 
 const ImagesFlexBox = styled.div`
   display: flex;
   flex-direction: row;
-  // gap: 1.04vw;
   gap: var(--mobile-gap-8);
   width: 100%;
+
+  ${media.laptop} {
+    gap: 1.04vw;
+  }
 `;
 
 const M_CaseImagesGrid: React.FC<CaseImagesGridProps> = ({

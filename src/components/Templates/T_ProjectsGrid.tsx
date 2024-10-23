@@ -38,6 +38,12 @@ const ProjectsGrid = styled.div`
     grid-gap: 1.04vw;
     grid-template-columns: 1fr 1fr;
   }
+
+  ${media.laptop} {
+    display: grid;
+    grid-gap: 1.04vw;
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 // const BgGradient = styled.img`
@@ -62,24 +68,23 @@ const BgGradient = styled.img`
   position: absolute;
   width: 100vw;
   height: auto;
-  // left: calc(50% - 280vw);
   top: -17%;
-  // top: calc(15% - 240vw);
   z-index: -1;
   margin-left: calc(-16px - env(safe-area-inset-left, 0px));
 
   ${media.phoneLansdscape} {
-    // display: none;
     top: -60%;
   }
 
   ${media.tablets} {
-    // display: none;
     top: -89%;
   }
 
   ${media.tabletsL} {
-    // display: none;
+    top: -50%;
+  }
+
+  ${media.laptop} {
     top: -50%;
   }
 `;
@@ -126,7 +131,8 @@ const T_ProjectsGrid = ({
   const selectedProjects = projects.filter((_, index) =>
     [0, 2, 3].includes(index)
   );
-  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
+  const { isTablet, isPhoneLandscape, isTabletLandscape, isLaptop } =
+    useScreenSize();
 
   if (featured) {
     return (
@@ -134,7 +140,7 @@ const T_ProjectsGrid = ({
         {similar && (
           <BgGradient
             src={
-              isTabletLandscape
+              isTabletLandscape || isLaptop
                 ? "/assets/images/pc.webp"
                 : isTablet
                 ? "/assets/images/tablet_v.webp"
@@ -151,7 +157,7 @@ const T_ProjectsGrid = ({
                 name={project.name}
                 description={project.description}
                 src={
-                  isPhoneLandscape || isTablet || isTabletLandscape
+                  isPhoneLandscape || isTablet || isTabletLandscape || isLaptop
                     ? project.vertical_cover!
                     : project.horisontal_cover!
                 }
@@ -196,7 +202,8 @@ const T_ProjectsGrid = ({
             fadeOut={fadeOutStates![index]}
             locked={project.locked}
             highlight={
-              (isTablet || isTabletLandscape) && (index === 2 || index === 5)
+              (isTablet || isTabletLandscape || isLaptop) &&
+              (index === 2 || index === 5)
             }
           />
         ))}

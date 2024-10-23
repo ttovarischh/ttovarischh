@@ -16,9 +16,9 @@ interface ProjectCardProps {
   deliverables: { en: string; ru: string };
   type: { en: string; ru: string };
   currentLanguage: "en" | "ru";
-  horisontalOverlay?: boolean;
-  overlayColor?: string;
-  darkText?: boolean;
+  // horisontalOverlay?: boolean;
+  // overlayColor?: string;
+  // darkText?: boolean;
   works?: boolean;
   year?: string;
   filterTags?: {
@@ -41,7 +41,7 @@ const CardWrapper = styled.div<{
 }>`
   padding: 8px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: var(--card-border-radius);
 
   position: relative;
   display: ${({ $highlight }) => ($highlight ? "grid" : "flex")};
@@ -49,7 +49,6 @@ const CardWrapper = styled.div<{
   grid-template-columns: 4fr 2fr;
   grid-column-gap: 1.04vw;
   background-color: ${({ theme }) => theme.cards.bg};
-
   overflow: ${({ $locked }) => ($locked ? "visible" : "hidden")};
   cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
   transition: all 0.3s ease-out;
@@ -61,7 +60,12 @@ const CardWrapper = styled.div<{
     transition: transform 0.5s ease;
     aspect-ratio: 16/9;
     object-position: top;
-    border-radius: 5px;
+    border-radius: var(--incard-img-border-radius);
+    cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
+  }
+
+  .sk {
+    border-radius: var(--incard-img-border-radius);
   }
 
   ${media.phoneLansdscape} {
@@ -77,102 +81,47 @@ const CardWrapper = styled.div<{
     height: 100%;
   }
 
-  // desktop
-  // &:hover {
-  //   box-shadow: ${({ $locked, theme }) =>
-    !$locked ? `0px 10px 30px ${theme.boxShadows.projectCards}` : "none"};
+  ${media.laptop} {
+    padding: 20px;
+    &:hover {
+      box-shadow: ${({ $locked, theme }) =>
+        !$locked ? `0px 10px 30px ${theme.boxShadows.projectCards}` : "none"};
 
-  //   img {
-  //     transform: scale(${({ $locked }) => ($locked ? "none" : "1.01")});
-  //   }
-  // }
-
-  // > * {
-  //   cursor: ${({ $locked }) => $locked && "none"};
-  // }
+      img {
+        transform: scale(${({ $locked }) => ($locked ? "none" : "1.01")});
+      }
+    }
+  }
 `;
-
-// const CardWrapper = styled.div<{
-//   $fadeOut?: boolean;
-//   $highlight?: boolean;
-//   $locked?: boolean;
-// }>`
-//   position: relative;
-//   display: ${({ $highlight }) => ($highlight ? "grid" : "flex")};
-//   flex-direction: ${({ $highlight }) => ($highlight ? "row" : "column")};
-//   grid-template-columns: 4fr 2fr;
-//   grid-column-gap: 1.04vw;
-//   background-color: ${({ theme }) => theme.cards.bg};
-//   padding: 20px;
-//   box-sizing: border-box;
-//   border-radius: 16px;
-//   overflow: ${({ $locked }) => ($locked ? "visible" : "hidden")};
-//   cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
-//   transition: all 0.3s ease-out;
-//   opacity: ${({ $fadeOut }) => ($fadeOut ? 0 : 1)};
-//   transform: translateY(${({ $fadeOut }) => ($fadeOut ? "10px" : "0px")});
-
-//   &:hover {
-//     box-shadow: ${({ $locked, theme }) =>
-//       !$locked ? `0px 10px 30px ${theme.boxShadows.projectCards}` : "none"};
-
-//     img {
-//       transform: scale(${({ $locked }) => ($locked ? "none" : "1.01")});
-//     }
-//   }
-
-//   > * {
-//     cursor: ${({ $locked }) => $locked && "none"};
-//   }
-
-//   img {
-//     width: 100%;
-//     transition: transform 0.5s ease;
-//     cursor: ${({ $locked }) => ($locked ? "none" : "pointer")};
-//     aspect-ratio: 16/9;
-//     object-position: top;
-//   }
-// `;
 
 const MovingCardWrapper = styled(FlexBox)<{
   $isVisible: boolean;
   $vertical?: boolean;
 }>`
   background-color: ${({ theme }) => theme.main_grey};
-  // width: ${({ $vertical }) => ($vertical ? "auto" : "63.02vw")};
   width: 100%;
   box-sizing: border-box;
-  // border-radius: 16px;
-  border-radius: 10px;
+  border-radius: var(--card-border-radius);
+
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.5s ease, box-shadow 0.5s ease;
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.8s ease-out;
-  // padding: ${({ $vertical }) => ($vertical ? "12px" : "20px")};
   padding: 8px;
   border: ${({ $vertical }) =>
     $vertical ? "1px solid hsla(0, 0%, 0%, 0.045)" : "none"};
   box-shadow: ${({ $vertical }) =>
     $vertical ? "0px 0px 15px rgba(0, 0, 0, 0.7)" : "none"};
 
-  // &:hover {
-  //   transform: scale(1.02);
-  //   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
-
-  //   img {
-  //     transform: scale(1.01);
-  //   }
-  // }
-
   img {
-    // width: ${({ $vertical }) => ($vertical ? "19.11vw" : "100%")};
     width: 100%;
-    transition: transform 0.5s ease;
-    cursor: pointer;
-    // border-radius: ${({ $vertical }) => ($vertical ? "8px" : "10px")};
-    border-radius: 5px;
+    border-radius: var(--incard-img-border-radius);
+  }
+
+  .sk {
+    border-radius: var(--incard-img-border-radius);
   }
 
   ${({ $isVisible }) =>
@@ -184,6 +133,35 @@ const MovingCardWrapper = styled(FlexBox)<{
 
   ${media.tabletsL} {
     width: ${({ $vertical }) => ($vertical ? "unset" : "63.02vw")};
+  }
+
+  ${media.laptop} {
+    width: ${({ $vertical }) => ($vertical ? "auto" : "63.02vw")};
+    padding: ${({ $vertical }) => ($vertical ? "12px" : "20px")};
+
+    img {
+      border-radius: ${({ $vertical }) =>
+        $vertical
+          ? `var(--incard-vertical-img-border-radius)`
+          : `var(--incard-img-border-radius)`};
+
+      transition: transform 0.5s ease;
+      cursor: pointer;
+      width: ${({ $vertical }) => ($vertical ? "19.11vw" : "100%")};
+    }
+
+    .sk {
+      width: ${({ $vertical }) => ($vertical ? "19.11vw" : "100%")};
+    }
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+
+      img {
+        transform: scale(1.01);
+      }
+    }
   }
 `;
 
@@ -208,13 +186,13 @@ const ProjectInfoWrapper = styled(FlexBox)<{
   justify-content: space-between;
   align-items: flex-end;
   box-sizing: border-box;
-  // margin-top: ${({ $vertical }) => ($vertical ? "12px" : "0px")};
   margin-top: 0px;
-  // padding: ${({ $works, $highlight, $vertical }) =>
-    $works && $highlight ? "0px" : $vertical ? "0px 4px " : "20px 0px 0px"};
   padding: 4px;
-  // padding-top: 8px;
   padding-top: 12px;
+
+  p {
+    max-width: ${({ $highlight }) => ($highlight ? "90%" : "auto")};
+  }
 
   ${media.phoneLansdscape} {
     padding-top: ${({ $vertical }) => ($vertical ? "0px" : "12px")};
@@ -230,8 +208,10 @@ const ProjectInfoWrapper = styled(FlexBox)<{
     height: 100%;
   }
 
-  p {
-    max-width: ${({ $highlight }) => ($highlight ? "90%" : "auto")};
+  ${media.laptop} {
+    margin-top: ${({ $vertical }) => ($vertical ? "12px" : "0px")};
+    padding: ${({ $works, $highlight, $vertical }) =>
+      $works && $highlight ? "0px" : $vertical ? "0px 4px " : "20px 0px 0px"};
   }
 `;
 
@@ -243,8 +223,9 @@ const TagsWrapper = styled(FlexBox)<{
     $highlight ? "column-reverse" : "row"};
   gap: 8px;
 
-  // desktop
-  // justify-content: space-between;
+  ${media.laptop} {
+    justify-content: space-between;
+  }
 `;
 
 const TagsInnerWrapper = styled(FlexBox)<{
@@ -287,7 +268,7 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
           if (entry.isIntersecting) {
             set$IsVisible(true);
             if (cardRef.current) {
-              observer.unobserve(cardRef.current); // Stop observing once visible
+              observer.unobserve(cardRef.current);
             }
           }
         });
@@ -301,7 +282,7 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
 
     return () => {
       if (cardRef.current) {
-        observer.unobserve(cardRef.current); // Cleanup in case it wasn't done
+        observer.unobserve(cardRef.current);
       }
     };
   }, []);
@@ -329,12 +310,12 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
       tooltipRef.current.style.top = `${y}px`;
     }
   };
-  const { isTablet, isPhoneLandscape, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
 
   if (works) {
     return (
       <Link
-        to={`/${formattedName}`}
+        to={`/work/${formattedName}`}
         style={{ gridColumn: highlight ? "1 / -1" : "auto" }}
         onClick={(e) => {
           if (locked) {
@@ -350,37 +331,39 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
           $locked={locked}
         >
           {locked && <A_Tooltip ref={tooltipRef} />}
-          <A_ProjectCover
-            cover={src}
-            horisontal
-            projectName={name["en"]}
-            $imageBorderRadius="10px"
-          />
+          <A_ProjectCover cover={src} horisontal projectName={name["en"]} />
           <ProjectInfoWrapper $works={works} $gap="28px" $highlight={highlight}>
             <FlexBox
               $direction="column"
               $gap={highlight && !isTablet ? "12px" : "4px"}
               style={{ margin: "2px" }}
             >
-              {/* <PP_32 medium lineHeight="32px">
-                {name[currentLanguage]}
-              </PP_32> */}
-              <PP_24 medium lineHeight="24px">
-                {name[currentLanguage]}
-              </PP_24>
-              <PP_18 medium color={theme.medium_grey}>
-                {highlight && !isTablet
-                  ? description[currentLanguage]
-                  : s_description[currentLanguage]}
-              </PP_18>
-              {/* <PP_20 medium color={theme.medium_grey}>
-                {highlight
-                  ? description[currentLanguage]
-                  : s_description[currentLanguage]}
-              </PP_20> */}
+              {isLaptop ? (
+                <>
+                  <PP_32 medium lineHeight="32px">
+                    {name[currentLanguage]}
+                  </PP_32>
+                  <PP_20 medium color={theme.medium_grey}>
+                    {highlight
+                      ? description[currentLanguage]
+                      : s_description[currentLanguage]}
+                  </PP_20>
+                </>
+              ) : (
+                <>
+                  <PP_24 medium lineHeight="24px">
+                    {name[currentLanguage]}
+                  </PP_24>
+                  <PP_18 medium color={theme.medium_grey}>
+                    {highlight && !isTablet
+                      ? description[currentLanguage]
+                      : s_description[currentLanguage]}
+                  </PP_18>
+                </>
+              )}
             </FlexBox>
             <TagsWrapper $highlight={highlight}>
-              {isTablet || isTabletLandscape ? (
+              {isTablet || isTabletLandscape || isLaptop ? (
                 <TagsInnerWrapper $highlight={highlight}>
                   {filterTags!.map((filterTag, index) => (
                     <A_Tag
@@ -407,35 +390,54 @@ const O_ProjectCard: React.FC<ProjectCardProps> = ({
     );
   } else {
     return (
-      <Link to={`/${formattedName}`}>
+      <Link to={`/work/${formattedName}`}>
         <MovingCardWrapper
           $direction="column"
           $isVisible={$isVisible}
           ref={cardRef}
           $vertical={vertical}
         >
-          <A_ProjectCover cover={src} horisontal projectName={name["en"]} />
+          <A_ProjectCover
+            cover={src}
+            horisontal
+            projectName={name["en"]}
+            verticalCard={vertical}
+          />
           <ProjectInfoWrapper $vertical={vertical}>
-            <FlexBox $direction="column" $gap="6px" style={{ padding: "2px" }}>
-              {/* <PP_24 medium lineHeight="1.5rem">
-                {name[currentLanguage]}
-              </PP_24> */}
-              <PP_20 medium lineHeight="100%">
-                {name[currentLanguage]}
-              </PP_20>
-              {/* <PP_14 medium color={theme.medium_grey}>
-                {deliverables[currentLanguage]}
-              </PP_14> */}
-              <PP_16 medium color={theme.medium_grey}>
-                {deliverables[currentLanguage]}
-              </PP_16>
+            <FlexBox
+              $direction="column"
+              $gap="6px"
+              style={{ padding: isLaptop ? 0 : "2px" }}
+            >
+              {isLaptop ? (
+                <>
+                  <PP_24 medium lineHeight="1.5rem">
+                    {name[currentLanguage]}
+                  </PP_24>
+                  <PP_14 medium color={theme.medium_grey}>
+                    {deliverables[currentLanguage]}
+                  </PP_14>
+                </>
+              ) : (
+                <>
+                  <PP_20 medium lineHeight="100%">
+                    {name[currentLanguage]}
+                  </PP_20>
+                  <PP_16 medium color={theme.medium_grey}>
+                    {deliverables[currentLanguage]}
+                  </PP_16>
+                </>
+              )}
             </FlexBox>
-            {/* <PP_14 medium color={theme.medium_grey}>
-              {type[currentLanguage]}
-            </PP_14> */}
-            <PP_16 medium color={theme.medium_grey}>
-              {type[currentLanguage]}
-            </PP_16>
+            {isLaptop ? (
+              <PP_14 medium color={theme.medium_grey}>
+                {type[currentLanguage]}
+              </PP_14>
+            ) : (
+              <PP_16 medium color={theme.medium_grey}>
+                {type[currentLanguage]}
+              </PP_16>
+            )}
           </ProjectInfoWrapper>
         </MovingCardWrapper>
       </Link>

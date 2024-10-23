@@ -102,5 +102,11 @@
     "looking": "Looking for a job",
     "currently": "Currently:",
     "based": "Based in:"
+  },
+  "error": {
+    "header": "OooPS! This page does not exist",
+    "text": "Either you have a broken link or I've messed up my BrowserRouter settings again.\nAnyway try going back to the home page.",
+    "mobText": "This page does not exist. Either you have a broken link or I've messed up my BrowserRouter settings again.",
+    "goHome": "Go to home"
   }
 }

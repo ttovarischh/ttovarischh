@@ -41,17 +41,6 @@ const MainCompWrapper = styled.div`
 
   overflow: hidden;
 
-  // svg {
-  //   position: absolute;
-  //   left: calc(50% - 9px);
-  //   bottom: 24px;
-  //   transition: transform 0.3s ease-in-out;
-  // }
-
-  // svg:hover {
-  //   animation: ${jiggle} 0.6s ease-in-out;
-  // }
-
   ${media.tablets} {
     #difference,
     #difference1 {
@@ -70,6 +59,17 @@ const MainCompWrapper = styled.div`
     #difference,
     #difference1 {
       font-size: 1.5rem;
+    }
+
+    svg {
+      position: absolute;
+      left: calc(50% - 9px);
+      bottom: 24px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    svg:hover {
+      animation: ${jiggle} 0.6s ease-in-out;
     }
   }
 
@@ -126,12 +126,11 @@ const MainTextWrapper = styled.div`
   gap: 32px;
   box-sizing: border-box;
   padding-top: 76px;
+  flex-grow: 1;
 
   ${media.phoneLansdscape} {
     padding-top: 0px;
   }
-
-  flex-grow: 1;
 
   // margin-bottom: 30%;
 
@@ -146,6 +145,11 @@ const MainTextWrapper = styled.div`
   ${media.tabletsL} {
     flex-grow: 0;
     gap: 3.5vh;
+  }
+
+  ${media.laptop} {
+    padding-top: 0;
+    flex-grow: 0;
   }
 `;
 
@@ -196,14 +200,23 @@ const TextCompWrapper = styled(FlexBox)<{ $scrollY: number }>`
     }
   }
 
+  ${media.laptop} {
+    padding-bottom: 0px;
+    justify-content: center;
+    gap: 4vh;
+
+    #difference,
+    #difference1 {
+      max-width: 58%;
+    }
+  }
+
   // @media only screen and (min-aspect-ratio: 1440 / 700) and (max-device-width: 1600px) {
   //   padding-top: calc(1.4rem + 48px);
   // }
 `;
 
 const Portrait = styled.div`
-  // width: 2.38rem;
-  // height: 4.1rem;
   width: 2.125rem;
   height: 3.688rem;
   background: url("https://firebasestorage.googleapis.com/v0/b/ttovarischh-9c624.appspot.com/o/home%2Fp2.webp?alt=media&token=49801e81-4158-4cdc-b5c0-d7ecc9504b7f");
@@ -223,17 +236,40 @@ const Portrait = styled.div`
     height: 5.813rem;
     background-size: 48.75rem 46.504rem;
   }
+
+  ${media.laptop} {
+    width: 4.25rem;
+    height: 7.313rem;
+    background-size: 63.75rem 58.504rem;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 `;
 
 const Square = styled.div`
   width: 2.375rem;
   height: 2.375rem;
 
-  // desktop related
-  // transition: transform 0.3s ease;
-  // &:hover {
-  //   transform: scale(1.05);
-  // }
+  ${media.tablets} {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  ${media.tabletsL} {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  ${media.laptop} {
+    width: 5.5rem;
+    height: 5.5rem;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 `;
 
 const SquareA = styled(Square)`
@@ -243,15 +279,15 @@ const SquareA = styled(Square)`
     th 0.7s steps(15, jump-none) infinite;
 
   ${media.tablets} {
-    width: 4rem;
-    height: 4rem;
     background-size: 60rem 48rem;
   }
 
   ${media.tabletsL} {
-    width: 4rem;
-    height: 4rem;
     background-size: 60rem 48rem;
+  }
+
+  ${media.laptop} {
+    background-size: 82.5rem 66rem;
   }
 `;
 
@@ -262,15 +298,15 @@ const SquareB = styled(Square)`
     th 0.7s steps(12, jump-none) infinite;
 
   ${media.tablets} {
-    width: 4rem;
-    height: 4rem;
     background-size: 48rem 36rem;
   }
 
   ${media.tabletsL} {
-    width: 4rem;
-    height: 4rem;
     background-size: 48rem 36rem;
+  }
+
+  ${media.laptop} {
+    background-size: 66rem 49.5rem;
   }
 `;
 
@@ -299,8 +335,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
       return () => clearInterval(intervalId);
     }
   }, [isTouchDevice]);
-
-  console.log(isLaptop);
 
   if (isLaptop) {
     return (
@@ -367,9 +401,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
       <MainCompWrapper>
         <A_PixelatedGradient />
         <TextCompWrapper $scrollY={scrollY}>
-          {/* <PP_32 medium id="difference1">
-              {t("home.hey")}
-            </PP_32> */}
           <MainTextWrapper>
             {!isPhoneLandscape && (
               <PP_16 medium id="difference1">
@@ -379,16 +410,10 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
 
             <BigTextWrapper>
               <BigText $alignItems="center">
-                {/* <PP_128 bold center>
-                {t("home.im")}&nbsp;
-              </PP_128> */}
                 <PP_52 bold center>
                   {t("home.im")}&nbsp;
                 </PP_52>
                 <Portrait />
-                {/* <PP_128 bold center>
-                &nbsp;{t("home.polina")}
-              </PP_128> */}
                 <PP_52 bold center>
                   &nbsp;{t("home.polina")}
                 </PP_52>
@@ -406,14 +431,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
                     <PP_52 bold center>
                       {t("home.product")}
                     </PP_52>
-
-                    {/* <PP_128 bold center>
-                {t("home.product")}
-              </PP_128> */}
-
-                    {/* <PP_128 bold center>
-                ,
-              </PP_128> */}
                   </BigText>
                   <BigText $alignItems="center" $gap="0.5rem">
                     <PP_52 bold center>
@@ -428,9 +445,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
               )}
               <BigText $alignItems="center" $gap="0.5rem">
                 <SquareB />
-                {/* <PP_128 bold center lineHeight="84.1%">
-                {t("home.dev")}
-              </PP_128> */}
                 <PP_52 bold center lineHeight="84.1%">
                   {isTabletLandscape ? t("home.dev") : t("home.coder")}
                 </PP_52>
@@ -443,25 +457,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
                   !isTouchDevice ? () => set$IsHovered(false) : undefined
                 }
               >
-                {/* <PP_128 bold center>
-                {t("home.human")}
-                <Span
-                  $isHovered={isTouchDevice ? false : $isHovered}
-                  $isAnimating={!isTouchDevice ? false : $isAnimating}
-                  $delay={$isHovered || $isAnimating ? "0s" : "0.3s"}
-                  $isTouchDevice={isTouchDevice}
-                >
-                  .
-                </Span>
-                <Span
-                  $isHovered={isTouchDevice ? false : $isHovered}
-                  $isAnimating={!isTouchDevice ? false : $isAnimating}
-                  $delay={$isHovered || $isAnimating ? "0.3s" : "0s"}
-                  $isTouchDevice={isTouchDevice}
-                >
-                  .
-                </Span>
-              </PP_128> */}
                 <PP_52 bold center>
                   {t("home.mobHuman")}
                   <A_AnimatedDots
@@ -478,9 +473,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
               {t("home.ihave")}
             </PP_16>
           )}
-          {/* <PP_32 medium id="difference" center>
-            {t("home.ihave")}
-          </PP_32> */}
           {!isPhoneLandscape && !isTabletLandscape && (
             <FlexBox
               $gap="20px"
@@ -504,7 +496,6 @@ const M_MainComp: React.FC<M_MainCompProps> = React.memo(({ scrollY, t }) => {
             </FlexBox>
           )}
         </TextCompWrapper>
-        {/* <A_Icon iconName="scrollbottom" /> */}
       </MainCompWrapper>
     );
   }

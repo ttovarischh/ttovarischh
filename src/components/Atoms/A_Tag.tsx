@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FlexBox, PP_24, PP_20, PP_18 } from "../Quarks";
 import { media } from "../../styles/mediaQueries";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
 
 interface TagProps {
   $header?: boolean;
@@ -16,10 +17,8 @@ const TagWrapper = styled(FlexBox)<{
   $clickable?: boolean;
   $selected?: boolean;
 }>`
-  // padding: 8px 12px;
   padding: 4px 12px;
-  // border-radius: 12px;
-  border-radius: 8px;
+  border-radius: var(--tag-border-radius);
   background-color: ${(props) =>
     props.$header
       ? props.theme.tags.headertagbg
@@ -41,6 +40,10 @@ const TagWrapper = styled(FlexBox)<{
   ${media.tabletsL} {
     white-space: nowrap;
   }
+
+  ${media.laptop} {
+    padding: 8px 12px;
+  }
 `;
 
 const A_Tag: React.FC<TagProps> = ({
@@ -50,17 +53,30 @@ const A_Tag: React.FC<TagProps> = ({
   onFilterSelect,
   selected,
 }) => {
-  return (
-    <TagWrapper
-      $header={$header}
-      $selected={selected}
-      $clickable={onFilterSelect !== undefined}
-      onClick={onFilterSelect || undefined}
-    >
-      {/* {small ? <PP_20>{tagText}</PP_20> : <PP_24>{tagText}</PP_24>} */}
-      {small ? <PP_18>{tagText}</PP_18> : <PP_18>{tagText}</PP_18>}
-    </TagWrapper>
-  );
+  const { isLaptop } = useScreenSize();
+  if (isLaptop) {
+    return (
+      <TagWrapper
+        $header={$header}
+        $selected={selected}
+        $clickable={onFilterSelect !== undefined}
+        onClick={onFilterSelect || undefined}
+      >
+        {small ? <PP_20>{tagText}</PP_20> : <PP_24>{tagText}</PP_24>}
+      </TagWrapper>
+    );
+  } else {
+    return (
+      <TagWrapper
+        $header={$header}
+        $selected={selected}
+        $clickable={onFilterSelect !== undefined}
+        onClick={onFilterSelect || undefined}
+      >
+        <PP_18>{tagText}</PP_18>
+      </TagWrapper>
+    );
+  }
 };
 
 export default A_Tag;

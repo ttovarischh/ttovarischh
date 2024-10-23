@@ -18,7 +18,7 @@ const ThemeSwitcherButton = styled.button<{
   background-color: ${({ theme, $mobColor }) =>
     $mobColor ? theme.black : theme.navigation.themeswitcher};
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
   cursor: pointer;

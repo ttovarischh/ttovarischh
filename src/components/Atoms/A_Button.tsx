@@ -35,7 +35,7 @@ const BigButtonWrapper = styled(Button)`
   align-items: center;
   width: 100%;
   padding: 17px 16px;
-  border-radius: 12px;
+  border-radius: var(--big-button-border-radius);
   background-color: ${({ theme }) => theme.buttons.bigButton};
   flex: 1;
 `;
@@ -45,12 +45,9 @@ const SmallButtonWrapper = styled(Button)<{ $main?: boolean }>`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
   background-color: ${({ theme, $main }) =>
     $main ? "#121512" : theme.buttons.smallButton};
-
-  svg {
-  }
 `;
 
 const BackToTopWrapper = styled(Button)`
@@ -60,7 +57,7 @@ const BackToTopWrapper = styled(Button)`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
   background: ${({ theme }) => theme.navigation.backtotop};
 
   svg {
@@ -72,7 +69,7 @@ const BackToTopWrapper = styled(Button)`
 
 const A_Button = (props: ButtonProps) => {
   const theme = useTheme();
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
   if (props.fw) {
     return (
       <BigButtonWrapper
@@ -90,7 +87,7 @@ const A_Button = (props: ButtonProps) => {
         disabled={props.disabled}
         onClick={props.handleButtonClick}
       >
-        {isTablet || isTabletLandscape ? (
+        {isTablet || isTabletLandscape || isLaptop ? (
           <PP_20 medium>{props.buttonText}</PP_20>
         ) : (
           <PP_16 medium>{props.buttonText}</PP_16>
@@ -105,8 +102,9 @@ const A_Button = (props: ButtonProps) => {
       onClick={props.handleButtonClick}
       $main={props.main}
     >
-      {isTablet || isTabletLandscape ? (
-        // <PP_24>{props.buttonText}</PP_24>
+      {isLaptop ? (
+        <PP_24>{props.buttonText}</PP_24>
+      ) : isTablet || isTabletLandscape ? (
         <PP_18>{props.buttonText}</PP_18>
       ) : (
         <PP_18 color={props.main ? "#FBF8F3" : theme.white}>

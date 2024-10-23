@@ -5,6 +5,8 @@ import styled, { useTheme } from "styled-components";
 import Image from "../Quarks/Image";
 import Video from "../Quarks/Video";
 import LazyLoad from "react-lazyload";
+import { useScreenSize } from "../../styles/ScreenSizeContext";
+import { media } from "../../styles/mediaQueries";
 
 interface CaseImageProps {
   src: string;
@@ -19,21 +21,27 @@ interface CaseImageProps {
 
 const CaseImageWrapper = styled(FlexBox)<{ $body?: boolean }>`
   flex: 1;
-  // padding: var(--desktop-padding-20);
   padding: var(--mobile-padding-8);
-  // border-radius: var(--desktop-img-card-radius);
-  border-radius: var(--desktop-img-in-card-radius);
-  // gap: 16px;
+  border-radius: var(--card-border-radius);
   background-color: ${({ theme }) => theme.cards.bg};
   flex-direction: column;
   align-items: flex-start;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2),
     0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-
-  // new
   gap: var(--mobile-gap-8);
   width: 100%;
   box-sizing: border-box;
+
+  img,
+  video,
+  .sk {
+    border-radius: var(--incard-img-border-radius);
+  }
+
+  ${media.laptop} {
+    padding: var(--desktop-padding-20);
+    gap: 16px;
+  }
 `;
 
 const isVideo = (src: string) => {
@@ -42,6 +50,7 @@ const isVideo = (src: string) => {
 
 const A_CaseImage = (props: CaseImageProps) => {
   const theme = useTheme();
+  const { isLaptop } = useScreenSize();
 
   if (props.imageDescription) {
     return (
@@ -59,7 +68,6 @@ const A_CaseImage = (props: CaseImageProps) => {
                 src={props.src}
                 $width="100%"
                 $aspectRatio={16 / 9}
-                $borderRadius="5px"
               />
             </LazyLoad>
           </CaseImageWrapper>
@@ -76,35 +84,24 @@ const A_CaseImage = (props: CaseImageProps) => {
                 id={props.id}
                 $width="100%"
                 $aspectRatio={16 / 9}
-                $borderRadius="5px"
                 $imageDescription={props.imageDescription}
               />
             </LazyLoad>
-            {/* <PP_20 color={theme.medium_grey}>{props.imageDescription}</PP_20> */}
-            <PP_18 medium color={theme.medium_grey}>
-              {props.imageDescription}
-            </PP_18>
+            {isLaptop ? (
+              <PP_20 color={theme.medium_grey}>{props.imageDescription}</PP_20>
+            ) : (
+              <PP_18 medium color={theme.medium_grey}>
+                {props.imageDescription}
+              </PP_18>
+            )}
           </CaseImageWrapper>
         )}
       </>
     );
   } else if (props.ui) {
     return (
-      <LazyLoad
-        offset={200}
-        once
-        // style={{ width: "20vw" }}
-        style={{ width: "60.93vw" }}
-      >
-        <Video
-          ui
-          src={props.src}
-          // $width="20vw"
-          $width="60.93vw"
-          $aspectRatio={2.3}
-          // $borderRadius="12px"
-          $borderRadius="5px"
-        />
+      <LazyLoad offset={200} once style={{ width: "20vw" }}>
+        <Video ui src={props.src} $width="20vw" $aspectRatio={2.3} />
       </LazyLoad>
     );
   } else {
@@ -122,8 +119,6 @@ const A_CaseImage = (props: CaseImageProps) => {
               src={props.src}
               $width="100%"
               $aspectRatio={16 / 9}
-              // $borderRadius="12px"
-              $borderRadius="5px"
             />
           </LazyLoad>
         ) : (
@@ -138,8 +133,6 @@ const A_CaseImage = (props: CaseImageProps) => {
               id={props.id}
               $width="100%"
               $aspectRatio={16 / 9}
-              // $borderRadius="12px"
-              $borderRadius="5px"
               onClick={props.onClick}
             />
           </LazyLoad>

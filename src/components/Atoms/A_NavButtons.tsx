@@ -13,7 +13,7 @@ const NavButtonsWrapper = styled(FlexBox)`
   position: relative;
   background-color: ${({ theme }) => theme.navigation.navbuttonswrapper};
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
   width: fit-content;
@@ -29,7 +29,7 @@ const ButtonDot = styled.div`
   background-color: ${({ theme }) => theme.medium_grey};
   width: 4px;
   height: 4px;
-  border-radius: 100%;
+  border-radius: var(--button-border-radius);
   left: calc(50% - 2px);
   transition: all 0.4s ease;
   bottom: 10px;
@@ -37,7 +37,7 @@ const ButtonDot = styled.div`
 
 const NavButton = styled(FlexBox)`
   height: 100%;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
   position: relative;
   z-index: 1;
   align-self: center;
@@ -71,7 +71,8 @@ const HoverBackground = styled.div<{
 }>`
   position: absolute;
   height: 100%;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
+
   background-color: ${({ theme }) => theme.navigation.hoverbg};
   top: 0;
   left: ${({ $left }) => $left}px;

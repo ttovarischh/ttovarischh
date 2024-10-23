@@ -9,26 +9,6 @@ interface AboutCardsGridProps {
   currentLanguage: "en" | "ru";
 }
 
-// const AboutCardsGridWrapper = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(12, 1fr);
-//   grid-gap: 1.04vw;
-
-//   :nth-child(1),
-//   :nth-child(2),
-//   :nth-child(3) {
-//     grid-column: span 4;
-//   }
-//   :nth-child(4) {
-//     grid-column-start: 3;
-//     grid-column-end: 7;
-//   }
-//   :nth-child(5) {
-//     grid-column-start: 7;
-//     grid-column-end: 11;
-//   }
-// `;
-
 const AboutCardsGridWrapper = styled.div`
   display: grid;
   grid-template-rows: repeat(3, auto);
@@ -77,6 +57,27 @@ const AboutCardsGridWrapper = styled.div`
   ${media.tabletsL} {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
+
+    :nth-child(1),
+    :nth-child(2),
+    :nth-child(3) {
+      grid-column: span 4;
+    }
+
+    :nth-child(4) {
+      grid-column-start: 3;
+      grid-column-end: 7;
+    }
+    :nth-child(5) {
+      grid-column-start: 7;
+      grid-column-end: 11;
+    }
+  }
+
+  ${media.laptop} {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1.04vw;
 
     :nth-child(1),
     :nth-child(2),

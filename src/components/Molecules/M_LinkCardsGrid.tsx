@@ -28,7 +28,7 @@ const M_LinkCardsGrid: React.FC<LinkCardsGridProps> = ({
   linkCards,
   references,
 }) => {
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
   return (
     <LinkCardsContainer>
       {linkCards.map(({ image_src, header, text, link_text, url }, index) => (
@@ -43,7 +43,9 @@ const M_LinkCardsGrid: React.FC<LinkCardsGridProps> = ({
           style={{
             transform: index % 2 === 0 ? "rotate(-0.7deg)" : "rotate(0.8deg)",
           }}
-          reverse={(isTablet || isTabletLandscape) && index % 2 === 0}
+          reverse={
+            (isTablet || isTabletLandscape || isLaptop) && index % 2 === 0
+          }
         />
       ))}
     </LinkCardsContainer>

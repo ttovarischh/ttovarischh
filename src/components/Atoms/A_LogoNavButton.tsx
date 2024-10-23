@@ -8,7 +8,7 @@ const LogoNavButton = styled(Link)`
   display: flex;
   background-color: ${({ theme }) => theme.white};
   padding: 16px 12px;
-  border-radius: 4px;
+  border-radius: var(--logo-nav-button-border-radius);
   width: fit-content;
   z-index: 10;
   pointer-events: auto;

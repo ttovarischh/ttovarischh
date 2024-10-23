@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PP_20, PP_16 } from "../Quarks";
 import styled from "styled-components";
 import { useScreenSize } from "../../styles/ScreenSizeContext";
+import { media } from "../../styles/mediaQueries";
 
 interface TimeDisplayProps {
   t: (key: string) => string;
@@ -16,6 +17,10 @@ const Emoji = styled.span<{ $isVisible: boolean }>`
   transition: opacity 0.3s ease-in-out; // Adjust duration as needed
   margin-right: 16px;
   margin-left: 16px;
+
+  ${media.laptop} {
+    margin: 0;
+  }
 `;
 
 const A_TimeDisplay: React.FC<TimeDisplayProps> = ({ t }) => {

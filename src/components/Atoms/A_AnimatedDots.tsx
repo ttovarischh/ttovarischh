@@ -16,7 +16,6 @@ const Span = styled.span<{
 }>`
   width: ${({ $isAnimating, $isHovered }) =>
     $isAnimating || $isHovered ? "0.8rem" : 0};
-  // width was 2rem
   display: inline-block;
   opacity: ${({ $isAnimating, $isHovered }) =>
     $isAnimating || $isHovered ? 1 : 0};
@@ -34,6 +33,11 @@ const Span = styled.span<{
   ${media.tabletsL} {
     width: ${({ $isAnimating, $isHovered }) =>
       $isAnimating || $isHovered ? "1.45rem" : 0};
+  }
+
+  ${media.laptop} {
+    width: ${({ $isAnimating, $isHovered }) =>
+      $isAnimating || $isHovered ? "2rem" : 0};
   }
 `;
 

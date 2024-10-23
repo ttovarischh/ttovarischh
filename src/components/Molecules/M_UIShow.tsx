@@ -19,15 +19,22 @@ interface UIShowProps {
 
 const UIShowWrapper = styled(FlexBox)`
   width: 100%;
-  // padding: 0px 2.5vw;
+  padding: 0px 2.5vw;
   justify-content: center;
   gap: 2.66vw;
-
-  //new
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
 `;
+
+// const UIShowWrapper = styled(FlexBox)`
+//   width: 100%;
+//   // padding: 0px 2.5vw;
+//   justify-content: center;
+//   gap: 2.66vw;
+
+//   //new
+//   flex-direction: column;
+//   align-content: center;
+//   align-items: center;
+// `;
 
 const M_UIShow = (props: UIShowProps) => {
   const { uiShow, language, projectName, references } = props;
@@ -35,7 +42,7 @@ const M_UIShow = (props: UIShowProps) => {
 
   return (
     <UIShowWrapper id={references}>
-      <FlexBox
+      {/* <FlexBox
         $direction="column"
         $gap="12px"
         $alignItems="center"
@@ -47,10 +54,11 @@ const M_UIShow = (props: UIShowProps) => {
         <PP_18 color={theme.lightest_grey} center>
           {uiShow.textA.map((text) => text[language])}
         </PP_18>
-      </FlexBox>
+      </FlexBox> */}
 
       <A_CaseImage ui projectName={projectName} src={uiShow.imgSrc} />
-      {/* <FlexBox $direction="column" $gap="48px" style={{ maxWidth: "28.59vw" }}>
+
+      <FlexBox $direction="column" $gap="48px" style={{ maxWidth: "28.59vw" }}>
         <FlexBox $direction="column" $gap="16px">
           <PP_48 medium>
             {uiShow.headerA.map((header) => header[language])}
@@ -83,7 +91,7 @@ const M_UIShow = (props: UIShowProps) => {
             </FlexBox>
           </FlexBox>
         )}
-      </FlexBox> */}
+      </FlexBox>
     </UIShowWrapper>
   );
 };

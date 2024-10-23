@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexBox, PP_20, PP_24, PP_48, PP_18, PP_32 } from "../Quarks";
-import styled, { useTheme } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import useConstructTextWithLinks from "../../hooks/useConstructTextWithLinks";
 import { useScreenSize } from "../../styles/ScreenSizeContext";
 import { media } from "../../styles/mediaQueries";
@@ -29,26 +29,33 @@ interface InfoBlockProps {
   slash?: boolean;
 }
 
+const shareGridStyles = css`
+  grid-template-columns: repeat(6, 1fr);
+`;
+
 const GridWrapper = styled.div`
   display: grid;
-  // grid-template-columns: repeat(6, 1fr);
-  // grid-column-gap: 1.04vw;
 
   ${media.tablets} {
-    grid-template-columns: repeat(6, 1fr);
+    ${shareGridStyles};
     grid-column-gap: var(--mobile-gap-8);
   }
 
   ${media.tabletsL} {
-    grid-template-columns: repeat(6, 1fr);
+    ${shareGridStyles};
     grid-column-gap: var(--mobile-gap-8);
+  }
+
+  ${media.laptop} {
+    ${shareGridStyles};
+    grid-column-gap: 1.04vw;
   }
 `;
 
 const Mate = styled.a<{ $imageUrl?: string }>`
   width: 1.75rem;
   height: 1.75rem;
-  border-radius: 100px;
+  border-radius: var(--button-border-radius);
   background: url(${({ $imageUrl }) => $imageUrl});
   background-size: cover;
   transition: all 0.8s ease-out;
@@ -63,9 +70,7 @@ const Mate = styled.a<{ $imageUrl?: string }>`
 const InfoBlockWrapper = styled(FlexBox)<{ $body?: boolean }>`
   position: relative;
   flex-direction: column;
-  // gap: 2px;
   gap: 4px;
-  // min-width: 100%;
   a {
     transition: all 0.8s ease-out;
 
@@ -76,12 +81,12 @@ const InfoBlockWrapper = styled(FlexBox)<{ $body?: boolean }>`
 `;
 
 const InfoBlockWrapperBig = styled(FlexBox)<{ $body?: boolean }>`
-  // grid-column-start: 2;
-  // grid-column-end: 6;
-  // max-width: 85%;
-  // gap: 28px;
   gap: 12px;
-  // transition: all 0.5s;
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: ${({ theme }) => theme.medium_grey};
+  }
 
   ${media.phoneLansdscape} {
     padding-left: 20vw;
@@ -98,32 +103,34 @@ const InfoBlockWrapperBig = styled(FlexBox)<{ $body?: boolean }>`
     grid-column-end: 6;
   }
 
+  ${media.laptop} {
+    grid-column-start: 2;
+    grid-column-end: 6;
+    max-width: 85%;
+    gap: 28px;
+
+    a {
+      transition: all 0.5s ease;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
   // @media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
   //   max-width: 100%;
   // }
-
-  a {
-    text-decoration: underline;
-    text-decoration-color: ${({ theme }) => theme.medium_grey};
-    transition: all 0.5s ease;
-
-    &:hover {
-      opacity: 0.5;
-    }
-  }
 `;
 
 const TagWrapper = styled(FlexBox)`
   cursor: default;
   position: absolute;
-  // bottom: -0.6rem;
   top: 1.2rem;
-  // left: -0.7rem;
   left: 0rem;
   padding: 8px 12px;
-  border-radius: 12px;
   transform: rotate(1.766deg);
-  border-radius: 12px;
+  border-radius: var(--tag-border-radius);
   background: linear-gradient(
     90deg,
     rgba(116, 151, 99, 0.5) 0%,
@@ -134,6 +141,11 @@ const TagWrapper = styled(FlexBox)`
 
   ${media.tablets} {
     white-space: nowrap;
+  }
+
+  ${media.laptop} {
+    bottom: -0.6rem;
+    left: -0.7rem;
   }
 `;
 
@@ -150,7 +162,7 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
   slash,
 }) => {
   const theme = useTheme();
-  const { isTablet, isPhoneLandscape } = useScreenSize();
+  const { isTablet, isLaptop } = useScreenSize();
 
   const constructedText = useConstructTextWithLinks(
     text ?? "",
@@ -162,28 +174,38 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
     return (
       <GridWrapper>
         <InfoBlockWrapperBig $body={$body} id={references}>
-          {/* <PP_24 medium color={theme.medium_grey}>
-            {header}
-          </PP_24> */}
-          <PP_32 medium color={theme.medium_grey}>
-            {header}
-          </PP_32>
-          {/* <PP_48 medium lineHeight="113%">
-            {constructedText}
-          </PP_48> */}
-          <PP_18>{constructedText}</PP_18>
+          {isLaptop ? (
+            <>
+              <PP_24 medium color={theme.medium_grey}>
+                {header}
+              </PP_24>
+              <PP_48 medium lineHeight="113%">
+                {constructedText}
+              </PP_48>
+            </>
+          ) : (
+            <>
+              <PP_32 medium color={theme.medium_grey}>
+                {header}
+              </PP_32>
+              <PP_18>{constructedText}</PP_18>
+            </>
+          )}
         </InfoBlockWrapperBig>
       </GridWrapper>
     );
   } else {
     return (
       <InfoBlockWrapper $body={$body} id={references}>
-        {/* <PP_20 medium color={theme.medium_grey}>
-          {header}
-        </PP_20> */}
-        <PP_18 medium color={theme.medium_grey}>
-          {header}
-        </PP_18>
+        {isLaptop ? (
+          <PP_20 medium color={theme.medium_grey}>
+            {header}
+          </PP_20>
+        ) : (
+          <PP_18 medium color={theme.medium_grey}>
+            {header}
+          </PP_18>
+        )}
         {team ? (
           <FlexBox $gap="6px" $offsetTop="4px">
             {team.map((mate, index) => (
@@ -200,8 +222,11 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
             {aboutMeLinks.map((link, index) => (
               <React.Fragment key={index}>
                 <a href={link.url} target="_blank">
-                  <PP_18>{link.name}</PP_18>
-                  {/* <PP_20>{link.name}</PP_20> */}
+                  {isLaptop ? (
+                    <PP_20>{link.name}</PP_20>
+                  ) : (
+                    <PP_18>{link.name}</PP_18>
+                  )}
                 </a>
                 {slash && !isTablet && index !== aboutMeLinks.length - 1 && (
                   <PP_18 color={theme.medium_grey}>/</PP_18>
@@ -211,12 +236,14 @@ const A_InfoBlock: React.FC<InfoBlockProps> = ({
           </FlexBox>
         ) : (
           <>
-            {/* <PP_20>{constructedText}</PP_20> */}
-            <PP_18>{constructedText}</PP_18>
+            {isLaptop ? (
+              <PP_20>{constructedText}</PP_20>
+            ) : (
+              <PP_18>{constructedText}</PP_18>
+            )}
             {jobless && (
               <TagWrapper>
-                {/* <PP_20>{jobless}</PP_20> */}
-                <PP_18>{jobless}</PP_18>
+                {isLaptop ? <PP_20>{jobless}</PP_20> : <PP_18>{jobless}</PP_18>}
               </TagWrapper>
             )}
           </>

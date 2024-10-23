@@ -49,7 +49,8 @@ const AcordeonHeaderInnerWrapper = styled(FlexBox)`
 
 const HeaderLine = styled.div`
   width: 4px;
-  border-radius: 2px;
+  border-radius: var(--header-line-border-radius);
+
   background-color: ${({ theme }) => theme.cardBlocks.line};
   margin-right: 12px;
   align-self: stretch;
@@ -63,13 +64,13 @@ const M_CardsBlocksGrid: React.FC<CardsBlocksGridProps> = ({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
-  const { isTablet, isTabletLandscape } = useScreenSize();
+  const { isTablet, isTabletLandscape, isLaptop } = useScreenSize();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  if (isTablet || isTabletLandscape) {
+  if (isTablet || isTabletLandscape || isLaptop) {
     return (
       <CardsBlocksGrid id={references}>
         {smallCards.map(

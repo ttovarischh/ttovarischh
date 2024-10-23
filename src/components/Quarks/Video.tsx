@@ -5,7 +5,6 @@ import styled from "styled-components";
 interface VideoProps {
   src: string;
   $width?: string;
-  $borderRadius?: string;
   $aspectRatio?: number;
   $className?: string;
   poster?: string;
@@ -17,11 +16,7 @@ interface VideoProps {
 const CaseVideo = styled.video`
   width: 100%;
   object-fit: cover;
-  border-radius: 12px;
   overflow: hidden;
-
-  // new
-  border-radius: 5px;
 `;
 
 const UICaseVideo = styled(CaseVideo)`
@@ -30,14 +25,13 @@ const UICaseVideo = styled(CaseVideo)`
   object-fit: cover;
 
   // new
-  width: 60.93vw;
+  // width: 60.93vw;
 `;
 
 const Video = React.memo((props: VideoProps) => {
   const {
     src,
     $width,
-    $borderRadius,
     $aspectRatio,
     $className,
     poster,
@@ -49,6 +43,10 @@ const Video = React.memo((props: VideoProps) => {
 
   const handleVideoLoad = () => {
     setIsLoading(false);
+
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 20000);
   };
   const handleVideoError = () => {
     setIsLoading(false);
@@ -60,7 +58,6 @@ const Video = React.memo((props: VideoProps) => {
         <A_Skeleton
           $width={$width}
           $aspectRatio={$aspectRatio}
-          $borderRadius={$borderRadius}
           className={$className}
         />
       )}

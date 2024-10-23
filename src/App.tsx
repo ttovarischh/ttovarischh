@@ -15,11 +15,12 @@ import HomePage from "./routes/Home";
 import Project from "./routes/Project";
 import WorkPage from "./routes/Work";
 import AboutPage from "./routes/About";
+import NotFoundPage from "./routes/NotFound";
 import M_Footer from "./components/Molecules/M_Footer";
 import { useTranslation } from "react-i18next";
 import { ScreenSizeProvider } from "./styles/ScreenSizeContext";
 import O_Navigation from "./components/Organisms/O_Navigation";
-import Test from "./routes/Test";
+import A_Loader from "./components/Atoms/A_Loader";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(() => {
@@ -61,12 +62,8 @@ const App: React.FC = () => {
               }
             />
             <Route
-              path="/:name"
+              path="/work/:name"
               element={<Project currentLanguage={currentLanguage} t={t} />}
-            />
-            <Route
-              path="/test"
-              element={<Test currentLanguage={currentLanguage} t={t} />}
             />
             <Route
               path="/work"
@@ -87,6 +84,10 @@ const App: React.FC = () => {
                   projects={projects}
                 />
               }
+            />
+            <Route
+              path="*"
+              element={<NotFoundPage currentLanguage={currentLanguage} t={t} />}
             />
           </Routes>
           <M_Footer currentLanguage={currentLanguage} t={t} />

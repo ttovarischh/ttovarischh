@@ -7,7 +7,7 @@ interface ProjectCoverProps {
   alt?: string;
   horisontal?: boolean;
   projectName?: string;
-  $imageBorderRadius?: string;
+  verticalCard?: boolean;
 }
 
 const StyledImage = styled.img`
@@ -30,7 +30,7 @@ const A_ProjectCover: React.FC<ProjectCoverProps> = ({
   alt,
   horisontal,
   projectName,
-  $imageBorderRadius,
+  verticalCard,
 }) => {
   if (horisontal) {
     return (
@@ -38,9 +38,7 @@ const A_ProjectCover: React.FC<ProjectCoverProps> = ({
         src={cover}
         alt={`${projectName} horisontal cover`}
         $width="100%"
-        $aspectRatio={16 / 9}
-        $borderRadius="0px"
-        $imageBorderRadius={$imageBorderRadius}
+        $aspectRatio={verticalCard ? 1240 / 1750 : 16 / 9}
       />
     );
   } else {

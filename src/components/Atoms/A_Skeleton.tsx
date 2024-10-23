@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 interface SkeletonProps {
   $width?: string;
-  $borderRadius?: string;
   $aspectRatio?: number;
   className?: string;
 }
@@ -11,10 +10,9 @@ interface SkeletonProps {
 const SkeletonWrapper = styled.div<SkeletonProps>`
   width: ${({ $width }) => $width || "100%"};
   padding-top: ${({ $aspectRatio }) =>
-    $aspectRatio ? `${100 / $aspectRatio}%` : "0"}; // Maintain aspect ratio
+    $aspectRatio ? `${100 / $aspectRatio}%` : "0"};
 
   background-color: ${({ theme }) => theme.light_grey};
-  border-radius: ${({ $borderRadius }) => $borderRadius || "12px"};
   position: relative;
   overflow: hidden;
 
@@ -45,13 +43,12 @@ const SkeletonWrapper = styled.div<SkeletonProps>`
 `;
 
 const A_Skeleton: React.FC<SkeletonProps> = React.memo(
-  ({ $width, $borderRadius, $aspectRatio, className }) => {
+  ({ $width, $aspectRatio, className }) => {
     return (
       <SkeletonWrapper
         $width={$width}
-        $borderRadius={$borderRadius}
         $aspectRatio={$aspectRatio}
-        className={className}
+        className={className ? `sk ${className}` : "sk"}
       />
     );
   }
